@@ -71,6 +71,19 @@
     "welcome": "欢迎回来，{name}！",
     "overview": "概览",
     "recentProjects": "最近项目",
+    "deleteConfirm": "这将永久删除该项目及其所有记录。此操作无法撤销。",
+    "filters": {
+      "all": "全部",
+      "inProgress": "进行中",
+      "completed": "已完成",
+      "paused": "已暂停"
+    },
+    "sort": {
+      "newest": "最新优先",
+      "oldest": "最旧优先",
+      "progress": "进度最多",
+      "name": "按名称"
+    },
     "stats": {
       "totalProjects": "项目总数",
       "totalStitches": "针数总计",
@@ -227,20 +240,108 @@
     "locked": "未解锁",
     "progress": "进度：{current} / {target}",
     "unlockedAt": "解锁于 {date}",
-    "types": {
-      "firstProject": "第一个项目",
-      "firstLog": "第一条记录",
-      "projectCompleted": "项目完成",
-      "streak7": "连续 7 天",
-      "streak30": "连续 30 天",
-      "streak100": "连续 100 天",
-      "stitches1k": "1,000 针",
-      "stitches10k": "10,000 针",
-      "stitches100k": "100,000 针",
-      "speedTurtle": "速度：乌龟",
-      "speedRabbit": "速度：兔子",
-      "speedCheetah": "速度：猎豹",
-      "speedRocket": "速度：火箭"
+    "categories": {
+      "all": "全部",
+      "projects": "项目",
+      "stitches": "针数",
+      "streaks": "连续",
+      "logs": "记录",
+      "speed": "速度",
+      "social": "社交"
+    },
+    "list": {
+      "first_project": {
+        "name": "第一步",
+        "description": "创建您的第一个项目"
+      },
+      "five_projects": {
+        "name": "入门者",
+        "description": "创建5个项目"
+      },
+      "ten_projects": {
+        "name": "专注绣工",
+        "description": "创建10个项目"
+      },
+      "first_completed": {
+        "name": "完成者",
+        "description": "完成您的第一个项目"
+      },
+      "10k_stitches": {
+        "name": "热身中",
+        "description": "累计刺绣10,000针"
+      },
+      "50k_stitches": {
+        "name": "绣针大师",
+        "description": "累计刺绣50,000针"
+      },
+      "100k_stitches": {
+        "name": "十万俱乐部",
+        "description": "累计刺绣100,000针"
+      },
+      "1m_stitches": {
+        "name": "传奇绣工",
+        "description": "累计刺绣1,000,000针"
+      },
+      "week_streak": {
+        "name": "坚持不懈",
+        "description": "连续7天打卡"
+      },
+      "month_streak": {
+        "name": "专注投入",
+        "description": "连续30天打卡"
+      },
+      "100_day_streak": {
+        "name": "势不可挡",
+        "description": "连续100天打卡"
+      },
+      "first_log": {
+        "name": "首次记录",
+        "description": "添加您的第一条每日记录"
+      },
+      "100_logs": {
+        "name": "持续记录者",
+        "description": "添加100条每日记录"
+      },
+      "speed_demon": {
+        "name": "速度恶魔",
+        "description": "达到平均每天300+针（火箭级）"
+      },
+      "first_public": {
+        "name": "走向公开",
+        "description": "将您的第一个项目设为公开"
+      }
+    }
+  },
+  "themes": {
+    "Nature": "自然",
+    "Animals": "动物",
+    "Abstract": "抽象",
+    "Seasonal": "季节",
+    "Fantasy": "奇幻",
+    "Portrait": "肖像",
+    "Geometric": "几何",
+    "Holiday": "节日",
+    "Floral": "花卉",
+    "Modern": "现代",
+    "Traditional": "传统",
+    "Other": "其他"
+  },
+  "speedTiers": {
+    "TURTLE": {
+      "name": "乌龟",
+      "description": "慢而稳"
+    },
+    "BIKE": {
+      "name": "自行车",
+      "description": "进展不错"
+    },
+    "CAR": {
+      "name": "汽车",
+      "description": "快速前进"
+    },
+    "ROCKET": {
+      "name": "火箭",
+      "description": "闪电速度"
     }
   },
   "comments": {

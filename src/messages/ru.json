@@ -71,6 +71,19 @@
     "welcome": "С возвращением, {name}!",
     "overview": "Обзор",
     "recentProjects": "Последние проекты",
+    "deleteConfirm": "Это навсегда удалит проект и все его записи. Это действие нельзя отменить.",
+    "filters": {
+      "all": "Все",
+      "inProgress": "В процессе",
+      "completed": "Завершено",
+      "paused": "Приостановлено"
+    },
+    "sort": {
+      "newest": "Сначала новые",
+      "oldest": "Сначала старые",
+      "progress": "По прогрессу",
+      "name": "По названию"
+    },
     "stats": {
       "totalProjects": "Всего проектов",
       "totalStitches": "Всего крестиков",
@@ -223,24 +236,112 @@
   },
   "achievements": {
     "title": "Достижения",
-    "unlocked": "Разблокировано",
+    "unlocked": "разблокировано",
     "locked": "Заблокировано",
     "progress": "Прогресс: {current} / {target}",
     "unlockedAt": "Разблокировано {date}",
-    "types": {
-      "firstProject": "Первый проект",
-      "firstLog": "Первая запись",
-      "projectCompleted": "Проект завершен",
-      "streak7": "Серия 7 дней",
-      "streak30": "Серия 30 дней",
-      "streak100": "Серия 100 дней",
-      "stitches1k": "1 000 крестиков",
-      "stitches10k": "10 000 крестиков",
-      "stitches100k": "100 000 крестиков",
-      "speedTurtle": "Скорость: Черепаха",
-      "speedRabbit": "Скорость: Кролик",
-      "speedCheetah": "Скорость: Гепард",
-      "speedRocket": "Скорость: Ракета"
+    "categories": {
+      "all": "Все",
+      "projects": "Проекты",
+      "stitches": "Крестики",
+      "streaks": "Серии",
+      "logs": "Записи",
+      "speed": "Скорость",
+      "social": "Социальные"
+    },
+    "list": {
+      "first_project": {
+        "name": "Первые шаги",
+        "description": "Создайте свой первый проект"
+      },
+      "five_projects": {
+        "name": "Начинающий",
+        "description": "Создайте 5 проектов"
+      },
+      "ten_projects": {
+        "name": "Преданный вышивальщик",
+        "description": "Создайте 10 проектов"
+      },
+      "first_completed": {
+        "name": "Завершитель",
+        "description": "Завершите свой первый проект"
+      },
+      "10k_stitches": {
+        "name": "Разминка",
+        "description": "Вышейте 10 000 крестиков"
+      },
+      "50k_stitches": {
+        "name": "Мастер иглы",
+        "description": "Вышейте 50 000 крестиков"
+      },
+      "100k_stitches": {
+        "name": "Клуб сотни тысяч",
+        "description": "Вышейте 100 000 крестиков"
+      },
+      "1m_stitches": {
+        "name": "Легенда",
+        "description": "Вышейте 1 000 000 крестиков"
+      },
+      "week_streak": {
+        "name": "Целеустремленный",
+        "description": "Серия 7 дней"
+      },
+      "month_streak": {
+        "name": "Преданный делу",
+        "description": "Серия 30 дней"
+      },
+      "100_day_streak": {
+        "name": "Неудержимый",
+        "description": "Серия 100 дней"
+      },
+      "first_log": {
+        "name": "Первая запись",
+        "description": "Добавьте первую ежедневную запись"
+      },
+      "100_logs": {
+        "name": "Постоянный регистратор",
+        "description": "Добавьте 100 ежедневных записей"
+      },
+      "speed_demon": {
+        "name": "Демон скорости",
+        "description": "Достигните 300+ крестиков/день (уровень Ракета)"
+      },
+      "first_public": {
+        "name": "Выход в свет",
+        "description": "Сделайте первый проект публичным"
+      }
+    }
+  },
+  "themes": {
+    "Nature": "Природа",
+    "Animals": "Животные",
+    "Abstract": "Абстракция",
+    "Seasonal": "Сезонные",
+    "Fantasy": "Фэнтези",
+    "Portrait": "Портрет",
+    "Geometric": "Геометрия",
+    "Holiday": "Праздники",
+    "Floral": "Цветы",
+    "Modern": "Современное",
+    "Traditional": "Традиционное",
+    "Other": "Другое"
+  },
+  "speedTiers": {
+    "TURTLE": {
+      "name": "Черепаха",
+      "description": "Медленно и уверенно"
+    },
+    "BIKE": {
+      "name": "Велосипед",
+      "description": "Хороший темп"
+    },
+    "CAR": {
+      "name": "Автомобиль",
+      "description": "Быстрая езда"
+    },
+    "ROCKET": {
+      "name": "Ракета",
+      "description": "Молниеносная скорость"
     }
   },
   "comments": {

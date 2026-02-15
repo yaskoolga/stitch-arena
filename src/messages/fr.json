@@ -71,6 +71,19 @@
     "welcome": "Bon retour, {name} !",
     "overview": "Aperçu",
     "recentProjects": "Projets récents",
+    "deleteConfirm": "Cela supprimera définitivement le projet et tous ses journaux. Cette action ne peut pas être annulée.",
+    "filters": {
+      "all": "Tous",
+      "inProgress": "En cours",
+      "completed": "Terminés",
+      "paused": "En pause"
+    },
+    "sort": {
+      "newest": "Plus récents d'abord",
+      "oldest": "Plus anciens d'abord",
+      "progress": "Plus de progression",
+      "name": "Par nom"
+    },
     "stats": {
       "totalProjects": "Projets totaux",
       "totalStitches": "Points totaux",
@@ -223,24 +236,112 @@
   },
   "achievements": {
     "title": "Succès",
-    "unlocked": "Débloqué",
+    "unlocked": "débloqué",
     "locked": "Verrouillé",
     "progress": "Progression : {current} / {target}",
     "unlockedAt": "Débloqué le {date}",
-    "types": {
-      "firstProject": "Premier projet",
-      "firstLog": "Première entrée",
-      "projectCompleted": "Projet terminé",
-      "streak7": "Série de 7 jours",
-      "streak30": "Série de 30 jours",
-      "streak100": "Série de 100 jours",
-      "stitches1k": "1 000 points",
-      "stitches10k": "10 000 points",
-      "stitches100k": "100 000 points",
-      "speedTurtle": "Vitesse : Tortue",
-      "speedRabbit": "Vitesse : Lapin",
-      "speedCheetah": "Vitesse : Guépard",
-      "speedRocket": "Vitesse : Fusée"
+    "categories": {
+      "all": "Tous",
+      "projects": "Projets",
+      "stitches": "Points",
+      "streaks": "Séries",
+      "logs": "Journaux",
+      "speed": "Vitesse",
+      "social": "Social"
+    },
+    "list": {
+      "first_project": {
+        "name": "Premiers pas",
+        "description": "Créez votre premier projet"
+      },
+      "five_projects": {
+        "name": "Bien démarré",
+        "description": "Créez 5 projets"
+      },
+      "ten_projects": {
+        "name": "Brodeur dévoué",
+        "description": "Créez 10 projets"
+      },
+      "first_completed": {
+        "name": "Finisseur",
+        "description": "Terminez votre premier projet"
+      },
+      "10k_stitches": {
+        "name": "Échauffement",
+        "description": "Brodez 10 000 points au total"
+      },
+      "50k_stitches": {
+        "name": "Maître de l'aiguille",
+        "description": "Brodez 50 000 points au total"
+      },
+      "100k_stitches": {
+        "name": "Club des cent mille",
+        "description": "Brodez 100 000 points au total"
+      },
+      "1m_stitches": {
+        "name": "Légendaire",
+        "description": "Brodez 1 000 000 de points au total"
+      },
+      "week_streak": {
+        "name": "Engagé",
+        "description": "Série de 7 jours"
+      },
+      "month_streak": {
+        "name": "Dévoué",
+        "description": "Série de 30 jours"
+      },
+      "100_day_streak": {
+        "name": "Inarrêtable",
+        "description": "Série de 100 jours"
+      },
+      "first_log": {
+        "name": "Première entrée",
+        "description": "Ajoutez votre premier journal quotidien"
+      },
+      "100_logs": {
+        "name": "Journaliste régulier",
+        "description": "Ajoutez 100 journaux quotidiens"
+      },
+      "speed_demon": {
+        "name": "Démon de vitesse",
+        "description": "Atteignez 300+ points/jour en moyenne (niveau Fusée)"
+      },
+      "first_public": {
+        "name": "Passage au public",
+        "description": "Rendez votre premier projet public"
+      }
+    }
+  },
+  "themes": {
+    "Nature": "Nature",
+    "Animals": "Animaux",
+    "Abstract": "Abstrait",
+    "Seasonal": "Saisonnier",
+    "Fantasy": "Fantaisie",
+    "Portrait": "Portrait",
+    "Geometric": "Géométrique",
+    "Holiday": "Vacances",
+    "Floral": "Floral",
+    "Modern": "Moderne",
+    "Traditional": "Traditionnel",
+    "Other": "Autre"
+  },
+  "speedTiers": {
+    "TURTLE": {
+      "name": "Tortue",
+      "description": "Lent et régulier"
+    },
+    "BIKE": {
+      "name": "Vélo",
+      "description": "Avance bien"
+    },
+    "CAR": {
+      "name": "Voiture",
+      "description": "Vitesse de croisière"
+    },
+    "ROCKET": {
+      "name": "Fusée",
+      "description": "Vitesse de l'éclair"
     }
   },
   "comments": {

@@ -43,6 +43,7 @@ export default function DashboardPage() {
   const [deleteProjectId, setDeleteProjectId] = useState<string | null>(null);
 
   const t = useTranslations('projects');
+  const tDash = useTranslations('dashboard');
   const tCommon = useTranslations('common');
   const tToast = useTranslations('toast');
 
@@ -98,7 +99,7 @@ export default function DashboardPage() {
         open={!!deleteProjectId}
         onOpenChange={(open) => { if (!open) setDeleteProjectId(null); }}
         title={t('deleteProject')}
-        description="This will permanently delete the project and all its logs. This action cannot be undone."
+        description={tDash('deleteConfirm')}
         onConfirm={() => { if (deleteProjectId) deleteProject.mutate(deleteProjectId); }}
         loading={deleteProject.isPending}
       />
@@ -127,28 +128,28 @@ export default function DashboardPage() {
             size="sm"
             onClick={() => setFilter("all")}
           >
-            All
+            {tDash('filters.all')}
           </Button>
           <Button
             variant={filter === "in_progress" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("in_progress")}
           >
-            {t('status.inProgress')}
+            {tDash('filters.inProgress')}
           </Button>
           <Button
             variant={filter === "completed" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("completed")}
           >
-            {t('status.completed')}
+            {tDash('filters.completed')}
           </Button>
           <Button
             variant={filter === "paused" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("paused")}
           >
-            {t('status.paused')}
+            {tDash('filters.paused')}
           </Button>
         </div>
         <div className="ml-auto">
@@ -157,10 +158,10 @@ export default function DashboardPage() {
             onChange={(e) => setSortBy(e.target.value as SortBy)}
             className="h-9 rounded-md border border-input bg-background px-3 text-sm"
           >
-            <option value="newest">Newest first</option>
-            <option value="oldest">Oldest first</option>
-            <option value="progress">Most progress</option>
-            <option value="name">By name</option>
+            <option value="newest">{tDash('sort.newest')}</option>
+            <option value="oldest">{tDash('sort.oldest')}</option>
+            <option value="progress">{tDash('sort.progress')}</option>
+            <option value="name">{tDash('sort.name')}</option>
           </select>
         </div>
       </div>

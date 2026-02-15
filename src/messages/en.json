@@ -71,6 +71,19 @@
     "welcome": "Welcome back, {name}!",
     "overview": "Overview",
     "recentProjects": "Recent Projects",
+    "deleteConfirm": "This will permanently delete the project and all its logs. This action cannot be undone.",
+    "filters": {
+      "all": "All",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "paused": "Paused"
+    },
+    "sort": {
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "progress": "Most progress",
+      "name": "By name"
+    },
     "stats": {
       "totalProjects": "Total Projects",
       "totalStitches": "Total Stitches",
@@ -223,24 +236,112 @@
   },
   "achievements": {
     "title": "Achievements",
-    "unlocked": "Unlocked",
+    "unlocked": "unlocked",
     "locked": "Locked",
     "progress": "Progress: {current} / {target}",
     "unlockedAt": "Unlocked on {date}",
-    "types": {
-      "firstProject": "First Project",
-      "firstLog": "First Log",
-      "projectCompleted": "Project Completed",
-      "streak7": "7-Day Streak",
-      "streak30": "30-Day Streak",
-      "streak100": "100-Day Streak",
-      "stitches1k": "1,000 Stitches",
-      "stitches10k": "10,000 Stitches",
-      "stitches100k": "100,000 Stitches",
-      "speedTurtle": "Speed: Turtle",
-      "speedRabbit": "Speed: Rabbit",
-      "speedCheetah": "Speed: Cheetah",
-      "speedRocket": "Speed: Rocket"
+    "categories": {
+      "all": "All",
+      "projects": "Projects",
+      "stitches": "Stitches",
+      "streaks": "Streaks",
+      "logs": "Logs",
+      "speed": "Speed",
+      "social": "Social"
+    },
+    "list": {
+      "first_project": {
+        "name": "First Steps",
+        "description": "Create your first project"
+      },
+      "five_projects": {
+        "name": "Getting Started",
+        "description": "Create 5 projects"
+      },
+      "ten_projects": {
+        "name": "Dedicated Stitcher",
+        "description": "Create 10 projects"
+      },
+      "first_completed": {
+        "name": "Finisher",
+        "description": "Complete your first project"
+      },
+      "10k_stitches": {
+        "name": "Getting Warmed Up",
+        "description": "Stitch 10,000 stitches total"
+      },
+      "50k_stitches": {
+        "name": "Needle Master",
+        "description": "Stitch 50,000 stitches total"
+      },
+      "100k_stitches": {
+        "name": "Century Club",
+        "description": "Stitch 100,000 stitches total"
+      },
+      "1m_stitches": {
+        "name": "Legendary",
+        "description": "Stitch 1,000,000 stitches total"
+      },
+      "week_streak": {
+        "name": "Committed",
+        "description": "7 day streak"
+      },
+      "month_streak": {
+        "name": "Dedicated",
+        "description": "30 day streak"
+      },
+      "100_day_streak": {
+        "name": "Unstoppable",
+        "description": "100 day streak"
+      },
+      "first_log": {
+        "name": "First Entry",
+        "description": "Add your first daily log"
+      },
+      "100_logs": {
+        "name": "Consistent Logger",
+        "description": "Add 100 daily logs"
+      },
+      "speed_demon": {
+        "name": "Speed Demon",
+        "description": "Reach 300+ stitches/day average (Rocket tier)"
+      },
+      "first_public": {
+        "name": "Going Public",
+        "description": "Make your first project public"
+      }
+    }
+  },
+  "themes": {
+    "Nature": "Nature",
+    "Animals": "Animals",
+    "Abstract": "Abstract",
+    "Seasonal": "Seasonal",
+    "Fantasy": "Fantasy",
+    "Portrait": "Portrait",
+    "Geometric": "Geometric",
+    "Holiday": "Holiday",
+    "Floral": "Floral",
+    "Modern": "Modern",
+    "Traditional": "Traditional",
+    "Other": "Other"
+  },
+  "speedTiers": {
+    "TURTLE": {
+      "name": "Turtle",
+      "description": "Slow and steady"
+    },
+    "BIKE": {
+      "name": "Bike",
+      "description": "Moving along nicely"
+    },
+    "CAR": {
+      "name": "Car",
+      "description": "Cruising fast"
+    },
+    "ROCKET": {
+      "name": "Rocket",
+      "description": "Lightning speed"
     }
   },
   "comments": {

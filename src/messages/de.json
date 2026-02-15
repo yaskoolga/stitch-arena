@@ -71,6 +71,19 @@
     "welcome": "Willkommen zurück, {name}!",
     "overview": "Übersicht",
     "recentProjects": "Letzte Projekte",
+    "deleteConfirm": "Dies löscht das Projekt und alle seine Einträge dauerhaft. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "filters": {
+      "all": "Alle",
+      "inProgress": "In Bearbeitung",
+      "completed": "Abgeschlossen",
+      "paused": "Pausiert"
+    },
+    "sort": {
+      "newest": "Neueste zuerst",
+      "oldest": "Älteste zuerst",
+      "progress": "Meister Fortschritt",
+      "name": "Nach Name"
+    },
     "stats": {
       "totalProjects": "Projekte gesamt",
       "totalStitches": "Stiche gesamt",
@@ -227,20 +240,108 @@
     "locked": "Gesperrt",
     "progress": "Fortschritt: {current} / {target}",
     "unlockedAt": "Freigeschaltet am {date}",
-    "types": {
-      "firstProject": "Erstes Projekt",
-      "firstLog": "Erster Eintrag",
-      "projectCompleted": "Projekt abgeschlossen",
-      "streak7": "7-Tage-Serie",
-      "streak30": "30-Tage-Serie",
-      "streak100": "100-Tage-Serie",
-      "stitches1k": "1.000 Stiche",
-      "stitches10k": "10.000 Stiche",
-      "stitches100k": "100.000 Stiche",
-      "speedTurtle": "Geschwindigkeit: Schildkröte",
-      "speedRabbit": "Geschwindigkeit: Hase",
-      "speedCheetah": "Geschwindigkeit: Gepard",
-      "speedRocket": "Geschwindigkeit: Rakete"
+    "categories": {
+      "all": "Alle",
+      "projects": "Projekte",
+      "stitches": "Stiche",
+      "streaks": "Serien",
+      "logs": "Einträge",
+      "speed": "Geschwindigkeit",
+      "social": "Sozial"
+    },
+    "list": {
+      "first_project": {
+        "name": "Erste Schritte",
+        "description": "Erstellen Sie Ihr erstes Projekt"
+      },
+      "five_projects": {
+        "name": "Der Anfang",
+        "description": "Erstellen Sie 5 Projekte"
+      },
+      "ten_projects": {
+        "name": "Engagierter Sticker",
+        "description": "Erstellen Sie 10 Projekte"
+      },
+      "first_completed": {
+        "name": "Vollender",
+        "description": "Schließen Sie Ihr erstes Projekt ab"
+      },
+      "10k_stitches": {
+        "name": "Aufwärmen",
+        "description": "Sticken Sie insgesamt 10.000 Stiche"
+      },
+      "50k_stitches": {
+        "name": "Nadelmeister",
+        "description": "Sticken Sie insgesamt 50.000 Stiche"
+      },
+      "100k_stitches": {
+        "name": "Jahrhundert-Club",
+        "description": "Sticken Sie insgesamt 100.000 Stiche"
+      },
+      "1m_stitches": {
+        "name": "Legendär",
+        "description": "Sticken Sie insgesamt 1.000.000 Stiche"
+      },
+      "week_streak": {
+        "name": "Engagiert",
+        "description": "7-Tage-Serie"
+      },
+      "month_streak": {
+        "name": "Gewidmet",
+        "description": "30-Tage-Serie"
+      },
+      "100_day_streak": {
+        "name": "Unaufhaltsam",
+        "description": "100-Tage-Serie"
+      },
+      "first_log": {
+        "name": "Erster Eintrag",
+        "description": "Fügen Sie Ihren ersten Tageseintrag hinzu"
+      },
+      "100_logs": {
+        "name": "Beständiger Logger",
+        "description": "Fügen Sie 100 Tageseinträge hinzu"
+      },
+      "speed_demon": {
+        "name": "Geschwindigkeitsdämon",
+        "description": "Erreichen Sie 300+ Stiche/Tag im Durchschnitt (Raketen-Stufe)"
+      },
+      "first_public": {
+        "name": "Öffentlich werden",
+        "description": "Machen Sie Ihr erstes Projekt öffentlich"
+      }
+    }
+  },
+  "themes": {
+    "Nature": "Natur",
+    "Animals": "Tiere",
+    "Abstract": "Abstrakt",
+    "Seasonal": "Saisonal",
+    "Fantasy": "Fantasy",
+    "Portrait": "Porträt",
+    "Geometric": "Geometrisch",
+    "Holiday": "Feiertag",
+    "Floral": "Blumen",
+    "Modern": "Modern",
+    "Traditional": "Traditionell",
+    "Other": "Andere"
+  },
+  "speedTiers": {
+    "TURTLE": {
+      "name": "Schildkröte",
+      "description": "Langsam und stetig"
+    },
+    "BIKE": {
+      "name": "Fahrrad",
+      "description": "Schön vorankommen"
+    },
+    "CAR": {
+      "name": "Auto",
+      "description": "Schnell unterwegs"
+    },
+    "ROCKET": {
+      "name": "Rakete",
+      "description": "Blitzgeschwindigkeit"
     }
   },
   "comments": {

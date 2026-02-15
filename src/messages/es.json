@@ -71,6 +71,19 @@
     "welcome": "¡Bienvenido de nuevo, {name}!",
     "overview": "Resumen",
     "recentProjects": "Proyectos recientes",
+    "deleteConfirm": "Esto eliminará permanentemente el proyecto y todos sus registros. Esta acción no se puede deshacer.",
+    "filters": {
+      "all": "Todos",
+      "inProgress": "En progreso",
+      "completed": "Completados",
+      "paused": "Pausados"
+    },
+    "sort": {
+      "newest": "Más recientes primero",
+      "oldest": "Más antiguos primero",
+      "progress": "Más progreso",
+      "name": "Por nombre"
+    },
     "stats": {
       "totalProjects": "Proyectos totales",
       "totalStitches": "Puntadas totales",
@@ -223,24 +236,112 @@
   },
   "achievements": {
     "title": "Logros",
-    "unlocked": "Desbloqueado",
+    "unlocked": "desbloqueado",
     "locked": "Bloqueado",
     "progress": "Progreso: {current} / {target}",
     "unlockedAt": "Desbloqueado el {date}",
-    "types": {
-      "firstProject": "Primer proyecto",
-      "firstLog": "Primera entrada",
-      "projectCompleted": "Proyecto completado",
-      "streak7": "Racha de 7 días",
-      "streak30": "Racha de 30 días",
-      "streak100": "Racha de 100 días",
-      "stitches1k": "1.000 puntadas",
-      "stitches10k": "10.000 puntadas",
-      "stitches100k": "100.000 puntadas",
-      "speedTurtle": "Velocidad: Tortuga",
-      "speedRabbit": "Velocidad: Conejo",
-      "speedCheetah": "Velocidad: Guepardo",
-      "speedRocket": "Velocidad: Cohete"
+    "categories": {
+      "all": "Todos",
+      "projects": "Proyectos",
+      "stitches": "Puntadas",
+      "streaks": "Rachas",
+      "logs": "Registros",
+      "speed": "Velocidad",
+      "social": "Social"
+    },
+    "list": {
+      "first_project": {
+        "name": "Primeros pasos",
+        "description": "Crea tu primer proyecto"
+      },
+      "five_projects": {
+        "name": "Comenzando",
+        "description": "Crea 5 proyectos"
+      },
+      "ten_projects": {
+        "name": "Bordador dedicado",
+        "description": "Crea 10 proyectos"
+      },
+      "first_completed": {
+        "name": "Finalizador",
+        "description": "Completa tu primer proyecto"
+      },
+      "10k_stitches": {
+        "name": "Calentando motores",
+        "description": "Borda 10.000 puntadas en total"
+      },
+      "50k_stitches": {
+        "name": "Maestro de la aguja",
+        "description": "Borda 50.000 puntadas en total"
+      },
+      "100k_stitches": {
+        "name": "Club del centenar",
+        "description": "Borda 100.000 puntadas en total"
+      },
+      "1m_stitches": {
+        "name": "Legendario",
+        "description": "Borda 1.000.000 de puntadas en total"
+      },
+      "week_streak": {
+        "name": "Comprometido",
+        "description": "Racha de 7 días"
+      },
+      "month_streak": {
+        "name": "Dedicado",
+        "description": "Racha de 30 días"
+      },
+      "100_day_streak": {
+        "name": "Imparable",
+        "description": "Racha de 100 días"
+      },
+      "first_log": {
+        "name": "Primera entrada",
+        "description": "Añade tu primer registro diario"
+      },
+      "100_logs": {
+        "name": "Registrador constante",
+        "description": "Añade 100 registros diarios"
+      },
+      "speed_demon": {
+        "name": "Demonio de velocidad",
+        "description": "Alcanza 300+ puntadas/día en promedio (nivel Cohete)"
+      },
+      "first_public": {
+        "name": "Haciéndose público",
+        "description": "Haz público tu primer proyecto"
+      }
+    }
+  },
+  "themes": {
+    "Nature": "Naturaleza",
+    "Animals": "Animales",
+    "Abstract": "Abstracto",
+    "Seasonal": "Estacional",
+    "Fantasy": "Fantasía",
+    "Portrait": "Retrato",
+    "Geometric": "Geométrico",
+    "Holiday": "Festividad",
+    "Floral": "Floral",
+    "Modern": "Moderno",
+    "Traditional": "Tradicional",
+    "Other": "Otro"
+  },
+  "speedTiers": {
+    "TURTLE": {
+      "name": "Tortuga",
+      "description": "Lento pero constante"
+    },
+    "BIKE": {
+      "name": "Bicicleta",
+      "description": "Avanzando bien"
+    },
+    "CAR": {
+      "name": "Coche",
+      "description": "Navegando rápido"
+    },
+    "ROCKET": {
+      "name": "Cohete",
+      "description": "Velocidad relámpago"
     }
   },
   "comments": {
