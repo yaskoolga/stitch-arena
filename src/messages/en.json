@@ -1,0 +1,254 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "close": "Close",
+    "confirm": "Confirm",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "loadMore": "Load More",
+    "noResults": "No results found"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "community": "Community",
+    "gallery": "Gallery",
+    "profile": "Profile",
+    "favorites": "Favorites",
+    "calculator": "Calculator",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "auth": {
+    "welcome": "Welcome to StitchArena",
+    "loginTitle": "Log in to your account",
+    "registerTitle": "Create your account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signInWith": "Sign in with {provider}",
+    "orContinueWith": "Or continue with"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back, {name}!",
+    "overview": "Overview",
+    "recentProjects": "Recent Projects",
+    "stats": {
+      "totalProjects": "Total Projects",
+      "totalStitches": "Total Stitches",
+      "avgSpeed": "Avg Speed",
+      "mostProductive": "Most Productive Day",
+      "currentStreak": "Current Streak",
+      "active": "active",
+      "completed": "completed",
+      "stitchesPerDay": "stitches/day",
+      "days": "days"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "myProjects": "My Projects",
+    "createNew": "Create New Project",
+    "createProject": "Create Project",
+    "editProject": "Edit Project",
+    "deleteProject": "Delete Project",
+    "projectDetails": "Project Details",
+    "noProjects": "No projects yet",
+    "startFirst": "Start tracking your cross-stitch projects!",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "manufacturer": "Manufacturer",
+      "totalStitches": "Total Stitches",
+      "width": "Width",
+      "height": "Height",
+      "canvasType": "Canvas Type",
+      "coverImage": "Cover Image",
+      "schemaImage": "Pattern Image",
+      "status": "Status",
+      "themes": "Themes",
+      "isPublic": "Make Public"
+    },
+    "status": {
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "paused": "Paused"
+    },
+    "progress": {
+      "title": "Progress",
+      "completed": "{completed} / {total} stitches",
+      "percentage": "{percent}% complete",
+      "days": "Days",
+      "logs": "logs",
+      "avgPerDay": "Avg / Day",
+      "estDaysLeft": "Est. Days Left"
+    }
+  },
+  "logs": {
+    "title": "Log History",
+    "addLog": "Add Log",
+    "editLog": "Edit Log",
+    "deleteLog": "Delete Log",
+    "noLogs": "No logs yet",
+    "startLogging": "Start logging your progress!",
+    "fields": {
+      "date": "Date",
+      "daily": "Daily",
+      "total": "Total",
+      "photo": "Photo",
+      "notes": "Notes",
+      "stitches": "stitches"
+    },
+    "ai": {
+      "detecting": "AI is detecting stitches...",
+      "detected": "{count} stitches detected",
+      "confidence": "{percent}% confidence",
+      "correct": "Correct if needed"
+    }
+  },
+  "community": {
+    "title": "Community Feed",
+    "subtitle": "Latest activity from the StitchArena community",
+    "tabs": {
+      "all": "All Activity",
+      "projects": "New Projects",
+      "updates": "Updates"
+    },
+    "actions": {
+      "like": "Like",
+      "comment": "Comment",
+      "share": "Share"
+    },
+    "activity": {
+      "createdProject": "Created a new project",
+      "updatedProgress": "Updated progress",
+      "completedProject": "Completed project"
+    },
+    "empty": "No activity yet",
+    "beFirst": "Be the first to share your projects!"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "Completed cross-stitch projects from the community 🎉",
+    "filters": {
+      "all": "All",
+      "themes": "Themes",
+      "manufacturer": "Manufacturer"
+    },
+    "empty": "No completed projects yet",
+    "beFirst": "Be the first to finish a project!"
+  },
+  "profile": {
+    "title": "Profile",
+    "editProfile": "Edit Profile",
+    "myProfile": "My Profile",
+    "fields": {
+      "avatar": "Avatar",
+      "name": "Name",
+      "bio": "Bio",
+      "email": "Email",
+      "joined": "Joined {date}"
+    },
+    "tabs": {
+      "projects": "Projects",
+      "achievements": "Achievements",
+      "stats": "Stats"
+    },
+    "stats": {
+      "projects": "Projects",
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "paused": "Paused",
+      "totalStitches": "Total Stitches",
+      "avgSpeed": "Average Speed"
+    },
+    "empty": "No projects yet",
+    "createFirst": "Create Your First Project"
+  },
+  "achievements": {
+    "title": "Achievements",
+    "unlocked": "Unlocked",
+    "locked": "Locked",
+    "progress": "Progress: {current} / {target}",
+    "unlockedAt": "Unlocked on {date}",
+    "types": {
+      "firstProject": "First Project",
+      "firstLog": "First Log",
+      "projectCompleted": "Project Completed",
+      "streak7": "7-Day Streak",
+      "streak30": "30-Day Streak",
+      "streak100": "100-Day Streak",
+      "stitches1k": "1,000 Stitches",
+      "stitches10k": "10,000 Stitches",
+      "stitches100k": "100,000 Stitches",
+      "speedTurtle": "Speed: Turtle",
+      "speedRabbit": "Speed: Rabbit",
+      "speedCheetah": "Speed: Cheetah",
+      "speedRocket": "Speed: Rocket"
+    }
+  },
+  "comments": {
+    "title": "Comments",
+    "addComment": "Add a comment",
+    "writeComment": "Write a comment...",
+    "post": "Post",
+    "delete": "Delete",
+    "noComments": "No comments yet",
+    "beFirst": "Be the first to comment!",
+    "commentCount": "{count} comments"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "subtitle": "Projects you've liked",
+    "empty": "No favorites yet",
+    "explore": "Explore projects in the Gallery"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "No notifications",
+    "types": {
+      "like": "{user} liked your project",
+      "comment": "{user} commented on your project",
+      "follow": "{user} started following you",
+      "achievement": "You unlocked: {achievement}"
+    }
+  },
+  "toast": {
+    "success": {
+      "projectCreated": "Project created successfully",
+      "projectUpdated": "Project updated successfully",
+      "projectDeleted": "Project deleted successfully",
+      "logCreated": "Log added successfully",
+      "logUpdated": "Log updated successfully",
+      "logDeleted": "Log deleted successfully",
+      "profileUpdated": "Profile updated",
+      "commentAdded": "Comment added",
+      "commentDeleted": "Comment deleted",
+      "liked": "Liked",
+      "unliked": "Unliked"
+    },
+    "error": {
+      "generic": "Something went wrong",
+      "uploadFailed": "Failed to upload image",
+      "loginFailed": "Failed to login",
+      "registerFailed": "Failed to register"
+    }
+  }
+}

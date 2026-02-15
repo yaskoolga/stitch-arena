@@ -1,0 +1,254 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "close": "Fermer",
+    "confirm": "Confirmer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "loadMore": "Charger plus",
+    "noResults": "Aucun résultat trouvé"
+  },
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "projects": "Projets",
+    "community": "Communauté",
+    "gallery": "Galerie",
+    "profile": "Profil",
+    "favorites": "Favoris",
+    "calculator": "Calculatrice",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "register": "S'inscrire"
+  },
+  "auth": {
+    "welcome": "Bienvenue sur StitchArena",
+    "loginTitle": "Connectez-vous à votre compte",
+    "registerTitle": "Créez votre compte",
+    "email": "Email",
+    "password": "Mot de passe",
+    "name": "Nom",
+    "confirmPassword": "Confirmer le mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "noAccount": "Pas encore de compte ?",
+    "hasAccount": "Vous avez déjà un compte ?",
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "signInWith": "Se connecter avec {provider}",
+    "orContinueWith": "Ou continuer avec"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bon retour, {name} !",
+    "overview": "Aperçu",
+    "recentProjects": "Projets récents",
+    "stats": {
+      "totalProjects": "Projets totaux",
+      "totalStitches": "Points totaux",
+      "avgSpeed": "Vitesse moyenne",
+      "mostProductive": "Jour le plus productif",
+      "currentStreak": "Série actuelle",
+      "active": "actifs",
+      "completed": "terminés",
+      "stitchesPerDay": "points/jour",
+      "days": "jours"
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "myProjects": "Mes projets",
+    "createNew": "Créer un nouveau projet",
+    "createProject": "Créer un projet",
+    "editProject": "Modifier le projet",
+    "deleteProject": "Supprimer le projet",
+    "projectDetails": "Détails du projet",
+    "noProjects": "Aucun projet pour le moment",
+    "startFirst": "Commencez à suivre vos projets de point de croix !",
+    "fields": {
+      "title": "Titre",
+      "description": "Description",
+      "manufacturer": "Fabricant",
+      "totalStitches": "Points totaux",
+      "width": "Largeur",
+      "height": "Hauteur",
+      "canvasType": "Type de toile",
+      "coverImage": "Image de couverture",
+      "schemaImage": "Image de la grille",
+      "status": "Statut",
+      "themes": "Thèmes",
+      "isPublic": "Rendre public"
+    },
+    "status": {
+      "inProgress": "En cours",
+      "completed": "Terminé",
+      "paused": "En pause"
+    },
+    "progress": {
+      "title": "Progression",
+      "completed": "{completed} / {total} points",
+      "percentage": "{percent}% terminé",
+      "days": "Jours",
+      "logs": "entrées",
+      "avgPerDay": "Moy. / Jour",
+      "estDaysLeft": "Jours restants estimés"
+    }
+  },
+  "logs": {
+    "title": "Historique",
+    "addLog": "Ajouter une entrée",
+    "editLog": "Modifier l'entrée",
+    "deleteLog": "Supprimer l'entrée",
+    "noLogs": "Aucune entrée pour le moment",
+    "startLogging": "Commencez à enregistrer votre progression !",
+    "fields": {
+      "date": "Date",
+      "daily": "Quotidien",
+      "total": "Total",
+      "photo": "Photo",
+      "notes": "Notes",
+      "stitches": "points"
+    },
+    "ai": {
+      "detecting": "L'IA détecte les points...",
+      "detected": "{count} points détectés",
+      "confidence": "{percent}% de confiance",
+      "correct": "Corrigez si nécessaire"
+    }
+  },
+  "community": {
+    "title": "Fil de la communauté",
+    "subtitle": "Dernières activités de la communauté StitchArena",
+    "tabs": {
+      "all": "Toutes les activités",
+      "projects": "Nouveaux projets",
+      "updates": "Mises à jour"
+    },
+    "actions": {
+      "like": "J'aime",
+      "comment": "Commenter",
+      "share": "Partager"
+    },
+    "activity": {
+      "createdProject": "A créé un nouveau projet",
+      "updatedProgress": "A mis à jour sa progression",
+      "completedProject": "A terminé le projet"
+    },
+    "empty": "Aucune activité pour le moment",
+    "beFirst": "Soyez le premier à partager vos projets !"
+  },
+  "gallery": {
+    "title": "Galerie",
+    "subtitle": "Projets de point de croix terminés de la communauté 🎉",
+    "filters": {
+      "all": "Tous",
+      "themes": "Thèmes",
+      "manufacturer": "Fabricant"
+    },
+    "empty": "Aucun projet terminé pour le moment",
+    "beFirst": "Soyez le premier à terminer un projet !"
+  },
+  "profile": {
+    "title": "Profil",
+    "editProfile": "Modifier le profil",
+    "myProfile": "Mon profil",
+    "fields": {
+      "avatar": "Avatar",
+      "name": "Nom",
+      "bio": "Biographie",
+      "email": "Email",
+      "joined": "Inscrit le {date}"
+    },
+    "tabs": {
+      "projects": "Projets",
+      "achievements": "Succès",
+      "stats": "Statistiques"
+    },
+    "stats": {
+      "projects": "Projets",
+      "completed": "Terminés",
+      "inProgress": "En cours",
+      "paused": "En pause",
+      "totalStitches": "Points totaux",
+      "avgSpeed": "Vitesse moyenne"
+    },
+    "empty": "Aucun projet pour le moment",
+    "createFirst": "Créez votre premier projet"
+  },
+  "achievements": {
+    "title": "Succès",
+    "unlocked": "Débloqué",
+    "locked": "Verrouillé",
+    "progress": "Progression : {current} / {target}",
+    "unlockedAt": "Débloqué le {date}",
+    "types": {
+      "firstProject": "Premier projet",
+      "firstLog": "Première entrée",
+      "projectCompleted": "Projet terminé",
+      "streak7": "Série de 7 jours",
+      "streak30": "Série de 30 jours",
+      "streak100": "Série de 100 jours",
+      "stitches1k": "1 000 points",
+      "stitches10k": "10 000 points",
+      "stitches100k": "100 000 points",
+      "speedTurtle": "Vitesse : Tortue",
+      "speedRabbit": "Vitesse : Lapin",
+      "speedCheetah": "Vitesse : Guépard",
+      "speedRocket": "Vitesse : Fusée"
+    }
+  },
+  "comments": {
+    "title": "Commentaires",
+    "addComment": "Ajouter un commentaire",
+    "writeComment": "Écrire un commentaire...",
+    "post": "Publier",
+    "delete": "Supprimer",
+    "noComments": "Aucun commentaire pour le moment",
+    "beFirst": "Soyez le premier à commenter !",
+    "commentCount": "{count} commentaires"
+  },
+  "favorites": {
+    "title": "Favoris",
+    "subtitle": "Projets que vous avez aimés",
+    "empty": "Aucun favori pour le moment",
+    "explore": "Explorez les projets dans la Galerie"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Tout marquer comme lu",
+    "empty": "Aucune notification",
+    "types": {
+      "like": "{user} a aimé votre projet",
+      "comment": "{user} a commenté votre projet",
+      "follow": "{user} vous suit maintenant",
+      "achievement": "Vous avez débloqué : {achievement}"
+    }
+  },
+  "toast": {
+    "success": {
+      "projectCreated": "Projet créé avec succès",
+      "projectUpdated": "Projet mis à jour avec succès",
+      "projectDeleted": "Projet supprimé avec succès",
+      "logCreated": "Entrée ajoutée avec succès",
+      "logUpdated": "Entrée mise à jour avec succès",
+      "logDeleted": "Entrée supprimée avec succès",
+      "profileUpdated": "Profil mis à jour",
+      "commentAdded": "Commentaire ajouté",
+      "commentDeleted": "Commentaire supprimé",
+      "liked": "Aimé",
+      "unliked": "N'aime plus"
+    },
+    "error": {
+      "generic": "Une erreur s'est produite",
+      "uploadFailed": "Échec du téléchargement de l'image",
+      "loginFailed": "Échec de la connexion",
+      "registerFailed": "Échec de l'inscription"
+    }
+  }
+}

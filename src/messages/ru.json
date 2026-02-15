@@ -1,0 +1,254 @@
+{
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "create": "Создать",
+    "close": "Закрыть",
+    "confirm": "Подтвердить",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "sort": "Сортировка",
+    "loadMore": "Загрузить ещё",
+    "noResults": "Результатов не найдено"
+  },
+  "nav": {
+    "dashboard": "Панель",
+    "projects": "Проекты",
+    "community": "Сообщество",
+    "gallery": "Галерея",
+    "profile": "Профиль",
+    "favorites": "Избранное",
+    "calculator": "Калькулятор",
+    "settings": "Настройки",
+    "logout": "Выйти",
+    "login": "Войти",
+    "register": "Регистрация"
+  },
+  "auth": {
+    "welcome": "Добро пожаловать в StitchArena",
+    "loginTitle": "Войдите в свой аккаунт",
+    "registerTitle": "Создайте аккаунт",
+    "email": "Email",
+    "password": "Пароль",
+    "name": "Имя",
+    "confirmPassword": "Подтвердите пароль",
+    "forgotPassword": "Забыли пароль?",
+    "noAccount": "Нет аккаунта?",
+    "hasAccount": "Уже есть аккаунт?",
+    "signIn": "Войти",
+    "signUp": "Зарегистрироваться",
+    "signInWith": "Войти через {provider}",
+    "orContinueWith": "Или продолжить с"
+  },
+  "dashboard": {
+    "title": "Панель управления",
+    "welcome": "С возвращением, {name}!",
+    "overview": "Обзор",
+    "recentProjects": "Последние проекты",
+    "stats": {
+      "totalProjects": "Всего проектов",
+      "totalStitches": "Всего крестиков",
+      "avgSpeed": "Средняя скорость",
+      "mostProductive": "Самый продуктивный день",
+      "currentStreak": "Текущая серия",
+      "active": "активных",
+      "completed": "завершено",
+      "stitchesPerDay": "крестиков/день",
+      "days": "дней"
+    }
+  },
+  "projects": {
+    "title": "Проекты",
+    "myProjects": "Мои проекты",
+    "createNew": "Создать новый проект",
+    "createProject": "Создать проект",
+    "editProject": "Редактировать проект",
+    "deleteProject": "Удалить проект",
+    "projectDetails": "Детали проекта",
+    "noProjects": "Пока нет проектов",
+    "startFirst": "Начните отслеживать свои проекты вышивки!",
+    "fields": {
+      "title": "Название",
+      "description": "Описание",
+      "manufacturer": "Производитель",
+      "totalStitches": "Всего крестиков",
+      "width": "Ширина",
+      "height": "Высота",
+      "canvasType": "Тип канвы",
+      "coverImage": "Фото обложки",
+      "schemaImage": "Фото схемы",
+      "status": "Статус",
+      "themes": "Темы",
+      "isPublic": "Сделать публичным"
+    },
+    "status": {
+      "inProgress": "В процессе",
+      "completed": "Завершено",
+      "paused": "Приостановлено"
+    },
+    "progress": {
+      "title": "Прогресс",
+      "completed": "{completed} / {total} крестиков",
+      "percentage": "{percent}% завершено",
+      "days": "Дней",
+      "logs": "записей",
+      "avgPerDay": "Средн. / день",
+      "estDaysLeft": "Осталось дней"
+    }
+  },
+  "logs": {
+    "title": "История записей",
+    "addLog": "Добавить запись",
+    "editLog": "Редактировать запись",
+    "deleteLog": "Удалить запись",
+    "noLogs": "Пока нет записей",
+    "startLogging": "Начните записывать свой прогресс!",
+    "fields": {
+      "date": "Дата",
+      "daily": "За день",
+      "total": "Всего",
+      "photo": "Фото",
+      "notes": "Заметки",
+      "stitches": "крестиков"
+    },
+    "ai": {
+      "detecting": "AI определяет крестики...",
+      "detected": "Обнаружено {count} крестиков",
+      "confidence": "Уверенность {percent}%",
+      "correct": "Исправьте при необходимости"
+    }
+  },
+  "community": {
+    "title": "Лента сообщества",
+    "subtitle": "Последняя активность сообщества StitchArena",
+    "tabs": {
+      "all": "Вся активность",
+      "projects": "Новые проекты",
+      "updates": "Обновления"
+    },
+    "actions": {
+      "like": "Нравится",
+      "comment": "Комментарий",
+      "share": "Поделиться"
+    },
+    "activity": {
+      "createdProject": "Создал новый проект",
+      "updatedProgress": "Обновил прогресс",
+      "completedProject": "Завершил проект"
+    },
+    "empty": "Пока нет активности",
+    "beFirst": "Будьте первым, кто поделится своими проектами!"
+  },
+  "gallery": {
+    "title": "Галерея",
+    "subtitle": "Завершенные проекты вышивки от сообщества 🎉",
+    "filters": {
+      "all": "Все",
+      "themes": "Темы",
+      "manufacturer": "Производитель"
+    },
+    "empty": "Пока нет завершенных проектов",
+    "beFirst": "Будьте первым, кто завершит проект!"
+  },
+  "profile": {
+    "title": "Профиль",
+    "editProfile": "Редактировать профиль",
+    "myProfile": "Мой профиль",
+    "fields": {
+      "avatar": "Аватар",
+      "name": "Имя",
+      "bio": "О себе",
+      "email": "Email",
+      "joined": "Присоединился {date}"
+    },
+    "tabs": {
+      "projects": "Проекты",
+      "achievements": "Достижения",
+      "stats": "Статистика"
+    },
+    "stats": {
+      "projects": "Проектов",
+      "completed": "Завершено",
+      "inProgress": "В процессе",
+      "paused": "Приостановлено",
+      "totalStitches": "Всего крестиков",
+      "avgSpeed": "Средняя скорость"
+    },
+    "empty": "Пока нет проектов",
+    "createFirst": "Создайте свой первый проект"
+  },
+  "achievements": {
+    "title": "Достижения",
+    "unlocked": "Разблокировано",
+    "locked": "Заблокировано",
+    "progress": "Прогресс: {current} / {target}",
+    "unlockedAt": "Разблокировано {date}",
+    "types": {
+      "firstProject": "Первый проект",
+      "firstLog": "Первая запись",
+      "projectCompleted": "Проект завершен",
+      "streak7": "Серия 7 дней",
+      "streak30": "Серия 30 дней",
+      "streak100": "Серия 100 дней",
+      "stitches1k": "1 000 крестиков",
+      "stitches10k": "10 000 крестиков",
+      "stitches100k": "100 000 крестиков",
+      "speedTurtle": "Скорость: Черепаха",
+      "speedRabbit": "Скорость: Кролик",
+      "speedCheetah": "Скорость: Гепард",
+      "speedRocket": "Скорость: Ракета"
+    }
+  },
+  "comments": {
+    "title": "Комментарии",
+    "addComment": "Добавить комментарий",
+    "writeComment": "Напишите комментарий...",
+    "post": "Отправить",
+    "delete": "Удалить",
+    "noComments": "Пока нет комментариев",
+    "beFirst": "Будьте первым, кто оставит комментарий!",
+    "commentCount": "{count} комментариев"
+  },
+  "favorites": {
+    "title": "Избранное",
+    "subtitle": "Проекты, которые вам понравились",
+    "empty": "Пока нет избранных",
+    "explore": "Исследуйте проекты в Галерее"
+  },
+  "notifications": {
+    "title": "Уведомления",
+    "markAllRead": "Отметить все как прочитанные",
+    "empty": "Нет уведомлений",
+    "types": {
+      "like": "{user} оценил ваш проект",
+      "comment": "{user} прокомментировал ваш проект",
+      "follow": "{user} начал за вами следить",
+      "achievement": "Вы разблокировали: {achievement}"
+    }
+  },
+  "toast": {
+    "success": {
+      "projectCreated": "Проект успешно создан",
+      "projectUpdated": "Проект успешно обновлен",
+      "projectDeleted": "Проект успешно удален",
+      "logCreated": "Запись успешно добавлена",
+      "logUpdated": "Запись успешно обновлена",
+      "logDeleted": "Запись успешно удалена",
+      "profileUpdated": "Профиль обновлен",
+      "commentAdded": "Комментарий добавлен",
+      "commentDeleted": "Комментарий удален",
+      "liked": "Понравилось",
+      "unliked": "Не понравилось"
+    },
+    "error": {
+      "generic": "Что-то пошло не так",
+      "uploadFailed": "Не удалось загрузить изображение",
+      "loginFailed": "Не удалось войти",
+      "registerFailed": "Не удалось зарегистрироваться"
+    }
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建",
+    "close": "关闭",
+    "confirm": "确认",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "loadMore": "加载更多",
+    "noResults": "未找到结果"
+  },
+  "nav": {
+    "dashboard": "控制面板",
+    "projects": "项目",
+    "community": "社区",
+    "gallery": "作品库",
+    "profile": "个人资料",
+    "favorites": "收藏",
+    "calculator": "计算器",
+    "settings": "设置",
+    "logout": "退出登录",
+    "login": "登录",
+    "register": "注册"
+  },
+  "auth": {
+    "welcome": "欢迎来到 StitchArena",
+    "loginTitle": "登录您的账户",
+    "registerTitle": "创建您的账户",
+    "email": "邮箱",
+    "password": "密码",
+    "name": "姓名",
+    "confirmPassword": "确认密码",
+    "forgotPassword": "忘记密码？",
+    "noAccount": "还没有账户？",
+    "hasAccount": "已有账户？",
+    "signIn": "登录",
+    "signUp": "注册",
+    "signInWith": "使用 {provider} 登录",
+    "orContinueWith": "或继续使用"
+  },
+  "dashboard": {
+    "title": "控制面板",
+    "welcome": "欢迎回来，{name}！",
+    "overview": "概览",
+    "recentProjects": "最近项目",
+    "stats": {
+      "totalProjects": "项目总数",
+      "totalStitches": "针数总计",
+      "avgSpeed": "平均速度",
+      "mostProductive": "最高产日",
+      "currentStreak": "当前连续",
+      "active": "进行中",
+      "completed": "已完成",
+      "stitchesPerDay": "针/天",
+      "days": "天"
+    }
+  },
+  "projects": {
+    "title": "项目",
+    "myProjects": "我的项目",
+    "createNew": "创建新项目",
+    "createProject": "创建项目",
+    "editProject": "编辑项目",
+    "deleteProject": "删除项目",
+    "projectDetails": "项目详情",
+    "noProjects": "还没有项目",
+    "startFirst": "开始记录您的十字绣项目吧！",
+    "fields": {
+      "title": "标题",
+      "description": "描述",
+      "manufacturer": "制造商",
+      "totalStitches": "针数总计",
+      "width": "宽度",
+      "height": "高度",
+      "canvasType": "绣布类型",
+      "coverImage": "封面图片",
+      "schemaImage": "图纸图片",
+      "status": "状态",
+      "themes": "主题",
+      "isPublic": "设为公开"
+    },
+    "status": {
+      "inProgress": "进行中",
+      "completed": "已完成",
+      "paused": "已暂停"
+    },
+    "progress": {
+      "title": "进度",
+      "completed": "{completed} / {total} 针",
+      "percentage": "完成 {percent}%",
+      "days": "天数",
+      "logs": "记录",
+      "avgPerDay": "平均/天",
+      "estDaysLeft": "预计剩余天数"
+    }
+  },
+  "logs": {
+    "title": "历史记录",
+    "addLog": "添加记录",
+    "editLog": "编辑记录",
+    "deleteLog": "删除记录",
+    "noLogs": "还没有记录",
+    "startLogging": "开始记录您的进度吧！",
+    "fields": {
+      "date": "日期",
+      "daily": "每日",
+      "total": "总计",
+      "photo": "照片",
+      "notes": "备注",
+      "stitches": "针"
+    },
+    "ai": {
+      "detecting": "AI 正在识别针数...",
+      "detected": "检测到 {count} 针",
+      "confidence": "{percent}% 置信度",
+      "correct": "如需要请修正"
+    }
+  },
+  "community": {
+    "title": "社区动态",
+    "subtitle": "StitchArena 社区的最新活动",
+    "tabs": {
+      "all": "全部活动",
+      "projects": "新项目",
+      "updates": "更新"
+    },
+    "actions": {
+      "like": "点赞",
+      "comment": "评论",
+      "share": "分享"
+    },
+    "activity": {
+      "createdProject": "创建了新项目",
+      "updatedProgress": "更新了进度",
+      "completedProject": "完成了项目"
+    },
+    "empty": "还没有活动",
+    "beFirst": "成为第一个分享项目的人！"
+  },
+  "gallery": {
+    "title": "作品库",
+    "subtitle": "社区完成的十字绣作品 🎉",
+    "filters": {
+      "all": "全部",
+      "themes": "主题",
+      "manufacturer": "制造商"
+    },
+    "empty": "还没有完成的项目",
+    "beFirst": "成为第一个完成项目的人！"
+  },
+  "profile": {
+    "title": "个人资料",
+    "editProfile": "编辑资料",
+    "myProfile": "我的资料",
+    "fields": {
+      "avatar": "头像",
+      "name": "姓名",
+      "bio": "个人简介",
+      "email": "邮箱",
+      "joined": "加入于 {date}"
+    },
+    "tabs": {
+      "projects": "项目",
+      "achievements": "成就",
+      "stats": "统计"
+    },
+    "stats": {
+      "projects": "项目",
+      "completed": "已完成",
+      "inProgress": "进行中",
+      "paused": "已暂停",
+      "totalStitches": "针数总计",
+      "avgSpeed": "平均速度"
+    },
+    "empty": "还没有项目",
+    "createFirst": "创建您的第一个项目"
+  },
+  "achievements": {
+    "title": "成就",
+    "unlocked": "已解锁",
+    "locked": "未解锁",
+    "progress": "进度：{current} / {target}",
+    "unlockedAt": "解锁于 {date}",
+    "types": {
+      "firstProject": "第一个项目",
+      "firstLog": "第一条记录",
+      "projectCompleted": "项目完成",
+      "streak7": "连续 7 天",
+      "streak30": "连续 30 天",
+      "streak100": "连续 100 天",
+      "stitches1k": "1,000 针",
+      "stitches10k": "10,000 针",
+      "stitches100k": "100,000 针",
+      "speedTurtle": "速度：乌龟",
+      "speedRabbit": "速度：兔子",
+      "speedCheetah": "速度：猎豹",
+      "speedRocket": "速度：火箭"
+    }
+  },
+  "comments": {
+    "title": "评论",
+    "addComment": "添加评论",
+    "writeComment": "写评论...",
+    "post": "发布",
+    "delete": "删除",
+    "noComments": "还没有评论",
+    "beFirst": "成为第一个评论的人！",
+    "commentCount": "{count} 条评论"
+  },
+  "favorites": {
+    "title": "收藏",
+    "subtitle": "您点赞的项目",
+    "empty": "还没有收藏",
+    "explore": "在作品库中探索项目"
+  },
+  "notifications": {
+    "title": "通知",
+    "markAllRead": "全部标记为已读",
+    "empty": "没有通知",
+    "types": {
+      "like": "{user} 赞了您的项目",
+      "comment": "{user} 评论了您的项目",
+      "follow": "{user} 开始关注您",
+      "achievement": "您解锁了：{achievement}"
+    }
+  },
+  "toast": {
+    "success": {
+      "projectCreated": "项目创建成功",
+      "projectUpdated": "项目更新成功",
+      "projectDeleted": "项目删除成功",
+      "logCreated": "记录添加成功",
+      "logUpdated": "记录更新成功",
+      "logDeleted": "记录删除成功",
+      "profileUpdated": "资料已更新",
+      "commentAdded": "评论已添加",
+      "commentDeleted": "评论已删除",
+      "liked": "已点赞",
+      "unliked": "已取消点赞"
+    },
+    "error": {
+      "generic": "出错了",
+      "uploadFailed": "图片上传失败",
+      "loginFailed": "登录失败",
+      "registerFailed": "注册失败"
+    }
+  }
+}

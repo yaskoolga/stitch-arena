@@ -1,0 +1,202 @@
+"use client";
+
+import { useState, useMemo } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { useTranslations } from 'next-intl';
+import Link from "next/link";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { ProjectCard } from "@/components/projects/project-card";
+import { SkeletonCard } from "@/components/skeleton-card";
+import { ConfirmDialog } from "@/components/confirm-dialog";
+import { OverallStats } from "@/components/dashboard/overall-stats";
+import { AchievementsSection } from "@/components/achievements/achievements-section";
+import { calculate6MonthAverage } from "@/lib/stats";
+
+interface ProjectItem {
+  id: string;
+  title: string;
+  totalStitches: number;
+  completedStitches: number;
+  status: string;
+  canvasType?: string;
+  schemaImage?: string | null;
+  imageUrl?: string | null; // Old format (for backwards compatibility)
+  themes?: string;
+  createdAt: string;
+  logs?: Array<{
+    dailyStitches: number;
+    date: string;
+  }>;
+}
+
+type FilterStatus = "all" | "in_progress" | "completed" | "paused";
+type SortBy = "newest" | "oldest" | "progress" | "name";
+
+export default function DashboardPage() {
+  const { data: session, status } = useSession();
+  const queryClient = useQueryClient();
+  const [filter, setFilter] = useState<FilterStatus>("all");
+  const [sortBy, setSortBy] = useState<SortBy>("newest");
+  const [deleteProjectId, setDeleteProjectId] = useState<string | null>(null);
+
+  const t = useTranslations('projects');
+  const tCommon = useTranslations('common');
+  const tToast = useTranslations('toast');
+
+  const { data: projects, isLoading } = useQuery<ProjectItem[]>({
+    queryKey: ["projects"],
+    queryFn: () => fetch("/api/projects").then((r) => r.json()),
+    enabled: !!session,
+  });
+
+  const deleteProject = useMutation({
+    mutationFn: (id: string) =>
+      fetch(`/api/projects/${id}`, { method: "DELETE" }).then((r) => r.json()),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      toast.success(tToast('success.projectDeleted'));
+      setDeleteProjectId(null);
+    },
+    onError: () => toast.error(tToast('error.generic')),
+  });
+
+  const filtered = useMemo(() => {
+    if (!projects) return [];
+    let list = [...projects];
+
+    if (filter !== "all") {
+      list = list.filter((p) => p.status === filter);
+    }
+
+    switch (sortBy) {
+      case "oldest":
+        list.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+        break;
+      case "newest":
+        list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        break;
+      case "progress":
+        list.sort((a, b) => (b.completedStitches / b.totalStitches) - (a.completedStitches / a.totalStitches));
+        break;
+      case "name":
+        list.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+    }
+
+    return list;
+  }, [projects, filter, sortBy]);
+
+  if (status === "loading") return <p>{tCommon('loading')}</p>;
+  if (!session) redirect("/login");
+
+  return (
+    <div>
+      <ConfirmDialog
+        open={!!deleteProjectId}
+        onOpenChange={(open) => { if (!open) setDeleteProjectId(null); }}
+        title={t('deleteProject')}
+        description="This will permanently delete the project and all its logs. This action cannot be undone."
+        onConfirm={() => { if (deleteProjectId) deleteProject.mutate(deleteProjectId); }}
+        loading={deleteProject.isPending}
+      />
+
+      {/* Overall Statistics Section */}
+      <div className="mb-8">
+        <OverallStats />
+      </div>
+
+      {/* Achievements Section */}
+      <div className="mb-8">
+        <AchievementsSection />
+      </div>
+
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-3xl font-bold">{t('myProjects')}</h1>
+        <Link href="/projects/new">
+          <Button>{t('createNew')}</Button>
+        </Link>
+      </div>
+
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <div className="flex gap-1">
+          <Button
+            variant={filter === "all" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setFilter("all")}
+          >
+            All
+          </Button>
+          <Button
+            variant={filter === "in_progress" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setFilter("in_progress")}
+          >
+            {t('status.inProgress')}
+          </Button>
+          <Button
+            variant={filter === "completed" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setFilter("completed")}
+          >
+            {t('status.completed')}
+          </Button>
+          <Button
+            variant={filter === "paused" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setFilter("paused")}
+          >
+            {t('status.paused')}
+          </Button>
+        </div>
+        <div className="ml-auto">
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as SortBy)}
+            className="h-9 rounded-md border border-input bg-background px-3 text-sm"
+          >
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="progress">Most progress</option>
+            <option value="name">By name</option>
+          </select>
+        </div>
+      </div>
+
+      {isLoading ? (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[...Array(6)].map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      ) : filtered.length === 0 ? (
+        <p className="text-muted-foreground">
+          {projects?.length === 0 ? (
+            <>{t('noProjects')} <Link href="/projects/new" className="underline">{t('startFirst')}</Link></>
+          ) : (
+            tCommon('noResults')
+          )}
+        </p>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((p) => {
+            const themes = p.themes ? JSON.parse(p.themes) : [];
+            const avgSpeed = p.logs ? calculate6MonthAverage(p.logs as any) : 0;
+
+            return (
+              <ProjectCard
+                key={p.id}
+                {...p}
+                themes={themes}
+                avgSpeed={avgSpeed}
+                onDelete={setDeleteProjectId}
+              />
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
