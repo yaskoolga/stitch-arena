@@ -9,14 +9,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import Image from 'next/image';
 
 const languages = [
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
-  { code: 'zh', name: '中文', flag: '🇨🇳' },
+  { code: 'en', name: 'English', flag: 'gb', emoji: '🇬🇧' },
+  { code: 'ru', name: 'Русский', flag: 'ru', emoji: '🇷🇺' },
+  { code: 'de', name: 'Deutsch', flag: 'de', emoji: '🇩🇪' },
+  { code: 'fr', name: 'Français', flag: 'fr', emoji: '🇫🇷' },
+  { code: 'es', name: 'Español', flag: 'es', emoji: '🇪🇸' },
+  { code: 'zh', name: '中文', flag: 'cn', emoji: '🇨🇳' },
 ] as const;
 
 export function LanguageSwitcher() {
@@ -35,7 +36,13 @@ export function LanguageSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="gap-2">
-          <span className="text-lg">{currentLanguage.flag}</span>
+          <Image
+            src={`https://flagcdn.com/w20/${currentLanguage.flag}.png`}
+            alt={currentLanguage.name}
+            width={20}
+            height={15}
+            className="rounded-sm"
+          />
           <span className="hidden sm:inline">{currentLanguage.name}</span>
         </Button>
       </DropdownMenuTrigger>
@@ -46,7 +53,13 @@ export function LanguageSwitcher() {
             onClick={() => switchLanguage(lang.code)}
             className={locale === lang.code ? 'bg-accent' : ''}
           >
-            <span className="mr-2 text-lg">{lang.flag}</span>
+            <Image
+              src={`https://flagcdn.com/w20/${lang.flag}.png`}
+              alt={lang.name}
+              width={16}
+              height={12}
+              className="mr-2 rounded-sm"
+            />
             {lang.name}
           </DropdownMenuItem>
         ))}
