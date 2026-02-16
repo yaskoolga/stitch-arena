@@ -88,12 +88,25 @@
       "totalProjects": "Projets totaux",
       "totalStitches": "Points totaux",
       "avgSpeed": "Vitesse moyenne",
+      "averageSpeed": "Vitesse moyenne",
       "mostProductive": "Jour le plus productif",
       "currentStreak": "Série actuelle",
       "active": "actifs",
       "completed": "terminés",
+      "paused": "en pause",
       "stitchesPerDay": "points/jour",
-      "days": "jours"
+      "stitchesPerDaySixMonths": "Points par jour (6 mois)",
+      "days": "jours",
+      "day": "jour",
+      "daysInARow": "jours d'affilée",
+      "dayInARow": "jour d'affilée",
+      "acrossAll": "Sur tous les projets",
+      "noDataYet": "Pas encore de données",
+      "best": "Meilleur",
+      "activityOverview": "Aperçu de l'activité",
+      "topProjects": "Top 5 des projets par progression",
+      "stitches": "points",
+      "failedToLoad": "Échec du chargement des statistiques"
     }
   },
   "projects": {

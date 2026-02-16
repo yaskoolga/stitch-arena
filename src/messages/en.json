@@ -88,12 +88,25 @@
       "totalProjects": "Total Projects",
       "totalStitches": "Total Stitches",
       "avgSpeed": "Avg Speed",
+      "averageSpeed": "Average Speed",
       "mostProductive": "Most Productive Day",
       "currentStreak": "Current Streak",
       "active": "active",
       "completed": "completed",
+      "paused": "paused",
       "stitchesPerDay": "stitches/day",
-      "days": "days"
+      "stitchesPerDaySixMonths": "Stitches per day (6 months)",
+      "days": "days",
+      "day": "day",
+      "daysInARow": "days in a row",
+      "dayInARow": "day in a row",
+      "acrossAll": "Across all projects",
+      "noDataYet": "No data yet",
+      "best": "Best",
+      "activityOverview": "Activity Overview",
+      "topProjects": "Top 5 Projects by Progress",
+      "stitches": "stitches",
+      "failedToLoad": "Failed to load statistics"
     }
   },
   "projects": {

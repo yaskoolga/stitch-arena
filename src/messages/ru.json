@@ -88,12 +88,25 @@
       "totalProjects": "Всего проектов",
       "totalStitches": "Всего крестиков",
       "avgSpeed": "Средняя скорость",
+      "averageSpeed": "Средняя скорость",
       "mostProductive": "Самый продуктивный день",
       "currentStreak": "Текущая серия",
       "active": "активных",
       "completed": "завершено",
+      "paused": "приостановлено",
       "stitchesPerDay": "крестиков/день",
-      "days": "дней"
+      "stitchesPerDaySixMonths": "Крестиков в день (6 месяцев)",
+      "days": "дней",
+      "day": "день",
+      "daysInARow": "дней подряд",
+      "dayInARow": "день подряд",
+      "acrossAll": "По всем проектам",
+      "noDataYet": "Пока нет данных",
+      "best": "Лучший результат",
+      "activityOverview": "Обзор активности",
+      "topProjects": "Топ 5 проектов по прогрессу",
+      "stitches": "крестиков",
+      "failedToLoad": "Не удалось загрузить статистику"
     }
   },
   "projects": {

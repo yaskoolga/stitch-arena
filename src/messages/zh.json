@@ -88,12 +88,25 @@
       "totalProjects": "项目总数",
       "totalStitches": "针数总计",
       "avgSpeed": "平均速度",
+      "averageSpeed": "平均速度",
       "mostProductive": "最高产日",
       "currentStreak": "当前连续",
       "active": "进行中",
       "completed": "已完成",
+      "paused": "已暂停",
       "stitchesPerDay": "针/天",
-      "days": "天"
+      "stitchesPerDaySixMonths": "每日针数（6个月）",
+      "days": "天",
+      "day": "天",
+      "daysInARow": "连续天数",
+      "dayInARow": "连续天",
+      "acrossAll": "所有项目",
+      "noDataYet": "暂无数据",
+      "best": "最佳",
+      "activityOverview": "活动概览",
+      "topProjects": "进度前5项目",
+      "stitches": "针",
+      "failedToLoad": "加载统计信息失败"
     }
   },
   "projects": {
