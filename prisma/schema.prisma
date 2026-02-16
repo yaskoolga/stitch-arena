@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String            @id @default(cuid())
+  email            String            @unique
+  name             String?
+  password         String?
+  avatar           String?
+  bio              String?
+  resetToken       String?
+  resetTokenExpiry DateTime?
+  createdAt        DateTime          @default(now())
+  projects         Project[]
+  achievements     UserAchievement[]
+  comments         Comment[]
+  likes            Like[]
+}
+
+model Project {
+  id              String     @id @default(cuid())
+  userId          String
+  title           String
+  description     String?
+  manufacturer    String?    // Pattern manufacturer (DMC, Dimensions, etc.)
+  coverImage      String?    // Cover photo (from package) - shown in project cards
+  schemaImage     String?    // Optional reference photo of pattern (technical)
+  totalStitches   Int        // Total stitches in project (manual input or width × height)
+  width           Int?       // Pattern width (for auto-calculation)
+  height          Int?       // Pattern height (for auto-calculation)
+  canvasType      String?    // Aida 14, 16, 18, etc.
+  calibrationData String?    // JSON string with calibration settings
+  status          String     @default("in_progress") // in_progress, completed, abandoned
+  isPublic        Boolean    @default(false)
+  themes          String?    @default("[]") // JSON array of project themes/categories
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logs            DailyLog[]
+  comments        Comment[]
+  likes           Like[]
+}
+
+model DailyLog {
+  id               String   @id @default(cuid())
+  projectId        String
+  date             DateTime
+  photoUrl         String?  // Photo of work-in-progress
+  previousPhotoUrl String?  // Previous photo for comparison
+  totalStitches    Int      @default(0) // Cumulative total stitches at this point
+  dailyStitches    Int      @default(0) // Increment for this day (total - previous)
+  aiDetected       Int?     // AI detected count (before user correction)
+  aiConfidence     Float?   // AI confidence score (0-1)
+  userCorrected    Boolean  @default(false) // Did user manually correct the AI result?
+  notes            String?
+  createdAt        DateTime @default(now())
+  project          Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId, date])
+}
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  achievementId String   // Type of achievement (e.g., "first_project", "100k_stitches")
+  unlockedAt    DateTime @default(now())
+  progress      Int      @default(0) // Current progress towards achievement (if applicable)
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  userId    String
+  projectId String
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([userId])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  projectId String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, projectId])
+  @@index([projectId])
+}

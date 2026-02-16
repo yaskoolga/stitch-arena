@@ -59,12 +59,23 @@
     "name": "Имя",
     "confirmPassword": "Подтвердите пароль",
     "forgotPassword": "Забыли пароль?",
+    "resetPassword": "Сбросить пароль",
+    "sendResetLink": "Отправить ссылку",
+    "backToLogin": "Вернуться ко входу",
+    "resetEmailSent": "Ссылка для сброса пароля отправлена на ваш email",
     "noAccount": "Нет аккаунта?",
     "hasAccount": "Уже есть аккаунт?",
     "signIn": "Войти",
     "signUp": "Зарегистрироваться",
     "signInWith": "Войти через {provider}",
-    "orContinueWith": "Или продолжить с"
+    "orContinueWith": "Или продолжить с",
+    "errors": {
+      "invalidCredentials": "Неверный email или пароль",
+      "userNotFound": "Пользователь с таким email не найден",
+      "invalidPassword": "Неверный пароль",
+      "useGoogle": "Этот аккаунт использует вход через Google",
+      "generic": "Ошибка входа. Попробуйте снова."
+    }
   },
   "dashboard": {
     "title": "Панель управления",

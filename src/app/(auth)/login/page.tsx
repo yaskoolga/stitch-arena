@@ -38,7 +38,16 @@ export default function LoginPage() {
     });
 
     if (res?.error) {
-      setError(t("toast.error.loginFailed"));
+      // Map specific errors to translations
+      const errorMessage = res.error.includes("No user found")
+        ? t("auth.errors.userNotFound")
+        : res.error.includes("Invalid password")
+        ? t("auth.errors.invalidPassword")
+        : res.error.includes("sign in with Google")
+        ? t("auth.errors.useGoogle")
+        : t("auth.errors.generic");
+
+      setError(errorMessage);
       setLoading(false);
     } else {
       router.push("/dashboard");
@@ -76,7 +85,15 @@ export default function LoginPage() {
               <Input id="email" name="email" type="email" required />
             </div>
             <div>
-              <Label htmlFor="password">{t("auth.password")}</Label>
+              <div className="flex items-center justify-between mb-1">
+                <Label htmlFor="password">{t("auth.password")}</Label>
+                <Link
+                  href="/forgot-password"
+                  className="text-sm text-primary hover:underline"
+                >
+                  {t("auth.forgotPassword")}
+                </Link>
+              </div>
               <Input id="password" name="password" type="password" required />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>

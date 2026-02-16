@@ -59,12 +59,23 @@
     "name": "Name",
     "confirmPassword": "Confirm Password",
     "forgotPassword": "Forgot password?",
+    "resetPassword": "Reset Password",
+    "sendResetLink": "Send Reset Link",
+    "backToLogin": "Back to Login",
+    "resetEmailSent": "Password reset link sent to your email",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "signInWith": "Sign in with {provider}",
-    "orContinueWith": "Or continue with"
+    "orContinueWith": "Or continue with",
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "userNotFound": "No user found with this email",
+      "invalidPassword": "Invalid password",
+      "useGoogle": "This account uses Google sign-in",
+      "generic": "Failed to login. Please try again."
+    }
   },
   "dashboard": {
     "title": "Dashboard",
