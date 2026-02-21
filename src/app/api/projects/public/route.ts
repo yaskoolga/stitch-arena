@@ -4,14 +4,23 @@ import { prisma } from "@/lib/prisma";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const themesParam = searchParams.get("themes");
+  const manufacturerParam = searchParams.get("manufacturer");
+  const searchParam = searchParams.get("search");
 
-  // Parse themes filter
+  // Parse filters
   const themesFilter = themesParam ? themesParam.split(",").map(t => t.trim()) : null;
 
   const projects = await prisma.project.findMany({
     where: {
       isPublic: true,
-      status: "completed", // Only show completed projects in gallery
+      // Show all public projects, not just completed
+      ...(manufacturerParam && { manufacturer: manufacturerParam }),
+      ...(searchParam && {
+        title: {
+          contains: searchParam,
+          mode: "insensitive",
+        },
+      }),
     },
     include: {
       user: { select: { id: true, name: true, avatar: true } },
@@ -22,7 +31,7 @@ export async function GET(req: Request) {
       },
     },
     orderBy: { updatedAt: "desc" },
-    take: 50,
+    take: 100,
   });
 
   let filteredProjects = projects;
@@ -44,6 +53,7 @@ export async function GET(req: Request) {
       id: p.id,
       title: p.title,
       description: p.description,
+      manufacturer: p.manufacturer,
       finalPhoto: finalPhoto, // Final photo from last log (completed work)
       coverImage: p.coverImage, // Cover photo from package (fallback)
       schemaImage: p.schemaImage, // Technical pattern reference (fallback)

@@ -251,14 +251,33 @@
   },
   "gallery": {
     "title": "Gallery",
-    "subtitle": "Completed cross-stitch projects from the community 🎉",
+    "subtitle": "Cross-stitch projects from the community 🎉",
+    "by": "by",
     "filters": {
       "all": "All",
       "themes": "Themes",
-      "manufacturer": "Manufacturer"
+      "manufacturer": "Manufacturer",
+      "allManufacturers": "All manufacturers",
+      "searchPlaceholder": "Search projects...",
+      "newest": "Newest first",
+      "byProgress": "By progress"
     },
-    "empty": "No completed projects yet",
-    "beFirst": "Be the first to finish a project!"
+    "empty": "No projects yet",
+    "beFirst": "Be the first to share a project!"
+  },
+  "themes": {
+    "Nature": "Nature",
+    "Animals": "Animals",
+    "Abstract": "Abstract",
+    "Seasonal": "Seasonal",
+    "Fantasy": "Fantasy",
+    "Portrait": "Portrait",
+    "Geometric": "Geometric",
+    "Holiday": "Holiday",
+    "Floral": "Floral",
+    "Modern": "Modern",
+    "Traditional": "Traditional",
+    "Other": "Other"
   },
   "profile": {
     "title": "Profile",

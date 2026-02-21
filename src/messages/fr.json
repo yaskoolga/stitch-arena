@@ -240,14 +240,33 @@
   },
   "gallery": {
     "title": "Galerie",
-    "subtitle": "Projets de point de croix terminés de la communauté 🎉",
+    "subtitle": "Projets de point de croix de la communauté 🎉",
+    "by": "par",
     "filters": {
       "all": "Tous",
       "themes": "Thèmes",
-      "manufacturer": "Fabricant"
+      "manufacturer": "Fabricant",
+      "allManufacturers": "Tous les fabricants",
+      "searchPlaceholder": "Rechercher des projets...",
+      "newest": "Plus récents",
+      "byProgress": "Par progression"
     },
-    "empty": "Aucun projet terminé pour le moment",
-    "beFirst": "Soyez le premier à terminer un projet !"
+    "empty": "Aucun projet pour le moment",
+    "beFirst": "Soyez le premier à partager un projet !"
+  },
+  "themes": {
+    "Nature": "Nature",
+    "Animals": "Animaux",
+    "Abstract": "Abstrait",
+    "Seasonal": "Saisonnier",
+    "Fantasy": "Fantaisie",
+    "Portrait": "Portrait",
+    "Geometric": "Géométrique",
+    "Holiday": "Fête",
+    "Floral": "Floral",
+    "Modern": "Moderne",
+    "Traditional": "Traditionnel",
+    "Other": "Autre"
   },
   "profile": {
     "title": "Profil",

@@ -240,14 +240,33 @@
   },
   "gallery": {
     "title": "Galerie",
-    "subtitle": "Fertige Kreuzstichprojekte aus der Community 🎉",
+    "subtitle": "Kreuzstichprojekte aus der Community 🎉",
+    "by": "von",
     "filters": {
       "all": "Alle",
       "themes": "Themen",
-      "manufacturer": "Hersteller"
+      "manufacturer": "Hersteller",
+      "allManufacturers": "Alle Hersteller",
+      "searchPlaceholder": "Projekte suchen...",
+      "newest": "Neueste zuerst",
+      "byProgress": "Nach Fortschritt"
     },
-    "empty": "Noch keine fertigen Projekte",
-    "beFirst": "Seien Sie der Erste, der ein Projekt beendet!"
+    "empty": "Noch keine Projekte",
+    "beFirst": "Seien Sie der Erste, der ein Projekt teilt!"
+  },
+  "themes": {
+    "Nature": "Natur",
+    "Animals": "Tiere",
+    "Abstract": "Abstrakt",
+    "Seasonal": "Saisonal",
+    "Fantasy": "Fantasie",
+    "Portrait": "Porträt",
+    "Geometric": "Geometrisch",
+    "Holiday": "Feiertag",
+    "Floral": "Blumen",
+    "Modern": "Modern",
+    "Traditional": "Traditionell",
+    "Other": "Andere"
   },
   "profile": {
     "title": "Profil",

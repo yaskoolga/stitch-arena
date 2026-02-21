@@ -9,14 +9,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { LikeButton } from "@/components/projects/like-button";
 import { PROJECT_THEMES } from "@/lib/constants";
-import { X } from "lucide-react";
+import { X, Search } from "lucide-react";
 
 interface PublicProject {
   id: string;
   title: string;
   description?: string | null;
+  manufacturer?: string | null;
   finalPhoto?: string | null;
   coverImage?: string | null;
   schemaImage?: string | null;
@@ -32,16 +34,30 @@ export default function GalleryPage() {
   const t = useTranslations();
   const [selectedThemes, setSelectedThemes] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<"newest" | "progress">("newest");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [manufacturerFilter, setManufacturerFilter] = useState<string>("");
 
   const { data: projects, isLoading } = useQuery<PublicProject[]>({
-    queryKey: ["public-projects", selectedThemes],
+    queryKey: ["public-projects", selectedThemes, searchQuery, manufacturerFilter],
     queryFn: () => {
-      const params = selectedThemes.length > 0
-        ? `?themes=${selectedThemes.join(",")}`
-        : "";
-      return fetch(`/api/projects/public${params}`).then((r) => r.json());
+      const params = new URLSearchParams();
+      if (selectedThemes.length > 0) params.set("themes", selectedThemes.join(","));
+      if (searchQuery) params.set("search", searchQuery);
+      if (manufacturerFilter) params.set("manufacturer", manufacturerFilter);
+
+      const queryString = params.toString();
+      return fetch(`/api/projects/public${queryString ? `?${queryString}` : ""}`).then((r) => r.json());
     },
   });
+
+  // Get unique manufacturers for filter
+  const manufacturers = useMemo(() => {
+    if (!projects) return [];
+    const uniqueManufacturers = Array.from(new Set(
+      projects.map(p => p.manufacturer).filter(Boolean)
+    )).sort();
+    return uniqueManufacturers as string[];
+  }, [projects]);
 
   const sortedProjects = useMemo(() => {
     if (!projects) return [];
@@ -69,6 +85,42 @@ export default function GalleryPage() {
 
       {/* Filters */}
       <div className="mb-4 space-y-3">
+        {/* Search and Manufacturer */}
+        <div className="flex flex-col sm:flex-row gap-3">
+          {/* Search */}
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder={t("gallery.filters.searchPlaceholder")}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9"
+            />
+          </div>
+
+          {/* Manufacturer filter */}
+          <select
+            value={manufacturerFilter}
+            onChange={(e) => setManufacturerFilter(e.target.value)}
+            className="h-10 rounded-md border border-input bg-background px-3 text-sm w-full sm:w-48"
+          >
+            <option value="">{t("gallery.filters.allManufacturers")}</option>
+            {manufacturers.map((m) => (
+              <option key={m} value={m}>{m}</option>
+            ))}
+          </select>
+
+          {/* Sort */}
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as "newest" | "progress")}
+            className="h-10 rounded-md border border-input bg-background px-3 text-sm w-full sm:w-40"
+          >
+            <option value="newest">{t("gallery.filters.newest")}</option>
+            <option value="progress">{t("gallery.filters.byProgress")}</option>
+          </select>
+        </div>
+
         {/* Theme filters */}
         <div>
           <h3 className="mb-2 text-sm font-medium">{t("gallery.filters.themes")}</h3>
@@ -80,26 +132,13 @@ export default function GalleryPage() {
                 size="sm"
                 onClick={() => toggleTheme(theme)}
               >
-                {theme}
+                {t(`themes.${theme}` as any)}
                 {selectedThemes.includes(theme) && (
                   <X className="ml-1 h-3 w-3" />
                 )}
               </Button>
             ))}
           </div>
-        </div>
-
-        {/* Sort */}
-        <div className="flex items-center gap-4">
-          <span className="text-sm font-medium">{t("common.sort")}:</span>
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as "newest" | "progress")}
-            className="h-9 rounded-md border border-input bg-background px-3 text-sm"
-          >
-            <option value="newest">{t("dashboard.welcome").includes("back") ? "Newest first" : t("common.sort")}</option>
-            <option value="progress">{t("projects.progress.title")}</option>
-          </select>
         </div>
       </div>
 
@@ -138,13 +177,20 @@ export default function GalleryPage() {
                       <CardTitle className="text-base group-hover:text-primary transition-colors">
                         {p.title}
                       </CardTitle>
-                      <Badge variant="default" className="bg-green-600 text-[10px] px-2 py-0.5">
-                        {t("projects.status.completed")}
+                      <Badge
+                        variant={p.status === "completed" ? "default" : "secondary"}
+                        className={`text-[10px] px-2 py-0.5 ${p.status === "completed" ? "bg-green-600" : ""}`}
+                      >
+                        {p.status === "in_progress"
+                          ? t("projects.status.inProgress")
+                          : p.status === "completed"
+                            ? t("projects.status.completed")
+                            : t("projects.status.paused")}
                       </Badge>
                     </div>
                     <Link href={`/profile/${p.user.id}`}>
                       <p className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer">
-                        by {p.user.name || "Anonymous"}
+                        {t("gallery.by")} {p.user.name || t("common.anonymous")}
                       </p>
                     </Link>
 
@@ -153,7 +199,7 @@ export default function GalleryPage() {
                       <div className="flex flex-wrap gap-1 mt-1.5">
                         {p.themes.slice(0, 3).map((theme) => (
                           <Badge key={theme} variant="outline" className="text-[10px]">
-                            {theme}
+                            {t(`themes.${theme}` as any)}
                           </Badge>
                         ))}
                         {p.themes.length > 3 && (

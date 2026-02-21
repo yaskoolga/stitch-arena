@@ -240,14 +240,33 @@
   },
   "gallery": {
     "title": "作品库",
-    "subtitle": "社区完成的十字绣作品 🎉",
+    "subtitle": "社区的十字绣作品 🎉",
+    "by": "作者",
     "filters": {
       "all": "全部",
       "themes": "主题",
-      "manufacturer": "制造商"
+      "manufacturer": "制造商",
+      "allManufacturers": "所有制造商",
+      "searchPlaceholder": "搜索项目...",
+      "newest": "最新优先",
+      "byProgress": "按进度"
     },
-    "empty": "还没有完成的项目",
-    "beFirst": "成为第一个完成项目的人！"
+    "empty": "还没有项目",
+    "beFirst": "成为第一个分享项目的人！"
+  },
+  "themes": {
+    "Nature": "自然",
+    "Animals": "动物",
+    "Abstract": "抽象",
+    "Seasonal": "季节性",
+    "Fantasy": "奇幻",
+    "Portrait": "肖像",
+    "Geometric": "几何",
+    "Holiday": "节日",
+    "Floral": "花卉",
+    "Modern": "现代",
+    "Traditional": "传统",
+    "Other": "其他"
   },
   "profile": {
     "title": "个人资料",
