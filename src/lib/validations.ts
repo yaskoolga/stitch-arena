@@ -97,3 +97,89 @@ export const profileUpdateSchema = z.object({
   bio: z.string().max(500).optional().nullable(),
   avatar: z.string().optional().nullable(),
 });
+
+// Challenge validation schemas
+const challengeTypeEnum = z.enum(["speed", "streak", "completion"]);
+
+export const challengeCreateSchema = z
+  .object({
+    type: challengeTypeEnum,
+    title: z
+      .string()
+      .min(5, "Title must be at least 5 characters")
+      .max(100, "Title must be at most 100 characters"),
+    description: z
+      .string()
+      .max(500, "Description must be at most 500 characters")
+      .optional()
+      .nullable(),
+    startDate: z.string().refine((d) => !isNaN(Date.parse(d)), "Invalid start date"),
+    endDate: z.string().refine((d) => !isNaN(Date.parse(d)), "Invalid end date"),
+    targetValue: z.coerce.number().int().positive("Target value must be positive"),
+  })
+  .refine(
+    (data) => {
+      const start = new Date(data.startDate);
+      const now = new Date();
+      return start > now;
+    },
+    { message: "Start date must be in the future", path: ["startDate"] }
+  )
+  .refine(
+    (data) => {
+      const start = new Date(data.startDate);
+      const end = new Date(data.endDate);
+      return end > start;
+    },
+    { message: "End date must be after start date", path: ["endDate"] }
+  )
+  .refine(
+    (data) => {
+      const start = new Date(data.startDate);
+      const end = new Date(data.endDate);
+      const durationDays = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+      return durationDays >= 3 && durationDays <= 90;
+    },
+    { message: "Challenge duration must be between 3 and 90 days", path: ["endDate"] }
+  )
+  .refine(
+    (data) => {
+      // Validate target value based on type
+      const { type, targetValue } = data;
+      if (type === "speed") {
+        return targetValue >= 1000 && targetValue <= 100000;
+      } else if (type === "streak") {
+        return targetValue >= 3 && targetValue <= 365;
+      } else if (type === "completion") {
+        return targetValue >= 1 && targetValue <= 50;
+      }
+      return true;
+    },
+    {
+      message: "Invalid target value for challenge type",
+      path: ["targetValue"],
+    }
+  );
+
+export const challengeUpdateSchema = z.object({
+  type: challengeTypeEnum.optional(),
+  title: z
+    .string()
+    .min(5, "Title must be at least 5 characters")
+    .max(100, "Title must be at most 100 characters")
+    .optional(),
+  description: z
+    .string()
+    .max(500, "Description must be at most 500 characters")
+    .optional()
+    .nullable(),
+  startDate: z
+    .string()
+    .refine((d) => !isNaN(Date.parse(d)), "Invalid start date")
+    .optional(),
+  endDate: z
+    .string()
+    .refine((d) => !isNaN(Date.parse(d)), "Invalid end date")
+    .optional(),
+  targetValue: z.coerce.number().int().positive("Target value must be positive").optional(),
+});
