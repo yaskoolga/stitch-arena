@@ -16,6 +16,8 @@
 - 🏆 **17 Achievements** — Достижения по 6 категориям (First Steps, Consistency, Speed Demon, Completionist, Social Butterfly, Milestones)
 - 🚀 **Speed Tiers** — 4 уровня скорости (🐢 Turtle, 🚴 Bike, 🚗 Car, 🚀 Rocket)
 - 📊 **Progress Tracking** — Отслеживание прогресса по каждому достижению
+- 🏆 **Challenges** — Челленджи на скорость/серию/завершение с лидербордами
+- 👥 **User-Created Challenges** — Создание своих челленджей (требования: 30+ дней аккаунт, 7+ дней серия)
 
 ### 🌈 Project Management
 - 🏭 **Manufacturer** — Справочник производителей схем (DMC, Dimensions, RIOLIS и др.)
