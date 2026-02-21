@@ -21,7 +21,7 @@ import { SkeletonProjectDetail } from "@/components/skeleton-card";
 import { ImageDialog } from "@/components/ui/image-dialog";
 import { CommentsSection } from "@/components/comments/comments-section";
 import { LikeButton } from "@/components/projects/like-button";
-import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus } from "lucide-react";
+import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus, Upload } from "lucide-react";
 
 interface Log {
   id: string;
@@ -63,6 +63,8 @@ export default function ProjectDetailPage() {
 
   const [deleteProjectOpen, setDeleteProjectOpen] = useState(false);
   const [deleteLogId, setDeleteLogId] = useState<string | null>(null);
+  const [showAllPhotos, setShowAllPhotos] = useState(false);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
   const { data: project, isLoading } = useQuery<Project>({
     queryKey: ["project", id],
@@ -88,6 +90,55 @@ export default function ProjectDetailPage() {
     },
     onError: () => toast.error(t("toast.error.generic")),
   });
+
+  const handleQuickPhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingPhoto(true);
+    try {
+      // Upload photo
+      const formData = new FormData();
+      formData.append("file", file);
+      const uploadRes = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      if (!uploadRes.ok) throw new Error("Failed to upload photo");
+      const { url } = await uploadRes.json();
+
+      // Create log with photo
+      const previousTotal = sortedLogs[0]?.totalStitches || 0;
+      const logData = {
+        date: new Date().toISOString().split('T')[0],
+        dailyStitches: 0,
+        totalStitches: previousTotal,
+        photoUrl: url,
+        previousPhotoUrl: sortedLogs[0]?.photoUrl || null,
+        notes: null,
+        aiDetected: null,
+        aiConfidence: null,
+        userCorrected: false,
+      };
+
+      const logRes = await fetch(`/api/projects/${id}/logs`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(logData),
+      });
+      if (!logRes.ok) throw new Error("Failed to create log");
+
+      toast.success(t("toast.success.photoAdded"));
+      queryClient.invalidateQueries({ queryKey: ["project", id] });
+
+      // Reset file input
+      e.target.value = '';
+    } catch (error) {
+      toast.error(t("toast.error.generic"));
+    } finally {
+      setUploadingPhoto(false);
+    }
+  };
 
   if (authStatus === "loading" || isLoading) {
     return <SkeletonProjectDetail />;
@@ -200,7 +251,7 @@ export default function ProjectDetailPage() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap mb-5">
             {project.isPublic && (
               <LikeButton projectId={id} variant="outline" />
             )}
@@ -220,22 +271,8 @@ export default function ProjectDetailPage() {
               <Trash2 className="h-4 w-4" />
             </Button>
           </div>
-        </div>
 
-        {/* Decorative background pattern */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-          }} />
-        </div>
-      </div>
-
-      {/* Progress Overview */}
-      <Card className="gap-3 py-4">
-        <CardHeader className="px-4 pb-0">
-          <CardTitle className="text-lg">{t("projects.progress.title")}</CardTitle>
-        </CardHeader>
-        <CardContent className="px-4 pb-0">
+          {/* Progress Bar */}
           <div className="space-y-1.5">
             <div className="flex justify-between text-sm">
               <span className="font-medium">{completedStitches.toLocaleString()} / {totalStitches.toLocaleString()} {t("logs.fields.stitches")}</span>
@@ -251,8 +288,15 @@ export default function ProjectDetailPage() {
               </p>
             )}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+
+        {/* Decorative background pattern */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }} />
+        </div>
+      </div>
 
       <StatsCards
         totalStitches={totalStitches}
@@ -261,14 +305,86 @@ export default function ProjectDetailPage() {
         firstLogDate={sortedLogs.length > 0 ? sortedLogs[sortedLogs.length - 1].date : undefined}
       />
 
+      {/* Progress Photos Gallery */}
       <Card className="gap-3 py-4">
         <CardHeader className="px-4 pb-0">
-          <CardTitle className="text-lg">{t("projects.progress.title")}</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg">{t("logs.fields.photo")}</CardTitle>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => document.getElementById('quick-photo-upload')?.click()}
+                disabled={uploadingPhoto}
+                className="gap-2"
+              >
+                <Upload className="h-4 w-4" />
+                {uploadingPhoto ? t("common.uploading") : t("logs.addPhoto")}
+              </Button>
+              {sortedLogs.filter(log => log.photoUrl || log.imageUrl).length > 5 && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowAllPhotos(!showAllPhotos)}
+                >
+                  {showAllPhotos ? `↑ ${t("common.back")}` : t("common.loadMore")}
+                </Button>
+              )}
+            </div>
+            <input
+              id="quick-photo-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleQuickPhotoUpload}
+              disabled={uploadingPhoto}
+              className="hidden"
+            />
+          </div>
         </CardHeader>
         <CardContent className="px-4 pb-0">
-          <ProgressChart logs={project.logs} />
+          {sortedLogs.some(log => log.photoUrl || log.imageUrl) ? (
+            <>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                {sortedLogs
+                  .filter(log => log.photoUrl || log.imageUrl)
+                  .slice(0, showAllPhotos ? undefined : 5)
+                  .map((log) => {
+                    const photoSrc = log.photoUrl || log.imageUrl;
+                    return (
+                      <div key={log.id} className="group relative">
+                        <ImageDialog
+                          src={photoSrc!}
+                          alt={`Progress on ${format(new Date(log.date), "dd.MM.yyyy")}`}
+                          thumbnailClassName="aspect-square w-full overflow-hidden rounded-lg border-2 border-muted hover:border-primary/50 transition-all"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 rounded-b-lg">
+                          <p className="text-xs text-white font-medium">
+                            {format(new Date(log.date), "dd.MM")}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+              {!showAllPhotos && sortedLogs.filter(log => log.photoUrl || log.imageUrl).length > 5 && (
+                <p className="text-xs text-muted-foreground mt-3 text-center">
+                  {t("common.viewMore")}: {sortedLogs.filter(log => log.photoUrl || log.imageUrl).length - 5} {t("logs.fields.photo").toLowerCase()}
+                </p>
+              )}
+            </>
+          ) : (
+            <div className="text-center py-6">
+              <Upload className="h-10 w-10 mx-auto mb-2 text-muted-foreground" />
+              <p className="text-sm text-muted-foreground">{t("logs.noPhotos")}</p>
+            </div>
+          )}
         </CardContent>
       </Card>
+
+      {/* Comments Section - only for public projects */}
+      {project.isPublic && (
+        <CommentsSection projectId={id} projectOwnerId={project.userId} />
+      )}
 
       {/* Log History Table */}
       <Card className="gap-3 py-4">
@@ -303,7 +419,9 @@ export default function ProjectDetailPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedLogs.map((log) => {
+                  {sortedLogs
+                    .filter(log => (log.dailyStitches ?? 0) > 0)
+                    .map((log) => {
                     const stitchCount = log.totalStitches ?? log.stitches ?? 0;
                     const dailyCount = log.dailyStitches ?? 0;
 
@@ -359,53 +477,15 @@ export default function ProjectDetailPage() {
         </CardContent>
       </Card>
 
-      {/* Progress Photos Gallery */}
-      {sortedLogs.some(log => log.photoUrl || log.imageUrl) && (
-        <Card className="gap-3 py-4">
-          <CardHeader className="px-4 pb-0">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">{t("logs.fields.photo")}</CardTitle>
-              <Badge variant="outline" className="text-xs">
-                {t("common.loadMore")}
-              </Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="px-4 pb-0">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {sortedLogs
-                .filter(log => log.photoUrl || log.imageUrl)
-                .slice(0, 5)
-                .map((log) => {
-                  const photoSrc = log.photoUrl || log.imageUrl;
-                  return (
-                    <div key={log.id} className="group relative">
-                      <ImageDialog
-                        src={photoSrc!}
-                        alt={`Progress on ${format(new Date(log.date), "dd.MM.yyyy")}`}
-                        thumbnailClassName="aspect-square w-full overflow-hidden rounded-lg border-2 border-muted hover:border-primary/50 transition-all"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 rounded-b-lg">
-                        <p className="text-xs text-white font-medium">
-                          {format(new Date(log.date), "dd.MM")}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
-            {sortedLogs.filter(log => log.photoUrl || log.imageUrl).length > 5 && (
-              <p className="text-xs text-muted-foreground mt-3 text-center">
-                Showing first 5 of {sortedLogs.filter(log => log.photoUrl || log.imageUrl).length} photos (Free plan limit)
-              </p>
-            )}
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Comments Section - only for public projects */}
-      {project.isPublic && (
-        <CommentsSection projectId={id} projectOwnerId={project.userId} />
-      )}
+      {/* Progress Chart */}
+      <Card className="gap-3 py-4">
+        <CardHeader className="px-4 pb-0">
+          <CardTitle className="text-lg">{t("projects.progress.title")}</CardTitle>
+        </CardHeader>
+        <CardContent className="px-4 pb-0">
+          <ProgressChart logs={project.logs} />
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -25,7 +25,8 @@
     "anonymous": "匿名",
     "back": "返回",
     "viewMore": "查看更多",
-    "memberSince": "加入时间"
+    "memberSince": "加入时间",
+    "uploading": "上传中..."
   },
   "nav": {
     "dashboard": "控制面板",
@@ -172,10 +173,12 @@
   "logs": {
     "title": "历史记录",
     "addLog": "添加记录",
+    "addPhoto": "添加照片",
     "addDailyLog": "添加每日记录",
     "editLog": "编辑记录",
     "deleteLog": "删除记录",
     "noLogs": "还没有记录",
+    "noPhotos": "还没有照片。上传您的第一张进度照片吧！",
     "startLogging": "开始记录您的进度吧！",
     "backToProject": "返回项目",
     "trackProgress": "跟踪您的进度",

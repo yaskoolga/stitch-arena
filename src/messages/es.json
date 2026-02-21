@@ -25,7 +25,8 @@
     "anonymous": "Anónimo",
     "back": "Atrás",
     "viewMore": "Ver más",
-    "memberSince": "Miembro desde"
+    "memberSince": "Miembro desde",
+    "uploading": "Subiendo..."
   },
   "nav": {
     "dashboard": "Panel",
@@ -172,10 +173,12 @@
   "logs": {
     "title": "Historial",
     "addLog": "Añadir entrada",
+    "addPhoto": "Añadir foto",
     "addDailyLog": "Añadir registro diario",
     "editLog": "Editar entrada",
     "deleteLog": "Eliminar entrada",
     "noLogs": "Aún no hay entradas",
+    "noPhotos": "Aún no hay fotos. ¡Sube tu primera foto de progreso!",
     "startLogging": "¡Comienza a registrar tu progreso!",
     "backToProject": "Volver al proyecto",
     "trackProgress": "Sigue tu progreso en",

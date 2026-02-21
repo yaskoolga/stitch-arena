@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
 
 interface DailyLogFormProps {
   projectId: string;
@@ -154,12 +154,35 @@ export function DailyLogForm({
             <p className="text-xs text-muted-foreground mb-2">
               Upload a photo of your progress
             </p>
-            <Input
+            <div className="flex items-center gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                disabled={uploading}
+                onClick={() => document.getElementById('photo')?.click()}
+                className="gap-2"
+              >
+                <Upload className="h-4 w-4" />
+                {uploading ? "Uploading..." : photoUrl ? "Change Photo" : "Choose Photo"}
+              </Button>
+              {photoUrl && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setPhotoUrl("")}
+                >
+                  Remove
+                </Button>
+              )}
+            </div>
+            <input
               id="photo"
               type="file"
               accept="image/*"
               onChange={handlePhotoUpload}
               disabled={uploading}
+              className="hidden"
             />
             {uploading && (
               <p className="text-sm text-muted-foreground mt-2 flex items-center gap-2">

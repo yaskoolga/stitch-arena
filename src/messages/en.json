@@ -25,7 +25,8 @@
     "anonymous": "Anonymous",
     "back": "Back",
     "viewMore": "View More",
-    "memberSince": "Member since"
+    "memberSince": "Member since",
+    "uploading": "Uploading..."
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -183,10 +184,12 @@
   "logs": {
     "title": "Log History",
     "addLog": "Add Log",
+    "addPhoto": "Add Photo",
     "addDailyLog": "Add Daily Log",
     "editLog": "Edit Log",
     "deleteLog": "Delete Log",
     "noLogs": "No logs yet",
+    "noPhotos": "No photos yet. Upload your first progress photo!",
     "startLogging": "Start logging your progress!",
     "backToProject": "Back to Project",
     "trackProgress": "Track your progress on",
