@@ -13,13 +13,25 @@
     "filter": "Filter",
     "sort": "Sort",
     "loadMore": "Load More",
-    "noResults": "No results found"
+    "noResults": "No results found",
+    "all": "All",
+    "status": "Status",
+    "type": "Type",
+    "viewDetails": "View Details",
+    "complete": "complete",
+    "progress": "Progress",
+    "projects": "Projects",
+    "you": "You",
+    "anonymous": "Anonymous",
+    "back": "Back",
+    "viewMore": "View More"
   },
   "nav": {
     "dashboard": "Dashboard",
     "projects": "Projects",
     "community": "Community",
     "gallery": "Gallery",
+    "challenges": "Challenges",
     "profile": "Profile",
     "favorites": "Favorites",
     "calculator": "Calculator",
@@ -32,7 +44,12 @@
     "title": "StitchArena",
     "subtitle": "Track your cross-stitch projects, log daily progress, and visualize your stitching journey.",
     "getStarted": "Get Started",
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "features": {
+      "track": { "title": "Track Projects", "description": "Log daily stitches and watch your progress grow in real time" },
+      "stats": { "title": "See Your Stats", "description": "Activity heatmap, speed badges, streaks, and completion forecasts" },
+      "community": { "title": "Join the Community", "description": "Share your work and explore projects from other stitchers" }
+    }
   },
   "calculator": {
     "title": "Calculator",
@@ -235,6 +252,10 @@
     "title": "Profile",
     "editProfile": "Edit Profile",
     "myProfile": "My Profile",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "followers": "Followers",
+    "following": "Following",
     "fields": {
       "avatar": "Avatar",
       "name": "Name",
@@ -414,6 +435,44 @@
       "uploadFailed": "Failed to upload image",
       "loginFailed": "Failed to login",
       "registerFailed": "Failed to register"
+    }
+  },
+  "challenges": {
+    "title": "Challenges",
+    "subtitle": "Compete with the community",
+    "join": "Join Challenge",
+    "leave": "Leave Challenge",
+    "joined": "Joined",
+    "participants": "participants",
+    "yourProgress": "Your Progress",
+    "target": "Target",
+    "daysRemaining": "Days Remaining",
+    "duration": "Duration",
+    "notFound": "Challenge not found",
+    "noChallenges": "No challenges available",
+    "noChallengesDescription": "Check back soon for new challenges!",
+    "joinSuccess": "Successfully joined challenge!",
+    "leaveSuccess": "Successfully left challenge",
+    "filters": {
+      "active": "Active",
+      "upcoming": "Upcoming",
+      "past": "Past"
+    },
+    "types": {
+      "speed": "Speed Challenge",
+      "streak": "Streak Challenge",
+      "completion": "Completion Challenge"
+    },
+    "leaderboard": {
+      "title": "Leaderboard",
+      "rank": "Rank",
+      "user": "User",
+      "score": "Score",
+      "noEntries": "No entries yet"
+    },
+    "leaveConfirm": {
+      "title": "Leave Challenge?",
+      "description": "Are you sure you want to leave this challenge? Your progress will be lost."
     }
   }
 }

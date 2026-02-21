@@ -1,0 +1,158 @@
+"use client";
+
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+import { ChallengeCard } from "@/components/challenges/challenge-card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Trophy } from "lucide-react";
+
+type StatusFilter = "active" | "upcoming" | "past" | "all";
+type TypeFilter = "all" | "speed" | "streak" | "completion";
+
+interface Challenge {
+  id: string;
+  type: string;
+  title: string;
+  description?: string | null;
+  startDate: string;
+  endDate: string;
+  targetValue: number;
+  _count?: {
+    participants: number;
+  };
+}
+
+interface UserParticipation {
+  challengeId: string;
+  currentProgress: number;
+}
+
+export default function ChallengesPage() {
+  const t = useTranslations();
+  const { data: session } = useSession();
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("active");
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
+
+  // Fetch challenges
+  const { data: challenges, isLoading: challengesLoading } = useQuery<Challenge[]>({
+    queryKey: ["challenges", statusFilter === "all" ? undefined : statusFilter, typeFilter === "all" ? undefined : typeFilter],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (statusFilter !== "all") params.append("status", statusFilter);
+      if (typeFilter !== "all") params.append("type", typeFilter);
+
+      const response = await fetch(`/api/challenges?${params}`);
+      const json = await response.json();
+      return json.data || [];
+    },
+  });
+
+  // Fetch user participations if logged in
+  const { data: participations } = useQuery<UserParticipation[]>({
+    queryKey: ["user-challenge-participations"],
+    queryFn: async () => {
+      if (!session?.user) return [];
+      const response = await fetch("/api/challenges/participations");
+      if (!response.ok) return [];
+      const json = await response.json();
+      return json.data || [];
+    },
+    enabled: !!session?.user,
+  });
+
+  // Create participation map for quick lookup
+  const participationMap = new Map(
+    participations?.map((p) => [p.challengeId, p]) || []
+  );
+
+  return (
+    <div>
+      {/* Header */}
+      <div className="mb-8">
+        <div className="flex items-center gap-3 mb-2">
+          <Trophy className="h-8 w-8 text-primary" />
+          <h1 className="text-3xl font-bold">{t("challenges.title")}</h1>
+        </div>
+        <p className="text-muted-foreground">{t("challenges.subtitle")}</p>
+      </div>
+
+      {/* Filters */}
+      <div className="mb-6 space-y-4">
+        {/* Status Filter */}
+        <div>
+          <h3 className="mb-2 text-sm font-medium">{t("common.status")}</h3>
+          <div className="flex flex-wrap gap-2">
+            {(["all", "active", "upcoming", "past"] as StatusFilter[]).map((status) => (
+              <Button
+                key={status}
+                variant={statusFilter === status ? "default" : "outline"}
+                size="sm"
+                onClick={() => setStatusFilter(status)}
+              >
+                {status === "all"
+                  ? t("common.all")
+                  : t(`challenges.filters.${status}`)}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Type Filter */}
+        <div>
+          <h3 className="mb-2 text-sm font-medium">{t("common.type")}</h3>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant={typeFilter === "all" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setTypeFilter("all")}
+            >
+              {t("common.all")}
+            </Button>
+            {(["speed", "streak", "completion"] as TypeFilter[]).map((type) => (
+              <Button
+                key={type}
+                variant={typeFilter === type ? "default" : "outline"}
+                size="sm"
+                onClick={() => setTypeFilter(type)}
+              >
+                {t(`challenges.types.${type}`)}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Challenges Grid */}
+      {challengesLoading ? (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <Skeleton key={i} className="h-[300px]" />
+          ))}
+        </div>
+      ) : challenges && challenges.length > 0 ? (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {challenges.map((challenge) => (
+            <ChallengeCard
+              key={challenge.id}
+              challenge={challenge}
+              userParticipation={participationMap.get(challenge.id)}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-12">
+          <Trophy className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
+          <h3 className="text-lg font-semibold mb-2">
+            {t("challenges.noChallenges")}
+          </h3>
+          <p className="text-muted-foreground">
+            {t("challenges.noChallengesDescription")}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}

@@ -142,7 +142,11 @@ export default function GalleryPage() {
                         {t("projects.status.completed")}
                       </Badge>
                     </div>
-                    <p className="text-sm text-muted-foreground">by {p.user.name || "Anonymous"}</p>
+                    <Link href={`/profile/${p.user.id}`}>
+                      <p className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                        by {p.user.name || "Anonymous"}
+                      </p>
+                    </Link>
 
                     {/* Theme badges */}
                     {p.themes && p.themes.length > 0 && (

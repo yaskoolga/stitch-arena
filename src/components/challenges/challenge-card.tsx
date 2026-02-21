@@ -1,0 +1,139 @@
+"use client";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
+import { differenceInDays, isPast, isFuture } from "date-fns";
+import Link from "next/link";
+import { Trophy, Users, Calendar, Target } from "lucide-react";
+
+interface ChallengeCardProps {
+  challenge: {
+    id: string;
+    type: string;
+    title: string;
+    description?: string | null;
+    startDate: Date | string;
+    endDate: Date | string;
+    targetValue: number;
+    _count?: {
+      participants: number;
+    };
+  };
+  userParticipation?: {
+    currentProgress: number;
+  } | null;
+}
+
+export function ChallengeCard({ challenge, userParticipation }: ChallengeCardProps) {
+  const t = useTranslations();
+  const now = new Date();
+  const startDate = new Date(challenge.startDate);
+  const endDate = new Date(challenge.endDate);
+
+  const isActive = now >= startDate && now <= endDate;
+  const isUpcoming = isFuture(startDate);
+  const isPastChallenge = isPast(endDate);
+
+  const daysRemaining = isActive ? differenceInDays(endDate, now) : 0;
+  const participantCount = challenge._count?.participants || 0;
+
+  // Calculate progress percentage
+  const progressPercent = userParticipation
+    ? Math.min((userParticipation.currentProgress / challenge.targetValue) * 100, 100)
+    : 0;
+
+  // Get status badge
+  const getStatusBadge = () => {
+    if (isPastChallenge) {
+      return <Badge variant="secondary">{t("challenges.filters.past")}</Badge>;
+    }
+    if (isUpcoming) {
+      return <Badge variant="outline">{t("challenges.filters.upcoming")}</Badge>;
+    }
+    return <Badge variant="default">{t("challenges.filters.active")}</Badge>;
+  };
+
+  // Get type badge
+  const getTypeBadge = () => {
+    const typeColors: Record<string, string> = {
+      speed: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+      streak: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+      completion: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+    };
+
+    return (
+      <Badge className={typeColors[challenge.type] || ""}>
+        {t(`challenges.types.${challenge.type}`)}
+      </Badge>
+    );
+  };
+
+  return (
+    <Card className="hover:shadow-lg transition-shadow">
+      <CardHeader>
+        <div className="flex items-start justify-between gap-2 mb-2">
+          {getStatusBadge()}
+          {getTypeBadge()}
+        </div>
+        <CardTitle className="text-xl">{challenge.title}</CardTitle>
+        {challenge.description && (
+          <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+            {challenge.description}
+          </p>
+        )}
+      </CardHeader>
+
+      <CardContent className="space-y-4">
+        {/* Stats */}
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="flex items-center gap-2">
+            <Users className="h-4 w-4 text-muted-foreground" />
+            <span>
+              {participantCount} {t("challenges.participants")}
+            </span>
+          </div>
+
+          {isActive && (
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <span>
+                {daysRemaining} {daysRemaining === 1 ? "day" : "days"} left
+              </span>
+            </div>
+          )}
+
+          <div className="flex items-center gap-2 col-span-2">
+            <Target className="h-4 w-4 text-muted-foreground" />
+            <span>
+              {t("challenges.target")}: {challenge.targetValue.toLocaleString()}
+            </span>
+          </div>
+        </div>
+
+        {/* User Progress */}
+        {userParticipation && (
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">{t("challenges.yourProgress")}</span>
+              <span className="font-medium">
+                {userParticipation.currentProgress.toLocaleString()} / {challenge.targetValue.toLocaleString()}
+              </span>
+            </div>
+            <Progress value={progressPercent} />
+          </div>
+        )}
+
+        {/* View Details Button */}
+        <Link href={`/challenges/${challenge.id}`}>
+          <Button className="w-full" variant={userParticipation ? "default" : "outline"}>
+            <Trophy className="mr-2 h-4 w-4" />
+            {t("common.viewDetails")}
+          </Button>
+        </Link>
+      </CardContent>
+    </Card>
+  );
+}

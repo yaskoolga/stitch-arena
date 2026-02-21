@@ -13,13 +13,25 @@
     "filter": "Filter",
     "sort": "Sortieren",
     "loadMore": "Mehr laden",
-    "noResults": "Keine Ergebnisse gefunden"
+    "noResults": "Keine Ergebnisse gefunden",
+    "all": "Alle",
+    "status": "Status",
+    "type": "Typ",
+    "viewDetails": "Details anzeigen",
+    "complete": "Abgeschlossen",
+    "progress": "Fortschritt",
+    "projects": "Projekte",
+    "you": "Sie",
+    "anonymous": "Anonym",
+    "back": "Zurück",
+    "viewMore": "Mehr anzeigen"
   },
   "nav": {
     "dashboard": "Dashboard",
     "projects": "Projekte",
     "community": "Community",
     "gallery": "Galerie",
+    "challenges": "Herausforderungen",
     "profile": "Profil",
     "favorites": "Favoriten",
     "calculator": "Rechner",
@@ -32,7 +44,12 @@
     "title": "StitchArena",
     "subtitle": "Verfolgen Sie Ihre Kreuzstich-Projekte, protokollieren Sie tägliche Fortschritte und visualisieren Sie Ihre Stick-Reise.",
     "getStarted": "Loslegen",
-    "signIn": "Anmelden"
+    "signIn": "Anmelden",
+    "features": {
+      "track": { "title": "Projekte verfolgen", "description": "Tägliche Stiche protokollieren und Fortschritt in Echtzeit sehen" },
+      "stats": { "title": "Statistiken ansehen", "description": "Aktivitätskarte, Geschwindigkeitsbadges, Serien und Fertigstellungsprognosen" },
+      "community": { "title": "Community beitreten", "description": "Eigene Arbeiten teilen und Projekte anderer Sticker entdecken" }
+    }
   },
   "calculator": {
     "title": "Rechner",
@@ -224,6 +241,10 @@
     "title": "Profil",
     "editProfile": "Profil bearbeiten",
     "myProfile": "Mein Profil",
+    "follow": "Folgen",
+    "unfollow": "Entfolgen",
+    "followers": "Follower",
+    "following": "Folge ich",
     "fields": {
       "avatar": "Profilbild",
       "name": "Name",
@@ -403,6 +424,44 @@
       "uploadFailed": "Bild konnte nicht hochgeladen werden",
       "loginFailed": "Anmeldung fehlgeschlagen",
       "registerFailed": "Registrierung fehlgeschlagen"
+    }
+  },
+  "challenges": {
+    "title": "Herausforderungen",
+    "subtitle": "Wettbewerb mit der Community",
+    "join": "Teilnehmen",
+    "leave": "Verlassen",
+    "joined": "Teilgenommen",
+    "participants": "Teilnehmer",
+    "yourProgress": "Ihr Fortschritt",
+    "target": "Ziel",
+    "daysRemaining": "Verbleibende Tage",
+    "duration": "Dauer",
+    "notFound": "Herausforderung nicht gefunden",
+    "noChallenges": "Keine Herausforderungen verfügbar",
+    "noChallengesDescription": "Schauen Sie bald wieder vorbei für neue Herausforderungen!",
+    "joinSuccess": "Erfolgreich der Herausforderung beigetreten!",
+    "leaveSuccess": "Herausforderung verlassen",
+    "filters": {
+      "active": "Aktiv",
+      "upcoming": "Bevorstehend",
+      "past": "Vergangen"
+    },
+    "types": {
+      "speed": "Geschwindigkeits-Challenge",
+      "streak": "Serien-Challenge",
+      "completion": "Abschluss-Challenge"
+    },
+    "leaderboard": {
+      "title": "Bestenliste",
+      "rank": "Rang",
+      "user": "Benutzer",
+      "score": "Punkte",
+      "noEntries": "Noch keine Einträge"
+    },
+    "leaveConfirm": {
+      "title": "Herausforderung verlassen?",
+      "description": "Sind Sie sicher, dass Sie diese Herausforderung verlassen möchten? Ihr Fortschritt geht verloren."
     }
   }
 }

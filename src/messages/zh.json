@@ -13,13 +13,25 @@
     "filter": "筛选",
     "sort": "排序",
     "loadMore": "加载更多",
-    "noResults": "未找到结果"
+    "noResults": "未找到结果",
+    "all": "全部",
+    "status": "状态",
+    "type": "类型",
+    "viewDetails": "查看详情",
+    "complete": "完成",
+    "progress": "进度",
+    "projects": "项目",
+    "you": "您",
+    "anonymous": "匿名",
+    "back": "返回",
+    "viewMore": "查看更多"
   },
   "nav": {
     "dashboard": "控制面板",
     "projects": "项目",
     "community": "社区",
     "gallery": "作品库",
+    "challenges": "挑战",
     "profile": "个人资料",
     "favorites": "收藏",
     "calculator": "计算器",
@@ -32,7 +44,12 @@
     "title": "StitchArena",
     "subtitle": "跟踪您的十字绣项目，记录每日进度，可视化您的刺绣之旅。",
     "getStarted": "开始使用",
-    "signIn": "登录"
+    "signIn": "登录",
+    "features": {
+      "track": { "title": "跟踪项目", "description": "记录每日针数，实时查看进度增长" },
+      "stats": { "title": "查看统计", "description": "活动热图、速度徽章、连续天数和完成预测" },
+      "community": { "title": "加入社区", "description": "分享您的作品，探索其他绣者的项目" }
+    }
   },
   "calculator": {
     "title": "计算器",
@@ -224,6 +241,10 @@
     "title": "个人资料",
     "editProfile": "编辑资料",
     "myProfile": "我的资料",
+    "follow": "关注",
+    "unfollow": "取消关注",
+    "followers": "粉丝",
+    "following": "关注中",
     "fields": {
       "avatar": "头像",
       "name": "姓名",
@@ -403,6 +424,44 @@
       "uploadFailed": "图片上传失败",
       "loginFailed": "登录失败",
       "registerFailed": "注册失败"
+    }
+  },
+  "challenges": {
+    "title": "挑战",
+    "subtitle": "与社区竞争",
+    "join": "参加挑战",
+    "leave": "退出挑战",
+    "joined": "已参加",
+    "participants": "参与者",
+    "yourProgress": "您的进度",
+    "target": "目标",
+    "daysRemaining": "剩余天数",
+    "duration": "持续时间",
+    "notFound": "未找到挑战",
+    "noChallenges": "暂无可用挑战",
+    "noChallengesDescription": "请稍后查看新挑战！",
+    "joinSuccess": "成功参加挑战！",
+    "leaveSuccess": "已退出挑战",
+    "filters": {
+      "active": "进行中",
+      "upcoming": "即将开始",
+      "past": "已结束"
+    },
+    "types": {
+      "speed": "速度挑战",
+      "streak": "连续挑战",
+      "completion": "完成挑战"
+    },
+    "leaderboard": {
+      "title": "排行榜",
+      "rank": "排名",
+      "user": "用户",
+      "score": "分数",
+      "noEntries": "暂无记录"
+    },
+    "leaveConfirm": {
+      "title": "退出挑战？",
+      "description": "您确定要退出此挑战吗？您的进度将会丢失。"
     }
   }
 }

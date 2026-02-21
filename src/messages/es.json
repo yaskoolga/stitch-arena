@@ -13,13 +13,25 @@
     "filter": "Filtrar",
     "sort": "Ordenar",
     "loadMore": "Cargar más",
-    "noResults": "No se encontraron resultados"
+    "noResults": "No se encontraron resultados",
+    "all": "Todos",
+    "status": "Estado",
+    "type": "Tipo",
+    "viewDetails": "Ver detalles",
+    "complete": "Completado",
+    "progress": "Progreso",
+    "projects": "Proyectos",
+    "you": "Tú",
+    "anonymous": "Anónimo",
+    "back": "Atrás",
+    "viewMore": "Ver más"
   },
   "nav": {
     "dashboard": "Panel",
     "projects": "Proyectos",
     "community": "Comunidad",
     "gallery": "Galería",
+    "challenges": "Desafíos",
     "profile": "Perfil",
     "favorites": "Favoritos",
     "calculator": "Calculadora",
@@ -32,7 +44,12 @@
     "title": "StitchArena",
     "subtitle": "Sigue tus proyectos de punto de cruz, registra el progreso diario y visualiza tu viaje de bordado.",
     "getStarted": "Empezar",
-    "signIn": "Iniciar sesión"
+    "signIn": "Iniciar sesión",
+    "features": {
+      "track": { "title": "Sigue tus proyectos", "description": "Registra puntos diarios y observa tu progreso crecer en tiempo real" },
+      "stats": { "title": "Ve tus estadísticas", "description": "Mapa de actividad, insignias de velocidad, rachas y previsiones de finalización" },
+      "community": { "title": "Únete a la comunidad", "description": "Comparte tu trabajo y explora proyectos de otros bordadores" }
+    }
   },
   "calculator": {
     "title": "Calculadora",
@@ -224,6 +241,10 @@
     "title": "Perfil",
     "editProfile": "Editar perfil",
     "myProfile": "Mi perfil",
+    "follow": "Seguir",
+    "unfollow": "Dejar de seguir",
+    "followers": "Seguidores",
+    "following": "Siguiendo",
     "fields": {
       "avatar": "Avatar",
       "name": "Nombre",
@@ -403,6 +424,44 @@
       "uploadFailed": "Error al subir la imagen",
       "loginFailed": "Error al iniciar sesión",
       "registerFailed": "Error al registrarse"
+    }
+  },
+  "challenges": {
+    "title": "Desafíos",
+    "subtitle": "Compite con la comunidad",
+    "join": "Unirse",
+    "leave": "Salir",
+    "joined": "Unido",
+    "participants": "participantes",
+    "yourProgress": "Tu Progreso",
+    "target": "Objetivo",
+    "daysRemaining": "Días Restantes",
+    "duration": "Duración",
+    "notFound": "Desafío no encontrado",
+    "noChallenges": "No hay desafíos disponibles",
+    "noChallengesDescription": "¡Vuelve pronto para nuevos desafíos!",
+    "joinSuccess": "¡Te uniste al desafío exitosamente!",
+    "leaveSuccess": "Has salido del desafío",
+    "filters": {
+      "active": "Activos",
+      "upcoming": "Próximos",
+      "past": "Pasados"
+    },
+    "types": {
+      "speed": "Desafío de Velocidad",
+      "streak": "Desafío de Racha",
+      "completion": "Desafío de Finalización"
+    },
+    "leaderboard": {
+      "title": "Tabla de Clasificación",
+      "rank": "Rango",
+      "user": "Usuario",
+      "score": "Puntuación",
+      "noEntries": "Aún no hay entradas"
+    },
+    "leaveConfirm": {
+      "title": "¿Salir del desafío?",
+      "description": "¿Estás seguro de que quieres salir de este desafío? Se perderá tu progreso."
     }
   }
 }

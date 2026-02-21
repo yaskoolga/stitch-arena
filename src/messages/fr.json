@@ -13,13 +13,25 @@
     "filter": "Filtrer",
     "sort": "Trier",
     "loadMore": "Charger plus",
-    "noResults": "Aucun résultat trouvé"
+    "noResults": "Aucun résultat trouvé",
+    "all": "Tous",
+    "status": "Statut",
+    "type": "Type",
+    "viewDetails": "Voir les détails",
+    "complete": "Terminé",
+    "progress": "Progression",
+    "projects": "Projets",
+    "you": "Vous",
+    "anonymous": "Anonyme",
+    "back": "Retour",
+    "viewMore": "Voir plus"
   },
   "nav": {
     "dashboard": "Tableau de bord",
     "projects": "Projets",
     "community": "Communauté",
     "gallery": "Galerie",
+    "challenges": "Défis",
     "profile": "Profil",
     "favorites": "Favoris",
     "calculator": "Calculatrice",
@@ -32,7 +44,12 @@
     "title": "StitchArena",
     "subtitle": "Suivez vos projets de point de croix, enregistrez les progrès quotidiens et visualisez votre parcours de broderie.",
     "getStarted": "Commencer",
-    "signIn": "Se connecter"
+    "signIn": "Se connecter",
+    "features": {
+      "track": { "title": "Suivez vos projets", "description": "Enregistrez les points quotidiens et regardez votre progression en temps réel" },
+      "stats": { "title": "Vos statistiques", "description": "Carte d'activité, badges de vitesse, séries et prévisions d'achèvement" },
+      "community": { "title": "Rejoignez la communauté", "description": "Partagez vos créations et explorez les projets d'autres brodeurs" }
+    }
   },
   "calculator": {
     "title": "Calculatrice",
@@ -224,6 +241,10 @@
     "title": "Profil",
     "editProfile": "Modifier le profil",
     "myProfile": "Mon profil",
+    "follow": "Suivre",
+    "unfollow": "Ne plus suivre",
+    "followers": "Abonnés",
+    "following": "Abonnements",
     "fields": {
       "avatar": "Avatar",
       "name": "Nom",
@@ -403,6 +424,44 @@
       "uploadFailed": "Échec du téléchargement de l'image",
       "loginFailed": "Échec de la connexion",
       "registerFailed": "Échec de l'inscription"
+    }
+  },
+  "challenges": {
+    "title": "Défis",
+    "subtitle": "Compétition avec la communauté",
+    "join": "Rejoindre",
+    "leave": "Quitter",
+    "joined": "Participé",
+    "participants": "participants",
+    "yourProgress": "Votre Progression",
+    "target": "Objectif",
+    "daysRemaining": "Jours Restants",
+    "duration": "Durée",
+    "notFound": "Défi introuvable",
+    "noChallenges": "Aucun défi disponible",
+    "noChallengesDescription": "Revenez bientôt pour de nouveaux défis!",
+    "joinSuccess": "Défi rejoint avec succès!",
+    "leaveSuccess": "Défi quitté",
+    "filters": {
+      "active": "Actifs",
+      "upcoming": "À Venir",
+      "past": "Passés"
+    },
+    "types": {
+      "speed": "Défi de Vitesse",
+      "streak": "Défi de Série",
+      "completion": "Défi d'Achèvement"
+    },
+    "leaderboard": {
+      "title": "Classement",
+      "rank": "Rang",
+      "user": "Utilisateur",
+      "score": "Score",
+      "noEntries": "Aucune entrée encore"
+    },
+    "leaveConfirm": {
+      "title": "Quitter le défi?",
+      "description": "Êtes-vous sûr de vouloir quitter ce défi? Votre progression sera perdue."
     }
   }
 }

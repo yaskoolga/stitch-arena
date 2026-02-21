@@ -163,7 +163,7 @@ export function OverallStats() {
           </CardContent>
         </Card>
 
-        <Card className="gap-1 py-3 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border-orange-200 dark:border-orange-800">
+        <Card className="gap-1 py-3">
           <CardHeader className="px-4 pb-0">
             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
               🔥 {t('currentStreak')}

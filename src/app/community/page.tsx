@@ -173,16 +173,20 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
     <Card className="gap-3 py-4 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
       <CardHeader className="px-4 pb-0">
         <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={project.user.avatar || undefined} />
-            <AvatarFallback className="text-sm">
-              {project.user.name?.[0]?.toUpperCase() || "?"}
-            </AvatarFallback>
-          </Avatar>
+          <Link href={`/profile/${project.user.id}`}>
+            <Avatar className="h-10 w-10 cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+              <AvatarImage src={project.user.avatar || undefined} />
+              <AvatarFallback className="text-sm">
+                {project.user.name?.[0]?.toUpperCase() || "?"}
+              </AvatarFallback>
+            </Avatar>
+          </Link>
           <div className="flex-1 min-w-0">
-            <p className="font-medium text-sm">
-              {project.user.name || "Anonymous"}
-            </p>
+            <Link href={`/profile/${project.user.id}`}>
+              <p className="font-medium text-sm hover:text-primary transition-colors cursor-pointer">
+                {project.user.name || "Anonymous"}
+              </p>
+            </Link>
             <p className="text-xs text-muted-foreground">
               {t("community.activity.createdProject")} • {format(new Date(createdAt), "dd.MM.yyyy")}
             </p>
@@ -269,16 +273,20 @@ function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
     <Card className="gap-3 py-4 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
       <CardHeader className="px-4 pb-0">
         <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={log.project.user.avatar || undefined} />
-            <AvatarFallback className="text-sm">
-              {log.project.user.name?.[0]?.toUpperCase() || "?"}
-            </AvatarFallback>
-          </Avatar>
+          <Link href={`/profile/${log.project.user.id}`}>
+            <Avatar className="h-10 w-10 cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+              <AvatarImage src={log.project.user.avatar || undefined} />
+              <AvatarFallback className="text-sm">
+                {log.project.user.name?.[0]?.toUpperCase() || "?"}
+              </AvatarFallback>
+            </Avatar>
+          </Link>
           <div className="flex-1 min-w-0">
-            <p className="font-medium text-sm">
-              {log.project.user.name || "Anonymous"}
-            </p>
+            <Link href={`/profile/${log.project.user.id}`}>
+              <p className="font-medium text-sm hover:text-primary transition-colors cursor-pointer">
+                {log.project.user.name || "Anonymous"}
+              </p>
+            </Link>
             <p className="text-xs text-muted-foreground">
               {t("community.activity.updatedProgress")} • {format(new Date(createdAt), "dd.MM.yyyy")}
             </p>

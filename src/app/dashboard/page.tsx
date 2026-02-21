@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import Link from "next/link";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ProjectCard } from "@/components/projects/project-card";
 import { SkeletonCard } from "@/components/skeleton-card";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -153,16 +154,17 @@ export default function DashboardPage() {
           </Button>
         </div>
         <div className="ml-auto">
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as SortBy)}
-            className="h-9 rounded-md border border-input bg-background px-3 text-sm"
-          >
-            <option value="newest">{tDash('sort.newest')}</option>
-            <option value="oldest">{tDash('sort.oldest')}</option>
-            <option value="progress">{tDash('sort.progress')}</option>
-            <option value="name">{tDash('sort.name')}</option>
-          </select>
+          <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortBy)}>
+            <SelectTrigger size="sm">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="newest">{tDash('sort.newest')}</SelectItem>
+              <SelectItem value="oldest">{tDash('sort.oldest')}</SelectItem>
+              <SelectItem value="progress">{tDash('sort.progress')}</SelectItem>
+              <SelectItem value="name">{tDash('sort.name')}</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 

@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: krestiki
+      POSTGRES_PASSWORD: krestiki_secret
+      POSTGRES_DB: stitch_arena
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  cv-service:
+    build: ./cv-service
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - PORT=8001
+      - HOST=0.0.0.0
+      - BACKEND_URL=http://host.docker.internal:3000
+      - DEBUG=false
+    volumes:
+      - ./cv-service/app:/app/app
+      - ./cv-service/models:/app/models
+
+volumes:
+  pgdata:

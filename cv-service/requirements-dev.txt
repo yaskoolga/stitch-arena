@@ -1,0 +1,7 @@
+# Development dependencies
+pytest==8.4.1
+pytest-asyncio==0.25.3
+httpx==0.29.1
+
+# Include main requirements
+-r requirements.txt

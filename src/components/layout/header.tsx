@@ -13,6 +13,7 @@ import {
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Logo } from "@/components/ui/logo";
+import { NotificationsDropdown } from "@/components/notifications/notifications-dropdown";
 
 export function Header() {
   const { data: session } = useSession();
@@ -28,13 +29,20 @@ export function Header() {
         <nav className="flex items-center gap-2">
           <LanguageSwitcher />
           <ThemeToggle />
+          {session && <NotificationsDropdown />}
           {session ? (
             <>
               <Link href="/dashboard">
                 <Button variant="ghost">{t('dashboard')}</Button>
               </Link>
-              <Link href="/projects/new">
-                <Button variant="ghost">{t('projects')}</Button>
+              <Link href="/community">
+                <Button variant="ghost">{t('community')}</Button>
+              </Link>
+              <Link href="/gallery">
+                <Button variant="ghost">{t('gallery')}</Button>
+              </Link>
+              <Link href="/challenges">
+                <Button variant="ghost">{t('challenges')}</Button>
               </Link>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -42,7 +50,10 @@ export function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem asChild>
-                    <Link href="/profile">{t('profile')}</Link>
+                    <Link href={`/profile/${session.user?.id}`}>{t('profile')}</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/settings">{t('settings')}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
                     {t('logout')}

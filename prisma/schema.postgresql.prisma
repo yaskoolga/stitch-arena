@@ -1,0 +1,54 @@
+// PostgreSQL version of the schema
+// To switch: copy this file to schema.prisma and update .env DATABASE_URL
+// DATABASE_URL="postgresql://krestiki:krestiki_secret@localhost:5432/stitch_arena"
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  password  String?
+  avatar    String?
+  bio       String?
+  createdAt DateTime  @default(now())
+  projects  Project[]
+}
+
+model Project {
+  id             String     @id @default(cuid())
+  userId         String
+  title          String
+  description    String?
+  imageUrl       String?
+  totalStitches  Int
+  canvasType     String?
+  status         String     @default("in_progress")
+  isPublic       Boolean    @default(false)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  user           User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logs           DailyLog[]
+
+  @@index([userId])
+}
+
+model DailyLog {
+  id        String   @id @default(cuid())
+  projectId String
+  date      DateTime
+  stitches  Int
+  notes     String?
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+}
