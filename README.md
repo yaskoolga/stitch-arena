@@ -22,6 +22,7 @@
 ### 🌈 Project Management
 - 🏭 **Manufacturer** — Справочник производителей схем (DMC, Dimensions, RIOLIS и др.)
 - 🏷️ **Theme Tags** — 12 категорий тематик (Nature, Animals, Abstract, Seasonal, Fantasy и др.)
+- 🔢 **Initial Stitches** — Поддержка начатых проектов (крестики до начала отслеживания не учитываются в статистике)
 - 📸 **Image Upload** — Загрузка и оптимизация фото (WebP, thumbnails)
 - 🔍 **Image Viewer** — Модальное окно для просмотра фото
 - 🗑️ **Quick Delete** — Удаление проектов прямо из Dashboard

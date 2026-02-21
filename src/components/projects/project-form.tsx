@@ -17,6 +17,7 @@ interface ProjectFormProps {
     description?: string;
     manufacturer?: string;
     totalStitches?: number;
+    initialStitches?: number;
     width?: number;
     height?: number;
     canvasType?: string;
@@ -103,6 +104,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
       description: form.get("description"),
       manufacturer: manufacturer || null,
       totalStitches,
+      initialStitches: form.get("initialStitches") ? Number(form.get("initialStitches")) : 0,
       width,
       height,
       canvasType: form.get("canvasType"),
@@ -265,6 +267,22 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
             <Input id="totalStitches" name="totalStitches" type="number" min={1} required={!useAutoCalc} defaultValue={defaultValues?.totalStitches} />
           </div>
         )}
+      </div>
+
+      {/* Initial Stitches - Already stitched before tracking */}
+      <div>
+        <Label htmlFor="initialStitches">{t("projects.fields.initialStitches")}</Label>
+        <p className="text-xs text-muted-foreground mb-2">
+          {t("projects.fields.initialStitchesHint")}
+        </p>
+        <Input
+          id="initialStitches"
+          name="initialStitches"
+          type="number"
+          min={0}
+          defaultValue={defaultValues?.initialStitches || 0}
+          placeholder="0"
+        />
       </div>
 
       <div>

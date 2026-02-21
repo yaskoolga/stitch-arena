@@ -25,7 +25,7 @@ interface PublicProject {
   canvasType?: string | null;
   status: string;
   themes?: string[];
-  user: { name?: string | null; avatar?: string | null };
+  user: { id: string; name?: string | null; avatar?: string | null };
 }
 
 export default function GalleryPage() {

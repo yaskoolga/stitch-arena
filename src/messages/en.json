@@ -152,6 +152,8 @@
       "description": "Description",
       "manufacturer": "Manufacturer",
       "totalStitches": "Total Stitches",
+      "initialStitches": "Initial Stitches",
+      "initialStitchesHint": "Stitches already completed before you started tracking this project",
       "width": "Width",
       "height": "Height",
       "canvasType": "Canvas Type",
@@ -173,7 +175,8 @@
       "days": "Days",
       "logs": "logs",
       "avgPerDay": "Avg / Day",
-      "estDaysLeft": "Est. Days Left"
+      "estDaysLeft": "Est. Days Left",
+      "initialNote": "Includes {initial} initial stitches ({actual} stitched while tracking)"
     }
   },
   "logs": {

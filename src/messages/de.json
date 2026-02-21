@@ -141,6 +141,8 @@
       "description": "Beschreibung",
       "manufacturer": "Hersteller",
       "totalStitches": "Stiche gesamt",
+      "initialStitches": "Anfangsstiche",
+      "initialStitchesHint": "Stiche, die bereits vor Beginn der Verfolgung dieses Projekts fertiggestellt wurden",
       "width": "Breite",
       "height": "Höhe",
       "canvasType": "Stoff-Typ",
@@ -162,7 +164,8 @@
       "days": "Tage",
       "logs": "Einträge",
       "avgPerDay": "Durchschn. / Tag",
-      "estDaysLeft": "Geschätzte Tage übrig"
+      "estDaysLeft": "Geschätzte Tage übrig",
+      "initialNote": "Enthält {initial} Anfangsstiche ({actual} während der Verfolgung gestickt)"
     }
   },
   "logs": {

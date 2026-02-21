@@ -25,8 +25,12 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   // Use the latest log's totalStitches (cumulative total)
   const completedStitches = project.logs.length > 0
     ? project.logs[project.logs.length - 1].totalStitches
-    : 0;
-  return NextResponse.json({ ...project, completedStitches });
+    : project.initialStitches;
+
+  // Calculate actual stitches done while tracking (excluding initial)
+  const actualStitched = Math.max(0, completedStitches - project.initialStitches);
+
+  return NextResponse.json({ ...project, completedStitches, actualStitched });
 }
 
 export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {

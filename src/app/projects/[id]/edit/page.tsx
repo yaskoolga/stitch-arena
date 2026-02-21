@@ -30,11 +30,17 @@ export default function EditProjectPage() {
         defaultValues={{
           title: project.title,
           description: project.description ?? "",
+          manufacturer: project.manufacturer ?? "",
           totalStitches: project.totalStitches,
+          initialStitches: project.initialStitches || 0,
+          width: project.width,
+          height: project.height,
           canvasType: project.canvasType ?? "",
+          coverImage: project.coverImage,
+          schemaImage: project.schemaImage,
+          themes: project.themes,
           isPublic: project.isPublic,
           status: project.status,
-          imageUrl: project.imageUrl,
         }}
       />
     </div>

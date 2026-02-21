@@ -152,6 +152,8 @@
       "description": "Описание",
       "manufacturer": "Производитель",
       "totalStitches": "Всего крестиков",
+      "initialStitches": "Начальных крестиков",
+      "initialStitchesHint": "Крестики, уже вышитые до начала отслеживания этого проекта",
       "width": "Ширина",
       "height": "Высота",
       "canvasType": "Тип канвы",
@@ -173,7 +175,8 @@
       "days": "Дней",
       "logs": "записей",
       "avgPerDay": "Средн. / день",
-      "estDaysLeft": "Осталось дней"
+      "estDaysLeft": "Осталось дней",
+      "initialNote": "Включает {initial} начальных крестиков ({actual} вышито при отслеживании)"
     }
   },
   "logs": {

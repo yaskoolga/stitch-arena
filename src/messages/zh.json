@@ -141,6 +141,8 @@
       "description": "描述",
       "manufacturer": "制造商",
       "totalStitches": "针数总计",
+      "initialStitches": "初始针数",
+      "initialStitchesHint": "在开始跟踪此项目之前已完成的针数",
       "width": "宽度",
       "height": "高度",
       "canvasType": "绣布类型",
@@ -162,7 +164,8 @@
       "days": "天数",
       "logs": "记录",
       "avgPerDay": "平均/天",
-      "estDaysLeft": "预计剩余天数"
+      "estDaysLeft": "预计剩余天数",
+      "initialNote": "包含 {initial} 初始针数（跟踪期间完成 {actual} 针）"
     }
   },
   "logs": {

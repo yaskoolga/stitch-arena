@@ -141,6 +141,8 @@
       "description": "Description",
       "manufacturer": "Fabricant",
       "totalStitches": "Points totaux",
+      "initialStitches": "Points initiaux",
+      "initialStitchesHint": "Points déjà complétés avant de commencer à suivre ce projet",
       "width": "Largeur",
       "height": "Hauteur",
       "canvasType": "Type de toile",
@@ -162,7 +164,8 @@
       "days": "Jours",
       "logs": "entrées",
       "avgPerDay": "Moy. / Jour",
-      "estDaysLeft": "Jours restants estimés"
+      "estDaysLeft": "Jours restants estimés",
+      "initialNote": "Comprend {initial} points initiaux ({actual} points pendant le suivi)"
     }
   },
   "logs": {

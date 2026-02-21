@@ -68,16 +68,23 @@ export async function GET() {
     const projectsWithStitches = projects.map(p => {
       const completed = p.logs.length > 0
         ? Math.max(...p.logs.map(l => l.totalStitches))
-        : 0;
+        : p.initialStitches;
+      // Calculate actual stitched (excluding initial)
+      const actualStitched = Math.max(0, completed - p.initialStitches);
+      // Progress based on remaining stitches to complete
+      const remainingStitches = p.totalStitches - p.initialStitches;
+      const progress = remainingStitches > 0 ? (actualStitched / remainingStitches) * 100 : 0;
+
       return {
         id: p.id,
         title: p.title,
         schemaImage: p.schemaImage,
         totalStitches: p.totalStitches,
         completedStitches: completed,
-        progress: p.totalStitches > 0 ? (completed / p.totalStitches) * 100 : 0,
+        actualStitched, // Stitches done while tracking
+        progress,
       };
-    }).sort((a, b) => b.completedStitches - a.completedStitches).slice(0, 5);
+    }).sort((a, b) => b.actualStitched - a.actualStitched).slice(0, 5);
 
     // Heatmap data for last 12 months
     const heatmapData = groupLogsByDate(allLogs, HEATMAP_MONTHS);

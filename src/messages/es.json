@@ -141,6 +141,8 @@
       "description": "Descripción",
       "manufacturer": "Fabricante",
       "totalStitches": "Puntadas totales",
+      "initialStitches": "Puntadas iniciales",
+      "initialStitchesHint": "Puntadas ya completadas antes de comenzar a rastrear este proyecto",
       "width": "Ancho",
       "height": "Alto",
       "canvasType": "Tipo de tela",
@@ -162,7 +164,8 @@
       "days": "Días",
       "logs": "entradas",
       "avgPerDay": "Prom. / Día",
-      "estDaysLeft": "Días estimados restantes"
+      "estDaysLeft": "Días estimados restantes",
+      "initialNote": "Incluye {initial} puntadas iniciales ({actual} puntadas durante el seguimiento)"
     }
   },
   "logs": {

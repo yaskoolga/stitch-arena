@@ -142,18 +142,28 @@ export function findMostProductiveWeek(logs: DailyLog[]): {
 
 /**
  * Calculate project statistics
+ * @param logs Daily logs for the project
+ * @param totalStitches Total stitches in the pattern
+ * @param initialStitches Stitches already completed before tracking started (default 0)
  */
-export function calculateProjectStats(logs: DailyLog[], totalStitches: number) {
+export function calculateProjectStats(logs: DailyLog[], totalStitches: number, initialStitches = 0) {
   const completed = logs.length > 0
     ? Math.max(...logs.map(l => l.totalStitches))
-    : 0;
+    : initialStitches;
 
-  const progress = totalStitches > 0 ? (completed / totalStitches) * 100 : 0;
+  // Calculate actual stitches done while tracking (excluding initial)
+  const actualStitched = Math.max(0, completed - initialStitches);
+
+  // Progress based on remaining stitches (total - initial)
+  const remainingStitches = totalStitches - initialStitches;
+  const progress = remainingStitches > 0 ? (actualStitched / remainingStitches) * 100 : 0;
+
   const avgSpeed = calculate6MonthAverage(logs);
-  const forecast = calculateForecast(completed, totalStitches, avgSpeed);
+  const forecast = calculateForecast(actualStitched, remainingStitches, avgSpeed);
 
   return {
     completed,
+    actualStitched,
     progress,
     avgSpeed,
     forecast,

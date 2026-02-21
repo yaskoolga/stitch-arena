@@ -37,6 +37,7 @@ model Project {
   coverImage      String?    // Cover photo (from package) - shown in project cards
   schemaImage     String?    // Optional reference photo of pattern (technical)
   totalStitches   Int        // Total stitches in project (manual input or width × height)
+  initialStitches Int        @default(0) // Already stitched before tracking (not counted in stats/challenges)
   width           Int?       // Pattern width (for auto-calculation)
   height          Int?       // Pattern height (for auto-calculation)
   canvasType      String?    // Aida 14, 16, 18, etc.

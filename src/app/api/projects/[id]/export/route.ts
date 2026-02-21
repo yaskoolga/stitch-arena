@@ -20,11 +20,11 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  const header = "Date,Stitches,Notes";
+  const header = "Date,Total Stitches,Daily Stitches,Notes";
   const rows = project.logs.map((log) => {
     const date = format(new Date(log.date), "yyyy-MM-dd");
     const notes = (log.notes || "").replace(/"/g, '""');
-    return `${date},${log.stitches},"${notes}"`;
+    return `${date},${log.totalStitches},${log.dailyStitches},"${notes}"`;
   });
 
   const csv = [header, ...rows].join("\n");

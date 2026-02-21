@@ -30,7 +30,9 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { challengeUpdateSchema } from "@/lib/validations";
 
-type ChallengeFormData = z.infer<typeof challengeUpdateSchema>;
+type ChallengeFormData = z.infer<typeof challengeUpdateSchema> & {
+  targetValue?: number;
+};
 
 interface EditChallengeDialogProps {
   challengeId: string;
@@ -59,7 +61,7 @@ export function EditChallengeDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<ChallengeFormData>({
-    resolver: zodResolver(challengeUpdateSchema),
+    resolver: zodResolver(challengeUpdateSchema) as any,
     defaultValues: {
       type: challenge.type as any,
       title: challenge.title,

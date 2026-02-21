@@ -27,14 +27,30 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
 
-  const { date, stitches, notes, imageUrl } = parsed.data;
+  const {
+    date,
+    photoUrl,
+    previousPhotoUrl,
+    totalStitches,
+    dailyStitches,
+    aiDetected,
+    aiConfidence,
+    userCorrected,
+    notes
+  } = parsed.data;
+
   const updated = await prisma.dailyLog.update({
     where: { id },
     data: {
       date: date ? new Date(date) : undefined,
-      stitches,
+      photoUrl,
+      previousPhotoUrl,
+      totalStitches,
+      dailyStitches,
+      aiDetected,
+      aiConfidence,
+      userCorrected,
       notes,
-      imageUrl,
     },
   });
 

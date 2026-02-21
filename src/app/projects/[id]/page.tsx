@@ -44,7 +44,9 @@ interface Project {
   schemaImage?: string | null;   // Technical pattern reference
   imageUrl?: string | null;      // Old format (for backwards compatibility)
   totalStitches: number;
+  initialStitches: number;       // Stitches already done before tracking
   completedStitches?: number | null;
+  actualStitched?: number;       // Stitches done while tracking (excluding initial)
   canvasType?: string | null;
   status: string;
   isPublic?: boolean;
@@ -240,6 +242,14 @@ export default function ProjectDetailPage() {
               <span className="font-bold text-primary">{pct}%</span>
             </div>
             <Progress value={pct} className="h-2" />
+            {project.initialStitches > 0 && (
+              <p className="text-xs text-muted-foreground mt-2">
+                {t("projects.progress.initialNote", {
+                  initial: project.initialStitches.toLocaleString(),
+                  actual: (project.actualStitched || 0).toLocaleString()
+                })}
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>

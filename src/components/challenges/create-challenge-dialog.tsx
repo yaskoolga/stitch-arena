@@ -31,7 +31,9 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { challengeCreateSchema } from "@/lib/validations";
 
-type ChallengeFormData = z.infer<typeof challengeCreateSchema>;
+type ChallengeFormData = z.infer<typeof challengeCreateSchema> & {
+  targetValue: number;
+};
 
 interface CreateChallengeDialogProps {
   onSuccess?: () => void;
@@ -43,7 +45,7 @@ export function CreateChallengeDialog({ onSuccess }: CreateChallengeDialogProps)
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<ChallengeFormData>({
-    resolver: zodResolver(challengeCreateSchema),
+    resolver: zodResolver(challengeCreateSchema) as any,
     defaultValues: {
       type: "speed",
       title: "",

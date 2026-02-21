@@ -21,10 +21,15 @@ export async function GET() {
     orderBy: { createdAt: "desc" },
   });
 
-  const result = projects.map((p) => ({
-    ...p,
-    completedStitches: p.logs[0]?.totalStitches || 0, // Latest cumulative total
-  }));
+  const result = projects.map((p) => {
+    const completedStitches = p.logs[0]?.totalStitches || p.initialStitches;
+    const actualStitched = Math.max(0, completedStitches - p.initialStitches);
+    return {
+      ...p,
+      completedStitches,
+      actualStitched,
+    };
+  });
 
   return NextResponse.json(result);
 }
@@ -47,6 +52,7 @@ export async function POST(req: Request) {
     description,
     manufacturer,
     totalStitches,
+    initialStitches,
     width,
     height,
     canvasType,
@@ -70,6 +76,7 @@ export async function POST(req: Request) {
       description,
       manufacturer,
       totalStitches: finalTotalStitches,
+      initialStitches: initialStitches || 0,
       width,
       height,
       canvasType,

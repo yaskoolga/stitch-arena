@@ -14,9 +14,9 @@ export async function GET(req: Request) {
       status: "completed", // Only show completed projects in gallery
     },
     include: {
-      user: { select: { name: true, avatar: true } },
+      user: { select: { id: true, name: true, avatar: true } },
       logs: {
-        select: { totalStitches: true, photoUrl: true, imageUrl: true },
+        select: { totalStitches: true, photoUrl: true },
         orderBy: { date: "desc" },
         take: 1,
       },
@@ -38,7 +38,7 @@ export async function GET(req: Request) {
   const result = filteredProjects.map((p) => {
     const projectThemes = p.themes ? JSON.parse(p.themes) : [];
     const latestLog = p.logs[0];
-    const finalPhoto = latestLog?.photoUrl || latestLog?.imageUrl; // Final progress photo
+    const finalPhoto = latestLog?.photoUrl; // Final progress photo
 
     return {
       id: p.id,

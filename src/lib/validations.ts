@@ -12,6 +12,7 @@ export const projectCreateSchema = z.object({
   description: z.string().max(2000).optional().nullable(),
   manufacturer: z.string().max(100).optional().nullable(),
   totalStitches: z.coerce.number().int().positive("Must be a positive number"),
+  initialStitches: z.coerce.number().int().min(0, "Must be non-negative").optional().default(0),
   width: z.coerce.number().int().positive().optional().nullable(),
   height: z.coerce.number().int().positive().optional().nullable(),
   canvasType: z.string().max(100).optional().nullable(),
@@ -34,6 +35,13 @@ export const projectCreateSchema = z.object({
     return true;
   },
   { message: "Invalid dimensions" }
+).refine(
+  (data) => {
+    // initialStitches must be less than totalStitches
+    const initial = data.initialStitches || 0;
+    return initial < data.totalStitches;
+  },
+  { message: "Initial stitches must be less than total stitches", path: ["initialStitches"] }
 );
 
 export const projectUpdateSchema = z.object({
@@ -41,6 +49,7 @@ export const projectUpdateSchema = z.object({
   description: z.string().max(2000).optional().nullable(),
   manufacturer: z.string().max(100).optional().nullable(),
   totalStitches: z.coerce.number().int().positive().optional(),
+  initialStitches: z.coerce.number().int().min(0).optional(),
   width: z.coerce.number().int().positive().optional().nullable(),
   height: z.coerce.number().int().positive().optional().nullable(),
   canvasType: z.string().max(100).optional().nullable(),
