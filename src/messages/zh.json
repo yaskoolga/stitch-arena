@@ -26,7 +26,8 @@
     "back": "返回",
     "viewMore": "查看更多",
     "memberSince": "加入时间",
-    "uploading": "上传中..."
+    "uploading": "上传中...",
+    "optional": "可选"
   },
   "nav": {
     "dashboard": "控制面板",
@@ -135,6 +136,8 @@
     "createProject": "创建项目",
     "editProject": "编辑项目",
     "deleteProject": "删除项目",
+    "startedOn": "开始于",
+    "progressPhotoAlt": "进度于",
     "projectDetails": "项目详情",
     "noProjects": "还没有项目",
     "startFirst": "开始记录您的十字绣项目吧！",
@@ -203,6 +206,8 @@
       "total": "总计",
       "photo": "照片",
       "notes": "备注",
+      "notesPlaceholder": "关于今天工作的想法...",
+      "progressPhotoAlt": "进度照片",
       "stitches": "针"
     },
     "ai": {

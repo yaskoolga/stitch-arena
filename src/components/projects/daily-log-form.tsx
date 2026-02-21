@@ -194,7 +194,7 @@ export function DailyLogForm({
               <div className="mt-3 relative aspect-video w-full max-w-sm overflow-hidden rounded-md border">
                 <Image
                   src={photoUrl}
-                  alt="Progress photo"
+                  alt={t("logs.fields.progressPhotoAlt")}
                   fill
                   className="object-cover"
                 />
@@ -204,11 +204,11 @@ export function DailyLogForm({
 
           {/* Notes */}
           <div>
-            <Label htmlFor="notes">Notes (optional)</Label>
+            <Label htmlFor="notes">{t("logs.fields.notes")} ({t("common.optional")})</Label>
             <Textarea
               id="notes"
               name="notes"
-              placeholder="Any thoughts about today's session..."
+              placeholder={t("logs.fields.notesPlaceholder")}
               rows={3}
             />
           </div>

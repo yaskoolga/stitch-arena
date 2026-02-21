@@ -26,7 +26,8 @@
     "back": "Zurück",
     "viewMore": "Mehr anzeigen",
     "memberSince": "Mitglied seit",
-    "uploading": "Hochladen..."
+    "uploading": "Hochladen...",
+    "optional": "optional"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -135,6 +136,8 @@
     "createProject": "Projekt erstellen",
     "editProject": "Projekt bearbeiten",
     "deleteProject": "Projekt löschen",
+    "startedOn": "Gestartet",
+    "progressPhotoAlt": "Fortschritt am",
     "projectDetails": "Projektdetails",
     "noProjects": "Noch keine Projekte",
     "startFirst": "Beginnen Sie, Ihre Kreuzstichprojekte zu verfolgen!",
@@ -203,6 +206,8 @@
       "total": "Gesamt",
       "photo": "Foto",
       "notes": "Notizen",
+      "notesPlaceholder": "Gedanken zur heutigen Sitzung...",
+      "progressPhotoAlt": "Fortschrittsfoto",
       "stitches": "Stiche"
     },
     "ai": {

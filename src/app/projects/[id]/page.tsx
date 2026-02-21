@@ -193,7 +193,7 @@ export default function ProjectDetailPage() {
                         variant="ghost"
                         size="icon"
                         className="h-8 w-8 text-muted-foreground hover:text-primary"
-                        title="Edit project"
+                        title={t("projects.editProject")}
                       >
                         <Edit className="h-4 w-4" />
                       </Button>
@@ -204,7 +204,7 @@ export default function ProjectDetailPage() {
                   <div className="space-y-1.5 text-sm">
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <Calendar className="h-4 w-4 text-primary" />
-                      <span>Started {format(new Date(project.logs[0]?.date || Date.now()), "dd.MM.yyyy")}</span>
+                      <span>{t("projects.startedOn")} {format(new Date(project.logs[0]?.date || Date.now()), "dd.MM.yyyy")}</span>
                     </div>
                     {project.manufacturer && (
                       <div className="flex items-center gap-2 text-muted-foreground">
@@ -266,7 +266,7 @@ export default function ProjectDetailPage() {
               size="icon"
               onClick={() => setDeleteProjectOpen(true)}
               className="ml-auto text-muted-foreground hover:text-destructive hover:bg-destructive/10"
-              title="Delete project"
+              title={t("projects.deleteProject")}
             >
               <Trash2 className="h-4 w-4" />
             </Button>
@@ -354,7 +354,7 @@ export default function ProjectDetailPage() {
                       <div key={log.id} className="group relative">
                         <ImageDialog
                           src={photoSrc!}
-                          alt={`Progress on ${format(new Date(log.date), "dd.MM.yyyy")}`}
+                          alt={`${t("projects.progressPhotoAlt")} ${format(new Date(log.date), "dd.MM.yyyy")}`}
                           thumbnailClassName="aspect-square w-full overflow-hidden rounded-lg border-2 border-muted hover:border-primary/50 transition-all"
                         />
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 rounded-b-lg">
@@ -451,7 +451,7 @@ export default function ProjectDetailPage() {
                             size="icon"
                             className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
                             onClick={() => setDeleteLogId(log.id)}
-                            title="Delete log"
+                            title={t("logs.deleteLog")}
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </Button>

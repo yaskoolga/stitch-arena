@@ -26,7 +26,8 @@
     "back": "Back",
     "viewMore": "View More",
     "memberSince": "Member since",
-    "uploading": "Uploading..."
+    "uploading": "Uploading...",
+    "optional": "optional"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -146,6 +147,8 @@
     "createProject": "Create Project",
     "editProject": "Edit Project",
     "deleteProject": "Delete Project",
+    "startedOn": "Started",
+    "progressPhotoAlt": "Progress on",
     "projectDetails": "Project Details",
     "noProjects": "No projects yet",
     "startFirst": "Start tracking your cross-stitch projects!",
@@ -214,6 +217,8 @@
       "total": "Total",
       "photo": "Photo",
       "notes": "Notes",
+      "notesPlaceholder": "Any thoughts about today's session...",
+      "progressPhotoAlt": "Progress photo",
       "stitches": "stitches"
     },
     "ai": {

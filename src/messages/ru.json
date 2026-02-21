@@ -26,7 +26,8 @@
     "back": "Назад",
     "viewMore": "Показать ещё",
     "memberSince": "Участник с",
-    "uploading": "Загрузка..."
+    "uploading": "Загрузка...",
+    "optional": "необязательно"
   },
   "nav": {
     "dashboard": "Панель",
@@ -146,6 +147,8 @@
     "createProject": "Создать проект",
     "editProject": "Редактировать проект",
     "deleteProject": "Удалить проект",
+    "startedOn": "Начат",
+    "progressPhotoAlt": "Прогресс на",
     "projectDetails": "Детали проекта",
     "noProjects": "Пока нет проектов",
     "startFirst": "Начните отслеживать свои проекты вышивки!",
@@ -214,6 +217,8 @@
       "total": "Всего",
       "photo": "Фото",
       "notes": "Заметки",
+      "notesPlaceholder": "Ваши мысли о сегодняшней сессии...",
+      "progressPhotoAlt": "Фото прогресса",
       "stitches": "крестиков"
     },
     "ai": {

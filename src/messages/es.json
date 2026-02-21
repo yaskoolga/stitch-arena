@@ -26,7 +26,8 @@
     "back": "Atrás",
     "viewMore": "Ver más",
     "memberSince": "Miembro desde",
-    "uploading": "Subiendo..."
+    "uploading": "Subiendo...",
+    "optional": "opcional"
   },
   "nav": {
     "dashboard": "Panel",
@@ -135,6 +136,8 @@
     "createProject": "Crear proyecto",
     "editProject": "Editar proyecto",
     "deleteProject": "Eliminar proyecto",
+    "startedOn": "Iniciado",
+    "progressPhotoAlt": "Progreso el",
     "projectDetails": "Detalles del proyecto",
     "noProjects": "Aún no hay proyectos",
     "startFirst": "¡Comienza a seguir tus proyectos de punto de cruz!",
@@ -203,6 +206,8 @@
       "total": "Total",
       "photo": "Foto",
       "notes": "Notas",
+      "notesPlaceholder": "Pensamientos sobre la sesión de hoy...",
+      "progressPhotoAlt": "Foto de progreso",
       "stitches": "puntadas"
     },
     "ai": {
