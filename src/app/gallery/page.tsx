@@ -188,7 +188,7 @@ export default function GalleryPage() {
                             : t("projects.status.paused")}
                       </Badge>
                     </div>
-                    <Link href={`/profile/${p.user.id}`}>
+                    <Link href={`/dashboard/${p.user.id}`}>
                       <p className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer">
                         {t("gallery.by")} {p.user.name || t("common.anonymous")}
                       </p>

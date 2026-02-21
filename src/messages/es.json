@@ -91,6 +91,9 @@
     "welcome": "¡Bienvenido de nuevo, {name}!",
     "overview": "Resumen",
     "recentProjects": "Proyectos recientes",
+    "publicProjects": "Proyectos públicos",
+    "noPublicProjects": "Aún no hay proyectos públicos",
+    "noProjectsFilter": "No se encontraron proyectos con el filtro seleccionado",
     "deleteConfirm": "Esto eliminará permanentemente el proyecto y todos sus registros. Esta acción no se puede deshacer.",
     "filters": {
       "all": "Todos",

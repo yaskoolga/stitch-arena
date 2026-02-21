@@ -31,23 +31,34 @@ interface Achievement {
   unlockedAt: string | null;
 }
 
-export function CompactProfile() {
+interface CompactProfileProps {
+  userId?: string;  // If not specified - current user
+  isOwn?: boolean;  // Is this the current user's profile?
+}
+
+export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
   const t = useTranslations();
   const tAch = useTranslations("achievements");
 
+  // Determine which endpoint to use based on userId and isOwn
+  const profileEndpoint = userId && !isOwn ? `/api/users/${userId}` : '/api/profile';
+  const achievementsEndpoint = userId && !isOwn
+    ? `/api/users/${userId}/achievements`
+    : '/api/achievements';
+
   const { data: user } = useQuery<UserProfile>({
-    queryKey: ["profile"],
+    queryKey: ["profile", userId],
     queryFn: async () => {
-      const res = await fetch("/api/profile");
+      const res = await fetch(profileEndpoint);
       if (!res.ok) throw new Error("Failed to fetch");
       return res.json();
     },
   });
 
   const { data: achievements } = useQuery<Achievement[]>({
-    queryKey: ["achievements"],
+    queryKey: ["achievements", userId],
     queryFn: async () => {
-      const res = await fetch("/api/achievements");
+      const res = await fetch(achievementsEndpoint);
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
       return data.achievements || [];
@@ -65,7 +76,7 @@ export function CompactProfile() {
       <CardContent className="px-3 py-3">
         <div className="flex items-center gap-4">
           {/* Профиль слева */}
-          <Link href="/profile" className="flex items-center gap-3 group shrink-0">
+          <Link href="/dashboard" className="flex items-center gap-3 group shrink-0">
             <Avatar className="h-12 w-12 ring-2 ring-primary/10 group-hover:ring-primary/30 transition-all">
               <AvatarImage src={user.avatar || undefined} />
               <AvatarFallback className="text-sm bg-gradient-to-br from-primary/20 to-primary/10">

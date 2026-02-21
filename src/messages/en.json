@@ -102,6 +102,9 @@
     "welcome": "Welcome back, {name}!",
     "overview": "Overview",
     "recentProjects": "Recent Projects",
+    "publicProjects": "Public Projects",
+    "noPublicProjects": "No public projects yet",
+    "noProjectsFilter": "No projects found with the selected filter",
     "deleteConfirm": "This will permanently delete the project and all its logs. This action cannot be undone.",
     "filters": {
       "all": "All",

@@ -91,6 +91,9 @@
     "welcome": "Willkommen zurück, {name}!",
     "overview": "Übersicht",
     "recentProjects": "Letzte Projekte",
+    "publicProjects": "Öffentliche Projekte",
+    "noPublicProjects": "Noch keine öffentlichen Projekte",
+    "noProjectsFilter": "Keine Projekte mit dem ausgewählten Filter gefunden",
     "deleteConfirm": "Dies löscht das Projekt und alle seine Einträge dauerhaft. Diese Aktion kann nicht rückgängig gemacht werden.",
     "filters": {
       "all": "Alle",

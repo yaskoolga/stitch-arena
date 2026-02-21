@@ -50,7 +50,7 @@ export function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem asChild>
-                    <Link href={`/profile/${session.user?.id}`}>{t('profile')}</Link>
+                    <Link href="/dashboard">{t('profile')}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link href="/settings">{t('settings')}</Link>

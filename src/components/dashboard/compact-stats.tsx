@@ -35,13 +35,20 @@ interface OverallStatsData {
   heatmapData: Array<{ date: string; count: number }>;
 }
 
-export function CompactStats() {
+interface CompactStatsProps {
+  userId?: string;  // If not specified - current user
+}
+
+export function CompactStats({ userId }: CompactStatsProps) {
   const t = useTranslations("dashboard.stats");
 
+  // Determine which endpoint to use
+  const statsEndpoint = userId ? `/api/stats/user/${userId}` : '/api/stats/overall';
+
   const { data, isLoading, error } = useQuery<OverallStatsData>({
-    queryKey: ["overall-stats"],
+    queryKey: ["overall-stats", userId],
     queryFn: async () => {
-      const res = await fetch("/api/stats/overall");
+      const res = await fetch(statsEndpoint);
       if (!res.ok) throw new Error("Failed to fetch stats");
       return res.json();
     },

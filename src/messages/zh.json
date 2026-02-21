@@ -91,6 +91,9 @@
     "welcome": "欢迎回来，{name}！",
     "overview": "概览",
     "recentProjects": "最近项目",
+    "publicProjects": "公开项目",
+    "noPublicProjects": "暂无公开项目",
+    "noProjectsFilter": "未找到符合所选筛选器的项目",
     "deleteConfirm": "这将永久删除该项目及其所有记录。此操作无法撤销。",
     "filters": {
       "all": "全部",

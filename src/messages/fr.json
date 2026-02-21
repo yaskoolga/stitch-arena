@@ -91,6 +91,9 @@
     "welcome": "Bon retour, {name} !",
     "overview": "Aperçu",
     "recentProjects": "Projets récents",
+    "publicProjects": "Projets publics",
+    "noPublicProjects": "Aucun projet public pour le moment",
+    "noProjectsFilter": "Aucun projet trouvé avec le filtre sélectionné",
     "deleteConfirm": "Cela supprimera définitivement le projet et tous ses journaux. Cette action ne peut pas être annulée.",
     "filters": {
       "all": "Tous",

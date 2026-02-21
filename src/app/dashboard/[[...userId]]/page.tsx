@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -18,6 +18,7 @@ import { ActivityHeatmapCard } from "@/components/dashboard/activity-heatmap-car
 import { calculate6MonthAverage } from "@/lib/stats";
 import { Plus, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { DailyLog } from "@prisma/client";
 
 interface ProjectItem {
   id: string;
@@ -39,22 +40,47 @@ interface ProjectItem {
 type FilterStatus = "all" | "in_progress" | "completed" | "paused";
 type SortBy = "newest" | "oldest" | "progress" | "name";
 
-export default function DashboardPage() {
+interface DashboardPageProps {
+  params: Promise<{ userId?: string[] }>;
+}
+
+export default function DashboardPage({ params }: DashboardPageProps) {
   const { data: session, status } = useSession();
   const queryClient = useQueryClient();
   const [filter, setFilter] = useState<FilterStatus>("all");
   const [sortBy, setSortBy] = useState<SortBy>("newest");
   const [deleteProjectId, setDeleteProjectId] = useState<string | null>(null);
+  const [resolvedParams, setResolvedParams] = useState<{ userId?: string[] } | null>(null);
 
   const t = useTranslations('projects');
   const tDash = useTranslations('dashboard');
   const tCommon = useTranslations('common');
   const tToast = useTranslations('toast');
 
+  // Resolve params (Next.js 16 - params is a Promise)
+  React.useEffect(() => {
+    params.then(setResolvedParams);
+  }, [params]);
+
+  // Extract userId from optional catch-all route
+  const userId = resolvedParams?.userId?.[0];
+  const isOwnDashboard = !userId || userId === session?.user?.id;
+  const targetUserId = userId || session?.user?.id;
+
+  // Redirect if viewing own profile through userId
+  if (userId && session?.user?.id && userId === session.user.id) {
+    redirect('/dashboard');
+  }
+
+  // Determine which projects endpoint to use
+  const projectsEndpoint = isOwnDashboard
+    ? '/api/projects'  // All projects (public + private)
+    : `/api/users/${targetUserId}/projects`;  // Only public projects
+
   const { data: projects, isLoading } = useQuery<ProjectItem[]>({
-    queryKey: ["projects"],
-    queryFn: () => fetch("/api/projects").then((r) => r.json()),
-    enabled: !!session,
+    queryKey: ["projects", targetUserId, isOwnDashboard],
+    queryFn: () => fetch(projectsEndpoint).then((r) => r.json()),
+    enabled: !!session && !!resolvedParams,
   });
 
   const deleteProject = useMutation({
@@ -94,19 +120,19 @@ export default function DashboardPage() {
     return list;
   }, [projects, filter, sortBy]);
 
-  if (status === "loading") return <p>{tCommon('loading')}</p>;
+  if (status === "loading" || !resolvedParams) return <p>{tCommon('loading')}</p>;
   if (!session) redirect("/login");
 
   return (
     <div>
       {/* Профиль + Достижения */}
       <div className="mb-3">
-        <CompactProfile />
+        <CompactProfile userId={targetUserId} isOwn={isOwnDashboard} />
       </div>
 
       {/* Компактная статистика */}
       <div className="mb-3">
-        <CompactStats />
+        <CompactStats userId={isOwnDashboard ? undefined : targetUserId} />
       </div>
 
       <ConfirmDialog
@@ -122,15 +148,19 @@ export default function DashboardPage() {
         loading={deleteProject.isPending}
       />
 
-      {/* 3. Проекты */}
+      {/* Проекты */}
       <div className="mb-2 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{t("myProjects")}</h1>
-        <Link href="/projects/new">
-          <Button size="sm">
-            <Plus className="mr-1 h-3.5 w-3.5" />
-            {t("createNew")}
-          </Button>
-        </Link>
+        <h1 className="text-2xl font-bold">
+          {isOwnDashboard ? t("myProjects") : tDash("publicProjects")}
+        </h1>
+        {isOwnDashboard && (
+          <Link href="/projects/new">
+            <Button size="sm">
+              <Plus className="mr-1 h-3.5 w-3.5" />
+              {t("createNew")}
+            </Button>
+          </Link>
+        )}
       </div>
 
       {/* Фильтры */}
@@ -192,9 +222,13 @@ export default function DashboardPage() {
           <CardContent className="flex flex-col items-center justify-center py-8">
             <BookOpen className="mb-3 h-10 w-10 text-muted-foreground" />
             <p className="mb-4 text-center text-sm text-muted-foreground">
-              {filter === "all" ? t("noProjects") : tDash("noProjectsFilter")}
+              {filter === "all"
+                ? isOwnDashboard
+                  ? t("noProjects")
+                  : tDash("noPublicProjects")
+                : tDash("noProjectsFilter")}
             </p>
-            {filter === "all" && (
+            {filter === "all" && isOwnDashboard && (
               <Link href="/projects/new">
                 <Button>
                   <Plus className="mr-1 h-4 w-4" />
@@ -208,7 +242,7 @@ export default function DashboardPage() {
         <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((p) => {
             const themes = p.themes ? JSON.parse(p.themes) : [];
-            const avgSpeed = p.logs ? calculate6MonthAverage(p.logs as any) : 0;
+            const avgSpeed = p.logs ? calculate6MonthAverage(p.logs as DailyLog[]) : 0;
 
             return (
               <ProjectCard
@@ -216,15 +250,15 @@ export default function DashboardPage() {
                 {...p}
                 themes={themes}
                 avgSpeed={avgSpeed}
-                onDelete={setDeleteProjectId}
+                onDelete={isOwnDashboard ? setDeleteProjectId : undefined}
               />
             );
           })}
         </div>
       )}
 
-      {/* 4. Activity Heatmap */}
-      <ActivityHeatmapCard />
+      {/* Activity Heatmap - only for own dashboard */}
+      {isOwnDashboard && <ActivityHeatmapCard />}
     </div>
   );
 }

@@ -5,12 +5,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActivityHeatmap } from "./activity-heatmap";
 import { useTranslations } from "next-intl";
 
-export function ActivityHeatmapCard() {
+interface ActivityHeatmapCardProps {
+  userId?: string;  // If not specified - current user
+}
+
+export function ActivityHeatmapCard({ userId }: ActivityHeatmapCardProps) {
   const t = useTranslations("dashboard.stats");
 
+  // Determine which endpoint to use
+  const statsEndpoint = userId ? `/api/stats/user/${userId}` : '/api/stats/overall';
+
   const { data: stats } = useQuery({
-    queryKey: ["overall-stats"],
-    queryFn: () => fetch("/api/stats/overall").then((r) => r.json()),
+    queryKey: ["overall-stats", userId],
+    queryFn: () => fetch(statsEndpoint).then((r) => r.json()),
     staleTime: 5 * 60 * 1000,
   });
 

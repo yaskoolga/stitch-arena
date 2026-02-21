@@ -173,7 +173,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
     <Card className="gap-2 py-3 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
       <CardHeader className="px-3 pb-0">
         <div className="flex items-center gap-2">
-          <Link href={`/profile/${project.user.id}`}>
+          <Link href={`/dashboard/${project.user.id}`}>
             <Avatar className="h-8 w-8 cursor-pointer hover:ring-2 hover:ring-primary transition-all">
               <AvatarImage src={project.user.avatar || undefined} />
               <AvatarFallback className="text-xs">
@@ -182,7 +182,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
             </Avatar>
           </Link>
           <div className="flex-1 min-w-0">
-            <Link href={`/profile/${project.user.id}`}>
+            <Link href={`/dashboard/${project.user.id}`}>
               <p className="font-medium text-xs hover:text-primary transition-colors cursor-pointer">
                 {project.user.name || "Anonymous"}
               </p>
@@ -273,7 +273,7 @@ function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
     <Card className="gap-2 py-3 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
       <CardHeader className="px-3 pb-0">
         <div className="flex items-center gap-2">
-          <Link href={`/profile/${log.project.user.id}`}>
+          <Link href={`/dashboard/${log.project.user.id}`}>
             <Avatar className="h-8 w-8 cursor-pointer hover:ring-2 hover:ring-primary transition-all">
               <AvatarImage src={log.project.user.avatar || undefined} />
               <AvatarFallback className="text-xs">
@@ -282,7 +282,7 @@ function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
             </Avatar>
           </Link>
           <div className="flex-1 min-w-0">
-            <Link href={`/profile/${log.project.user.id}`}>
+            <Link href={`/dashboard/${log.project.user.id}`}>
               <p className="font-medium text-xs hover:text-primary transition-colors cursor-pointer">
                 {log.project.user.name || "Anonymous"}
               </p>
