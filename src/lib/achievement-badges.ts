@@ -129,7 +129,7 @@ export function getBadge(achievementId: string): AchievementBadge | null {
  * Get user's special badges (sorted by tier)
  */
 export function getUserBadges(achievementIds: string[]): AchievementBadge[] {
-  const tierOrder = { legendary: 0, gold: 1, silver: 2, bronze: 3 };
+  const tierOrder = { legendary: 0, platinum: 1, gold: 2, silver: 3, bronze: 4 };
 
   return achievementIds
     .map((id) => getBadge(id))

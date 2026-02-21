@@ -64,11 +64,11 @@ export default function GalleryPage() {
 
   return (
     <div>
-      <h1 className="mb-2 text-3xl font-bold">{t("gallery.title")}</h1>
-      <p className="mb-6 text-muted-foreground">{t("gallery.subtitle")}</p>
+      <h1 className="mb-2 text-2xl font-bold">{t("gallery.title")}</h1>
+      <p className="mb-4 text-sm text-muted-foreground">{t("gallery.subtitle")}</p>
 
       {/* Filters */}
-      <div className="mb-6 space-y-4">
+      <div className="mb-4 space-y-3">
         {/* Theme filters */}
         <div>
           <h3 className="mb-2 text-sm font-medium">{t("gallery.filters.themes")}</h3>
@@ -112,7 +112,7 @@ export default function GalleryPage() {
             : t("gallery.beFirst")}
         </p>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {sortedProjects.map((p) => {
             const pct = Math.min(100, Math.round((p.completedStitches / p.totalStitches) * 100));
             const imageSrc = p.finalPhoto || p.coverImage || p.schemaImage; // Priority: finalPhoto > coverImage > schemaImage
@@ -133,50 +133,50 @@ export default function GalleryPage() {
                       />
                     </div>
                   )}
-                  <CardHeader className="pb-2">
+                  <CardHeader className="pb-1.5 px-3 pt-3">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                      <CardTitle className="text-base group-hover:text-primary transition-colors">
                         {p.title}
                       </CardTitle>
-                      <Badge variant="default" className="bg-green-600">
+                      <Badge variant="default" className="bg-green-600 text-[10px] px-2 py-0.5">
                         {t("projects.status.completed")}
                       </Badge>
                     </div>
                     <Link href={`/profile/${p.user.id}`}>
-                      <p className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                      <p className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer">
                         by {p.user.name || "Anonymous"}
                       </p>
                     </Link>
 
                     {/* Theme badges */}
                     {p.themes && p.themes.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mt-2">
+                      <div className="flex flex-wrap gap-1 mt-1.5">
                         {p.themes.slice(0, 3).map((theme) => (
-                          <Badge key={theme} variant="outline" className="text-xs">
+                          <Badge key={theme} variant="outline" className="text-[10px]">
                             {theme}
                           </Badge>
                         ))}
                         {p.themes.length > 3 && (
-                          <Badge variant="outline" className="text-xs">
+                          <Badge variant="outline" className="text-[10px]">
                             +{p.themes.length - 3}
                           </Badge>
                         )}
                       </div>
                     )}
                   </CardHeader>
-                  <CardContent>
-                    {p.description && <p className="mb-2 text-sm text-muted-foreground line-clamp-2">{p.description}</p>}
-                    {p.canvasType && <p className="mb-2 text-xs text-muted-foreground">{p.canvasType}</p>}
-                    <div className="space-y-1 mb-3">
-                      <div className="flex justify-between text-sm">
+                  <CardContent className="px-3 pb-3">
+                    {p.description && <p className="mb-1.5 text-xs text-muted-foreground line-clamp-2">{p.description}</p>}
+                    {p.canvasType && <p className="mb-1.5 text-[10px] text-muted-foreground">{p.canvasType}</p>}
+                    <div className="space-y-0.5 mb-2">
+                      <div className="flex justify-between text-xs">
                         <span>{p.completedStitches.toLocaleString()} / {p.totalStitches.toLocaleString()}</span>
                         <span className="font-medium">{pct}%</span>
                       </div>
-                      <Progress value={pct} />
+                      <Progress value={pct} className="h-1.5" />
                     </div>
                   </CardContent>
                 </Link>
-                <CardContent className="pt-0">
+                <CardContent className="pt-0 px-3 pb-3">
                   <LikeButton projectId={p.id} variant="ghost" size="sm" />
                 </CardContent>
               </Card>

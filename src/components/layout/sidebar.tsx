@@ -17,13 +17,11 @@ export function Sidebar() {
 
   const navItems = [
     { href: "/dashboard", label: t('dashboard') },
-    { href: "/projects/new", label: t('projects') },
     { href: "/gallery", label: t('gallery') },
     { href: "/challenges", label: t('challenges') },
     { href: "/community", label: t('community') },
     { href: "/favorites", label: t('favorites') },
     { href: "/calculator", label: t('calculator') },
-    { href: "/profile", label: t('profile') },
   ];
 
   if (!session) return null;

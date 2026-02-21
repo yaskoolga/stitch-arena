@@ -12,9 +12,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ProjectCard } from "@/components/projects/project-card";
 import { SkeletonCard } from "@/components/skeleton-card";
 import { ConfirmDialog } from "@/components/confirm-dialog";
-import { OverallStats } from "@/components/dashboard/overall-stats";
-import { AchievementsSection } from "@/components/achievements/achievements-section";
+import { CompactProfile } from "@/components/dashboard/compact-profile";
+import { CompactStats } from "@/components/dashboard/compact-stats";
+import { ActivityHeatmapCard } from "@/components/dashboard/activity-heatmap-card";
 import { calculate6MonthAverage } from "@/lib/stats";
+import { Plus, BookOpen } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface ProjectItem {
   id: string;
@@ -96,61 +99,70 @@ export default function DashboardPage() {
 
   return (
     <div>
+      {/* Профиль + Достижения */}
+      <div className="mb-3">
+        <CompactProfile />
+      </div>
+
+      {/* Компактная статистика */}
+      <div className="mb-3">
+        <CompactStats />
+      </div>
+
       <ConfirmDialog
-        open={!!deleteProjectId}
-        onOpenChange={(open) => { if (!open) setDeleteProjectId(null); }}
-        title={t('deleteProject')}
-        description={tDash('deleteConfirm')}
-        onConfirm={() => { if (deleteProjectId) deleteProject.mutate(deleteProjectId); }}
+        open={deleteProjectId !== null}
+        onOpenChange={(open) => {
+          if (!open) setDeleteProjectId(null);
+        }}
+        title={t("deleteProject")}
+        description={tDash("deleteConfirm")}
+        onConfirm={() => {
+          if (deleteProjectId) deleteProject.mutate(deleteProjectId);
+        }}
         loading={deleteProject.isPending}
       />
 
-      {/* Overall Statistics Section */}
-      <div className="mb-8">
-        <OverallStats />
-      </div>
-
-      {/* Achievements Section */}
-      <div className="mb-8">
-        <AchievementsSection />
-      </div>
-
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">{t('myProjects')}</h1>
+      {/* 3. Проекты */}
+      <div className="mb-2 flex items-center justify-between">
+        <h1 className="text-2xl font-bold">{t("myProjects")}</h1>
         <Link href="/projects/new">
-          <Button>{t('createNew')}</Button>
+          <Button size="sm">
+            <Plus className="mr-1 h-3.5 w-3.5" />
+            {t("createNew")}
+          </Button>
         </Link>
       </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-2">
+      {/* Фильтры */}
+      <div className="mb-2 flex flex-wrap items-center gap-2">
         <div className="flex gap-1">
           <Button
             variant={filter === "all" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("all")}
           >
-            {tDash('filters.all')}
+            {tDash("filters.all")}
           </Button>
           <Button
             variant={filter === "in_progress" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("in_progress")}
           >
-            {tDash('filters.inProgress')}
+            {tDash("filters.inProgress")}
           </Button>
           <Button
             variant={filter === "completed" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("completed")}
           >
-            {tDash('filters.completed')}
+            {tDash("filters.completed")}
           </Button>
           <Button
             variant={filter === "paused" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("paused")}
           >
-            {tDash('filters.paused')}
+            {tDash("filters.paused")}
           </Button>
         </div>
         <div className="ml-auto">
@@ -159,31 +171,41 @@ export default function DashboardPage() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="newest">{tDash('sort.newest')}</SelectItem>
-              <SelectItem value="oldest">{tDash('sort.oldest')}</SelectItem>
-              <SelectItem value="progress">{tDash('sort.progress')}</SelectItem>
-              <SelectItem value="name">{tDash('sort.name')}</SelectItem>
+              <SelectItem value="newest">{tDash("sort.newest")}</SelectItem>
+              <SelectItem value="oldest">{tDash("sort.oldest")}</SelectItem>
+              <SelectItem value="progress">{tDash("sort.progress")}</SelectItem>
+              <SelectItem value="name">{tDash("sort.name")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
 
+      {/* Сетка проектов */}
       {isLoading ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[...Array(6)].map((_, i) => (
+        <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {Array.from({ length: 6 }).map((_, i) => (
             <SkeletonCard key={i} />
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <p className="text-muted-foreground">
-          {projects?.length === 0 ? (
-            <>{t('noProjects')} <Link href="/projects/new" className="underline">{t('startFirst')}</Link></>
-          ) : (
-            tCommon('noResults')
-          )}
-        </p>
+        <Card className="mb-4">
+          <CardContent className="flex flex-col items-center justify-center py-8">
+            <BookOpen className="mb-3 h-10 w-10 text-muted-foreground" />
+            <p className="mb-4 text-center text-sm text-muted-foreground">
+              {filter === "all" ? t("noProjects") : tDash("noProjectsFilter")}
+            </p>
+            {filter === "all" && (
+              <Link href="/projects/new">
+                <Button>
+                  <Plus className="mr-1 h-4 w-4" />
+                  {t("startFirst")}
+                </Button>
+              </Link>
+            )}
+          </CardContent>
+        </Card>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((p) => {
             const themes = p.themes ? JSON.parse(p.themes) : [];
             const avgSpeed = p.logs ? calculate6MonthAverage(p.logs as any) : 0;
@@ -200,6 +222,9 @@ export default function DashboardPage() {
           })}
         </div>
       )}
+
+      {/* 4. Activity Heatmap */}
+      <ActivityHeatmapCard />
     </div>
   );
 }

@@ -47,26 +47,26 @@ export default function FavoritesPage() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center gap-3">
+      <div className="mb-4 flex items-center gap-3">
         <Heart className="h-8 w-8 text-red-500 fill-red-500" />
-        <h1 className="text-3xl font-bold">My Favorites</h1>
+        <h1 className="text-2xl font-bold">My Favorites</h1>
       </div>
-      <p className="text-muted-foreground mb-6">
+      <p className="text-sm text-muted-foreground mb-4">
         Projects you've liked from the community
       </p>
 
       {isLoading ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {[...Array(6)].map((_, i) => (
             <Card key={i} className="overflow-hidden">
-              <Skeleton className="h-48 w-full" />
-              <CardHeader>
-                <Skeleton className="h-6 w-3/4" />
-                <Skeleton className="h-4 w-1/2 mt-2" />
+              <Skeleton className="h-40 w-full" />
+              <CardHeader className="px-3 pt-3">
+                <Skeleton className="h-5 w-3/4" />
+                <Skeleton className="h-3 w-1/2 mt-1.5" />
               </CardHeader>
-              <CardContent>
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-2 w-full mt-2" />
+              <CardContent className="px-3 pb-3">
+                <Skeleton className="h-3 w-full" />
+                <Skeleton className="h-1.5 w-full mt-1.5" />
               </CardContent>
             </Card>
           ))}
@@ -75,19 +75,19 @@ export default function FavoritesPage() {
         <Card>
           <CardContent className="py-12 text-center">
             <Heart className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-            <h3 className="text-lg font-medium mb-2">No favorites yet</h3>
-            <p className="text-muted-foreground mb-4">
+            <h3 className="text-base font-medium mb-2">No favorites yet</h3>
+            <p className="text-sm text-muted-foreground mb-4">
               Explore the gallery and like projects you love
             </p>
             <Link href="/gallery">
-              <button className="text-primary hover:underline">
+              <button className="text-sm text-primary hover:underline">
                 Browse Gallery →
               </button>
             </Link>
           </CardContent>
         </Card>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {favorites.map((project) => {
             const pct = Math.min(
               100,
@@ -110,15 +110,16 @@ export default function FavoritesPage() {
                       />
                     </div>
                   )}
-                  <CardHeader className="pb-2">
+                  <CardHeader className="pb-1.5 px-3 pt-3">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg">{project.title}</CardTitle>
-                      <div className="flex items-center gap-2">
+                      <CardTitle className="text-base">{project.title}</CardTitle>
+                      <div className="flex items-center gap-1.5">
                         <LikeButton projectId={project.id} variant="ghost" size="sm" />
                         <Badge
                           variant={
                             project.status === "completed" ? "default" : "secondary"
                           }
+                          className="text-[10px] px-2 py-0.5"
                         >
                           {project.status === "in_progress"
                             ? "In Progress"
@@ -126,46 +127,46 @@ export default function FavoritesPage() {
                         </Badge>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       by {project.user.name || "Anonymous"}
                     </p>
 
                     {/* Theme badges */}
                     {project.themes && project.themes.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mt-2">
+                      <div className="flex flex-wrap gap-1 mt-1.5">
                         {project.themes.slice(0, 3).map((theme) => (
-                          <Badge key={theme} variant="outline" className="text-xs">
+                          <Badge key={theme} variant="outline" className="text-[10px]">
                             {theme}
                           </Badge>
                         ))}
                         {project.themes.length > 3 && (
-                          <Badge variant="outline" className="text-xs">
+                          <Badge variant="outline" className="text-[10px]">
                             +{project.themes.length - 3}
                           </Badge>
                         )}
                       </div>
                     )}
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="px-3 pb-3">
                     {project.description && (
-                      <p className="mb-2 text-sm text-muted-foreground line-clamp-2">
+                      <p className="mb-1.5 text-xs text-muted-foreground line-clamp-2">
                         {project.description}
                       </p>
                     )}
                     {project.canvasType && (
-                      <p className="mb-2 text-xs text-muted-foreground">
+                      <p className="mb-1.5 text-[10px] text-muted-foreground">
                         {project.canvasType}
                       </p>
                     )}
-                    <div className="space-y-1">
-                      <div className="flex justify-between text-sm">
+                    <div className="space-y-0.5">
+                      <div className="flex justify-between text-xs">
                         <span>
                           {project.completedStitches.toLocaleString()} /{" "}
                           {project.totalStitches.toLocaleString()}
                         </span>
                         <span className="font-medium">{pct}%</span>
                       </div>
-                      <Progress value={pct} />
+                      <Progress value={pct} className="h-1.5" />
                     </div>
                   </CardContent>
                 </Link>

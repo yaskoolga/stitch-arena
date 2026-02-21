@@ -28,22 +28,22 @@ export function AchievementBadge({
 }: AchievementBadgeProps) {
   const sizeClasses = {
     sm: {
-      container: "p-2",
+      container: "p-1.5",
+      emoji: "text-lg",
+      name: "text-[10px]",
+      description: "text-[9px]",
+    },
+    md: {
+      container: "p-2.5",
       emoji: "text-xl",
       name: "text-xs",
       description: "text-[10px]",
     },
-    md: {
+    lg: {
       container: "p-3",
-      emoji: "text-2xl",
+      emoji: "text-3xl",
       name: "text-sm",
       description: "text-xs",
-    },
-    lg: {
-      container: "p-4",
-      emoji: "text-4xl",
-      name: "text-base",
-      description: "text-sm",
     },
   };
 

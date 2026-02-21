@@ -312,7 +312,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
         <input type="checkbox" id="isPublic" name="isPublic" defaultChecked={defaultValues?.isPublic} />
         <Label htmlFor="isPublic">{t("projects.fields.isPublic")}</Label>
       </div>
-      <Button type="submit" disabled={loading || uploading}>
+      <Button type="submit" disabled={loading || !!uploading}>
         {loading ? t("common.loading") : isEdit ? t("projects.editProject") : t("projects.createProject")}
       </Button>
     </form>

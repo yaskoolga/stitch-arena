@@ -21,7 +21,7 @@ export function PatternAnalyzer({ onDetectionComplete }: PatternAnalyzerProps) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { detectStitches, isLoading, result, error } = useCVDetection();
+  const { detectProgress, isLoading, result, error } = useCVDetection();
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -40,7 +40,7 @@ export function PatternAnalyzer({ onDetectionComplete }: PatternAnalyzerProps) {
   const handleAnalyze = async () => {
     if (!selectedFile) return;
 
-    const detectionResult = await detectStitches(selectedFile);
+    const detectionResult = await detectProgress(selectedFile);
 
     if (detectionResult && onDetectionComplete && previewUrl) {
       onDetectionComplete(detectionResult.total_stitches, previewUrl);
@@ -144,32 +144,7 @@ export function PatternAnalyzer({ onDetectionComplete }: PatternAnalyzerProps) {
                       <span className="text-muted-foreground">Processing Time:</span>
                       <p className="font-medium">{result.processing_time_ms.toFixed(0)}ms</p>
                     </div>
-                    <div>
-                      <span className="text-muted-foreground">Colors Detected:</span>
-                      <p className="font-medium">{result.colors.length}</p>
-                    </div>
                   </div>
-
-                  {/* Color breakdown */}
-                  {result.colors.length > 0 && (
-                    <div className="mt-3 space-y-1">
-                      <p className="text-sm font-medium">Dominant Colors:</p>
-                      <div className="flex flex-wrap gap-2">
-                        {result.colors.slice(0, 5).map((color, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-center gap-1.5 text-xs bg-background px-2 py-1 rounded"
-                          >
-                            <div
-                              className="w-4 h-4 rounded border"
-                              style={{ backgroundColor: color.color_hex }}
-                            />
-                            <span>{color.percentage.toFixed(1)}%</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
 
                   <Button
                     variant="outline"

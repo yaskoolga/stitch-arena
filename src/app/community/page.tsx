@@ -58,18 +58,18 @@ export default function CommunityPage() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="mb-6">
+      <div className="mb-4">
         <div className="flex items-center gap-3 mb-2">
           <Sparkles className="h-8 w-8 text-primary" />
-          <h1 className="text-3xl font-bold">{t("community.title")}</h1>
+          <h1 className="text-2xl font-bold">{t("community.title")}</h1>
         </div>
-        <p className="text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           {t("community.subtitle")}
         </p>
       </div>
 
       {/* Filters */}
-      <Tabs value={filter} onValueChange={(v) => setFilter(v as any)} className="mb-6">
+      <Tabs value={filter} onValueChange={(v) => setFilter(v as any)} className="mb-4">
         <TabsList className="grid w-full grid-cols-3 max-w-md">
           <TabsTrigger value="all" className="text-sm">
             {t("community.tabs.all")}
@@ -84,26 +84,26 @@ export default function CommunityPage() {
       </Tabs>
 
       {/* Feed */}
-      <div className="space-y-3">
+      <div className="space-y-2.5">
         {isLoading ? (
           <>
             {[...Array(5)].map((_, i) => (
-              <Card key={i} className="gap-3 py-4">
-                <CardHeader className="px-4 pb-0">
-                  <div className="flex items-center gap-3">
-                    <Skeleton className="h-10 w-10 rounded-full" />
+              <Card key={i} className="gap-2 py-3">
+                <CardHeader className="px-3 pb-0">
+                  <div className="flex items-center gap-2">
+                    <Skeleton className="h-8 w-8 rounded-full" />
                     <div className="flex-1">
-                      <Skeleton className="h-4 w-32 mb-1.5" />
-                      <Skeleton className="h-3 w-48" />
+                      <Skeleton className="h-3 w-28 mb-1" />
+                      <Skeleton className="h-2.5 w-40" />
                     </div>
-                    <Skeleton className="h-6 w-16 rounded-full" />
+                    <Skeleton className="h-5 w-14 rounded-full" />
                   </div>
                 </CardHeader>
-                <CardContent className="px-4 pb-0">
-                  <Skeleton className="h-48 w-full rounded-lg mb-3" />
-                  <Skeleton className="h-5 w-3/4 mb-2" />
-                  <Skeleton className="h-4 w-full mb-1" />
-                  <Skeleton className="h-4 w-2/3" />
+                <CardContent className="px-3 pb-0">
+                  <Skeleton className="h-40 w-full rounded-lg mb-2" />
+                  <Skeleton className="h-4 w-3/4 mb-1.5" />
+                  <Skeleton className="h-3 w-full mb-1" />
+                  <Skeleton className="h-3 w-2/3" />
                 </CardContent>
               </Card>
             ))}
@@ -170,39 +170,39 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
   );
 
   return (
-    <Card className="gap-3 py-4 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
-      <CardHeader className="px-4 pb-0">
-        <div className="flex items-center gap-3">
+    <Card className="gap-2 py-3 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
+      <CardHeader className="px-3 pb-0">
+        <div className="flex items-center gap-2">
           <Link href={`/profile/${project.user.id}`}>
-            <Avatar className="h-10 w-10 cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+            <Avatar className="h-8 w-8 cursor-pointer hover:ring-2 hover:ring-primary transition-all">
               <AvatarImage src={project.user.avatar || undefined} />
-              <AvatarFallback className="text-sm">
+              <AvatarFallback className="text-xs">
                 {project.user.name?.[0]?.toUpperCase() || "?"}
               </AvatarFallback>
             </Avatar>
           </Link>
           <div className="flex-1 min-w-0">
             <Link href={`/profile/${project.user.id}`}>
-              <p className="font-medium text-sm hover:text-primary transition-colors cursor-pointer">
+              <p className="font-medium text-xs hover:text-primary transition-colors cursor-pointer">
                 {project.user.name || "Anonymous"}
               </p>
             </Link>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-[10px] text-muted-foreground">
               {t("community.activity.createdProject")} • {format(new Date(createdAt), "dd.MM.yyyy")}
             </p>
           </div>
-          <Badge variant="secondary" className="gap-1 text-xs">
-            <Sparkles className="h-3 w-3" />
+          <Badge variant="secondary" className="gap-1 text-[10px] px-2 py-0.5">
+            <Sparkles className="h-2.5 w-2.5" />
             {t("projects.createNew").split(" ")[0]}
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className="px-4 pb-0">
+      <CardContent className="px-3 pb-0">
         <Link href={`/projects/${project.id}`} className="block group">
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             {/* Photo left */}
             {project.schemaImage && (
-              <div className="relative h-48 w-48 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
+              <div className="relative h-40 w-40 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
                 <Image
                   src={project.schemaImage}
                   alt={project.title}
@@ -214,51 +214,51 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
 
             {/* Content right */}
             <div className="flex-1 min-w-0">
-              <h3 className="text-base font-semibold mb-1 group-hover:text-primary transition-colors line-clamp-1">
+              <h3 className="text-sm font-semibold mb-0.5 group-hover:text-primary transition-colors line-clamp-1">
                 {project.title}
               </h3>
 
               {project.description && (
-                <p className="text-sm text-muted-foreground mb-2 line-clamp-1">
+                <p className="text-xs text-muted-foreground mb-1.5 line-clamp-1">
                   {project.description}
                 </p>
               )}
 
               {project.themes && project.themes.length > 0 && (
-                <div className="flex flex-wrap gap-1 mb-2">
+                <div className="flex flex-wrap gap-1 mb-1.5">
                   {project.themes.slice(0, 3).map((theme: string) => (
-                    <Badge key={theme} variant="outline" className="text-xs">
+                    <Badge key={theme} variant="outline" className="text-[10px]">
                       {theme}
                     </Badge>
                   ))}
                   {project.themes.length > 3 && (
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-[10px]">
                       +{project.themes.length - 3}
                     </Badge>
                   )}
                 </div>
               )}
 
-              <div className="space-y-1">
-                <div className="flex justify-between text-xs">
+              <div className="space-y-0.5">
+                <div className="flex justify-between text-[10px]">
                   <span className="text-muted-foreground">
                     {project.completedStitches.toLocaleString()} /{" "}
                     {project.totalStitches.toLocaleString()} {t("logs.fields.stitches")}
                   </span>
                   <span className="font-medium">{pct}%</span>
                 </div>
-                <Progress value={pct} className="h-1.5" />
+                <Progress value={pct} className="h-1" />
               </div>
             </div>
           </div>
         </Link>
 
-        <div className="flex items-center gap-1 pt-2 border-t mt-3">
+        <div className="flex items-center gap-1 pt-1.5 border-t mt-2">
           <LikeButton projectId={project.id} variant="ghost" size="sm" />
           <Link href={`/projects/${project.id}#comments`}>
-            <Button variant="ghost" size="sm" className="gap-1.5 h-8">
-              <MessageCircle className="h-4 w-4" />
-              <span className="text-sm">{project.commentCount}</span>
+            <Button variant="ghost" size="sm" className="gap-1 h-7">
+              <MessageCircle className="h-3 w-3" />
+              <span className="text-xs">{project.commentCount}</span>
             </Button>
           </Link>
         </div>
@@ -270,39 +270,39 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
 function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
   const t = useTranslations();
   return (
-    <Card className="gap-3 py-4 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
-      <CardHeader className="px-4 pb-0">
-        <div className="flex items-center gap-3">
+    <Card className="gap-2 py-3 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
+      <CardHeader className="px-3 pb-0">
+        <div className="flex items-center gap-2">
           <Link href={`/profile/${log.project.user.id}`}>
-            <Avatar className="h-10 w-10 cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+            <Avatar className="h-8 w-8 cursor-pointer hover:ring-2 hover:ring-primary transition-all">
               <AvatarImage src={log.project.user.avatar || undefined} />
-              <AvatarFallback className="text-sm">
+              <AvatarFallback className="text-xs">
                 {log.project.user.name?.[0]?.toUpperCase() || "?"}
               </AvatarFallback>
             </Avatar>
           </Link>
           <div className="flex-1 min-w-0">
             <Link href={`/profile/${log.project.user.id}`}>
-              <p className="font-medium text-sm hover:text-primary transition-colors cursor-pointer">
+              <p className="font-medium text-xs hover:text-primary transition-colors cursor-pointer">
                 {log.project.user.name || "Anonymous"}
               </p>
             </Link>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-[10px] text-muted-foreground">
               {t("community.activity.updatedProgress")} • {format(new Date(createdAt), "dd.MM.yyyy")}
             </p>
           </div>
-          <Badge variant="secondary" className="gap-1 text-xs">
-            <ImageIcon className="h-3 w-3" />
+          <Badge variant="secondary" className="gap-1 text-[10px] px-2 py-0.5">
+            <ImageIcon className="h-2.5 w-2.5" />
             {t("community.tabs.updates")}
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className="px-4 pb-0">
+      <CardContent className="px-3 pb-0">
         <Link href={`/projects/${log.project.id}`} className="block group">
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             {/* Photo left */}
             {log.photoUrl && (
-              <div className="relative h-48 w-48 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
+              <div className="relative h-40 w-40 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
                 <Image
                   src={log.photoUrl}
                   alt="Progress photo"
@@ -314,24 +314,24 @@ function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
 
             {/* Content right */}
             <div className="flex-1 min-w-0">
-              <p className="text-sm text-muted-foreground mb-1.5">
+              <p className="text-xs text-muted-foreground mb-1">
                 on project:{" "}
                 <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                   {log.project.title}
                 </span>
               </p>
 
-              <div className="flex flex-wrap items-center gap-2 mb-2">
-                <Badge variant="outline" className="gap-1 text-xs bg-green-50 text-green-700 border-green-200">
+              <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+                <Badge variant="outline" className="gap-1 text-[10px] bg-green-50 text-green-700 border-green-200">
                   +{log.dailyStitches.toLocaleString()}
                 </Badge>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-[10px] text-muted-foreground">
                   {t("logs.fields.total")}: {log.totalStitches.toLocaleString()}
                 </span>
               </div>
 
               {log.notes && (
-                <p className="text-sm text-muted-foreground line-clamp-2">
+                <p className="text-xs text-muted-foreground line-clamp-2">
                   {log.notes}
                 </p>
               )}
@@ -339,7 +339,7 @@ function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
           </div>
         </Link>
 
-        <div className="flex items-center gap-1 pt-2 border-t mt-3">
+        <div className="flex items-center gap-1 pt-1.5 border-t mt-2">
           <LikeButton projectId={log.project.id} variant="ghost" size="sm" />
         </div>
       </CardContent>

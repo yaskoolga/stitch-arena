@@ -61,14 +61,14 @@ export function ProjectCard({
             <Image src={imageSrc} alt={title} fill className="object-cover" />
           </div>
         )}
-        <CardHeader className="pb-2">
+        <CardHeader className="pb-1.5 px-3 pt-3">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">{title}</CardTitle>
-            <div className="flex items-center gap-2">
+            <CardTitle className="text-base">{title}</CardTitle>
+            <div className="flex items-center gap-1.5">
               {avgSpeed > 0 && (
                 <SpeedBadge avgStitchesPerDay={avgSpeed} size="sm" />
               )}
-              <Badge variant={status === "completed" ? "default" : "secondary"}>
+              <Badge variant={status === "completed" ? "default" : "secondary"} className="text-[10px] px-2 py-0.5">
                 {status === "in_progress" ? t("projects.status.inProgress") : status === "completed" ? t("projects.status.completed") : t("projects.status.paused")}
               </Badge>
             </div>
@@ -76,34 +76,34 @@ export function ProjectCard({
 
           {/* Theme tags */}
           {themes && themes.length > 0 && (
-            <div className="flex flex-wrap gap-1 mt-2">
+            <div className="flex flex-wrap gap-1 mt-1.5">
               {themes.slice(0, 3).map((theme) => (
-                <Badge key={theme} variant="outline" className="text-xs">
+                <Badge key={theme} variant="outline" className="text-[10px]">
                   {theme}
                 </Badge>
               ))}
               {themes.length > 3 && (
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="outline" className="text-[10px]">
                   +{themes.length - 3}
                 </Badge>
               )}
             </div>
           )}
         </CardHeader>
-        <CardContent>
-          {canvasType && <p className="mb-2 text-sm text-muted-foreground">{canvasType}</p>}
-          <div className="space-y-1">
-            <div className="flex justify-between text-sm">
+        <CardContent className="px-3 pb-3">
+          {canvasType && <p className="mb-1.5 text-xs text-muted-foreground">{canvasType}</p>}
+          <div className="space-y-0.5">
+            <div className="flex justify-between text-xs">
               <span>{safeCompletedStitches.toLocaleString()} / {safeTotalStitches.toLocaleString()}</span>
               <span>{pct}%</span>
             </div>
-            <Progress value={pct} />
+            <Progress value={pct} className="h-1.5" />
           </div>
 
           {/* Forecast completion date */}
           {forecastDate && (
-            <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
-              <Calendar className="h-3 w-3" />
+            <div className="flex items-center gap-1 mt-1.5 text-[10px] text-muted-foreground">
+              <Calendar className="h-2.5 w-2.5" />
               <span>{t("projects.progress.estDaysLeft")}: {format(forecastDate, "MMM d, yyyy")}</span>
             </div>
           )}
@@ -113,14 +113,14 @@ export function ProjectCard({
         <Button
           variant="ghost"
           size="sm"
-          className="absolute top-2 right-2 h-7 w-7 p-0 text-muted-foreground/40 hover:text-destructive hover:bg-destructive/10 transition-colors opacity-0 group-hover:opacity-100"
+          className="absolute top-2 right-2 h-6 w-6 p-0 text-muted-foreground/40 hover:text-destructive hover:bg-destructive/10 transition-colors opacity-0 group-hover:opacity-100"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
             onDelete(id);
           }}
         >
-          <Trash2 className="h-3.5 w-3.5" />
+          <Trash2 className="h-3 w-3" />
         </Button>
       )}
     </Card>
