@@ -41,22 +41,22 @@ interface ActiveChallengesWidgetProps {
 export function ActiveChallengesWidget({ userId }: ActiveChallengesWidgetProps) {
   const t = useTranslations();
 
+  // Don't show widget for other users (only for own dashboard)
   // Fetch user's active challenges
   const { data: challenges, isLoading } = useQuery({
-    queryKey: ["active-challenges", userId],
+    queryKey: ["active-challenges"],
     queryFn: async () => {
-      const url = userId
-        ? `/api/challenges?userId=${userId}&status=active`
-        : `/api/challenges?status=active`;
-      const res = await fetch(url);
+      const res = await fetch(`/api/challenges?status=active`);
       if (!res.ok) throw new Error("Failed to fetch challenges");
       const json = await res.json();
-      return json.data as UserChallenge[];
+      return json.data as Challenge[];
     },
     staleTime: 2 * 60 * 1000, // 2 minutes
+    enabled: !userId, // Only fetch for own dashboard
   });
 
-  const userChallenges = challenges?.filter(c => c.leaderboard !== null) || [];
+  // For now, show empty state for challenges since we don't have user progress data
+  const userChallenges: UserChallenge[] = [];
 
   const getChallengeIcon = (type: string) => {
     switch (type) {
@@ -118,6 +118,11 @@ export function ActiveChallengesWidget({ userId }: ActiveChallengesWidgetProps) 
         ) : (
           <div className="space-y-3">
             {userChallenges.map((uc) => {
+              // Skip if challenge data is incomplete
+              if (!uc.challenge || !uc.challenge.targetValue) {
+                return null;
+              }
+
               const progressPercent = getProgressPercentage(
                 uc.currentProgress,
                 uc.challenge.targetValue
