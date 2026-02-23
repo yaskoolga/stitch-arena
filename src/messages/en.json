@@ -27,7 +27,9 @@
     "viewMore": "View More",
     "memberSince": "Member since",
     "uploading": "Uploading...",
-    "optional": "optional"
+    "optional": "optional",
+    "remove": "Remove",
+    "saving": "Saving..."
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -220,7 +222,10 @@
       },
       "formDescription": "Upload a photo for automatic counting, or enter the number manually",
       "uploadPhoto": "Photo of your work",
-      "uploadPhotoHint": "Upload a clear, well-lit photo for best AI detection results"
+      "uploadPhotoHint": "Upload a clear, well-lit photo for best AI detection results",
+      "processing": "Processing...",
+      "choosePhoto": "Choose Photo",
+      "changePhoto": "Change Photo"
     }
   },
   "logs": {
@@ -250,6 +255,7 @@
     "tip2": "Take photos in consistent lighting to see your progress",
     "tip3": "Add notes about what you worked on",
     "tip4": "Be honest with your stitch count - this is for you!",
+    "saveLog": "Save Log",
     "fields": {
       "date": "Date",
       "daily": "Daily",
@@ -258,7 +264,10 @@
       "notes": "Notes",
       "notesPlaceholder": "Any thoughts about today's session...",
       "progressPhotoAlt": "Progress photo",
-      "stitches": "stitches"
+      "stitches": "stitches",
+      "stitchesCompleted": "Stitches completed today",
+      "stitchesPlaceholder": "e.g. 250",
+      "previousTotal": "Previous total: {count} stitches"
     },
     "ai": {
       "detecting": "AI is detecting stitches...",

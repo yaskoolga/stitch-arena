@@ -27,7 +27,9 @@
     "viewMore": "Mehr anzeigen",
     "memberSince": "Mitglied seit",
     "uploading": "Hochladen...",
-    "optional": "optional"
+    "optional": "optional",
+    "remove": "Entfernen",
+    "saving": "Speichern..."
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -209,7 +211,10 @@
       },
       "formDescription": "Laden Sie ein Foto für automatische Zählung hoch oder geben Sie die Anzahl manuell ein",
       "uploadPhoto": "Foto Ihrer Arbeit",
-      "uploadPhotoHint": "Laden Sie ein klares, gut beleuchtetes Foto für beste KI-Erkennungsergebnisse hoch"
+      "uploadPhotoHint": "Laden Sie ein klares, gut beleuchtetes Foto für beste KI-Erkennungsergebnisse hoch",
+      "processing": "Verarbeitung...",
+      "choosePhoto": "Foto auswählen",
+      "changePhoto": "Foto ändern"
     }
   },
   "logs": {
@@ -239,6 +244,7 @@
     "tip2": "Machen Sie Fotos bei gleichmäßiger Beleuchtung",
     "tip3": "Fügen Sie Notizen hinzu, woran Sie gearbeitet haben",
     "tip4": "Seien Sie ehrlich mit Ihrer Stichzahl - das ist für Sie!",
+    "saveLog": "Eintrag speichern",
     "fields": {
       "date": "Datum",
       "daily": "Täglich",
@@ -247,7 +253,10 @@
       "notes": "Notizen",
       "notesPlaceholder": "Gedanken zur heutigen Sitzung...",
       "progressPhotoAlt": "Fortschrittsfoto",
-      "stitches": "Stiche"
+      "stitches": "Stiche",
+      "stitchesCompleted": "Heute fertiggestellte Stiche",
+      "stitchesPlaceholder": "z.B. 250",
+      "previousTotal": "Vorheriges Gesamt: {count} Stiche"
     },
     "ai": {
       "detecting": "KI erkennt Stiche...",

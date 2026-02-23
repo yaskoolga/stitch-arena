@@ -27,7 +27,9 @@
     "viewMore": "Ver más",
     "memberSince": "Miembro desde",
     "uploading": "Subiendo...",
-    "optional": "opcional"
+    "optional": "opcional",
+    "remove": "Eliminar",
+    "saving": "Guardando..."
   },
   "nav": {
     "dashboard": "Panel",
@@ -209,7 +211,10 @@
       },
       "formDescription": "Sube una foto para conteo automático o ingresa el número manualmente",
       "uploadPhoto": "Foto de tu trabajo",
-      "uploadPhotoHint": "Sube una foto clara y bien iluminada para mejores resultados de detección IA"
+      "uploadPhotoHint": "Sube una foto clara y bien iluminada para mejores resultados de detección IA",
+      "processing": "Procesando...",
+      "choosePhoto": "Elegir foto",
+      "changePhoto": "Cambiar foto"
     }
   },
   "logs": {
@@ -239,6 +244,7 @@
     "tip2": "Toma fotos con iluminación consistente",
     "tip3": "Añade notas sobre lo que trabajaste",
     "tip4": "Sé honesto con tu cuenta de puntadas - ¡es para ti!",
+    "saveLog": "Guardar registro",
     "fields": {
       "date": "Fecha",
       "daily": "Diario",
@@ -247,7 +253,10 @@
       "notes": "Notas",
       "notesPlaceholder": "Pensamientos sobre la sesión de hoy...",
       "progressPhotoAlt": "Foto de progreso",
-      "stitches": "puntadas"
+      "stitches": "puntadas",
+      "stitchesCompleted": "Puntadas completadas hoy",
+      "stitchesPlaceholder": "ej. 250",
+      "previousTotal": "Total anterior: {count} puntadas"
     },
     "ai": {
       "detecting": "La IA está detectando puntadas...",

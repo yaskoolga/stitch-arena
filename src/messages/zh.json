@@ -27,7 +27,9 @@
     "viewMore": "查看更多",
     "memberSince": "加入时间",
     "uploading": "上传中...",
-    "optional": "可选"
+    "optional": "可选",
+    "remove": "删除",
+    "saving": "保存中..."
   },
   "nav": {
     "dashboard": "控制面板",
@@ -209,7 +211,10 @@
       },
       "formDescription": "上传照片进行自动计数，或手动输入数量",
       "uploadPhoto": "您的作品照片",
-      "uploadPhotoHint": "上传清晰、光线充足的照片以获得最佳AI检测结果"
+      "uploadPhotoHint": "上传清晰、光线充足的照片以获得最佳AI检测结果",
+      "processing": "处理中...",
+      "choosePhoto": "选择照片",
+      "changePhoto": "更换照片"
     }
   },
   "logs": {
@@ -239,6 +244,7 @@
     "tip2": "在一致的光线下拍照以查看进度",
     "tip3": "添加关于工作内容的备注",
     "tip4": "对针数要诚实 - 这是为您自己！",
+    "saveLog": "保存记录",
     "fields": {
       "date": "日期",
       "daily": "每日",
@@ -247,7 +253,10 @@
       "notes": "备注",
       "notesPlaceholder": "关于今天工作的想法...",
       "progressPhotoAlt": "进度照片",
-      "stitches": "针"
+      "stitches": "针",
+      "stitchesCompleted": "今日完成针数",
+      "stitchesPlaceholder": "例如 250",
+      "previousTotal": "上次总计: {count} 针"
     },
     "ai": {
       "detecting": "AI 正在识别针数...",

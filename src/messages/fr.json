@@ -209,7 +209,10 @@
       },
       "formDescription": "Téléchargez une photo pour le comptage automatique ou saisissez le nombre manuellement",
       "uploadPhoto": "Photo de votre travail",
-      "uploadPhotoHint": "Téléchargez une photo claire et bien éclairée pour de meilleurs résultats de détection IA"
+      "uploadPhotoHint": "Téléchargez une photo claire et bien éclairée pour de meilleurs résultats de détection IA",
+      "processing": "Traitement...",
+      "choosePhoto": "Choisir une photo",
+      "changePhoto": "Changer la photo"
     }
   },
   "logs": {
@@ -239,6 +242,7 @@
     "tip2": "Prenez des photos avec un éclairage constant",
     "tip3": "Ajoutez des notes sur ce que vous avez fait",
     "tip4": "Soyez honnête avec votre compte de points - c'est pour vous !",
+    "saveLog": "Enregistrer l'entrée",
     "fields": {
       "date": "Date",
       "daily": "Quotidien",
@@ -247,7 +251,10 @@
       "notes": "Notes",
       "notesPlaceholder": "Vos pensées sur la session d'aujourd'hui...",
       "progressPhotoAlt": "Photo de progression",
-      "stitches": "points"
+      "stitches": "points",
+      "stitchesCompleted": "Points complétés aujourd'hui",
+      "stitchesPlaceholder": "par ex. 250",
+      "previousTotal": "Total précédent: {count} points"
     },
     "ai": {
       "detecting": "L'IA détecte les points...",

@@ -189,7 +189,7 @@ export function DailyLogForm({
         <CardContent className="space-y-4">
           {/* Date */}
           <div>
-            <Label htmlFor="date">Date</Label>
+            <Label htmlFor="date">{t("logs.fields.date")}</Label>
             <Input
               id="date"
               name="date"
@@ -199,10 +199,68 @@ export function DailyLogForm({
             />
           </div>
 
+          {/* Photo Upload */}
+          <div>
+            <Label htmlFor="photo">{t("projects.ai.uploadPhoto")}</Label>
+            <p className="text-xs text-muted-foreground mb-2">
+              {t("projects.ai.uploadPhotoHint")}
+            </p>
+            <div className="flex items-center gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                disabled={uploading || isDetecting}
+                onClick={() => document.getElementById('photo')?.click()}
+                className="gap-2"
+              >
+                <Upload className="h-4 w-4" />
+                {uploading || isDetecting
+                  ? t("projects.ai.processing")
+                  : photoUrl
+                  ? t("projects.ai.changePhoto")
+                  : t("projects.ai.choosePhoto")}
+              </Button>
+              {photoUrl && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setPhotoUrl("")}
+                >
+                  {t("common.remove")}
+                </Button>
+              )}
+            </div>
+            <input
+              id="photo"
+              type="file"
+              accept="image/*"
+              onChange={handlePhotoUpload}
+              disabled={uploading || isDetecting}
+              className="hidden"
+            />
+            {(uploading || isDetecting) && (
+              <p className="text-sm text-muted-foreground mt-2 flex items-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                {uploading ? t("common.uploading") : t("projects.ai.detecting")}
+              </p>
+            )}
+            {photoUrl && (
+              <div className="mt-3 relative aspect-video w-full max-w-sm overflow-hidden rounded-md border">
+                <Image
+                  src={photoUrl}
+                  alt={t("logs.fields.progressPhotoAlt")}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
+          </div>
+
           {/* Daily Stitches */}
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <Label htmlFor="dailyStitches">Stitches completed today</Label>
+              <Label htmlFor="dailyStitches">{t("logs.fields.stitchesCompleted")}</Label>
               {isDetecting && (
                 <Badge variant="secondary" className="gap-1">
                   <Loader2 className="h-3 w-3 animate-spin" />
@@ -235,68 +293,16 @@ export function DailyLogForm({
               type="number"
               min={0}
               required
-              placeholder="e.g. 250"
+              placeholder={t("logs.fields.stitchesPlaceholder")}
               value={dailyStitches}
               onChange={handleStitchChange}
             />
             {previousLog && (
               <p className="text-sm text-muted-foreground mt-1">
-                Previous total: {previousLog.totalStitches.toLocaleString()} stitches
+                {t("logs.fields.previousTotal", {
+                  count: previousLog.totalStitches.toLocaleString()
+                })}
               </p>
-            )}
-          </div>
-
-          {/* Photo Upload */}
-          <div>
-            <Label htmlFor="photo">{t("projects.ai.uploadPhoto")}</Label>
-            <p className="text-xs text-muted-foreground mb-2">
-              {t("projects.ai.uploadPhotoHint")}
-            </p>
-            <div className="flex items-center gap-3">
-              <Button
-                type="button"
-                variant="outline"
-                disabled={uploading || isDetecting}
-                onClick={() => document.getElementById('photo')?.click()}
-                className="gap-2"
-              >
-                <Upload className="h-4 w-4" />
-                {uploading || isDetecting ? "Processing..." : photoUrl ? "Change Photo" : "Choose Photo"}
-              </Button>
-              {photoUrl && (
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setPhotoUrl("")}
-                >
-                  Remove
-                </Button>
-              )}
-            </div>
-            <input
-              id="photo"
-              type="file"
-              accept="image/*"
-              onChange={handlePhotoUpload}
-              disabled={uploading || isDetecting}
-              className="hidden"
-            />
-            {(uploading || isDetecting) && (
-              <p className="text-sm text-muted-foreground mt-2 flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                {uploading ? "Uploading..." : t("projects.ai.detecting")}
-              </p>
-            )}
-            {photoUrl && (
-              <div className="mt-3 relative aspect-video w-full max-w-sm overflow-hidden rounded-md border">
-                <Image
-                  src={photoUrl}
-                  alt={t("logs.fields.progressPhotoAlt")}
-                  fill
-                  className="object-cover"
-                />
-              </div>
             )}
           </div>
 
@@ -322,10 +328,10 @@ export function DailyLogForm({
           {saving ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin mr-2" />
-              Saving...
+              {t("common.saving")}
             </>
           ) : (
-            "Save Log"
+            t("logs.saveLog")
           )}
         </Button>
         <Button
@@ -334,7 +340,7 @@ export function DailyLogForm({
           onClick={() => router.back()}
           disabled={saving || isDetecting}
         >
-          Cancel
+          {t("common.cancel")}
         </Button>
       </div>
     </form>
