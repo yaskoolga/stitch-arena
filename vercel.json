@@ -1,0 +1,16 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/challenges/generate",
+      "schedule": "0 0 * * 1"
+    },
+    {
+      "path": "/api/cron/challenges/close",
+      "schedule": "0 1 * * *"
+    },
+    {
+      "path": "/api/cron/challenges/update-leaderboards",
+      "schedule": "*/5 * * * *"
+    }
+  ]
+}
