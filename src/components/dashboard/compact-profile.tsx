@@ -87,7 +87,9 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
               <p className="text-sm font-semibold truncate group-hover:text-primary transition-colors">
                 {user.name || "Anonymous"}
               </p>
-              <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
+              {isOwn && (
+                <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
+              )}
               <div className="flex items-center gap-1 mt-0.5">
                 <Calendar className="h-2.5 w-2.5 text-muted-foreground" />
                 <span className="text-[9px] text-muted-foreground">
