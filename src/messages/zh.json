@@ -200,7 +200,16 @@
       "corrected": "已手动修正",
       "lowConfidence": "低置信度 - 请验证",
       "serviceError": "自动检测不可用",
-      "fallbackManual": "请手动输入"
+      "fallbackManual": "请手动输入",
+      "howItWorks": {
+        "title": "自动针数检测工作原理：",
+        "step1": "上传您的十字绣作品照片",
+        "step2": "AI将分析图像并计数针数（约2-5秒）",
+        "step3": "如果置信度高（≥50%），计数将自动填充。您始终可以手动调整"
+      },
+      "formDescription": "上传照片进行自动计数，或手动输入数量",
+      "uploadPhoto": "您的作品照片",
+      "uploadPhotoHint": "上传清晰、光线充足的照片以获得最佳AI检测结果"
     }
   },
   "logs": {

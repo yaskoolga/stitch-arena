@@ -211,7 +211,16 @@
       "corrected": "Manually corrected",
       "lowConfidence": "Low confidence - please verify",
       "serviceError": "Auto-detection unavailable",
-      "fallbackManual": "Please enter count manually"
+      "fallbackManual": "Please enter count manually",
+      "howItWorks": {
+        "title": "How automatic stitch detection works:",
+        "step1": "Upload a photo of your cross-stitch work",
+        "step2": "AI will analyze the image and count stitches (~2-5 seconds)",
+        "step3": "If confidence is high (≥50%), the count will auto-fill. You can always adjust it manually"
+      },
+      "formDescription": "Upload a photo for automatic counting, or enter the number manually",
+      "uploadPhoto": "Photo of your work",
+      "uploadPhotoHint": "Upload a clear, well-lit photo for best AI detection results"
     }
   },
   "logs": {

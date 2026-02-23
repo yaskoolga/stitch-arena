@@ -200,7 +200,16 @@
       "corrected": "Manuell korrigiert",
       "lowConfidence": "Geringe Sicherheit - bitte überprüfen",
       "serviceError": "Auto-Erkennung nicht verfügbar",
-      "fallbackManual": "Bitte manuell eingeben"
+      "fallbackManual": "Bitte manuell eingeben",
+      "howItWorks": {
+        "title": "So funktioniert die automatische Stickerkennung:",
+        "step1": "Laden Sie ein Foto Ihrer Kreuzsticharbeit hoch",
+        "step2": "KI analysiert das Bild und zählt Stiche (~2-5 Sekunden)",
+        "step3": "Bei hoher Sicherheit (≥50%) wird die Anzahl automatisch ausgefüllt. Sie können sie jederzeit manuell anpassen"
+      },
+      "formDescription": "Laden Sie ein Foto für automatische Zählung hoch oder geben Sie die Anzahl manuell ein",
+      "uploadPhoto": "Foto Ihrer Arbeit",
+      "uploadPhotoHint": "Laden Sie ein klares, gut beleuchtetes Foto für beste KI-Erkennungsergebnisse hoch"
     }
   },
   "logs": {

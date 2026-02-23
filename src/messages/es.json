@@ -200,7 +200,16 @@
       "corrected": "Corregido manualmente",
       "lowConfidence": "Baja confianza - por favor verifique",
       "serviceError": "Detección automática no disponible",
-      "fallbackManual": "Por favor ingrese manualmente"
+      "fallbackManual": "Por favor ingrese manualmente",
+      "howItWorks": {
+        "title": "Cómo funciona la detección automática de puntadas:",
+        "step1": "Sube una foto de tu trabajo de punto de cruz",
+        "step2": "La IA analizará la imagen y contará las puntadas (~2-5 segundos)",
+        "step3": "Si la confianza es alta (≥50%), el recuento se completará automáticamente. Siempre puedes ajustarlo manualmente"
+      },
+      "formDescription": "Sube una foto para conteo automático o ingresa el número manualmente",
+      "uploadPhoto": "Foto de tu trabajo",
+      "uploadPhotoHint": "Sube una foto clara y bien iluminada para mejores resultados de detección IA"
     }
   },
   "logs": {

@@ -200,7 +200,16 @@
       "corrected": "Corrigé manuellement",
       "lowConfidence": "Faible confiance - veuillez vérifier",
       "serviceError": "Détection automatique indisponible",
-      "fallbackManual": "Veuillez saisir manuellement"
+      "fallbackManual": "Veuillez saisir manuellement",
+      "howItWorks": {
+        "title": "Comment fonctionne la détection automatique des points:",
+        "step1": "Téléchargez une photo de votre broderie au point de croix",
+        "step2": "L'IA analysera l'image et comptera les points (~2-5 secondes)",
+        "step3": "Si la confiance est élevée (≥50%), le nombre sera rempli automatiquement. Vous pouvez toujours l'ajuster manuellement"
+      },
+      "formDescription": "Téléchargez une photo pour le comptage automatique ou saisissez le nombre manuellement",
+      "uploadPhoto": "Photo de votre travail",
+      "uploadPhotoHint": "Téléchargez une photo claire et bien éclairée pour de meilleurs résultats de détection IA"
     }
   },
   "logs": {

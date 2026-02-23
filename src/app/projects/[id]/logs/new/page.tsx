@@ -104,44 +104,6 @@ export default function AddDailyLogPage() {
         </div>
       </div>
 
-      {/* Project Progress Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('currentProgress')}</CardTitle>
-          <CardDescription>{t('currentProgressDesc')}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <p className="text-2xl font-bold">{project.totalStitches.toLocaleString()}</p>
-              <p className="text-sm text-muted-foreground">{t('totalStitches')}</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-green-600">
-                {project.completedStitches.toLocaleString()}
-              </p>
-              <p className="text-sm text-muted-foreground">{t('completed')}</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold">
-                {Math.round((project.completedStitches / project.totalStitches) * 100)}%
-              </p>
-              <p className="text-sm text-muted-foreground">{t('progressPercent')}</p>
-            </div>
-          </div>
-          {latestLog && (
-            <div className="mt-4 pt-4 border-t">
-              <p className="text-sm text-muted-foreground">
-                {t('lastLogged')} <span className="font-medium">{latestLog.totalStitches.toLocaleString()}</span> {t('stitchesTotal')}
-                {latestLog.dailyStitches > 0 && (
-                  <span className="text-green-600"> (+{latestLog.dailyStitches.toLocaleString()} {t('newStitches')})</span>
-                )}
-              </p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
       {/* Daily Log Form */}
       <DailyLogForm
         projectId={id}

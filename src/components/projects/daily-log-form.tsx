@@ -158,11 +158,32 @@ export function DailyLogForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* AI Detection Info Banner */}
+      <Card className="border-primary/50 bg-primary/5">
+        <CardContent className="pt-4 pb-4">
+          <div className="flex gap-3">
+            <div className="flex-shrink-0 mt-0.5">
+              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-lg">🤖</span>
+              </div>
+            </div>
+            <div className="flex-1 space-y-2">
+              <p className="font-medium text-sm">{t("projects.ai.howItWorks.title")}</p>
+              <ul className="text-xs text-muted-foreground space-y-1">
+                <li>• {t("projects.ai.howItWorks.step1")}</li>
+                <li>• {t("projects.ai.howItWorks.step2")}</li>
+                <li>• {t("projects.ai.howItWorks.step3")}</li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       <Card>
         <CardHeader>
-          <CardTitle>Daily Progress</CardTitle>
+          <CardTitle>{t("logs.addDailyLog")}</CardTitle>
           <CardDescription>
-            Enter the number of stitches you completed today
+            {t("projects.ai.formDescription")}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -227,9 +248,9 @@ export function DailyLogForm({
 
           {/* Photo Upload */}
           <div>
-            <Label htmlFor="photo">Photo (optional)</Label>
+            <Label htmlFor="photo">{t("projects.ai.uploadPhoto")}</Label>
             <p className="text-xs text-muted-foreground mb-2">
-              Upload a photo of your progress
+              {t("projects.ai.uploadPhotoHint")}
             </p>
             <div className="flex items-center gap-3">
               <Button
