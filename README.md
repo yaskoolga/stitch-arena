@@ -13,11 +13,14 @@
 - ⏱️ **Completion Forecast** — Прогноз даты завершения проекта
 
 ### 🎮 Gamification
-- 🏆 **17 Achievements** — Достижения по 6 категориям (First Steps, Consistency, Speed Demon, Completionist, Social Butterfly, Milestones)
+- 🏆 **20 Achievements** — Достижения по 7 категориям (First Steps, Consistency, Speed Demon, Completionist, Social Butterfly, Milestones, Challenges)
 - 🚀 **Speed Tiers** — 4 уровня скорости (🐢 Turtle, 🚴 Bike, 🚗 Car, 🚀 Rocket)
 - 📊 **Progress Tracking** — Отслеживание прогресса по каждому достижению
 - 🏆 **Challenges** — Челленджи на скорость/серию/завершение с лидербордами
 - 👥 **User-Created Challenges** — Создание своих челленджей (требования: 30+ дней аккаунт, 7+ дней серия)
+- 🎮 **Challenge Achievements** — 3 новых достижения: Challenge Accepted, Podium Finish, Champion
+- 📊 **Active Challenges Widget** — Виджет с активными челленджами на Dashboard
+- 🤖 **Automated Challenges** — Автоматическая генерация еженедельных челленджей (Vercel Cron)
 
 ### 🌈 Project Management
 - 🏭 **Manufacturer** — Справочник производителей схем (DMC, Dimensions, RIOLIS и др.)
@@ -26,6 +29,7 @@
 - 📸 **Image Upload** — Загрузка и оптимизация фото (WebP, thumbnails)
 - 🔍 **Image Viewer** — Модальное окно для просмотра фото
 - 🗑️ **Quick Delete** — Удаление проектов прямо из Dashboard
+- 📤 **Data Export** — Экспорт данных проекта в CSV/JSON/TXT форматах
 
 ### 👥 Social Features
 - ❤️ **Likes** — Лайкайте понравившиеся проекты
@@ -115,6 +119,9 @@ NEXTAUTH_URL="http://localhost:3000"
 
 # CV Service (optional)
 CV_SERVICE_URL="http://localhost:8001"
+
+# Cron Jobs (for automated challenges)
+CRON_SECRET="your-cron-secret-here"
 ```
 
 ## Структура проекта
@@ -178,7 +185,6 @@ prisma/
 | PUT | `/api/projects/[id]` | Обновить проект (с темами) |
 | DELETE | `/api/projects/[id]` | Удалить проект |
 | GET | `/api/projects/public` | Публичные проекты (с фильтрацией по темам) |
-| GET | `/api/projects/[id]/export` | Экспорт в CSV |
 
 #### 📝 Logs
 | Method | Path | Описание |
@@ -205,6 +211,22 @@ prisma/
 | POST | `/api/projects/[id]/like` | Toggle лайк |
 | GET | `/api/favorites` | Список избранных проектов |
 | GET | `/api/feed` | Лента активности (type: all/projects/logs) |
+
+#### 🏆 Challenges
+| Method | Path | Описание |
+|--------|------|----------|
+| GET | `/api/challenges` | Список челленджей (с фильтрацией) |
+| POST | `/api/challenges` | Создать челлендж |
+| GET | `/api/challenges/[id]` | Детали челленджа |
+| POST | `/api/challenges/[id]/join` | Присоединиться/покинуть челлендж |
+| GET | `/api/challenges/[id]/leaderboard` | Лидерборд челленджа |
+
+#### 🤖 Cron Jobs (Automated)
+| Method | Path | Описание | Schedule |
+|--------|------|----------|----------|
+| GET | `/api/cron/challenges/generate` | Генерация новых челленджей | Пн 00:00 |
+| GET | `/api/cron/challenges/close` | Закрытие завершённых | Ежедневно 01:00 |
+| GET | `/api/cron/challenges/update-leaderboards` | Обновление лидербордов | Каждые 5 мин |
 
 #### 👤 Profile & Other
 | Method | Path | Описание |
@@ -253,6 +275,7 @@ pytest --cov=app tests/   # с покрытием
 
 - **[FEATURES.md](FEATURES.md)** — Полный список функций
 - **[CHANGELOG.md](CHANGELOG.md)** — История изменений
+- **[CRON_JOBS.md](CRON_JOBS.md)** — Документация по автоматическим задачам
 - **[FUTURE_FEATURES.md](FUTURE_FEATURES.md)** — Roadmap и будущие функции
 - **[PROGRESS.md](PROGRESS.md)** — История разработки и прогресс
 - **[CV_SERVICE_SETUP.md](CV_SERVICE_SETUP.md)** — Настройка CV-сервиса
@@ -288,8 +311,12 @@ docker run -p 8001:8001 stitch-arena-cv
 - ✅ **Phase 2D**: Manual tracking (simplified daily log form)
 - ✅ **Phase 3A**: Advanced Statistics (overall stats, heatmap, streaks, completion forecast)
 - ✅ **Phase 3B**: Themes & Tags (12 theme categories, filtering)
-- ✅ **Phase 3C**: Gamification (17 achievements, 4 speed tiers, progress tracking)
-- ✅ **Phase 3D**: Social Features (comments, likes, favorites, community feed) 🎉
+- ✅ **Phase 3C**: Gamification (20 achievements, 4 speed tiers, progress tracking, challenge achievements)
+- ✅ **Phase 3D**: Social Features (comments, likes, favorites, community feed)
+- ✅ **Phase 3E**: Challenges Enhancement (automated generation, active challenges widget, data export) 🎉
+
+### Current Version
+- 📦 **v0.7.0** — Challenge System Enhancements (Feb 2026)
 
 ### In Progress
 - ⏳ **Phase 4**: Testing & CI/CD (e2e tests, automated deployment)

@@ -6,6 +6,104 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-02-23
+
+### ✨ Added - Challenge System Enhancements & Data Export
+
+#### Challenge Achievements
+- **3 New Achievements** for the challenges system:
+  - 🎮 **Challenge Accepted** (Bronze) - Join your first challenge
+  - 🥉 **Podium Finish** (Silver) - Finish in top 3 of a challenge
+  - 🏆 **Champion** (Gold) - Win a challenge (1st place)
+- Automatic achievement awarding when challenges end
+- Integration with existing achievement system (checkAchievements, unlockAchievements)
+
+#### Automated Challenge Management (Vercel Cron)
+- **Auto-generate Challenges** (Every Monday 00:00 UTC)
+  - Creates 2-3 weekly challenges (Speed, Streak, Completion)
+  - Prevents duplicate generation
+  - Configurable challenge templates
+- **Auto-close Challenges** (Daily 01:00 UTC)
+  - Closes finished challenges
+  - Awards achievements to winners and top-3 finishers
+  - Sets isActive to false
+- **Auto-update Leaderboards** (Every 5 minutes)
+  - Recalculates progress for all active challenges
+  - Updates participant progress and rankings
+  - Handles rank ties correctly
+- **Security**: CRON_SECRET environment variable for authorization
+- **Documentation**: Comprehensive CRON_JOBS.md guide
+
+#### Active Challenges Widget
+- **Dashboard Widget** showing user's active challenges:
+  - Challenge title and type (Speed/Streak/Completion)
+  - Current progress with progress bar
+  - Leaderboard position (badge highlighted for top-3)
+  - Direct links to challenge detail pages
+- **Empty State** with call-to-action to browse challenges
+- **Compact Design** matching other dashboard cards
+
+#### Data Export
+- **CSV Export** - Structured log data:
+  - Columns: Date, Daily Stitches, Total Stitches, Time Spent, Notes, Photo URL
+  - Proper CSV escaping for quotes and special characters
+  - Downloads as `{project_title}_logs.csv`
+- **Text Summary Export** - Human-readable project summary:
+  - Project details (title, description, manufacturer)
+  - Statistics (total logs, avg stitches/day, date range)
+  - Full log history with dates and counts
+  - Downloads as `{project_title}_summary.txt`
+- **JSON Export** - Complete structured data:
+  - Project metadata and all logs
+  - Export timestamp
+  - Photo presence flags
+  - Downloads as `{project_title}_data.json`
+- **Export Button** in project header (dropdown menu)
+- Client-side export (no server processing)
+- Success/error toast notifications
+
+### 🌍 Internationalization
+- Added translations for all new features (6 languages: en/ru/de/fr/es/zh):
+  - Challenge achievements (categories, names, descriptions)
+  - Active challenges widget (title, description, empty state)
+  - Export functionality (button labels, success/error messages)
+
+### 🐛 Fixes
+- Fixed TypeScript error in public projects route (removed unsupported mode: "insensitive" for SQLite)
+- Fixed TypeScript error in dashboard page (proper type casting for calculate6MonthAverage)
+- Fixed missing useTranslations import in daily-log-form component
+
+### 📚 Documentation
+- Added `CRON_JOBS.md` - Comprehensive cron jobs documentation:
+  - Setup instructions (CRON_SECRET)
+  - Detailed description of all 3 cron jobs
+  - Testing guide (local and production)
+  - Troubleshooting section
+  - Security best practices
+- Updated `README.md`:
+  - Achievement count: 17 → 20
+  - Added Challenges category (7 categories total)
+  - Added cron jobs API endpoints table
+  - Added CRON_SECRET to environment variables
+  - Updated project status to v0.7.0
+- Updated `FEATURES.md` with new features
+
+### 📊 Statistics
+- **Total Achievements**: 20 (was 17)
+- **Achievement Categories**: 7 (added Challenges)
+- **Cron Jobs**: 3 automated tasks
+- **Export Formats**: 3 (CSV, TXT, JSON)
+- **Files Changed**: 37 files
+- **Lines Added**: ~1,400
+- **Commits**: 4 feature commits
+
+### 🚀 Deployment Notes
+- Set `CRON_SECRET` environment variable in Vercel
+- Cron jobs will start automatically after deployment
+- Monitor cron job execution in Vercel Dashboard → Cron Jobs
+
+---
+
 ## [0.5.2] - 2026-02-21
 
 ### Added - Улучшенная галерея с фильтрами и переводами 🎨
