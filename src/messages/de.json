@@ -130,6 +130,13 @@
       "topProjects": "Top 5 Projekte nach Fortschritt",
       "stitches": "Stiche",
       "failedToLoad": "Statistiken konnten nicht geladen werden"
+    },
+    "activeChallenges": {
+      "title": "Aktive Herausforderungen",
+      "description": "Fortschritt bei aktuellen Herausforderungen",
+      "empty": "Sie nehmen an keinen Herausforderungen teil",
+      "browse": "Herausforderungen durchsuchen",
+      "progress": "Fortschritt"
     }
   },
   "projects": {

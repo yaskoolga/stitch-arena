@@ -15,6 +15,7 @@ import { ConfirmDialog } from "@/components/confirm-dialog";
 import { CompactProfile } from "@/components/dashboard/compact-profile";
 import { CompactStats } from "@/components/dashboard/compact-stats";
 import { ActivityHeatmapCard } from "@/components/dashboard/activity-heatmap-card";
+import { ActiveChallengesWidget } from "@/components/dashboard/active-challenges-widget";
 import { calculate6MonthAverage } from "@/lib/stats";
 import { Plus, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -133,6 +134,11 @@ export default function DashboardPage({ params }: DashboardPageProps) {
       {/* Компактная статистика */}
       <div className="mb-3">
         <CompactStats userId={isOwnDashboard ? undefined : targetUserId} />
+      </div>
+
+      {/* Active Challenges Widget */}
+      <div className="mb-4">
+        <ActiveChallengesWidget userId={isOwnDashboard ? undefined : targetUserId} />
       </div>
 
       <ConfirmDialog

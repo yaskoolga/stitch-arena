@@ -130,6 +130,13 @@
       "topProjects": "进度前5项目",
       "stitches": "针",
       "failedToLoad": "加载统计信息失败"
+    },
+    "activeChallenges": {
+      "title": "进行中的挑战",
+      "description": "当前挑战进度",
+      "empty": "您没有参加任何挑战",
+      "browse": "浏览挑战",
+      "progress": "进度"
     }
   },
   "projects": {

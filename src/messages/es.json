@@ -130,6 +130,13 @@
       "topProjects": "Top 5 proyectos por progreso",
       "stitches": "puntadas",
       "failedToLoad": "Error al cargar estadísticas"
+    },
+    "activeChallenges": {
+      "title": "Desafíos activos",
+      "description": "Tu progreso en desafíos actuales",
+      "empty": "No estás participando en ningún desafío",
+      "browse": "Explorar desafíos",
+      "progress": "Progreso"
     }
   },
   "projects": {
