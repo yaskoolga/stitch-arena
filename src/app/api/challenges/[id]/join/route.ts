@@ -65,6 +65,10 @@ export async function POST(
 
       const participation = await joinChallenge(session.user.id, challengeId);
 
+      // Unlock achievements (FIRST_CHALLENGE)
+      const { unlockAchievements } = await import("@/lib/achievements");
+      await unlockAchievements(session.user.id);
+
       return NextResponse.json({
         data: participation,
         message: "Successfully joined challenge",

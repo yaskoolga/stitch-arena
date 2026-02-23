@@ -223,7 +223,33 @@ export const ACHIEVEMENTS = {
     category: 'social',
     requirement: 1,
   },
+
+  // Challenges
+  FIRST_CHALLENGE: {
+    id: 'first_challenge',
+    name: 'Challenge Accepted',
+    description: 'Join your first challenge',
+    emoji: '🎮',
+    category: 'challenges',
+    requirement: 1,
+  },
+  CHALLENGE_PODIUM: {
+    id: 'challenge_podium',
+    name: 'Podium Finish',
+    description: 'Finish in top 3 of a challenge',
+    emoji: '🥉',
+    category: 'challenges',
+    requirement: 1,
+  },
+  CHALLENGE_WINNER: {
+    id: 'challenge_winner',
+    name: 'Champion',
+    description: 'Win a challenge (1st place)',
+    emoji: '🏆',
+    category: 'challenges',
+    requirement: 1,
+  },
 } as const;
 
 export type AchievementId = typeof ACHIEVEMENTS[keyof typeof ACHIEVEMENTS]['id'];
-export type AchievementCategory = 'projects' | 'stitches' | 'streaks' | 'logs' | 'speed' | 'social';
+export type AchievementCategory = 'projects' | 'stitches' | 'streaks' | 'logs' | 'speed' | 'social' | 'challenges';

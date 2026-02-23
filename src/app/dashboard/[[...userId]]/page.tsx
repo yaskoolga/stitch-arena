@@ -242,7 +242,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
         <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((p) => {
             const themes = p.themes ? JSON.parse(p.themes) : [];
-            const avgSpeed = p.logs ? calculate6MonthAverage(p.logs as DailyLog[]) : 0;
+            const avgSpeed = p.logs ? calculate6MonthAverage(p.logs as unknown as DailyLog[]) : 0;
 
             return (
               <ProjectCard

@@ -315,7 +315,8 @@
       "streaks": "Rachas",
       "logs": "Registros",
       "speed": "Velocidad",
-      "social": "Social"
+      "social": "Social",
+      "challenges": "Desafíos"
     },
     "list": {
       "first_project": {
@@ -377,6 +378,18 @@
       "first_public": {
         "name": "Haciéndose público",
         "description": "Haz público tu primer proyecto"
+      },
+      "first_challenge": {
+        "name": "Desafío aceptado",
+        "description": "Únete a tu primer desafío"
+      },
+      "challenge_podium": {
+        "name": "Puesto en el podio",
+        "description": "Termina en el top 3 de un desafío"
+      },
+      "challenge_winner": {
+        "name": "Campeón",
+        "description": "Gana un desafío (1er lugar)"
       }
     }
   },

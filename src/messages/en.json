@@ -326,7 +326,8 @@
       "streaks": "Streaks",
       "logs": "Logs",
       "speed": "Speed",
-      "social": "Social"
+      "social": "Social",
+      "challenges": "Challenges"
     },
     "list": {
       "first_project": {
@@ -388,6 +389,18 @@
       "first_public": {
         "name": "Going Public",
         "description": "Make your first project public"
+      },
+      "first_challenge": {
+        "name": "Challenge Accepted",
+        "description": "Join your first challenge"
+      },
+      "challenge_podium": {
+        "name": "Podium Finish",
+        "description": "Finish in top 3 of a challenge"
+      },
+      "challenge_winner": {
+        "name": "Champion",
+        "description": "Win a challenge (1st place)"
       }
     }
   },

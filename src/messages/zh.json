@@ -315,7 +315,8 @@
       "streaks": "连续",
       "logs": "记录",
       "speed": "速度",
-      "social": "社交"
+      "social": "社交",
+      "challenges": "挑战"
     },
     "list": {
       "first_project": {
@@ -377,6 +378,18 @@
       "first_public": {
         "name": "走向公开",
         "description": "将您的第一个项目设为公开"
+      },
+      "first_challenge": {
+        "name": "接受挑战",
+        "description": "加入您的第一个挑战"
+      },
+      "challenge_podium": {
+        "name": "登上领奖台",
+        "description": "在挑战中进入前3名"
+      },
+      "challenge_winner": {
+        "name": "冠军",
+        "description": "赢得挑战（第1名）"
       }
     }
   },

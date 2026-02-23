@@ -56,6 +56,14 @@ export const ACHIEVEMENT_BADGES: Record<string, AchievementBadge> = {
     color: "from-yellow-400 to-orange-500",
     tier: "gold",
   },
+  "challenge_winner": {
+    id: "challenge_winner",
+    name: "Champion",
+    description: "Win a challenge (1st place)",
+    icon: "🏆",
+    color: "from-yellow-400 to-yellow-600",
+    tier: "gold",
+  },
 
   // Silver tier
   "50k_stitches": {
@@ -79,6 +87,14 @@ export const ACHIEVEMENT_BADGES: Record<string, AchievementBadge> = {
     name: "Consistent Logger",
     description: "Add 100 daily logs",
     icon: "📊",
+    color: "from-gray-300 to-gray-500",
+    tier: "silver",
+  },
+  "challenge_podium": {
+    id: "challenge_podium",
+    name: "Podium Finish",
+    description: "Finish in top 3 of a challenge",
+    icon: "🥉",
     color: "from-gray-300 to-gray-500",
     tier: "silver",
   },
@@ -113,6 +129,14 @@ export const ACHIEVEMENT_BADGES: Record<string, AchievementBadge> = {
     name: "Going Public",
     description: "Make your first project public",
     icon: "🌍",
+    color: "from-orange-300 to-orange-500",
+    tier: "bronze",
+  },
+  "first_challenge": {
+    id: "first_challenge",
+    name: "Challenge Accepted",
+    description: "Join your first challenge",
+    icon: "🎮",
     color: "from-orange-300 to-orange-500",
     tier: "bronze",
   },

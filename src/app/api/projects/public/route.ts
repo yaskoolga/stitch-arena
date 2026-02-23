@@ -18,7 +18,6 @@ export async function GET(req: Request) {
       ...(searchParam && {
         title: {
           contains: searchParam,
-          mode: "insensitive",
         },
       }),
     },

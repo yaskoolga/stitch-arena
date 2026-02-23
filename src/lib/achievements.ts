@@ -29,6 +29,29 @@ export async function checkAchievements(userId: string): Promise<AchievementChec
   const completedProjects = projects.filter(p => p.status === "completed").length;
   const publicProjects = projects.filter(p => p.isPublic).length;
 
+  // Get user's challenge participations
+  const challengeParticipations = await prisma.challengeParticipant.findMany({
+    where: { userId },
+    include: {
+      challenge: true,
+    },
+  });
+
+  // Get challenge leaderboard entries for finished challenges
+  const finishedChallengeIds = challengeParticipations
+    .filter(p => p.challenge.endDate < new Date())
+    .map(p => p.challengeId);
+
+  const leaderboardEntries = await prisma.challengeLeaderboard.findMany({
+    where: {
+      challengeId: { in: finishedChallengeIds },
+      userId,
+    },
+  });
+
+  const hasWonChallenge = leaderboardEntries.some(entry => entry.rank === 1);
+  const hasPodiumFinish = leaderboardEntries.some(entry => entry.rank <= 3);
+
   // Calculate streaks
   const { calculateStreak } = await import("./stats");
   const { currentStreak, bestStreak } = calculateStreak(allLogs);
@@ -156,6 +179,28 @@ export async function checkAchievements(userId: string): Promise<AchievementChec
     isUnlocked: unlockedIds.has(ACHIEVEMENTS.FIRST_PUBLIC.id) || publicProjects >= 1,
     progress: publicProjects,
     requirement: ACHIEVEMENTS.FIRST_PUBLIC.requirement,
+  });
+
+  // Challenges
+  checks.push({
+    achievementId: ACHIEVEMENTS.FIRST_CHALLENGE.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.FIRST_CHALLENGE.id) || challengeParticipations.length >= 1,
+    progress: challengeParticipations.length,
+    requirement: ACHIEVEMENTS.FIRST_CHALLENGE.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.CHALLENGE_PODIUM.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.CHALLENGE_PODIUM.id) || hasPodiumFinish,
+    progress: hasPodiumFinish ? 1 : 0,
+    requirement: ACHIEVEMENTS.CHALLENGE_PODIUM.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.CHALLENGE_WINNER.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.CHALLENGE_WINNER.id) || hasWonChallenge,
+    progress: hasWonChallenge ? 1 : 0,
+    requirement: ACHIEVEMENTS.CHALLENGE_WINNER.requirement,
   });
 
   return checks;

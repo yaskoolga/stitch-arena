@@ -512,3 +512,27 @@ export async function canDeleteChallenge(
     reason: "Cannot delete a challenge with participants or that has ended",
   };
 }
+
+/**
+ * Award achievements to challenge winners and podium finishers
+ * Called when a challenge ends
+ */
+export async function awardChallengeAchievements(challengeId: string): Promise<void> {
+  // Get leaderboard entries for this challenge
+  const leaderboard = await prisma.challengeLeaderboard.findMany({
+    where: { challengeId },
+    orderBy: { rank: "asc" },
+    take: 3, // Top 3 finishers
+  });
+
+  if (leaderboard.length === 0) {
+    return;
+  }
+
+  const { unlockAchievements } = await import("./achievements");
+
+  // Award achievements to top 3 finishers
+  for (const entry of leaderboard) {
+    await unlockAchievements(entry.userId);
+  }
+}

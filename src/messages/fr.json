@@ -315,7 +315,8 @@
       "streaks": "Séries",
       "logs": "Journaux",
       "speed": "Vitesse",
-      "social": "Social"
+      "social": "Social",
+      "challenges": "Défis"
     },
     "list": {
       "first_project": {
@@ -377,6 +378,18 @@
       "first_public": {
         "name": "Passage au public",
         "description": "Rendez votre premier projet public"
+      },
+      "first_challenge": {
+        "name": "Défi accepté",
+        "description": "Rejoignez votre premier défi"
+      },
+      "challenge_podium": {
+        "name": "Place sur le podium",
+        "description": "Terminez dans le top 3 d'un défi"
+      },
+      "challenge_winner": {
+        "name": "Champion",
+        "description": "Gagnez un défi (1ère place)"
       }
     }
   },

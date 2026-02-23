@@ -326,7 +326,8 @@
       "streaks": "Серии",
       "logs": "Записи",
       "speed": "Скорость",
-      "social": "Социальные"
+      "social": "Социальные",
+      "challenges": "Челленджи"
     },
     "list": {
       "first_project": {
@@ -388,6 +389,18 @@
       "first_public": {
         "name": "Выход в свет",
         "description": "Сделайте первый проект публичным"
+      },
+      "first_challenge": {
+        "name": "Челлендж принят",
+        "description": "Присоединитесь к своему первому челленджу"
+      },
+      "challenge_podium": {
+        "name": "На пьедестале",
+        "description": "Финишируйте в топ-3 челленджа"
+      },
+      "challenge_winner": {
+        "name": "Чемпион",
+        "description": "Победите в челлендже (1 место)"
       }
     }
   },
