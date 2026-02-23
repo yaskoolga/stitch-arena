@@ -204,6 +204,14 @@
       "summaryError": "Failed to export project summary",
       "jsonSuccess": "Data exported to JSON successfully",
       "jsonError": "Failed to export data to JSON"
+    },
+    "ai": {
+      "detecting": "Analyzing photo...",
+      "confidence": "{percent}% confident",
+      "corrected": "Manually corrected",
+      "lowConfidence": "Low confidence - please verify",
+      "serviceError": "Auto-detection unavailable",
+      "fallbackManual": "Please enter count manually"
     }
   },
   "logs": {

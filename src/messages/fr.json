@@ -193,6 +193,14 @@
       "summaryError": "Échec de l'export du résumé",
       "jsonSuccess": "Données exportées en JSON avec succès",
       "jsonError": "Échec de l'export en JSON"
+    },
+    "ai": {
+      "detecting": "Analyse de la photo...",
+      "confidence": "{percent}% de confiance",
+      "corrected": "Corrigé manuellement",
+      "lowConfidence": "Faible confiance - veuillez vérifier",
+      "serviceError": "Détection automatique indisponible",
+      "fallbackManual": "Veuillez saisir manuellement"
     }
   },
   "logs": {

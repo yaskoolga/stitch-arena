@@ -193,6 +193,14 @@
       "summaryError": "Fehler beim Exportieren der Zusammenfassung",
       "jsonSuccess": "Daten erfolgreich als JSON exportiert",
       "jsonError": "Fehler beim Exportieren als JSON"
+    },
+    "ai": {
+      "detecting": "Foto wird analysiert...",
+      "confidence": "{percent}% sicher",
+      "corrected": "Manuell korrigiert",
+      "lowConfidence": "Geringe Sicherheit - bitte überprüfen",
+      "serviceError": "Auto-Erkennung nicht verfügbar",
+      "fallbackManual": "Bitte manuell eingeben"
     }
   },
   "logs": {

@@ -193,6 +193,14 @@
       "summaryError": "导出摘要失败",
       "jsonSuccess": "成功导出数据为JSON",
       "jsonError": "导出JSON失败"
+    },
+    "ai": {
+      "detecting": "正在分析照片...",
+      "confidence": "{percent}% 置信度",
+      "corrected": "已手动修正",
+      "lowConfidence": "低置信度 - 请验证",
+      "serviceError": "自动检测不可用",
+      "fallbackManual": "请手动输入"
     }
   },
   "logs": {

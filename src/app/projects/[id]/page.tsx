@@ -22,6 +22,7 @@ import { ImageDialog } from "@/components/ui/image-dialog";
 import { CommentsSection } from "@/components/comments/comments-section";
 import { LikeButton } from "@/components/projects/like-button";
 import { ExportButtons } from "@/components/projects/export-buttons";
+import { useCVDetection } from "@/hooks/useCVDetection";
 import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus, Upload } from "lucide-react";
 
 interface Log {
@@ -67,6 +68,9 @@ export default function ProjectDetailPage() {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
+  // CV Detection hook
+  const { detectProgress, isLoading: isDetecting } = useCVDetection();
+
   const { data: project, isLoading } = useQuery<Project>({
     queryKey: ["project", id],
     queryFn: () => fetch(`/api/projects/${id}`).then((r) => r.json()),
@@ -108,17 +112,47 @@ export default function ProjectDetailPage() {
       if (!uploadRes.ok) throw new Error("Failed to upload photo");
       const { url } = await uploadRes.json();
 
-      // Create log with photo
+      // Trigger CV detection
+      const previousPhotoUrl = sortedLogs[0]?.photoUrl || null;
+      const previousPhotoFile = previousPhotoUrl
+        ? await fetch(previousPhotoUrl).then(r => r.blob()).then(blob => new File([blob], "previous.jpg", { type: blob.type }))
+        : null;
+
+      const cvResult = await detectProgress(file, previousPhotoFile);
+
+      let dailyStitches = 0;
+      let aiDetected = null;
+      let aiConfidence = null;
+      let successMessage = t("toast.success.photoAdded");
+
+      if (cvResult && cvResult.success) {
+        if (cvResult.confidence >= 0.5) {
+          // Auto-apply AI result if confidence is high enough
+          dailyStitches = cvResult.daily_stitches;
+          aiDetected = cvResult.daily_stitches;
+          aiConfidence = cvResult.confidence;
+          const confidencePercent = Math.round(cvResult.confidence * 100);
+          successMessage = `✅ Detected ${dailyStitches.toLocaleString()} stitches (${confidencePercent}% confident)`;
+        } else {
+          // Low confidence - use 0 and warn user
+          toast.warning(t("projects.ai.lowConfidence"));
+        }
+      } else {
+        // Detection failed - use 0 and inform user
+        toast.info(t("projects.ai.serviceError"));
+      }
+
+      // Create log with photo and AI data
       const previousTotal = sortedLogs[0]?.totalStitches || 0;
       const logData = {
         date: new Date().toISOString().split('T')[0],
-        dailyStitches: 0,
-        totalStitches: previousTotal,
+        dailyStitches,
+        totalStitches: previousTotal + dailyStitches,
         photoUrl: url,
-        previousPhotoUrl: sortedLogs[0]?.photoUrl || null,
+        previousPhotoUrl,
         notes: null,
-        aiDetected: null,
-        aiConfidence: null,
+        aiDetected,
+        aiConfidence,
         userCorrected: false,
       };
 
@@ -129,7 +163,7 @@ export default function ProjectDetailPage() {
       });
       if (!logRes.ok) throw new Error("Failed to create log");
 
-      toast.success(t("toast.success.photoAdded"));
+      toast.success(successMessage);
       queryClient.invalidateQueries({ queryKey: ["project", id] });
 
       // Reset file input
@@ -319,11 +353,15 @@ export default function ProjectDetailPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => document.getElementById('quick-photo-upload')?.click()}
-                disabled={uploadingPhoto}
+                disabled={uploadingPhoto || isDetecting}
                 className="gap-2"
               >
                 <Upload className="h-4 w-4" />
-                {uploadingPhoto ? t("common.uploading") : t("logs.addPhoto")}
+                {uploadingPhoto || isDetecting
+                  ? uploadingPhoto
+                    ? t("common.uploading")
+                    : t("projects.ai.detecting")
+                  : t("logs.addPhoto")}
               </Button>
               {sortedLogs.filter(log => log.photoUrl || log.imageUrl).length > 5 && (
                 <Button
@@ -340,7 +378,7 @@ export default function ProjectDetailPage() {
               type="file"
               accept="image/*"
               onChange={handleQuickPhotoUpload}
-              disabled={uploadingPhoto}
+              disabled={uploadingPhoto || isDetecting}
               className="hidden"
             />
           </div>

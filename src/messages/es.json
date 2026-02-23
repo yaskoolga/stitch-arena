@@ -193,6 +193,14 @@
       "summaryError": "Error al exportar el resumen",
       "jsonSuccess": "Datos exportados a JSON exitosamente",
       "jsonError": "Error al exportar a JSON"
+    },
+    "ai": {
+      "detecting": "Analizando foto...",
+      "confidence": "{percent}% de confianza",
+      "corrected": "Corregido manualmente",
+      "lowConfidence": "Baja confianza - por favor verifique",
+      "serviceError": "Detección automática no disponible",
+      "fallbackManual": "Por favor ingrese manualmente"
     }
   },
   "logs": {

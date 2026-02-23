@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -15,7 +15,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Loader2, Upload } from "lucide-react";
+import { useCVDetection } from "@/hooks/useCVDetection";
 
 interface DailyLogFormProps {
   projectId: string;
@@ -35,6 +37,14 @@ export function DailyLogForm({
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [photoUrl, setPhotoUrl] = useState<string>("");
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [dailyStitches, setDailyStitches] = useState<string>("");
+  const [aiDetectedValue, setAiDetectedValue] = useState<number | null>(null);
+  const [aiConfidenceValue, setAiConfidenceValue] = useState<number | null>(null);
+  const [userCorrectedFlag, setUserCorrectedFlag] = useState(false);
+
+  // CV Detection hook
+  const { detectProgress, isLoading: isDetecting } = useCVDetection();
 
   // Get default date (today)
   const today = new Date().toISOString().split('T')[0];
@@ -44,7 +54,10 @@ export function DailyLogForm({
     if (!file) return;
 
     setUploading(true);
+    setPhotoFile(file);
+
     try {
+      // Upload photo
       const formData = new FormData();
       formData.append("file", file);
 
@@ -60,10 +73,43 @@ export function DailyLogForm({
       const { url } = await res.json();
       setPhotoUrl(url);
       toast.success("Photo uploaded");
+
+      // Trigger CV detection
+      const previousPhotoFile = previousLog?.photoUrl
+        ? await fetch(previousLog.photoUrl).then(r => r.blob()).then(blob => new File([blob], "previous.jpg", { type: blob.type }))
+        : null;
+
+      const result = await detectProgress(file, previousPhotoFile);
+
+      if (result && result.success && result.confidence >= 0.5) {
+        // Auto-apply AI result if confidence is high enough
+        setDailyStitches(result.daily_stitches.toString());
+        setAiDetectedValue(result.daily_stitches);
+        setAiConfidenceValue(result.confidence);
+        toast.success(
+          `${t("projects.ai.detecting")} ${t("projects.ai.confidence", { percent: Math.round(result.confidence * 100) })}`
+        );
+      } else if (result && result.success) {
+        // Low confidence - show warning
+        toast.warning(t("projects.ai.lowConfidence"));
+      } else {
+        // Detection failed - fallback to manual
+        toast.error(t("projects.ai.serviceError") + " - " + t("projects.ai.fallbackManual"));
+      }
     } catch (error) {
       toast.error("Failed to upload photo");
     } finally {
       setUploading(false);
+    }
+  };
+
+  const handleStitchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setDailyStitches(value);
+
+    // If user modifies the AI-detected value, set userCorrected flag
+    if (aiDetectedValue !== null && Number(value) !== aiDetectedValue) {
+      setUserCorrectedFlag(true);
     }
   };
 
@@ -73,20 +119,20 @@ export function DailyLogForm({
 
     try {
       const formData = new FormData(e.currentTarget);
-      const dailyStitches = Number(formData.get("dailyStitches"));
+      const stitchCount = Number(formData.get("dailyStitches"));
       const previousTotal = previousLog?.totalStitches || 0;
-      const totalStitches = previousTotal + dailyStitches;
+      const totalStitches = previousTotal + stitchCount;
 
       const body = {
         date: formData.get("date"),
-        dailyStitches,
+        dailyStitches: stitchCount,
         totalStitches,
         photoUrl: photoUrl || null,
         previousPhotoUrl: previousLog?.photoUrl || null,
         notes: formData.get("notes") || null,
-        aiDetected: null,
-        aiConfidence: null,
-        userCorrected: false,
+        aiDetected: aiDetectedValue,
+        aiConfidence: aiConfidenceValue,
+        userCorrected: userCorrectedFlag,
       };
 
       const res = await fetch(`/api/projects/${projectId}/logs`, {
@@ -134,7 +180,34 @@ export function DailyLogForm({
 
           {/* Daily Stitches */}
           <div>
-            <Label htmlFor="dailyStitches">Stitches completed today</Label>
+            <div className="flex items-center gap-2 mb-1">
+              <Label htmlFor="dailyStitches">Stitches completed today</Label>
+              {isDetecting && (
+                <Badge variant="secondary" className="gap-1">
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                  {t("projects.ai.detecting")}
+                </Badge>
+              )}
+              {aiConfidenceValue !== null && !isDetecting && (
+                <Badge
+                  variant={
+                    aiConfidenceValue >= 0.8
+                      ? "default"
+                      : aiConfidenceValue >= 0.5
+                      ? "secondary"
+                      : "destructive"
+                  }
+                  className="gap-1"
+                >
+                  🤖 {t("projects.ai.confidence", { percent: Math.round(aiConfidenceValue * 100) })}
+                </Badge>
+              )}
+              {userCorrectedFlag && (
+                <Badge variant="outline" className="gap-1">
+                  ✏️ {t("projects.ai.corrected")}
+                </Badge>
+              )}
+            </div>
             <Input
               id="dailyStitches"
               name="dailyStitches"
@@ -142,6 +215,8 @@ export function DailyLogForm({
               min={0}
               required
               placeholder="e.g. 250"
+              value={dailyStitches}
+              onChange={handleStitchChange}
             />
             {previousLog && (
               <p className="text-sm text-muted-foreground mt-1">
@@ -160,12 +235,12 @@ export function DailyLogForm({
               <Button
                 type="button"
                 variant="outline"
-                disabled={uploading}
+                disabled={uploading || isDetecting}
                 onClick={() => document.getElementById('photo')?.click()}
                 className="gap-2"
               >
                 <Upload className="h-4 w-4" />
-                {uploading ? "Uploading..." : photoUrl ? "Change Photo" : "Choose Photo"}
+                {uploading || isDetecting ? "Processing..." : photoUrl ? "Change Photo" : "Choose Photo"}
               </Button>
               {photoUrl && (
                 <Button
@@ -183,13 +258,13 @@ export function DailyLogForm({
               type="file"
               accept="image/*"
               onChange={handlePhotoUpload}
-              disabled={uploading}
+              disabled={uploading || isDetecting}
               className="hidden"
             />
-            {uploading && (
+            {(uploading || isDetecting) && (
               <p className="text-sm text-muted-foreground mt-2 flex items-center gap-2">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Uploading...
+                {uploading ? "Uploading..." : t("projects.ai.detecting")}
               </p>
             )}
             {photoUrl && (
@@ -220,7 +295,7 @@ export function DailyLogForm({
       <div className="flex gap-3">
         <Button
           type="submit"
-          disabled={saving || uploading}
+          disabled={saving || uploading || isDetecting}
           className="flex-1"
         >
           {saving ? (
@@ -236,7 +311,7 @@ export function DailyLogForm({
           type="button"
           variant="outline"
           onClick={() => router.back()}
-          disabled={saving}
+          disabled={saving || isDetecting}
         >
           Cancel
         </Button>
