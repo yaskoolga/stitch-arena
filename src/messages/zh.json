@@ -181,6 +181,18 @@
       "avgPerDay": "平均/天",
       "estDaysLeft": "预计剩余天数",
       "initialNote": "包含 {initial} 初始针数（跟踪期间完成 {actual} 针）"
+    },
+    "export": {
+      "button": "导出",
+      "csv": "导出为CSV",
+      "summary": "导出摘要",
+      "json": "导出为JSON",
+      "csvSuccess": "成功导出记录为CSV",
+      "csvError": "导出CSV失败",
+      "summarySuccess": "成功导出项目摘要",
+      "summaryError": "导出摘要失败",
+      "jsonSuccess": "成功导出数据为JSON",
+      "jsonError": "导出JSON失败"
     }
   },
   "logs": {

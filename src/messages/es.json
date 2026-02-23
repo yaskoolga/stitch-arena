@@ -181,6 +181,18 @@
       "avgPerDay": "Prom. / Día",
       "estDaysLeft": "Días estimados restantes",
       "initialNote": "Incluye {initial} puntadas iniciales ({actual} puntadas durante el seguimiento)"
+    },
+    "export": {
+      "button": "Exportar",
+      "csv": "Exportar como CSV",
+      "summary": "Exportar resumen",
+      "json": "Exportar como JSON",
+      "csvSuccess": "Registros exportados a CSV exitosamente",
+      "csvError": "Error al exportar a CSV",
+      "summarySuccess": "Resumen del proyecto exportado exitosamente",
+      "summaryError": "Error al exportar el resumen",
+      "jsonSuccess": "Datos exportados a JSON exitosamente",
+      "jsonError": "Error al exportar a JSON"
     }
   },
   "logs": {

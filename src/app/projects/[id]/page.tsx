@@ -21,6 +21,7 @@ import { SkeletonProjectDetail } from "@/components/skeleton-card";
 import { ImageDialog } from "@/components/ui/image-dialog";
 import { CommentsSection } from "@/components/comments/comments-section";
 import { LikeButton } from "@/components/projects/like-button";
+import { ExportButtons } from "@/components/projects/export-buttons";
 import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus, Upload } from "lucide-react";
 
 interface Log {
@@ -188,16 +189,19 @@ export default function ProjectDetailPage() {
                     <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                       {project.title}
                     </h1>
-                    <Link href={`/projects/${id}/edit`}>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-muted-foreground hover:text-primary"
-                        title={t("projects.editProject")}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                    </Link>
+                    <div className="flex items-center gap-1">
+                      <ExportButtons project={project} />
+                      <Link href={`/projects/${id}/edit`}>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-muted-foreground hover:text-primary"
+                          title={t("projects.editProject")}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
 
                   {/* Project Metadata - Vertical Layout */}

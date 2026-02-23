@@ -192,6 +192,18 @@
       "avgPerDay": "Avg / Day",
       "estDaysLeft": "Est. Days Left",
       "initialNote": "Includes {initial} initial stitches ({actual} stitched while tracking)"
+    },
+    "export": {
+      "button": "Export",
+      "csv": "Export as CSV",
+      "summary": "Export Summary",
+      "json": "Export as JSON",
+      "csvSuccess": "Logs exported to CSV successfully",
+      "csvError": "Failed to export logs to CSV",
+      "summarySuccess": "Project summary exported successfully",
+      "summaryError": "Failed to export project summary",
+      "jsonSuccess": "Data exported to JSON successfully",
+      "jsonError": "Failed to export data to JSON"
     }
   },
   "logs": {

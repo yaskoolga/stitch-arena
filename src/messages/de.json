@@ -181,6 +181,18 @@
       "avgPerDay": "Durchschn. / Tag",
       "estDaysLeft": "Geschätzte Tage übrig",
       "initialNote": "Enthält {initial} Anfangsstiche ({actual} während der Verfolgung gestickt)"
+    },
+    "export": {
+      "button": "Exportieren",
+      "csv": "Als CSV exportieren",
+      "summary": "Zusammenfassung exportieren",
+      "json": "Als JSON exportieren",
+      "csvSuccess": "Einträge erfolgreich als CSV exportiert",
+      "csvError": "Fehler beim Exportieren als CSV",
+      "summarySuccess": "Projektzusammenfassung erfolgreich exportiert",
+      "summaryError": "Fehler beim Exportieren der Zusammenfassung",
+      "jsonSuccess": "Daten erfolgreich als JSON exportiert",
+      "jsonError": "Fehler beim Exportieren als JSON"
     }
   },
   "logs": {
