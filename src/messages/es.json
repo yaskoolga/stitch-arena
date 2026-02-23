@@ -48,13 +48,17 @@
   },
   "landing": {
     "title": "StitchArena",
-    "subtitle": "Sigue tus proyectos de punto de cruz, registra el progreso diario y visualiza tu viaje de bordado.",
+    "subtitle": "Sigue tus proyectos con detección de puntadas por IA, únete a desafíos emocionantes y conéctate con otros bordadores",
     "getStarted": "Empezar",
     "signIn": "Iniciar sesión",
     "features": {
       "track": {
         "title": "Sigue tus proyectos",
         "description": "Registra puntos diarios y observa tu progreso crecer en tiempo real"
+      },
+      "ai": {
+        "title": "Sin contar manualmente",
+        "description": "La IA detecta automáticamente puntadas en tus fotos — solo sube y relájate"
       },
       "stats": {
         "title": "Ve tus estadísticas",

@@ -46,13 +46,17 @@
   },
   "landing": {
     "title": "StitchArena",
-    "subtitle": "Suivez vos projets de point de croix, enregistrez les progrès quotidiens et visualisez votre parcours de broderie.",
+    "subtitle": "Suivez vos projets avec détection de points par IA, participez à des défis et connectez-vous avec d'autres brodeurs",
     "getStarted": "Commencer",
     "signIn": "Se connecter",
     "features": {
       "track": {
         "title": "Suivez vos projets",
         "description": "Enregistrez les points quotidiens et regardez votre progression en temps réel"
+      },
+      "ai": {
+        "title": "Pas de comptage manuel",
+        "description": "L'IA détecte automatiquement les points sur vos photos — il suffit de télécharger et de vous détendre"
       },
       "stats": {
         "title": "Vos statistiques",

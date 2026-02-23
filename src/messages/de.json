@@ -48,13 +48,17 @@
   },
   "landing": {
     "title": "StitchArena",
-    "subtitle": "Verfolgen Sie Ihre Kreuzstich-Projekte, protokollieren Sie tägliche Fortschritte und visualisieren Sie Ihre Stick-Reise.",
+    "subtitle": "Verfolgen Sie Projekte mit KI-gestützter Stichdetektion, nehmen Sie an Challenges teil und vernetzen Sie sich mit anderen Stickern",
     "getStarted": "Loslegen",
     "signIn": "Anmelden",
     "features": {
       "track": {
         "title": "Projekte verfolgen",
         "description": "Tägliche Stiche protokollieren und Fortschritt in Echtzeit sehen"
+      },
+      "ai": {
+        "title": "Keine manuelle Zählung",
+        "description": "KI erkennt automatisch Stiche aus Ihren Fotos — einfach hochladen und entspannen"
       },
       "stats": {
         "title": "Statistiken ansehen",

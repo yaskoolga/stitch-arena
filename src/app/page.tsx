@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BarChart2, Users, BookOpen } from "lucide-react";
+import { BarChart2, Users, BookOpen, Sparkles } from "lucide-react";
 
 export default function Home() {
   const t = useTranslations('landing');
 
   const features = [
     { icon: BookOpen, key: "track" as const },
+    { icon: Sparkles, key: "ai" as const },
     { icon: BarChart2, key: "stats" as const },
     { icon: Users, key: "community" as const },
   ];
@@ -30,7 +31,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="mt-20 grid gap-6 sm:grid-cols-3 w-full max-w-3xl">
+      <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full max-w-5xl">
         {features.map(({ icon: Icon, key }) => (
           <Card key={key} className="text-left">
             <CardContent className="pt-6">

@@ -48,11 +48,12 @@
   },
   "landing": {
     "title": "StitchArena",
-    "subtitle": "Track your cross-stitch projects, log daily progress, and visualize your stitching journey.",
+    "subtitle": "Track your projects with AI-powered stitch detection, join exciting challenges, and connect with fellow stitchers",
     "getStarted": "Get Started",
     "signIn": "Sign In",
     "features": {
       "track": { "title": "Track Projects", "description": "Log daily stitches and watch your progress grow in real time" },
+      "ai": { "title": "No Manual Counting", "description": "AI automatically detects stitches from your photos — just upload and relax" },
       "stats": { "title": "See Your Stats", "description": "Activity heatmap, speed badges, streaks, and completion forecasts" },
       "community": { "title": "Join the Community", "description": "Share your work and explore projects from other stitchers" }
     }

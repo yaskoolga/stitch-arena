@@ -48,13 +48,17 @@
   },
   "landing": {
     "title": "StitchArena",
-    "subtitle": "跟踪您的十字绣项目，记录每日进度，可视化您的刺绣之旅。",
+    "subtitle": "使用AI针数识别跟踪项目，参加挑战并与其他绣工交流",
     "getStarted": "开始使用",
     "signIn": "登录",
     "features": {
       "track": {
         "title": "跟踪项目",
         "description": "记录每日针数，实时查看进度增长"
+      },
+      "ai": {
+        "title": "无需手动计数",
+        "description": "AI自动从照片中识别针数——只需上传并放松"
       },
       "stats": {
         "title": "查看统计",
