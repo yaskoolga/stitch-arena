@@ -184,23 +184,6 @@
 - 🗑️ **Quick Delete** - удаление из Dashboard
 - 🔍 **Фильтрация и сортировка**
 
-### Data Export (v0.7.0)
-- 📄 **CSV Export** - структурированные данные логов:
-  - Столбцы: Date, Daily Stitches, Total Stitches, Time Spent, Notes, Photo URL
-  - Правильное экранирование CSV
-  - Файл: `{project_title}_logs.csv`
-- 📝 **Text Summary** - читаемая сводка проекта:
-  - Детали проекта и статистика
-  - Полная история логов
-  - Файл: `{project_title}_summary.txt`
-- 💾 **JSON Export** - полный бэкап данных:
-  - Метаданные проекта + все логи
-  - Timestamp экспорта
-  - Файл: `{project_title}_data.json`
-- 🎯 **Export Button** в заголовке проекта (dropdown menu)
-- ⚡ **Client-side Export** - без обработки на сервере
-- 🔔 **Toast Notifications** - уведомления об успехе/ошибке
-
 ---
 
 ## 👥 Social Features
@@ -318,11 +301,6 @@
 - 🧮 **Калькулятор материалов**
 - 📏 **Расчет размеров**
 - 🧵 **Расход ниток**
-
-### Export
-- 📊 **CSV Export** - выгрузка данных проекта
-- 📋 **Все логи** в одном файле
-- 📅 **Временные метки**
 
 ---
 

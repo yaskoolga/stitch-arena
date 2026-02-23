@@ -60,7 +60,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.7.0] - 2026-02-23
 
-### ✨ Added - Challenge System Enhancements & Data Export
+### ✨ Added - Challenge System Enhancements
 
 #### Challenge Achievements
 - **3 New Achievements** for the challenges system:
@@ -95,30 +95,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Empty State** with call-to-action to browse challenges
 - **Compact Design** matching other dashboard cards
 
-#### Data Export
-- **CSV Export** - Structured log data:
-  - Columns: Date, Daily Stitches, Total Stitches, Time Spent, Notes, Photo URL
-  - Proper CSV escaping for quotes and special characters
-  - Downloads as `{project_title}_logs.csv`
-- **Text Summary Export** - Human-readable project summary:
-  - Project details (title, description, manufacturer)
-  - Statistics (total logs, avg stitches/day, date range)
-  - Full log history with dates and counts
-  - Downloads as `{project_title}_summary.txt`
-- **JSON Export** - Complete structured data:
-  - Project metadata and all logs
-  - Export timestamp
-  - Photo presence flags
-  - Downloads as `{project_title}_data.json`
-- **Export Button** in project header (dropdown menu)
-- Client-side export (no server processing)
-- Success/error toast notifications
-
 ### 🌍 Internationalization
 - Added translations for all new features (6 languages: en/ru/de/fr/es/zh):
   - Challenge achievements (categories, names, descriptions)
   - Active challenges widget (title, description, empty state)
-  - Export functionality (button labels, success/error messages)
 
 ### 🐛 Fixes
 - Fixed TypeScript error in public projects route (removed unsupported mode: "insensitive" for SQLite)
