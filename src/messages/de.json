@@ -39,6 +39,7 @@
     "challenges": "Herausforderungen",
     "profile": "Profil",
     "favorites": "Favoriten",
+    "following": "Folge ich",
     "calculator": "Rechner",
     "settings": "Einstellungen",
     "logout": "Abmelden",
@@ -51,9 +52,18 @@
     "getStarted": "Loslegen",
     "signIn": "Anmelden",
     "features": {
-      "track": { "title": "Projekte verfolgen", "description": "Tägliche Stiche protokollieren und Fortschritt in Echtzeit sehen" },
-      "stats": { "title": "Statistiken ansehen", "description": "Aktivitätskarte, Geschwindigkeitsbadges, Serien und Fertigstellungsprognosen" },
-      "community": { "title": "Community beitreten", "description": "Eigene Arbeiten teilen und Projekte anderer Sticker entdecken" }
+      "track": {
+        "title": "Projekte verfolgen",
+        "description": "Tägliche Stiche protokollieren und Fortschritt in Echtzeit sehen"
+      },
+      "stats": {
+        "title": "Statistiken ansehen",
+        "description": "Aktivitätskarte, Geschwindigkeitsbadges, Serien und Fertigstellungsprognosen"
+      },
+      "community": {
+        "title": "Community beitreten",
+        "description": "Eigene Arbeiten teilen und Projekte anderer Sticker entdecken"
+      }
     }
   },
   "calculator": {
@@ -86,7 +96,8 @@
     "signIn": "Anmelden",
     "signUp": "Registrieren",
     "signInWith": "Anmelden mit {provider}",
-    "orContinueWith": "Oder fortfahren mit"
+    "orContinueWith": "Oder fortfahren mit",
+    "loginRequired": "Melde dich an, um Projekten zu folgen"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -215,7 +226,10 @@
       "processing": "Verarbeitung...",
       "choosePhoto": "Foto auswählen",
       "changePhoto": "Foto ändern"
-    }
+    },
+    "follow": "Folgen",
+    "unfollow": "Entfolgen",
+    "followers": "Follower"
   },
   "logs": {
     "title": "Verlauf",
@@ -302,12 +316,18 @@
     "empty": "Noch keine Projekte",
     "beFirst": "Seien Sie der Erste, der ein Projekt teilt!"
   },
+  "following": {
+    "title": "Folge ich",
+    "subtitle": "Projekte, denen du folgst",
+    "empty": "Du folgst noch keinen Projekten",
+    "explore": "Entdecke Projekte in der Galerie"
+  },
   "themes": {
     "Nature": "Natur",
     "Animals": "Tiere",
     "Abstract": "Abstrakt",
     "Seasonal": "Saisonal",
-    "Fantasy": "Fantasie",
+    "Fantasy": "Fantasy",
     "Portrait": "Porträt",
     "Geometric": "Geometrisch",
     "Holiday": "Feiertag",
@@ -438,20 +458,6 @@
       }
     }
   },
-  "themes": {
-    "Nature": "Natur",
-    "Animals": "Tiere",
-    "Abstract": "Abstrakt",
-    "Seasonal": "Saisonal",
-    "Fantasy": "Fantasy",
-    "Portrait": "Porträt",
-    "Geometric": "Geometrisch",
-    "Holiday": "Feiertag",
-    "Floral": "Blumen",
-    "Modern": "Modern",
-    "Traditional": "Traditionell",
-    "Other": "Andere"
-  },
   "speedTiers": {
     "TURTLE": {
       "name": "Schildkröte",
@@ -509,7 +515,9 @@
       "commentAdded": "Kommentar hinzugefügt",
       "commentDeleted": "Kommentar gelöscht",
       "liked": "Gefällt mir",
-      "unliked": "Gefällt mir nicht mehr"
+      "unliked": "Gefällt mir nicht mehr",
+      "followed": "Projekt wird gefolgt",
+      "unfollowed": "Projekt nicht mehr gefolgt"
     },
     "error": {
       "generic": "Etwas ist schief gelaufen",

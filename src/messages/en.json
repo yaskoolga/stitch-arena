@@ -39,6 +39,7 @@
     "challenges": "Challenges",
     "profile": "Profile",
     "favorites": "Favorites",
+    "following": "Following",
     "calculator": "Calculator",
     "settings": "Settings",
     "logout": "Logout",
@@ -91,6 +92,7 @@
     "signUp": "Sign Up",
     "signInWith": "Sign in with {provider}",
     "orContinueWith": "Or continue with",
+    "loginRequired": "Sign in to follow projects",
     "errors": {
       "invalidCredentials": "Invalid email or password",
       "userNotFound": "No user found with this email",
@@ -164,6 +166,9 @@
     "projectDetails": "Project Details",
     "noProjects": "No projects yet",
     "startFirst": "Start tracking your cross-stitch projects!",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "followers": "Followers",
     "fields": {
       "title": "Title",
       "description": "Description",
@@ -312,6 +317,12 @@
     },
     "empty": "No projects yet",
     "beFirst": "Be the first to share a project!"
+  },
+  "following": {
+    "title": "Following",
+    "subtitle": "Projects you're following",
+    "empty": "Not following any projects yet",
+    "explore": "Explore projects in the Gallery"
   },
   "themes": {
     "Nature": "Nature",
@@ -520,7 +531,9 @@
       "commentAdded": "Comment added",
       "commentDeleted": "Comment deleted",
       "liked": "Liked",
-      "unliked": "Unliked"
+      "unliked": "Unliked",
+      "followed": "Following project",
+      "unfollowed": "Unfollowed project"
     },
     "error": {
       "generic": "Something went wrong",

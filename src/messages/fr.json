@@ -37,6 +37,7 @@
     "challenges": "Défis",
     "profile": "Profil",
     "favorites": "Favoris",
+    "following": "Abonnements",
     "calculator": "Calculatrice",
     "settings": "Paramètres",
     "logout": "Déconnexion",
@@ -49,9 +50,18 @@
     "getStarted": "Commencer",
     "signIn": "Se connecter",
     "features": {
-      "track": { "title": "Suivez vos projets", "description": "Enregistrez les points quotidiens et regardez votre progression en temps réel" },
-      "stats": { "title": "Vos statistiques", "description": "Carte d'activité, badges de vitesse, séries et prévisions d'achèvement" },
-      "community": { "title": "Rejoignez la communauté", "description": "Partagez vos créations et explorez les projets d'autres brodeurs" }
+      "track": {
+        "title": "Suivez vos projets",
+        "description": "Enregistrez les points quotidiens et regardez votre progression en temps réel"
+      },
+      "stats": {
+        "title": "Vos statistiques",
+        "description": "Carte d'activité, badges de vitesse, séries et prévisions d'achèvement"
+      },
+      "community": {
+        "title": "Rejoignez la communauté",
+        "description": "Partagez vos créations et explorez les projets d'autres brodeurs"
+      }
     }
   },
   "calculator": {
@@ -84,7 +94,8 @@
     "signIn": "Se connecter",
     "signUp": "S'inscrire",
     "signInWith": "Se connecter avec {provider}",
-    "orContinueWith": "Ou continuer avec"
+    "orContinueWith": "Ou continuer avec",
+    "loginRequired": "Connectez-vous pour suivre des projets"
   },
   "dashboard": {
     "title": "Tableau de bord",
@@ -151,6 +162,9 @@
     "projectDetails": "Détails du projet",
     "noProjects": "Aucun projet pour le moment",
     "startFirst": "Commencez à suivre vos projets de point de croix !",
+    "follow": "S'abonner",
+    "unfollow": "Se désabonner",
+    "followers": "Abonnés",
     "fields": {
       "title": "Titre",
       "description": "Description",
@@ -300,6 +314,12 @@
     "empty": "Aucun projet pour le moment",
     "beFirst": "Soyez le premier à partager un projet !"
   },
+  "following": {
+    "title": "Abonnements",
+    "subtitle": "Projets auxquels vous êtes abonné",
+    "empty": "Vous ne suivez aucun projet pour le moment",
+    "explore": "Découvrez des projets dans la Galerie"
+  },
   "themes": {
     "Nature": "Nature",
     "Animals": "Animaux",
@@ -308,7 +328,7 @@
     "Fantasy": "Fantaisie",
     "Portrait": "Portrait",
     "Geometric": "Géométrique",
-    "Holiday": "Fête",
+    "Holiday": "Vacances",
     "Floral": "Floral",
     "Modern": "Moderne",
     "Traditional": "Traditionnel",
@@ -436,20 +456,6 @@
       }
     }
   },
-  "themes": {
-    "Nature": "Nature",
-    "Animals": "Animaux",
-    "Abstract": "Abstrait",
-    "Seasonal": "Saisonnier",
-    "Fantasy": "Fantaisie",
-    "Portrait": "Portrait",
-    "Geometric": "Géométrique",
-    "Holiday": "Vacances",
-    "Floral": "Floral",
-    "Modern": "Moderne",
-    "Traditional": "Traditionnel",
-    "Other": "Autre"
-  },
   "speedTiers": {
     "TURTLE": {
       "name": "Tortue",
@@ -507,7 +513,9 @@
       "commentAdded": "Commentaire ajouté",
       "commentDeleted": "Commentaire supprimé",
       "liked": "Aimé",
-      "unliked": "N'aime plus"
+      "unliked": "N'aime plus",
+      "followed": "Abonné au projet",
+      "unfollowed": "Désabonné du projet"
     },
     "error": {
       "generic": "Une erreur s'est produite",

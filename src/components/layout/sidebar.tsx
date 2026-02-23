@@ -21,6 +21,7 @@ export function Sidebar() {
     { href: "/challenges", label: t('challenges') },
     { href: "/community", label: t('community') },
     { href: "/favorites", label: t('favorites') },
+    { href: "/following", label: t('following') },
     { href: "/calculator", label: t('calculator') },
   ];
 

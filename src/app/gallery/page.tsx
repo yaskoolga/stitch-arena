@@ -11,6 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { LikeButton } from "@/components/projects/like-button";
+import { FollowProjectButton } from "@/components/projects/follow-project-button";
 import { PROJECT_THEMES } from "@/lib/constants";
 import { X, Search } from "lucide-react";
 
@@ -188,11 +189,16 @@ export default function GalleryPage() {
                             : t("projects.status.paused")}
                       </Badge>
                     </div>
-                    <Link href={`/dashboard/${p.user.id}`}>
-                      <p className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer">
-                        {t("gallery.by")} {p.user.name || t("common.anonymous")}
-                      </p>
-                    </Link>
+                    <p
+                      className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.location.href = `/dashboard/${p.user.id}`;
+                      }}
+                    >
+                      {t("gallery.by")} {p.user.name || t("common.anonymous")}
+                    </p>
 
                     {/* Theme badges */}
                     {p.themes && p.themes.length > 0 && (
@@ -222,8 +228,9 @@ export default function GalleryPage() {
                     </div>
                   </CardContent>
                 </Link>
-                <CardContent className="pt-0 px-3 pb-3">
+                <CardContent className="pt-0 px-3 pb-3 flex gap-2">
                   <LikeButton projectId={p.id} variant="ghost" size="sm" />
+                  <FollowProjectButton projectId={p.id} projectOwnerId={p.user.id} variant="ghost" size="sm" showCount={false} />
                 </CardContent>
               </Card>
             );

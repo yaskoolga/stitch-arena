@@ -43,7 +43,8 @@
     "settings": "设置",
     "logout": "退出登录",
     "login": "登录",
-    "register": "注册"
+    "register": "注册",
+    "following": "关注中"
   },
   "landing": {
     "title": "StitchArena",
@@ -51,9 +52,18 @@
     "getStarted": "开始使用",
     "signIn": "登录",
     "features": {
-      "track": { "title": "跟踪项目", "description": "记录每日针数，实时查看进度增长" },
-      "stats": { "title": "查看统计", "description": "活动热图、速度徽章、连续天数和完成预测" },
-      "community": { "title": "加入社区", "description": "分享您的作品，探索其他绣者的项目" }
+      "track": {
+        "title": "跟踪项目",
+        "description": "记录每日针数，实时查看进度增长"
+      },
+      "stats": {
+        "title": "查看统计",
+        "description": "活动热图、速度徽章、连续天数和完成预测"
+      },
+      "community": {
+        "title": "加入社区",
+        "description": "分享您的作品，探索其他绣者的项目"
+      }
     }
   },
   "calculator": {
@@ -86,7 +96,8 @@
     "signIn": "登录",
     "signUp": "注册",
     "signInWith": "使用 {provider} 登录",
-    "orContinueWith": "或继续使用"
+    "orContinueWith": "或继续使用",
+    "loginRequired": "登录以关注项目"
   },
   "dashboard": {
     "title": "控制面板",
@@ -215,7 +226,10 @@
       "processing": "处理中...",
       "choosePhoto": "选择照片",
       "changePhoto": "更换照片"
-    }
+    },
+    "follow": "关注",
+    "unfollow": "取消关注",
+    "followers": "关注者"
   },
   "logs": {
     "title": "历史记录",
@@ -306,7 +320,7 @@
     "Nature": "自然",
     "Animals": "动物",
     "Abstract": "抽象",
-    "Seasonal": "季节性",
+    "Seasonal": "季节",
     "Fantasy": "奇幻",
     "Portrait": "肖像",
     "Geometric": "几何",
@@ -438,20 +452,6 @@
       }
     }
   },
-  "themes": {
-    "Nature": "自然",
-    "Animals": "动物",
-    "Abstract": "抽象",
-    "Seasonal": "季节",
-    "Fantasy": "奇幻",
-    "Portrait": "肖像",
-    "Geometric": "几何",
-    "Holiday": "节日",
-    "Floral": "花卉",
-    "Modern": "现代",
-    "Traditional": "传统",
-    "Other": "其他"
-  },
   "speedTiers": {
     "TURTLE": {
       "name": "乌龟",
@@ -509,7 +509,9 @@
       "commentAdded": "评论已添加",
       "commentDeleted": "评论已删除",
       "liked": "已点赞",
-      "unliked": "已取消点赞"
+      "unliked": "已取消点赞",
+      "followed": "已关注项目",
+      "unfollowed": "已取消关注项目"
     },
     "error": {
       "generic": "出错了",
@@ -620,5 +622,11 @@
       "cannotEdit": "无法编辑此挑战",
       "cannotDelete": "无法删除此挑战"
     }
+  },
+  "following": {
+    "title": "关注中",
+    "subtitle": "你关注的项目",
+    "empty": "还没有关注任何项目",
+    "explore": "在画廊中探索项目"
   }
 }

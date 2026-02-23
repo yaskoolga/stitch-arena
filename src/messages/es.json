@@ -39,6 +39,7 @@
     "challenges": "Desafíos",
     "profile": "Perfil",
     "favorites": "Favoritos",
+    "following": "Siguiendo",
     "calculator": "Calculadora",
     "settings": "Configuración",
     "logout": "Cerrar sesión",
@@ -51,9 +52,18 @@
     "getStarted": "Empezar",
     "signIn": "Iniciar sesión",
     "features": {
-      "track": { "title": "Sigue tus proyectos", "description": "Registra puntos diarios y observa tu progreso crecer en tiempo real" },
-      "stats": { "title": "Ve tus estadísticas", "description": "Mapa de actividad, insignias de velocidad, rachas y previsiones de finalización" },
-      "community": { "title": "Únete a la comunidad", "description": "Comparte tu trabajo y explora proyectos de otros bordadores" }
+      "track": {
+        "title": "Sigue tus proyectos",
+        "description": "Registra puntos diarios y observa tu progreso crecer en tiempo real"
+      },
+      "stats": {
+        "title": "Ve tus estadísticas",
+        "description": "Mapa de actividad, insignias de velocidad, rachas y previsiones de finalización"
+      },
+      "community": {
+        "title": "Únete a la comunidad",
+        "description": "Comparte tu trabajo y explora proyectos de otros bordadores"
+      }
     }
   },
   "calculator": {
@@ -86,7 +96,8 @@
     "signIn": "Iniciar sesión",
     "signUp": "Registrarse",
     "signInWith": "Iniciar sesión con {provider}",
-    "orContinueWith": "O continuar con"
+    "orContinueWith": "O continuar con",
+    "loginRequired": "Inicia sesión para seguir proyectos"
   },
   "dashboard": {
     "title": "Panel",
@@ -215,7 +226,10 @@
       "processing": "Procesando...",
       "choosePhoto": "Elegir foto",
       "changePhoto": "Cambiar foto"
-    }
+    },
+    "follow": "Seguir",
+    "unfollow": "Dejar de seguir",
+    "followers": "Seguidores"
   },
   "logs": {
     "title": "Historial",
@@ -302,6 +316,12 @@
     "empty": "Aún no hay proyectos",
     "beFirst": "¡Sé el primero en compartir un proyecto!"
   },
+  "following": {
+    "title": "Siguiendo",
+    "subtitle": "Proyectos que sigues",
+    "empty": "Aún no sigues ningún proyecto",
+    "explore": "Explora proyectos en la Galería"
+  },
   "themes": {
     "Nature": "Naturaleza",
     "Animals": "Animales",
@@ -310,7 +330,7 @@
     "Fantasy": "Fantasía",
     "Portrait": "Retrato",
     "Geometric": "Geométrico",
-    "Holiday": "Festivo",
+    "Holiday": "Festividad",
     "Floral": "Floral",
     "Modern": "Moderno",
     "Traditional": "Tradicional",
@@ -438,20 +458,6 @@
       }
     }
   },
-  "themes": {
-    "Nature": "Naturaleza",
-    "Animals": "Animales",
-    "Abstract": "Abstracto",
-    "Seasonal": "Estacional",
-    "Fantasy": "Fantasía",
-    "Portrait": "Retrato",
-    "Geometric": "Geométrico",
-    "Holiday": "Festividad",
-    "Floral": "Floral",
-    "Modern": "Moderno",
-    "Traditional": "Tradicional",
-    "Other": "Otro"
-  },
   "speedTiers": {
     "TURTLE": {
       "name": "Tortuga",
@@ -509,7 +515,9 @@
       "commentAdded": "Comentario añadido",
       "commentDeleted": "Comentario eliminado",
       "liked": "Me gusta",
-      "unliked": "Ya no me gusta"
+      "unliked": "Ya no me gusta",
+      "followed": "Siguiendo proyecto",
+      "unfollowed": "Dejaste de seguir el proyecto"
     },
     "error": {
       "generic": "Algo salió mal",

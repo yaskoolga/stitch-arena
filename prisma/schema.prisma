@@ -26,6 +26,7 @@ model User {
   followers             Follow[]               @relation("UserFollowers")
   following             Follow[]               @relation("UserFollowing")
   notifications         Notification[]
+  projectFollows        ProjectFollow[]        @relation("ProjectFollows")
 }
 
 model Project {
@@ -51,6 +52,7 @@ model Project {
   logs            DailyLog[]
   comments        Comment[]
   likes           Like[]
+  followers       ProjectFollow[]        @relation("ProjectFollowers")
 }
 
 model DailyLog {
@@ -173,7 +175,7 @@ model Follow {
 model Notification {
   id         String   @id @default(cuid())
   userId     String   // Recipient of the notification
-  type       String   // "like", "comment", "follow", "achievement"
+  type       String   // "like", "comment", "follow", "achievement", "projectfollow"
   actorId    String?  // User who performed the action (nullable for system notifications)
   resourceId String?  // ID of related resource (projectId, commentId, etc.)
   content    String   // Notification message
@@ -183,4 +185,17 @@ model Notification {
 
   @@index([userId, isRead])
   @@index([createdAt])
+}
+
+model ProjectFollow {
+  id        String   @id @default(cuid())
+  userId    String
+  projectId String
+  createdAt DateTime @default(now())
+  user      User     @relation("ProjectFollows", fields: [userId], references: [id], onDelete: Cascade)
+  project   Project  @relation("ProjectFollowers", fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, projectId])
+  @@index([projectId])
+  @@index([userId])
 }

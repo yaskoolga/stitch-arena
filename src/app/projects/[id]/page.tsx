@@ -22,6 +22,7 @@ import { SkeletonProjectDetail } from "@/components/skeleton-card";
 import { ImageDialog } from "@/components/ui/image-dialog";
 import { CommentsSection } from "@/components/comments/comments-section";
 import { LikeButton } from "@/components/projects/like-button";
+import { FollowProjectButton } from "@/components/projects/follow-project-button";
 import { useCVDetection } from "@/hooks/useCVDetection";
 import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus, Upload } from "lucide-react";
 
@@ -201,7 +202,7 @@ export default function ProjectDetailPage() {
   const completedStitches = project.completedStitches ?? 0;
   const totalStitches = project.totalStitches ?? 0;
   const pct = totalStitches > 0 ? Math.min(100, Math.round((completedStitches / totalStitches) * 100)) : 0;
-  const sortedLogs = [...project.logs].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const sortedLogs = [...(project.logs || [])].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   // Get today's date in YYYY-MM-DD format for comparison
   const todayStr = new Date().toISOString().split('T')[0];
@@ -276,28 +277,30 @@ export default function ProjectDetailPage() {
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-3">
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-bold text-foreground">
                       {project.title}
                     </h1>
-                    <div className="flex items-center gap-1">
-                      <Link href={`/projects/${id}/edit`}>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-muted-foreground hover:text-primary"
-                          title={t("projects.editProject")}
-                        >
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                      </Link>
-                    </div>
+                    {session?.user?.id === project.userId && (
+                      <div className="flex items-center gap-1">
+                        <Link href={`/projects/${id}/edit`}>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 text-muted-foreground hover:text-primary"
+                            title={t("projects.editProject")}
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                        </Link>
+                      </div>
+                    )}
                   </div>
 
                   {/* Project Metadata - Vertical Layout */}
                   <div className="space-y-1.5 text-sm">
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <Calendar className="h-4 w-4 text-primary" />
-                      <span>{t("projects.startedOn")} {format(new Date(project.logs[0]?.date || Date.now()), "dd.MM.yyyy")}</span>
+                      <span>{t("projects.startedOn")} {format(new Date((project.logs && project.logs[0]?.date) || Date.now()), "dd.MM.yyyy")}</span>
                     </div>
                     {project.manufacturer && (
                       <div className="flex items-center gap-2 text-muted-foreground">
@@ -345,24 +348,31 @@ export default function ProjectDetailPage() {
 
           {/* Action Buttons */}
           <div className="flex gap-2 flex-wrap mb-5">
-            {project.isPublic && (
-              <LikeButton projectId={id} variant="outline" />
+            {project.isPublic && session?.user?.id !== project.userId && (
+              <>
+                <LikeButton projectId={id} variant="outline" />
+                <FollowProjectButton projectId={id} projectOwnerId={project.userId} variant="outline" showCount />
+              </>
             )}
-            <Link href={`/projects/${id}/logs/new`}>
-              <Button className="gap-2">
-                <Plus className="h-4 w-4" />
-                {t("logs.addLog")}
+            {session?.user?.id === project.userId && (
+              <Link href={`/projects/${id}/logs/new`}>
+                <Button className="gap-2">
+                  <Plus className="h-4 w-4" />
+                  {t("logs.addLog")}
+                </Button>
+              </Link>
+            )}
+            {session?.user?.id === project.userId && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setDeleteProjectOpen(true)}
+                className="ml-auto text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                title={t("projects.deleteProject")}
+              >
+                <Trash2 className="h-4 w-4" />
               </Button>
-            </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setDeleteProjectOpen(true)}
-              className="ml-auto text-muted-foreground hover:text-destructive hover:bg-destructive/10"
-              title={t("projects.deleteProject")}
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
+            )}
           </div>
 
           {/* Progress Bar */}
@@ -394,7 +404,7 @@ export default function ProjectDetailPage() {
       <StatsCards
         totalStitches={totalStitches}
         completedStitches={completedStitches}
-        totalLogs={project.logs.length}
+        totalLogs={project.logs?.length || 0}
         firstLogDate={sortedLogs.length > 0 ? sortedLogs[sortedLogs.length - 1].date : undefined}
       />
 
@@ -404,20 +414,32 @@ export default function ProjectDetailPage() {
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">{t("logs.fields.photo")}</CardTitle>
             <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => document.getElementById('quick-photo-upload')?.click()}
-                disabled={uploadingPhoto || isDetecting}
-                className="gap-2"
-              >
-                <Upload className="h-4 w-4" />
-                {uploadingPhoto || isDetecting
-                  ? uploadingPhoto
-                    ? t("common.uploading")
-                    : t("projects.ai.detecting")
-                  : t("logs.addPhoto")}
-              </Button>
+              {session?.user?.id === project.userId && (
+                <>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => document.getElementById('quick-photo-upload')?.click()}
+                    disabled={uploadingPhoto || isDetecting}
+                    className="gap-2"
+                  >
+                    <Upload className="h-4 w-4" />
+                    {uploadingPhoto || isDetecting
+                      ? uploadingPhoto
+                        ? t("common.uploading")
+                        : t("projects.ai.detecting")
+                      : t("logs.addPhoto")}
+                  </Button>
+                  <input
+                    id="quick-photo-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleQuickPhotoUpload}
+                    disabled={uploadingPhoto || isDetecting}
+                    className="hidden"
+                  />
+                </>
+              )}
               {sortedLogs.filter(log => log.photoUrl || log.imageUrl).length > 5 && (
                 <Button
                   variant="outline"
@@ -428,14 +450,6 @@ export default function ProjectDetailPage() {
                 </Button>
               )}
             </div>
-            <input
-              id="quick-photo-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleQuickPhotoUpload}
-              disabled={uploadingPhoto || isDetecting}
-              className="hidden"
-            />
           </div>
         </CardHeader>
         <CardContent className="px-4 pb-0">
@@ -469,12 +483,12 @@ export default function ProjectDetailPage() {
                 </p>
               )}
             </>
-          ) : (
+          ) : session?.user?.id === project.userId ? (
             <div className="text-center py-6">
               <Upload className="h-10 w-10 mx-auto mb-2 text-muted-foreground" />
               <p className="text-sm text-muted-foreground">{t("logs.noPhotos")}</p>
             </div>
-          )}
+          ) : null}
         </CardContent>
       </Card>
 
@@ -500,9 +514,11 @@ export default function ProjectDetailPage() {
             <div className="text-center py-8">
               <Calendar className="h-12 w-12 mx-auto mb-3 text-muted-foreground" />
               <p className="text-sm text-muted-foreground mb-3">{t("logs.noLogs")}</p>
-              <Link href={`/projects/${id}/logs/new`}>
-                <Button size="sm">{t("logs.addLog")}</Button>
-              </Link>
+              {session?.user?.id === project.userId && (
+                <Link href={`/projects/${id}/logs/new`}>
+                  <Button size="sm">{t("logs.addLog")}</Button>
+                </Link>
+              )}
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -554,50 +570,54 @@ export default function ProjectDetailPage() {
                           {stitchCount.toLocaleString()}
                         </td>
                         <td className="py-2 px-3 text-right">
-                          {isEditing ? (
-                            <div className="flex gap-1 justify-end">
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                className="h-7 w-7 text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-950"
-                                onClick={() => handleSaveEdit(log.id)}
-                                title={t("common.save")}
-                              >
-                                ✓
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                className="h-7 w-7 text-muted-foreground hover:text-foreground"
-                                onClick={handleCancelEdit}
-                                title={t("common.cancel")}
-                              >
-                                ✕
-                              </Button>
-                            </div>
-                          ) : (
-                            <div className="flex gap-1 justify-end">
-                              {isToday && (
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-primary hover:bg-primary/10"
-                                  onClick={() => handleEditLog(log)}
-                                  title={t("common.edit")}
-                                >
-                                  <Edit className="h-3.5 w-3.5" />
-                                </Button>
+                          {session?.user?.id === project.userId && (
+                            <>
+                              {isEditing ? (
+                                <div className="flex gap-1 justify-end">
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-7 w-7 text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-950"
+                                    onClick={() => handleSaveEdit(log.id)}
+                                    title={t("common.save")}
+                                  >
+                                    ✓
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-7 w-7 text-muted-foreground hover:text-foreground"
+                                    onClick={handleCancelEdit}
+                                    title={t("common.cancel")}
+                                  >
+                                    ✕
+                                  </Button>
+                                </div>
+                              ) : (
+                                <div className="flex gap-1 justify-end">
+                                  {isToday && (
+                                    <Button
+                                      variant="ghost"
+                                      size="icon"
+                                      className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-primary hover:bg-primary/10"
+                                      onClick={() => handleEditLog(log)}
+                                      title={t("common.edit")}
+                                    >
+                                      <Edit className="h-3.5 w-3.5" />
+                                    </Button>
+                                  )}
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                                    onClick={() => setDeleteLogId(log.id)}
+                                    title={t("logs.deleteLog")}
+                                  >
+                                    <Trash2 className="h-3.5 w-3.5" />
+                                  </Button>
+                                </div>
                               )}
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
-                                onClick={() => setDeleteLogId(log.id)}
-                                title={t("logs.deleteLog")}
-                              >
-                                <Trash2 className="h-3.5 w-3.5" />
-                              </Button>
-                            </div>
+                            </>
                           )}
                         </td>
                       </tr>
@@ -627,7 +647,7 @@ export default function ProjectDetailPage() {
           <CardTitle className="text-lg">{t("projects.progress.title")}</CardTitle>
         </CardHeader>
         <CardContent className="px-4 pb-0">
-          <ProgressChart logs={project.logs} />
+          <ProgressChart logs={project.logs || []} />
         </CardContent>
       </Card>
     </div>

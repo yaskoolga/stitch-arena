@@ -135,3 +135,28 @@ export async function notifyAchievement({
     content: `You unlocked: ${achievementName}`,
   });
 }
+
+/**
+ * Notify when someone follows a project
+ */
+export async function notifyProjectFollow({
+  projectId,
+  projectTitle,
+  followedByUserId,
+  followedByUserName,
+  projectOwnerId,
+}: {
+  projectId: string;
+  projectTitle: string;
+  followedByUserId: string;
+  followedByUserName: string;
+  projectOwnerId: string;
+}) {
+  return createNotification({
+    userId: projectOwnerId,
+    type: "projectfollow",
+    actorId: followedByUserId,
+    resourceId: projectId,
+    content: `${followedByUserName} started following your project "${projectTitle}"`,
+  });
+}
