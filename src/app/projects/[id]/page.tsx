@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { StatsCards } from "@/components/dashboard/stats-cards";
 import { ProgressChart } from "@/components/projects/progress-chart";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -66,6 +67,8 @@ export default function ProjectDetailPage() {
   const [deleteLogId, setDeleteLogId] = useState<string | null>(null);
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [editingLogId, setEditingLogId] = useState<string | null>(null);
+  const [editDailyStitches, setEditDailyStitches] = useState<string>("");
 
   // CV Detection hook
   const { detectProgress, isLoading: isDetecting } = useCVDetection();
@@ -82,6 +85,21 @@ export default function ProjectDetailPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["project", id] });
       toast.success(t("toast.success.logDeleted"));
+    },
+    onError: () => toast.error(t("toast.error.generic")),
+  });
+
+  const updateLog = useMutation({
+    mutationFn: ({ logId, dailyStitches, totalStitches }: { logId: string; dailyStitches: number; totalStitches: number }) =>
+      fetch(`/api/logs/${logId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ dailyStitches, totalStitches, userCorrected: true }),
+      }).then((r) => r.json()),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["project", id] });
+      setEditingLogId(null);
+      toast.success(t("toast.success.logUpdated"));
     },
     onError: () => toast.error(t("toast.error.generic")),
   });
@@ -184,6 +202,45 @@ export default function ProjectDetailPage() {
   const totalStitches = project.totalStitches ?? 0;
   const pct = totalStitches > 0 ? Math.min(100, Math.round((completedStitches / totalStitches) * 100)) : 0;
   const sortedLogs = [...project.logs].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // Get today's date in YYYY-MM-DD format for comparison
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  const handleEditLog = (log: Log) => {
+    setEditingLogId(log.id);
+    setEditDailyStitches((log.dailyStitches ?? 0).toString());
+  };
+
+  const handleSaveEdit = (logId: string) => {
+    const newDailyStitches = Number(editDailyStitches);
+    if (isNaN(newDailyStitches) || newDailyStitches < 0) {
+      toast.error(t("toast.error.generic"));
+      return;
+    }
+
+    // Find the log being edited
+    const editedLog = sortedLogs.find(log => log.id === logId);
+    if (!editedLog) return;
+
+    // Find the previous log (by date)
+    const editedLogIndex = sortedLogs.findIndex(log => log.id === logId);
+    const previousLog = editedLogIndex < sortedLogs.length - 1 ? sortedLogs[editedLogIndex + 1] : null;
+    const previousTotal = previousLog?.totalStitches ?? 0;
+
+    // Calculate new totalStitches
+    const newTotalStitches = previousTotal + newDailyStitches;
+
+    updateLog.mutate({
+      logId,
+      dailyStitches: newDailyStitches,
+      totalStitches: newTotalStitches
+    });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingLogId(null);
+    setEditDailyStitches("");
+  };
 
   return (
     <div className="space-y-6">
@@ -464,6 +521,8 @@ export default function ProjectDetailPage() {
                     .map((log) => {
                     const stitchCount = log.totalStitches ?? log.stitches ?? 0;
                     const dailyCount = log.dailyStitches ?? 0;
+                    const isToday = log.date.split('T')[0] === todayStr;
+                    const isEditing = editingLogId === log.id;
 
                     return (
                       <tr key={log.id} className="group border-b hover:bg-muted/50 transition-colors">
@@ -474,7 +533,16 @@ export default function ProjectDetailPage() {
                           )}
                         </td>
                         <td className="py-2 px-3 text-right">
-                          {dailyCount > 0 ? (
+                          {isEditing ? (
+                            <Input
+                              type="number"
+                              min={0}
+                              value={editDailyStitches}
+                              onChange={(e) => setEditDailyStitches(e.target.value)}
+                              className="h-8 w-24 text-right"
+                              autoFocus
+                            />
+                          ) : dailyCount > 0 ? (
                             <span className="text-green-600 dark:text-green-400 font-medium">
                               +{dailyCount.toLocaleString()}
                             </span>
@@ -486,15 +554,51 @@ export default function ProjectDetailPage() {
                           {stitchCount.toLocaleString()}
                         </td>
                         <td className="py-2 px-3 text-right">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
-                            onClick={() => setDeleteLogId(log.id)}
-                            title={t("logs.deleteLog")}
-                          >
-                            <Trash2 className="h-3.5 w-3.5" />
-                          </Button>
+                          {isEditing ? (
+                            <div className="flex gap-1 justify-end">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-7 w-7 text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-950"
+                                onClick={() => handleSaveEdit(log.id)}
+                                title={t("common.save")}
+                              >
+                                ✓
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-7 w-7 text-muted-foreground hover:text-foreground"
+                                onClick={handleCancelEdit}
+                                title={t("common.cancel")}
+                              >
+                                ✕
+                              </Button>
+                            </div>
+                          ) : (
+                            <div className="flex gap-1 justify-end">
+                              {isToday && (
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-primary hover:bg-primary/10"
+                                  onClick={() => handleEditLog(log)}
+                                  title={t("common.edit")}
+                                >
+                                  <Edit className="h-3.5 w-3.5" />
+                                </Button>
+                              )}
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                                onClick={() => setDeleteLogId(log.id)}
+                                title={t("logs.deleteLog")}
+                              >
+                                <Trash2 className="h-3.5 w-3.5" />
+                              </Button>
+                            </div>
+                          )}
                         </td>
                       </tr>
                     );
