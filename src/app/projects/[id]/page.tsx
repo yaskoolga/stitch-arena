@@ -21,7 +21,6 @@ import { SkeletonProjectDetail } from "@/components/skeleton-card";
 import { ImageDialog } from "@/components/ui/image-dialog";
 import { CommentsSection } from "@/components/comments/comments-section";
 import { LikeButton } from "@/components/projects/like-button";
-import { ExportButtons } from "@/components/projects/export-buttons";
 import { useCVDetection } from "@/hooks/useCVDetection";
 import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus, Upload } from "lucide-react";
 
@@ -224,7 +223,6 @@ export default function ProjectDetailPage() {
                       {project.title}
                     </h1>
                     <div className="flex items-center gap-1">
-                      <ExportButtons project={project} />
                       <Link href={`/projects/${id}/edit`}>
                         <Button
                           variant="ghost"
