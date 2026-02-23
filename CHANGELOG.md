@@ -6,6 +6,58 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-02-23
+
+### ✨ Added - Automatic Stitch Detection (AI)
+
+#### CV-Powered Progress Tracking
+- **Automatic Stitch Detection** from uploaded photos:
+  - Integration with CV-service for real-time stitch counting
+  - AI-powered detection triggers on photo upload (200-500ms)
+  - Auto-populates stitch count when confidence ≥ 50%
+  - Confidence scoring displayed to user (0-100%)
+
+#### Smart User Interface
+- **Confidence Badges** with color coding:
+  - 🟢 Green badge (≥80%): High confidence
+  - 🟡 Yellow badge (50-79%): Medium confidence
+  - 🔴 Red badge (<50%): Low confidence (manual input required)
+  - 🤖 Robot emoji indicator for AI-detected values
+  - ✏️ "Manually corrected" badge when user overrides AI
+
+- **Enhanced Daily Log Form**:
+  - Automatic CV detection on photo upload
+  - Real-time loading states ("Analyzing photo...")
+  - Auto-fill stitch count field with AI result
+  - Manual correction tracking with userCorrected flag
+  - Graceful fallback to manual input on service errors
+
+- **Quick Photo Upload**:
+  - CV detection integrated into quick upload flow
+  - Confidence percentage shown in success toast
+  - Auto-creates log entry with AI-detected stitches
+  - Processing state indicators during detection
+
+#### Database & API
+- **AI Metadata Storage**:
+  - `aiDetected` field - AI-detected stitch count
+  - `aiConfidence` field - Confidence score (0-1)
+  - `userCorrected` field - Tracks manual user corrections
+  - All fields properly validated and saved via Prisma
+
+#### Internationalization
+- **6 Language Support** for all AI features:
+  - English, Russian, German, French, Spanish, Chinese
+  - Translations for: detecting, confidence, corrected, lowConfidence, serviceError, fallbackManual
+  - Consistent messaging across all languages
+
+#### Technical Implementation
+- Uses existing `useCVDetection` hook for CV API calls
+- Non-blocking detection with optimistic UI updates
+- Proper error handling with user-friendly messages
+- Maintains backward compatibility with manual entry
+- No breaking changes to existing workflows
+
 ## [0.7.0] - 2026-02-23
 
 ### ✨ Added - Challenge System Enhancements & Data Export
