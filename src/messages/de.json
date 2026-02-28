@@ -101,7 +101,9 @@
     "signUp": "Registrieren",
     "signInWith": "Anmelden mit {provider}",
     "orContinueWith": "Oder fortfahren mit",
-    "loginRequired": "Melde dich an, um Projekten zu folgen"
+    "loginRequired": "Melde dich an, um Projekten zu folgen",
+    "loginToViewFavorites": "Melde dich an, um deine Lieblingsprojekte anzuzeigen",
+    "loginToViewFollowing": "Melde dich an, um Projekte anzuzeigen, denen du folgst"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -172,17 +174,22 @@
       "title": "Titel",
       "description": "Beschreibung",
       "manufacturer": "Hersteller",
+      "manufacturerPlaceholder": "Hersteller auswählen",
       "totalStitches": "Stiche gesamt",
       "initialStitches": "Anfangsstiche",
       "initialStitchesHint": "Stiche, die bereits vor Beginn der Verfolgung dieses Projekts fertiggestellt wurden",
+      "initialStitchesExplanation": "Anfangsstiche werden nicht bei Geschwindigkeitsstatistiken, Erfolgen oder täglichen Durchschnittswerten gezählt. Sie werden nur zum Gesamtprojektfortschritt hinzugefügt.",
       "width": "Breite",
       "height": "Höhe",
       "canvasType": "Stoff-Typ",
+      "canvasTypePlaceholder": "z.B. Aida 14, Leinen 28",
       "coverImage": "Titelbild",
-      "schemaImage": "Zählmusterbild",
+      "coverImageHint": "Foto von der Packung oder dem Muster",
       "status": "Status",
       "themes": "Themen",
-      "isPublic": "Öffentlich machen"
+      "themesHint": "Wählen Sie bis zu 5 Themen für dieses Projekt",
+      "isPublic": "Öffentlich machen",
+      "calculateFromDimensions": "Aus Abmessungen berechnen (Breite × Höhe)"
     },
     "status": {
       "inProgress": "In Bearbeitung",
@@ -227,16 +234,20 @@
       "formDescription": "Laden Sie ein Foto für automatische Zählung hoch oder geben Sie die Anzahl manuell ein",
       "uploadPhoto": "Foto Ihrer Arbeit",
       "uploadPhotoHint": "Laden Sie ein klares, gut beleuchtetes Foto für beste KI-Erkennungsergebnisse hoch",
+      "uploadPhotoHintInitial": "Laden Sie ein Foto Ihres aktuellen Fortschritts hoch, um die Anfangsstiche automatisch zu erkennen",
       "processing": "Verarbeitung...",
       "choosePhoto": "Foto auswählen",
       "changePhoto": "Foto ändern"
     },
     "follow": "Folgen",
     "unfollow": "Entfolgen",
-    "followers": "Follower"
+    "followers": "Follower",
+    "onProject": "am Projekt"
   },
   "logs": {
     "title": "Verlauf",
+    "initial": "Anfänglich",
+    "initialStitches": "anfänglich",
     "addLog": "Eintrag hinzufügen",
     "addPhoto": "Foto hinzufügen",
     "addDailyLog": "Tageseintrag hinzufügen",
@@ -308,6 +319,16 @@
     "title": "Galerie",
     "subtitle": "Kreuzstichprojekte aus der Community 🎉",
     "by": "von",
+    "viewPhoto": "Foto ansehen",
+    "viewPhotoShort": "Ansehen",
+    "openProject": "Projekt öffnen",
+    "openProjectShort": "Öffnen",
+    "tabs": {
+      "all": "Alle Projekte",
+      "feed": "Feed",
+      "favorites": "Favoriten",
+      "following": "Folge ich"
+    },
     "filters": {
       "all": "Alle",
       "themes": "Themen",
@@ -375,7 +396,7 @@
     "title": "Erfolge",
     "unlocked": "Freigeschaltet",
     "locked": "Gesperrt",
-    "progress": "Fortschritt: {current} / {target}",
+    "progress": "Fortschritt",
     "unlockedAt": "Freigeschaltet am {date}",
     "categories": {
       "all": "Alle",
@@ -442,7 +463,7 @@
       },
       "speed_demon": {
         "name": "Geschwindigkeitsdämon",
-        "description": "Erreichen Sie 300+ Stiche/Tag im Durchschnitt (Raketen-Stufe)"
+        "description": "Erreichen Sie 500+ Stiche/Tag im Durchschnitt (Raketen-Stufe)"
       },
       "first_public": {
         "name": "Öffentlich werden",
@@ -467,6 +488,10 @@
       "name": "Schildkröte",
       "description": "Langsam und stetig"
     },
+    "WALKER": {
+      "name": "Fußgänger",
+      "description": "Gutes Tempo"
+    },
     "BIKE": {
       "name": "Fahrrad",
       "description": "Schön vorankommen"
@@ -474,6 +499,10 @@
     "CAR": {
       "name": "Auto",
       "description": "Schnell unterwegs"
+    },
+    "PLANE": {
+      "name": "Flugzeug",
+      "description": "Blitzschnell"
     },
     "ROCKET": {
       "name": "Rakete",

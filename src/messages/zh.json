@@ -101,7 +101,9 @@
     "signUp": "注册",
     "signInWith": "使用 {provider} 登录",
     "orContinueWith": "或继续使用",
-    "loginRequired": "登录以关注项目"
+    "loginRequired": "登录以关注项目",
+    "loginToViewFavorites": "登录以查看您收藏的项目",
+    "loginToViewFollowing": "登录以查看您关注的项目"
   },
   "dashboard": {
     "title": "控制面板",
@@ -172,17 +174,22 @@
       "title": "标题",
       "description": "描述",
       "manufacturer": "制造商",
+      "manufacturerPlaceholder": "选择制造商",
       "totalStitches": "针数总计",
       "initialStitches": "初始针数",
       "initialStitchesHint": "在开始跟踪此项目之前已完成的针数",
+      "initialStitchesExplanation": "初始针数不计入速度统计、成就或每日平均值。它们只是添加以显示项目总进度。",
       "width": "宽度",
       "height": "高度",
       "canvasType": "绣布类型",
+      "canvasTypePlaceholder": "例如 Aida 14, 麻布 28",
       "coverImage": "封面图片",
-      "schemaImage": "图纸图片",
+      "coverImageHint": "包装或图案的照片",
       "status": "状态",
       "themes": "主题",
-      "isPublic": "设为公开"
+      "themesHint": "为此项目选择最多5个主题",
+      "isPublic": "设为公开",
+      "calculateFromDimensions": "从尺寸计算（宽度 × 高度）"
     },
     "status": {
       "inProgress": "进行中",
@@ -227,16 +234,20 @@
       "formDescription": "上传照片进行自动计数，或手动输入数量",
       "uploadPhoto": "您的作品照片",
       "uploadPhotoHint": "上传清晰、光线充足的照片以获得最佳AI检测结果",
+      "uploadPhotoHintInitial": "上传当前进度的照片以自动检测初始针数",
       "processing": "处理中...",
       "choosePhoto": "选择照片",
       "changePhoto": "更换照片"
     },
     "follow": "关注",
     "unfollow": "取消关注",
-    "followers": "关注者"
+    "followers": "关注者",
+    "onProject": "在项目"
   },
   "logs": {
     "title": "历史记录",
+    "initial": "初始",
+    "initialStitches": "初始",
     "addLog": "添加记录",
     "addPhoto": "添加照片",
     "addDailyLog": "添加每日记录",
@@ -308,6 +319,16 @@
     "title": "作品库",
     "subtitle": "社区的十字绣作品 🎉",
     "by": "作者",
+    "viewPhoto": "查看照片",
+    "viewPhotoShort": "查看",
+    "openProject": "打开项目",
+    "openProjectShort": "打开",
+    "tabs": {
+      "all": "所有项目",
+      "feed": "动态",
+      "favorites": "收藏",
+      "following": "关注中"
+    },
     "filters": {
       "all": "全部",
       "themes": "主题",
@@ -369,7 +390,7 @@
     "title": "成就",
     "unlocked": "已解锁",
     "locked": "未解锁",
-    "progress": "进度：{current} / {target}",
+    "progress": "进度",
     "unlockedAt": "解锁于 {date}",
     "categories": {
       "all": "全部",
@@ -436,7 +457,7 @@
       },
       "speed_demon": {
         "name": "速度恶魔",
-        "description": "达到平均每天300+针（火箭级）"
+        "description": "达到平均每天500+针（火箭级）"
       },
       "first_public": {
         "name": "走向公开",
@@ -461,6 +482,10 @@
       "name": "乌龟",
       "description": "慢而稳"
     },
+    "WALKER": {
+      "name": "步行者",
+      "description": "良好节奏"
+    },
     "BIKE": {
       "name": "自行车",
       "description": "进展不错"
@@ -468,6 +493,10 @@
     "CAR": {
       "name": "汽车",
       "description": "快速前进"
+    },
+    "PLANE": {
+      "name": "飞机",
+      "description": "飞速前进"
     },
     "ROCKET": {
       "name": "火箭",

@@ -101,7 +101,9 @@
     "signUp": "Registrarse",
     "signInWith": "Iniciar sesión con {provider}",
     "orContinueWith": "O continuar con",
-    "loginRequired": "Inicia sesión para seguir proyectos"
+    "loginRequired": "Inicia sesión para seguir proyectos",
+    "loginToViewFavorites": "Inicia sesión para ver tus proyectos favoritos",
+    "loginToViewFollowing": "Inicia sesión para ver los proyectos que sigues"
   },
   "dashboard": {
     "title": "Panel",
@@ -172,17 +174,22 @@
       "title": "Título",
       "description": "Descripción",
       "manufacturer": "Fabricante",
+      "manufacturerPlaceholder": "Seleccionar fabricante",
       "totalStitches": "Puntadas totales",
       "initialStitches": "Puntadas iniciales",
       "initialStitchesHint": "Puntadas ya completadas antes de comenzar a rastrear este proyecto",
+      "initialStitchesExplanation": "Las puntadas iniciales no se cuentan en las estadísticas de velocidad, logros o promedios diarios. Solo se agregan para mostrar el progreso total del proyecto.",
       "width": "Ancho",
       "height": "Alto",
       "canvasType": "Tipo de tela",
+      "canvasTypePlaceholder": "ej. Aida 14, Lino 28",
       "coverImage": "Imagen de portada",
-      "schemaImage": "Imagen del patrón",
+      "coverImageHint": "Foto del paquete o patrón",
       "status": "Estado",
       "themes": "Temas",
-      "isPublic": "Hacer público"
+      "themesHint": "Seleccione hasta 5 temas para este proyecto",
+      "isPublic": "Hacer público",
+      "calculateFromDimensions": "Calcular desde dimensiones (ancho × alto)"
     },
     "status": {
       "inProgress": "En progreso",
@@ -227,16 +234,20 @@
       "formDescription": "Sube una foto para conteo automático o ingresa el número manualmente",
       "uploadPhoto": "Foto de tu trabajo",
       "uploadPhotoHint": "Sube una foto clara y bien iluminada para mejores resultados de detección IA",
+      "uploadPhotoHintInitial": "Sube una foto de tu progreso actual para detectar automáticamente las puntadas iniciales",
       "processing": "Procesando...",
       "choosePhoto": "Elegir foto",
       "changePhoto": "Cambiar foto"
     },
     "follow": "Seguir",
     "unfollow": "Dejar de seguir",
-    "followers": "Seguidores"
+    "followers": "Seguidores",
+    "onProject": "en proyecto"
   },
   "logs": {
     "title": "Historial",
+    "initial": "Inicial",
+    "initialStitches": "inicial",
     "addLog": "Añadir entrada",
     "addPhoto": "Añadir foto",
     "addDailyLog": "Añadir registro diario",
@@ -308,6 +319,16 @@
     "title": "Galería",
     "subtitle": "Proyectos de punto de cruz de la comunidad 🎉",
     "by": "por",
+    "viewPhoto": "Ver foto",
+    "viewPhotoShort": "Ver",
+    "openProject": "Abrir proyecto",
+    "openProjectShort": "Abrir",
+    "tabs": {
+      "all": "Todos los proyectos",
+      "feed": "Feed",
+      "favorites": "Favoritos",
+      "following": "Siguiendo"
+    },
     "filters": {
       "all": "Todos",
       "themes": "Temas",
@@ -375,7 +396,7 @@
     "title": "Logros",
     "unlocked": "desbloqueado",
     "locked": "Bloqueado",
-    "progress": "Progreso: {current} / {target}",
+    "progress": "Progreso",
     "unlockedAt": "Desbloqueado el {date}",
     "categories": {
       "all": "Todos",
@@ -442,7 +463,7 @@
       },
       "speed_demon": {
         "name": "Demonio de velocidad",
-        "description": "Alcanza 300+ puntadas/día en promedio (nivel Cohete)"
+        "description": "Alcanza 500+ puntadas/día en promedio (nivel Cohete)"
       },
       "first_public": {
         "name": "Haciéndose público",
@@ -467,6 +488,10 @@
       "name": "Tortuga",
       "description": "Lento pero constante"
     },
+    "WALKER": {
+      "name": "Caminante",
+      "description": "Buen ritmo"
+    },
     "BIKE": {
       "name": "Bicicleta",
       "description": "Avanzando bien"
@@ -474,6 +499,10 @@
     "CAR": {
       "name": "Coche",
       "description": "Navegando rápido"
+    },
+    "PLANE": {
+      "name": "Avión",
+      "description": "Volando"
     },
     "ROCKET": {
       "name": "Cohete",

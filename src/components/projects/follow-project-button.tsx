@@ -29,11 +29,6 @@ export function FollowProjectButton({
   const { data: session } = useSession();
   const queryClient = useQueryClient();
 
-  // Don't show follow button for own projects
-  if (session?.user?.id && projectOwnerId && session.user.id === projectOwnerId) {
-    return null;
-  }
-
   const { data } = useQuery<{ followerCount: number; isFollowing: boolean }>({
     queryKey: ["projectfollow", projectId],
     queryFn: async () => {
@@ -86,6 +81,11 @@ export function FollowProjectButton({
 
   const followerCount = data?.followerCount || 0;
   const isFollowing = data?.isFollowing || false;
+
+  // Don't show follow button for own projects
+  if (session?.user?.id && projectOwnerId && session.user.id === projectOwnerId) {
+    return null;
+  }
 
   return (
     <Button

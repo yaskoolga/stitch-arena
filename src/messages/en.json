@@ -8,6 +8,7 @@
     "edit": "Edit",
     "create": "Create",
     "close": "Close",
+    "noImage": "No image",
     "confirm": "Confirm",
     "search": "Search",
     "filter": "Filter",
@@ -94,6 +95,8 @@
     "signInWith": "Sign in with {provider}",
     "orContinueWith": "Or continue with",
     "loginRequired": "Sign in to follow projects",
+    "loginToViewFavorites": "Sign in to view your favorite projects",
+    "loginToViewFollowing": "Sign in to view projects you're following",
     "errors": {
       "invalidCredentials": "Invalid email or password",
       "userNotFound": "No user found with this email",
@@ -170,21 +173,27 @@
     "follow": "Follow",
     "unfollow": "Unfollow",
     "followers": "Followers",
+    "onProject": "on project",
     "fields": {
       "title": "Title",
       "description": "Description",
       "manufacturer": "Manufacturer",
+      "manufacturerPlaceholder": "Select manufacturer",
       "totalStitches": "Total Stitches",
       "initialStitches": "Initial Stitches",
       "initialStitchesHint": "Stitches already completed before you started tracking this project",
+      "initialStitchesExplanation": "Initial stitches are not counted toward your speed stats, achievements, or daily averages. They're simply added to show total project progress.",
       "width": "Width",
       "height": "Height",
       "canvasType": "Canvas Type",
+      "canvasTypePlaceholder": "e.g., Aida 14, Linen 28",
       "coverImage": "Cover Image",
-      "schemaImage": "Pattern Image",
+      "coverImageHint": "Photo from the package or pattern",
       "status": "Status",
       "themes": "Themes",
-      "isPublic": "Make Public"
+      "themesHint": "Select up to 5 themes for this project",
+      "isPublic": "Make Public",
+      "calculateFromDimensions": "Calculate from dimensions (width × height)"
     },
     "status": {
       "inProgress": "In Progress",
@@ -229,6 +238,7 @@
       "formDescription": "Upload a photo for automatic counting, or enter the number manually",
       "uploadPhoto": "Photo of your work",
       "uploadPhotoHint": "Upload a clear, well-lit photo for best AI detection results",
+      "uploadPhotoHintInitial": "Upload a photo of your current progress to automatically detect initial stitches",
       "processing": "Processing...",
       "choosePhoto": "Choose Photo",
       "changePhoto": "Change Photo"
@@ -256,6 +266,8 @@
     "newStitches": "new",
     "projectNotFound": "Project not found",
     "backToDashboard": "Back to Dashboard",
+    "initial": "Initial",
+    "initialStitches": "initial",
     "tipsTitle": "💡 Tips for tracking:",
     "tip1": "Log your progress daily for best tracking",
     "tip2": "Take photos in consistent lighting to see your progress",
@@ -307,6 +319,16 @@
     "title": "Gallery",
     "subtitle": "Cross-stitch projects from the community 🎉",
     "by": "by",
+    "viewPhoto": "View Photo",
+    "viewPhotoShort": "View",
+    "openProject": "Open Project",
+    "openProjectShort": "Open",
+    "tabs": {
+      "all": "All Projects",
+      "feed": "Feed",
+      "favorites": "Favorites",
+      "following": "Following"
+    },
     "filters": {
       "all": "All",
       "themes": "Themes",
@@ -374,7 +396,7 @@
     "title": "Achievements",
     "unlocked": "unlocked",
     "locked": "Locked",
-    "progress": "Progress: {current} / {target}",
+    "progress": "Progress",
     "unlockedAt": "Unlocked on {date}",
     "categories": {
       "all": "All",
@@ -441,7 +463,7 @@
       },
       "speed_demon": {
         "name": "Speed Demon",
-        "description": "Reach 300+ stitches/day average (Rocket tier)"
+        "description": "Reach 500+ stitches/day average (Rocket tier)"
       },
       "first_public": {
         "name": "Going Public",
@@ -480,6 +502,10 @@
       "name": "Turtle",
       "description": "Slow and steady"
     },
+    "WALKER": {
+      "name": "Walker",
+      "description": "Nice pace"
+    },
     "BIKE": {
       "name": "Bike",
       "description": "Moving along nicely"
@@ -487,6 +513,10 @@
     "CAR": {
       "name": "Car",
       "description": "Cruising fast"
+    },
+    "PLANE": {
+      "name": "Plane",
+      "description": "Flying through"
     },
     "ROCKET": {
       "name": "Rocket",

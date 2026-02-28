@@ -8,6 +8,7 @@
     "edit": "Редактировать",
     "create": "Создать",
     "close": "Закрыть",
+    "noImage": "Нет изображения",
     "confirm": "Подтвердить",
     "search": "Поиск",
     "filter": "Фильтр",
@@ -94,6 +95,8 @@
     "signInWith": "Войти через {provider}",
     "orContinueWith": "Или продолжить с",
     "loginRequired": "Войдите, чтобы подписаться на проекты",
+    "loginToViewFavorites": "Войдите, чтобы просмотреть избранные проекты",
+    "loginToViewFollowing": "Войдите, чтобы просмотреть проекты, на которые вы подписаны",
     "errors": {
       "invalidCredentials": "Неверный email или пароль",
       "userNotFound": "Пользователь с таким email не найден",
@@ -170,21 +173,27 @@
     "follow": "Подписаться",
     "unfollow": "Отписаться",
     "followers": "Подписчики",
+    "onProject": "на проекте",
     "fields": {
       "title": "Название",
       "description": "Описание",
       "manufacturer": "Производитель",
+      "manufacturerPlaceholder": "Выберите производителя",
       "totalStitches": "Всего крестиков",
       "initialStitches": "Начальных крестиков",
       "initialStitchesHint": "Крестики, уже вышитые до начала отслеживания этого проекта",
+      "initialStitchesExplanation": "Начальные крестики не учитываются в статистике скорости, достижениях и средних значениях. Они только прибавляются к общему прогрессу проекта.",
       "width": "Ширина",
       "height": "Высота",
       "canvasType": "Тип канвы",
+      "canvasTypePlaceholder": "напр., Aida 14, Лён 28",
       "coverImage": "Фото обложки",
-      "schemaImage": "Фото схемы",
+      "coverImageHint": "Фото с упаковки или схемы",
       "status": "Статус",
       "themes": "Темы",
-      "isPublic": "Сделать публичным"
+      "themesHint": "Выберите до 5 тем для проекта",
+      "isPublic": "Сделать публичным",
+      "calculateFromDimensions": "Рассчитать из размеров (ширина × высота)"
     },
     "status": {
       "inProgress": "В процессе",
@@ -229,6 +238,7 @@
       "formDescription": "Загрузите фото для автоматического подсчёта или введите количество вручную",
       "uploadPhoto": "Фото вашей работы",
       "uploadPhotoHint": "Загрузите чёткое, хорошо освещённое фото для лучших результатов AI-определения",
+      "uploadPhotoHintInitial": "Загрузите фото текущего состояния для автоопределения начальных крестиков",
       "processing": "Обработка...",
       "choosePhoto": "Выбрать фото",
       "changePhoto": "Изменить фото"
@@ -236,6 +246,8 @@
   },
   "logs": {
     "title": "История записей",
+    "initial": "Начальные",
+    "initialStitches": "начальные",
     "addLog": "Добавить запись",
     "addPhoto": "Добавить фото",
     "addDailyLog": "Добавить ежедневную запись",
@@ -307,6 +319,16 @@
     "title": "Галерея",
     "subtitle": "Проекты вышивки крестом от сообщества 🎉",
     "by": "от",
+    "viewPhoto": "Увеличить фото",
+    "viewPhotoShort": "Фото",
+    "openProject": "Открыть проект",
+    "openProjectShort": "Открыть",
+    "tabs": {
+      "all": "Все проекты",
+      "feed": "Лента",
+      "favorites": "Избранное",
+      "following": "Подписки"
+    },
     "filters": {
       "all": "Все",
       "themes": "Темы",
@@ -374,7 +396,7 @@
     "title": "Достижения",
     "unlocked": "разблокировано",
     "locked": "Заблокировано",
-    "progress": "Прогресс: {current} / {target}",
+    "progress": "Прогресс",
     "unlockedAt": "Разблокировано {date}",
     "categories": {
       "all": "Все",
@@ -441,7 +463,7 @@
       },
       "speed_demon": {
         "name": "Демон скорости",
-        "description": "Достигните 300+ крестиков/день (уровень Ракета)"
+        "description": "Достигните 500+ крестиков/день (уровень Ракета)"
       },
       "first_public": {
         "name": "Выход в свет",
@@ -480,13 +502,21 @@
       "name": "Черепаха",
       "description": "Медленно и уверенно"
     },
+    "WALKER": {
+      "name": "Пешеход",
+      "description": "Хороший темп"
+    },
     "BIKE": {
       "name": "Велосипед",
-      "description": "Хороший темп"
+      "description": "Отличный темп"
     },
     "CAR": {
       "name": "Автомобиль",
       "description": "Быстрая езда"
+    },
+    "PLANE": {
+      "name": "Самолёт",
+      "description": "Сверхбыстро"
     },
     "ROCKET": {
       "name": "Ракета",

@@ -99,7 +99,9 @@
     "signUp": "S'inscrire",
     "signInWith": "Se connecter avec {provider}",
     "orContinueWith": "Ou continuer avec",
-    "loginRequired": "Connectez-vous pour suivre des projets"
+    "loginRequired": "Connectez-vous pour suivre des projets",
+    "loginToViewFavorites": "Connectez-vous pour voir vos projets favoris",
+    "loginToViewFollowing": "Connectez-vous pour voir les projets que vous suivez"
   },
   "dashboard": {
     "title": "Tableau de bord",
@@ -169,21 +171,27 @@
     "follow": "S'abonner",
     "unfollow": "Se désabonner",
     "followers": "Abonnés",
+    "onProject": "sur le projet",
     "fields": {
       "title": "Titre",
       "description": "Description",
       "manufacturer": "Fabricant",
+      "manufacturerPlaceholder": "Sélectionner le fabricant",
       "totalStitches": "Points totaux",
       "initialStitches": "Points initiaux",
       "initialStitchesHint": "Points déjà complétés avant de commencer à suivre ce projet",
+      "initialStitchesExplanation": "Les points initiaux ne sont pas comptés dans les statistiques de vitesse, les succès ou les moyennes quotidiennes. Ils sont simplement ajoutés pour montrer la progression totale du projet.",
       "width": "Largeur",
       "height": "Hauteur",
       "canvasType": "Type de toile",
+      "canvasTypePlaceholder": "ex. Aida 14, Lin 28",
       "coverImage": "Image de couverture",
-      "schemaImage": "Image de la grille",
+      "coverImageHint": "Photo de l'emballage ou du modèle",
       "status": "Statut",
       "themes": "Thèmes",
-      "isPublic": "Rendre public"
+      "themesHint": "Sélectionnez jusqu'à 5 thèmes pour ce projet",
+      "isPublic": "Rendre public",
+      "calculateFromDimensions": "Calculer à partir des dimensions (largeur × hauteur)"
     },
     "status": {
       "inProgress": "En cours",
@@ -228,6 +236,7 @@
       "formDescription": "Téléchargez une photo pour le comptage automatique ou saisissez le nombre manuellement",
       "uploadPhoto": "Photo de votre travail",
       "uploadPhotoHint": "Téléchargez une photo claire et bien éclairée pour de meilleurs résultats de détection IA",
+      "uploadPhotoHintInitial": "Téléchargez une photo de votre progression actuelle pour détecter automatiquement les points initiaux",
       "processing": "Traitement...",
       "choosePhoto": "Choisir une photo",
       "changePhoto": "Changer la photo"
@@ -235,6 +244,8 @@
   },
   "logs": {
     "title": "Historique",
+    "initial": "Initial",
+    "initialStitches": "initial",
     "addLog": "Ajouter une entrée",
     "addPhoto": "Ajouter une photo",
     "addDailyLog": "Ajouter une entrée quotidienne",
@@ -306,6 +317,16 @@
     "title": "Galerie",
     "subtitle": "Projets de point de croix de la communauté 🎉",
     "by": "par",
+    "viewPhoto": "Voir la photo",
+    "viewPhotoShort": "Voir",
+    "openProject": "Ouvrir le projet",
+    "openProjectShort": "Ouvrir",
+    "tabs": {
+      "all": "Tous les projets",
+      "feed": "Fil d'actualité",
+      "favorites": "Favoris",
+      "following": "Abonnements"
+    },
     "filters": {
       "all": "Tous",
       "themes": "Thèmes",
@@ -373,7 +394,7 @@
     "title": "Succès",
     "unlocked": "débloqué",
     "locked": "Verrouillé",
-    "progress": "Progression : {current} / {target}",
+    "progress": "Progression",
     "unlockedAt": "Débloqué le {date}",
     "categories": {
       "all": "Tous",
@@ -440,7 +461,7 @@
       },
       "speed_demon": {
         "name": "Démon de vitesse",
-        "description": "Atteignez 300+ points/jour en moyenne (niveau Fusée)"
+        "description": "Atteignez 500+ points/jour en moyenne (niveau Fusée)"
       },
       "first_public": {
         "name": "Passage au public",
@@ -465,6 +486,10 @@
       "name": "Tortue",
       "description": "Lent et régulier"
     },
+    "WALKER": {
+      "name": "Marcheur",
+      "description": "Bon rythme"
+    },
     "BIKE": {
       "name": "Vélo",
       "description": "Avance bien"
@@ -472,6 +497,10 @@
     "CAR": {
       "name": "Voiture",
       "description": "Vitesse de croisière"
+    },
+    "PLANE": {
+      "name": "Avion",
+      "description": "En vol rapide"
     },
     "ROCKET": {
       "name": "Fusée",
