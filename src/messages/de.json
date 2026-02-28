@@ -35,7 +35,8 @@
     "currentTitle": "Aktueller Titel",
     "availableTitles": "Verfügbare Titel",
     "noUnlockedAchievements": "Schalten Sie Erfolge frei, um sie als Titel zu verwenden",
-    "toNext": "bis zum nächsten"
+    "toNext": "bis zum nächsten",
+    "next": "Weiter"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -405,9 +406,10 @@
   },
   "achievements": {
     "title": "Erfolge",
-    "unlocked": "Freigeschaltet",
+    "unlocked": "Erfolg freigeschaltet!",
     "locked": "Gesperrt",
     "progress": "Fortschritt",
+    "celebration": "Glückwunsch!",
     "unlockedAt": "Freigeschaltet am {date}",
     "categories": {
       "all": "Alle",

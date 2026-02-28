@@ -36,7 +36,8 @@
     "currentTitle": "Текущий титул",
     "availableTitles": "Доступные титулы",
     "noUnlockedAchievements": "Разблокируйте достижения, чтобы использовать их в качестве титулов",
-    "toNext": "до следующего"
+    "toNext": "до следующего",
+    "next": "Далее"
   },
   "nav": {
     "dashboard": "Панель",
@@ -405,10 +406,11 @@
   },
   "achievements": {
     "title": "Достижения",
-    "unlocked": "разблокировано",
+    "unlocked": "Достижение разблокировано!",
     "locked": "Заблокировано",
     "progress": "Прогресс",
     "unlockedAt": "Разблокировано {date}",
+    "celebration": "Поздравляем!",
     "categories": {
       "all": "Все",
       "projects": "Проекты",

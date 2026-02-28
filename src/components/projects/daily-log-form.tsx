@@ -18,6 +18,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Upload } from "lucide-react";
 import { useCVDetection } from "@/hooks/useCVDetection";
+import { useAchievementCheck } from "@/hooks/useAchievementCheck";
+import { AchievementCelebration } from "@/components/achievements/achievement-celebration";
 
 interface DailyLogFormProps {
   projectId: string;
@@ -45,6 +47,9 @@ export function DailyLogForm({
 
   // CV Detection hook
   const { detectProgress, isLoading: isDetecting } = useCVDetection();
+
+  // Achievement check hook
+  const { checkAchievements, newAchievements, clearNewAchievements } = useAchievementCheck();
 
   // Get default date (today)
   const today = new Date().toISOString().split('T')[0];
@@ -147,6 +152,10 @@ export function DailyLogForm({
       }
 
       toast.success("Daily log saved!");
+
+      // Check for newly unlocked achievements
+      await checkAchievements();
+
       router.push(`/projects/${projectId}`);
       router.refresh();
     } catch (error: any) {
@@ -157,6 +166,7 @@ export function DailyLogForm({
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* AI Detection Info Banner */}
       <Card className="border-primary/50 bg-primary/5">
@@ -344,5 +354,14 @@ export function DailyLogForm({
         </Button>
       </div>
     </form>
+
+      {/* Achievement Celebration Modal */}
+      {newAchievements.length > 0 && (
+        <AchievementCelebration
+          achievementIds={newAchievements}
+          onClose={clearNewAchievements}
+        />
+      )}
+    </>
   );
 }

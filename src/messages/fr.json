@@ -35,7 +35,8 @@
     "currentTitle": "Titre actuel",
     "availableTitles": "Titres disponibles",
     "noUnlockedAchievements": "Débloquez des succès pour les utiliser comme titres",
-    "toNext": "jusqu'au prochain"
+    "toNext": "jusqu'au prochain",
+    "next": "Suivant"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -405,9 +406,10 @@
   },
   "achievements": {
     "title": "Succès",
-    "unlocked": "débloqué",
+    "unlocked": "Succès débloqué!",
     "locked": "Verrouillé",
     "progress": "Progression",
+    "celebration": "Félicitations!",
     "unlockedAt": "Débloqué le {date}",
     "categories": {
       "all": "Tous",

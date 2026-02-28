@@ -35,7 +35,8 @@
     "currentTitle": "当前称号",
     "availableTitles": "可用称号",
     "noUnlockedAchievements": "解锁成就以使用它们作为称号",
-    "toNext": "距离下一个"
+    "toNext": "距离下一个",
+    "next": "下一个"
   },
   "nav": {
     "dashboard": "控制面板",
@@ -399,9 +400,10 @@
   },
   "achievements": {
     "title": "成就",
-    "unlocked": "已解锁",
+    "unlocked": "成就解锁!",
     "locked": "未解锁",
     "progress": "进度",
+    "celebration": "恭喜!",
     "unlockedAt": "解锁于 {date}",
     "categories": {
       "all": "全部",

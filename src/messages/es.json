@@ -35,7 +35,8 @@
     "currentTitle": "Título actual",
     "availableTitles": "Títulos disponibles",
     "noUnlockedAchievements": "Desbloquea logros para usarlos como títulos",
-    "toNext": "hasta el siguiente"
+    "toNext": "hasta el siguiente",
+    "next": "Siguiente"
   },
   "nav": {
     "dashboard": "Panel",
@@ -405,9 +406,10 @@
   },
   "achievements": {
     "title": "Logros",
-    "unlocked": "desbloqueado",
+    "unlocked": "¡Logro desbloqueado!",
     "locked": "Bloqueado",
     "progress": "Progreso",
+    "celebration": "¡Felicitaciones!",
     "unlockedAt": "Desbloqueado el {date}",
     "categories": {
       "all": "Todos",

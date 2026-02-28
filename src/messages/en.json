@@ -36,7 +36,8 @@
     "currentTitle": "Current title",
     "availableTitles": "Available titles",
     "noUnlockedAchievements": "Unlock achievements to use them as titles",
-    "toNext": "to next"
+    "toNext": "to next",
+    "next": "Next"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -405,10 +406,11 @@
   },
   "achievements": {
     "title": "Achievements",
-    "unlocked": "unlocked",
+    "unlocked": "Achievement Unlocked!",
     "locked": "Locked",
     "progress": "Progress",
     "unlockedAt": "Unlocked on {date}",
+    "celebration": "Congratulations!",
     "categories": {
       "all": "All",
       "projects": "Projects",
