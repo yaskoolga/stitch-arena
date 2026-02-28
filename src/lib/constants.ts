@@ -3,6 +3,38 @@
  */
 
 /**
+ * Achievement rarity levels
+ */
+export type AchievementRarity = 'bronze' | 'silver' | 'gold' | 'platinum';
+
+export const RARITY_CONFIG = {
+  bronze: {
+    name: 'Bronze',
+    emoji: '🥉',
+    color: 'text-amber-700 dark:text-amber-600',
+    bgColor: 'bg-amber-50 dark:bg-amber-950/20',
+  },
+  silver: {
+    name: 'Silver',
+    emoji: '🥈',
+    color: 'text-gray-600 dark:text-gray-400',
+    bgColor: 'bg-gray-50 dark:bg-gray-950/20',
+  },
+  gold: {
+    name: 'Gold',
+    emoji: '🥇',
+    color: 'text-yellow-600 dark:text-yellow-500',
+    bgColor: 'bg-yellow-50 dark:bg-yellow-950/20',
+  },
+  platinum: {
+    name: 'Platinum',
+    emoji: '💎',
+    color: 'text-cyan-600 dark:text-cyan-400',
+    bgColor: 'bg-cyan-50 dark:bg-cyan-950/20',
+  },
+} as const;
+
+/**
  * Available project themes/categories
  */
 export const PROJECT_THEMES = [
@@ -31,27 +63,41 @@ export const SPEED_TIERS = {
     name: 'Turtle',
     description: 'Slow and steady',
     minStitches: 0,
-    maxStitches: 50,
+    maxStitches: 30,
+  },
+  WALKER: {
+    emoji: '🚶',
+    name: 'Walker',
+    description: 'Nice pace',
+    minStitches: 31,
+    maxStitches: 100,
   },
   BIKE: {
     emoji: '🚴',
     name: 'Bike',
     description: 'Moving along nicely',
-    minStitches: 51,
-    maxStitches: 150,
+    minStitches: 101,
+    maxStitches: 200,
   },
   CAR: {
     emoji: '🚗',
     name: 'Car',
     description: 'Cruising fast',
-    minStitches: 151,
-    maxStitches: 300,
+    minStitches: 201,
+    maxStitches: 350,
+  },
+  PLANE: {
+    emoji: '✈️',
+    name: 'Plane',
+    description: 'Flying through',
+    minStitches: 351,
+    maxStitches: 500,
   },
   ROCKET: {
     emoji: '🚀',
     name: 'Rocket',
     description: 'Lightning speed',
-    minStitches: 301,
+    minStitches: 501,
     maxStitches: Infinity,
   },
 } as const;
@@ -63,8 +109,10 @@ export type SpeedTier = keyof typeof SPEED_TIERS;
  */
 export function getSpeedTier(avgStitchesPerDay: number): SpeedTier {
   if (avgStitchesPerDay >= SPEED_TIERS.ROCKET.minStitches) return 'ROCKET';
+  if (avgStitchesPerDay >= SPEED_TIERS.PLANE.minStitches) return 'PLANE';
   if (avgStitchesPerDay >= SPEED_TIERS.CAR.minStitches) return 'CAR';
   if (avgStitchesPerDay >= SPEED_TIERS.BIKE.minStitches) return 'BIKE';
+  if (avgStitchesPerDay >= SPEED_TIERS.WALKER.minStitches) return 'WALKER';
   return 'TURTLE';
 }
 
@@ -100,6 +148,7 @@ export const ACHIEVEMENTS = {
     emoji: '🎯',
     category: 'projects',
     requirement: 1,
+    rarity: 'bronze' as AchievementRarity,
   },
   FIVE_PROJECTS: {
     id: 'five_projects',
@@ -108,6 +157,7 @@ export const ACHIEVEMENTS = {
     emoji: '📚',
     category: 'projects',
     requirement: 5,
+    rarity: 'silver' as AchievementRarity,
   },
   TEN_PROJECTS: {
     id: 'ten_projects',
@@ -116,6 +166,7 @@ export const ACHIEVEMENTS = {
     emoji: '🏆',
     category: 'projects',
     requirement: 10,
+    rarity: 'gold' as AchievementRarity,
   },
   FIRST_COMPLETED: {
     id: 'first_completed',
@@ -124,6 +175,7 @@ export const ACHIEVEMENTS = {
     emoji: '✅',
     category: 'projects',
     requirement: 1,
+    rarity: 'bronze' as AchievementRarity,
   },
 
   // Stitches
@@ -134,6 +186,7 @@ export const ACHIEVEMENTS = {
     emoji: '🧵',
     category: 'stitches',
     requirement: 10000,
+    rarity: 'bronze' as AchievementRarity,
   },
   FIFTY_K_STITCHES: {
     id: '50k_stitches',
@@ -142,6 +195,7 @@ export const ACHIEVEMENTS = {
     emoji: '🪡',
     category: 'stitches',
     requirement: 50000,
+    rarity: 'silver' as AchievementRarity,
   },
   HUNDRED_K_STITCHES: {
     id: '100k_stitches',
@@ -150,6 +204,7 @@ export const ACHIEVEMENTS = {
     emoji: '💯',
     category: 'stitches',
     requirement: 100000,
+    rarity: 'gold' as AchievementRarity,
   },
   MILLION_STITCHES: {
     id: '1m_stitches',
@@ -158,6 +213,7 @@ export const ACHIEVEMENTS = {
     emoji: '👑',
     category: 'stitches',
     requirement: 1000000,
+    rarity: 'platinum' as AchievementRarity,
   },
 
   // Streaks
@@ -168,6 +224,7 @@ export const ACHIEVEMENTS = {
     emoji: '🔥',
     category: 'streaks',
     requirement: 7,
+    rarity: 'bronze' as AchievementRarity,
   },
   MONTH_STREAK: {
     id: 'month_streak',
@@ -176,6 +233,7 @@ export const ACHIEVEMENTS = {
     emoji: '⚡',
     category: 'streaks',
     requirement: 30,
+    rarity: 'silver' as AchievementRarity,
   },
   HUNDRED_DAY_STREAK: {
     id: '100_day_streak',
@@ -184,6 +242,7 @@ export const ACHIEVEMENTS = {
     emoji: '🌟',
     category: 'streaks',
     requirement: 100,
+    rarity: 'platinum' as AchievementRarity,
   },
 
   // Daily logs
@@ -194,6 +253,7 @@ export const ACHIEVEMENTS = {
     emoji: '📝',
     category: 'logs',
     requirement: 1,
+    rarity: 'bronze' as AchievementRarity,
   },
   HUNDRED_LOGS: {
     id: '100_logs',
@@ -202,6 +262,7 @@ export const ACHIEVEMENTS = {
     emoji: '📖',
     category: 'logs',
     requirement: 100,
+    rarity: 'silver' as AchievementRarity,
   },
 
   // Speed
@@ -212,6 +273,7 @@ export const ACHIEVEMENTS = {
     emoji: '🚀',
     category: 'speed',
     requirement: 300,
+    rarity: 'platinum' as AchievementRarity,
   },
 
   // Social
@@ -222,6 +284,7 @@ export const ACHIEVEMENTS = {
     emoji: '🌍',
     category: 'social',
     requirement: 1,
+    rarity: 'bronze' as AchievementRarity,
   },
 
   // Challenges
@@ -232,6 +295,7 @@ export const ACHIEVEMENTS = {
     emoji: '🎮',
     category: 'challenges',
     requirement: 1,
+    rarity: 'bronze' as AchievementRarity,
   },
   CHALLENGE_PODIUM: {
     id: 'challenge_podium',
@@ -240,6 +304,7 @@ export const ACHIEVEMENTS = {
     emoji: '🥉',
     category: 'challenges',
     requirement: 1,
+    rarity: 'gold' as AchievementRarity,
   },
   CHALLENGE_WINNER: {
     id: 'challenge_winner',
@@ -248,6 +313,7 @@ export const ACHIEVEMENTS = {
     emoji: '🏆',
     category: 'challenges',
     requirement: 1,
+    rarity: 'platinum' as AchievementRarity,
   },
 } as const;
 

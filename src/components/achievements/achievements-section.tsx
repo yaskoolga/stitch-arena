@@ -14,6 +14,7 @@ interface Achievement {
   emoji: string;
   category: string;
   requirement: number;
+  rarity: string;
   isUnlocked: boolean;
   progress: number;
   unlockedAt: string | null;
@@ -96,6 +97,7 @@ export function AchievementsSection() {
                       description={t(`list.${achievement.id}.description`)}
                       emoji={achievement.emoji}
                       isUnlocked={achievement.isUnlocked}
+                      rarity={achievement.rarity as any}
                       progress={achievement.progress}
                       requirement={achievement.requirement}
                       size="md"

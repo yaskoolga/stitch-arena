@@ -14,6 +14,7 @@ import { SkeletonCard } from "@/components/skeleton-card";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 import { CompactProfile } from "@/components/dashboard/compact-profile";
 import { CompactStats } from "@/components/dashboard/compact-stats";
+import { GamificationOverview } from "@/components/dashboard/gamification-overview";
 import { ActivityHeatmapCard } from "@/components/dashboard/activity-heatmap-card";
 import { ActiveChallengesWidget } from "@/components/dashboard/active-challenges-widget";
 import { calculate6MonthAverage } from "@/lib/stats";
@@ -130,6 +131,13 @@ export default function DashboardPage({ params }: DashboardPageProps) {
       <div className="mb-3">
         <CompactProfile userId={targetUserId} isOwn={isOwnDashboard} />
       </div>
+
+      {/* Gamification Overview (only for own dashboard) */}
+      {isOwnDashboard && (
+        <div className="mb-3">
+          <GamificationOverview />
+        </div>
+      )}
 
       {/* Компактная статистика */}
       <div className="mb-3">

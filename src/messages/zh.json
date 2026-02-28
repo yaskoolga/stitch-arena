@@ -29,7 +29,13 @@
     "uploading": "上传中...",
     "optional": "可选",
     "remove": "删除",
-    "saving": "保存中..."
+    "saving": "保存中...",
+    "selectTitle": "选择称号",
+    "changeTitle": "更改称号",
+    "currentTitle": "当前称号",
+    "availableTitles": "可用称号",
+    "noUnlockedAchievements": "解锁成就以使用它们作为称号",
+    "toNext": "距离下一个"
   },
   "nav": {
     "dashboard": "控制面板",
@@ -114,6 +120,11 @@
     "noPublicProjects": "暂无公开项目",
     "noProjectsFilter": "未找到符合所选筛选器的项目",
     "deleteConfirm": "这将永久删除该项目及其所有记录。此操作无法撤销。",
+    "gamification": "进度与成就",
+    "nextAchievement": "下一个成就",
+    "totalStitches": "总针数",
+    "currentStreak": "当前连击",
+    "bestStreak": "最佳连击",
     "filters": {
       "all": "全部",
       "inProgress": "进行中",
@@ -661,5 +672,19 @@
     "subtitle": "你关注的项目",
     "empty": "还没有关注任何项目",
     "explore": "在画廊中探索项目"
+  },
+  "levels": {
+    "title": "等级",
+    "progress": "距离下一级的进度",
+    "stitchesUntilNext": "还需 {count} 针升级",
+    "maxLevel": "已达到最高等级！",
+    "names": {
+      "Beginner": "新手",
+      "Hobbyist": "爱好者",
+      "Enthusiast": "热衷者",
+      "Expert": "专家",
+      "Master": "大师",
+      "Legend": "传奇"
+    }
   }
 }

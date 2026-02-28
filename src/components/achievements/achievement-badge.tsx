@@ -2,12 +2,14 @@
 
 import { cn } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
+import { RARITY_CONFIG, type AchievementRarity } from "@/lib/constants";
 
 interface AchievementBadgeProps {
   name: string;
   description: string;
   emoji: string;
   isUnlocked: boolean;
+  rarity?: AchievementRarity;
   progress?: number;
   requirement?: number;
   size?: "sm" | "md" | "lg";
@@ -20,6 +22,7 @@ export function AchievementBadge({
   description,
   emoji,
   isUnlocked,
+  rarity = "bronze",
   progress = 0,
   requirement = 0,
   size = "md",
@@ -32,21 +35,25 @@ export function AchievementBadge({
       emoji: "text-lg",
       name: "text-[10px]",
       description: "text-[9px]",
+      rarityBadge: "text-[9px]",
     },
     md: {
       container: "p-2.5",
       emoji: "text-xl",
       name: "text-xs",
       description: "text-[10px]",
+      rarityBadge: "text-[10px]",
     },
     lg: {
       container: "p-3",
       emoji: "text-3xl",
       name: "text-sm",
       description: "text-xs",
+      rarityBadge: "text-xs",
     },
   };
 
+  const rarityConfig = RARITY_CONFIG[rarity];
   const progressPercent = requirement > 0 ? Math.min((progress / requirement) * 100, 100) : 0;
 
   return (
@@ -55,7 +62,7 @@ export function AchievementBadge({
         "rounded-lg border transition-all",
         sizeClasses[size].container,
         isUnlocked
-          ? "bg-gradient-to-br from-yellow-50 to-amber-50 dark:from-yellow-950/20 dark:to-amber-950/20 border-yellow-200 dark:border-yellow-800"
+          ? `${rarityConfig.bgColor} border-${rarity === "bronze" ? "amber" : rarity === "silver" ? "gray" : rarity === "gold" ? "yellow" : "cyan"}-200 dark:border-${rarity === "bronze" ? "amber" : rarity === "silver" ? "gray" : rarity === "gold" ? "yellow" : "cyan"}-800`
           : "bg-muted/50 border-muted opacity-60 grayscale",
         className
       )}
@@ -69,6 +76,14 @@ export function AchievementBadge({
           <div className={cn("text-muted-foreground leading-tight mt-0.5", sizeClasses[size].description)}>
             {description}
           </div>
+        </div>
+
+        {/* Rarity badge */}
+        <div className={cn("flex items-center gap-1", sizeClasses[size].rarityBadge)}>
+          <span>{rarityConfig.emoji}</span>
+          <span className={cn("font-medium", isUnlocked ? rarityConfig.color : "text-muted-foreground opacity-50")}>
+            {rarityConfig.name}
+          </span>
         </div>
 
         {showProgress && !isUnlocked && requirement > 0 && (

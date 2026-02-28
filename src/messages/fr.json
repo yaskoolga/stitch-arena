@@ -27,7 +27,15 @@
     "viewMore": "Voir plus",
     "memberSince": "Membre depuis",
     "uploading": "Téléchargement...",
-    "optional": "optionnel"
+    "optional": "optionnel",
+    "remove": "Supprimer",
+    "saving": "Enregistrement...",
+    "selectTitle": "Sélectionner un titre",
+    "changeTitle": "Changer le titre",
+    "currentTitle": "Titre actuel",
+    "availableTitles": "Titres disponibles",
+    "noUnlockedAchievements": "Débloquez des succès pour les utiliser comme titres",
+    "toNext": "jusqu'au prochain"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -112,6 +120,11 @@
     "noPublicProjects": "Aucun projet public pour le moment",
     "noProjectsFilter": "Aucun projet trouvé avec le filtre sélectionné",
     "deleteConfirm": "Cela supprimera définitivement le projet et tous ses journaux. Cette action ne peut pas être annulée.",
+    "gamification": "Progression et succès",
+    "nextAchievement": "Prochain succès",
+    "totalStitches": "Total de points",
+    "currentStreak": "Série actuelle",
+    "bestStreak": "Meilleure série",
     "filters": {
       "all": "Tous",
       "inProgress": "En cours",
@@ -658,6 +671,20 @@
       "deleteFailed": "Échec de la suppression du défi",
       "cannotEdit": "Impossible de modifier ce défi",
       "cannotDelete": "Impossible de supprimer ce défi"
+    }
+  },
+  "levels": {
+    "title": "Niveau",
+    "progress": "Progression vers le niveau suivant",
+    "stitchesUntilNext": "{count} points jusqu'au niveau suivant",
+    "maxLevel": "Niveau maximum atteint !",
+    "names": {
+      "Beginner": "Débutant",
+      "Hobbyist": "Amateur",
+      "Enthusiast": "Passionné",
+      "Expert": "Expert",
+      "Master": "Maître",
+      "Legend": "Légende"
     }
   }
 }

@@ -30,7 +30,13 @@
     "uploading": "Uploading...",
     "optional": "optional",
     "remove": "Remove",
-    "saving": "Saving..."
+    "saving": "Saving...",
+    "selectTitle": "Select Title",
+    "changeTitle": "Change Title",
+    "currentTitle": "Current title",
+    "availableTitles": "Available titles",
+    "noUnlockedAchievements": "Unlock achievements to use them as titles",
+    "toNext": "to next"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -114,6 +120,11 @@
     "noPublicProjects": "No public projects yet",
     "noProjectsFilter": "No projects found with the selected filter",
     "deleteConfirm": "This will permanently delete the project and all its logs. This action cannot be undone.",
+    "gamification": "Progress & Achievements",
+    "nextAchievement": "Next achievement",
+    "totalStitches": "Total Stitches",
+    "currentStreak": "Current Streak",
+    "bestStreak": "Best Streak",
     "filters": {
       "all": "All",
       "inProgress": "In Progress",
@@ -674,6 +685,20 @@
       "deleteFailed": "Failed to delete challenge",
       "cannotEdit": "Cannot edit this challenge",
       "cannotDelete": "Cannot delete this challenge"
+    }
+  },
+  "levels": {
+    "title": "Level",
+    "progress": "Progress to next level",
+    "stitchesUntilNext": "{count} stitches until next level",
+    "maxLevel": "Max level reached!",
+    "names": {
+      "Beginner": "Beginner",
+      "Hobbyist": "Hobbyist",
+      "Enthusiast": "Enthusiast",
+      "Expert": "Expert",
+      "Master": "Master",
+      "Legend": "Legend"
     }
   }
 }

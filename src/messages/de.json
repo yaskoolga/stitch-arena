@@ -29,7 +29,13 @@
     "uploading": "Hochladen...",
     "optional": "optional",
     "remove": "Entfernen",
-    "saving": "Speichern..."
+    "saving": "Speichern...",
+    "selectTitle": "Titel auswählen",
+    "changeTitle": "Titel ändern",
+    "currentTitle": "Aktueller Titel",
+    "availableTitles": "Verfügbare Titel",
+    "noUnlockedAchievements": "Schalten Sie Erfolge frei, um sie als Titel zu verwenden",
+    "toNext": "bis zum nächsten"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -114,6 +120,11 @@
     "noPublicProjects": "Noch keine öffentlichen Projekte",
     "noProjectsFilter": "Keine Projekte mit dem ausgewählten Filter gefunden",
     "deleteConfirm": "Dies löscht das Projekt und alle seine Einträge dauerhaft. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "gamification": "Fortschritt & Erfolge",
+    "nextAchievement": "Nächster Erfolg",
+    "totalStitches": "Gesamt Stiche",
+    "currentStreak": "Aktuelle Serie",
+    "bestStreak": "Beste Serie",
     "filters": {
       "all": "Alle",
       "inProgress": "In Bearbeitung",
@@ -660,6 +671,20 @@
       "deleteFailed": "Challenge konnte nicht gelöscht werden",
       "cannotEdit": "Diese Challenge kann nicht bearbeitet werden",
       "cannotDelete": "Diese Challenge kann nicht gelöscht werden"
+    }
+  },
+  "levels": {
+    "title": "Stufe",
+    "progress": "Fortschritt zur nächsten Stufe",
+    "stitchesUntilNext": "{count} Stiche bis zur nächsten Stufe",
+    "maxLevel": "Maximale Stufe erreicht!",
+    "names": {
+      "Beginner": "Anfänger",
+      "Hobbyist": "Hobbyist",
+      "Enthusiast": "Enthusiast",
+      "Expert": "Experte",
+      "Master": "Meister",
+      "Legend": "Legende"
     }
   }
 }

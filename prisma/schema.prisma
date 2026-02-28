@@ -14,6 +14,7 @@ model User {
   password              String?
   avatar                String?
   bio                   String?
+  selectedTitle         String?                // ID of unlocked achievement used as title
   resetToken            String?
   resetTokenExpiry      DateTime?
   createdAt             DateTime               @default(now())

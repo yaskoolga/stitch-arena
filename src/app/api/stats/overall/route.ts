@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { groupLogsByDate, findMostProductiveDay, findMostProductiveWeek, calculate6MonthAverage, calculateStreak } from "@/lib/stats";
 import { HEATMAP_MONTHS } from "@/lib/constants";
+import { getLevelProgress } from "@/lib/levels";
 
 // Cache the result for 5 minutes
 let cachedStats: any = null;
@@ -89,6 +90,9 @@ export async function GET() {
     // Heatmap data for last 12 months
     const heatmapData = groupLogsByDate(allLogs, HEATMAP_MONTHS);
 
+    // Calculate user level based on total stitches
+    const levelInfo = getLevelProgress(totalStitches);
+
     const stats = {
       projectCounts: {
         total: totalProjects,
@@ -104,6 +108,13 @@ export async function GET() {
       bestStreak: streaks.bestStreak,
       topProjects: projectsWithStitches,
       heatmapData,
+      level: {
+        current: levelInfo.current,
+        next: levelInfo.next,
+        progress: levelInfo.progress,
+        stitchesUntilNext: levelInfo.stitchesUntilNext,
+        stitchesInCurrentLevel: levelInfo.stitchesInCurrentLevel,
+      },
     };
 
     // Update cache

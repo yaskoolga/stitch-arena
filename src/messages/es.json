@@ -29,7 +29,13 @@
     "uploading": "Subiendo...",
     "optional": "opcional",
     "remove": "Eliminar",
-    "saving": "Guardando..."
+    "saving": "Guardando...",
+    "selectTitle": "Seleccionar título",
+    "changeTitle": "Cambiar título",
+    "currentTitle": "Título actual",
+    "availableTitles": "Títulos disponibles",
+    "noUnlockedAchievements": "Desbloquea logros para usarlos como títulos",
+    "toNext": "hasta el siguiente"
   },
   "nav": {
     "dashboard": "Panel",
@@ -114,6 +120,11 @@
     "noPublicProjects": "Aún no hay proyectos públicos",
     "noProjectsFilter": "No se encontraron proyectos con el filtro seleccionado",
     "deleteConfirm": "Esto eliminará permanentemente el proyecto y todos sus registros. Esta acción no se puede deshacer.",
+    "gamification": "Progreso y logros",
+    "nextAchievement": "Siguiente logro",
+    "totalStitches": "Total de puntos",
+    "currentStreak": "Racha actual",
+    "bestStreak": "Mejor racha",
     "filters": {
       "all": "Todos",
       "inProgress": "En progreso",
@@ -660,6 +671,20 @@
       "deleteFailed": "Error al eliminar el desafío",
       "cannotEdit": "No se puede editar este desafío",
       "cannotDelete": "No se puede eliminar este desafío"
+    }
+  },
+  "levels": {
+    "title": "Nivel",
+    "progress": "Progreso al siguiente nivel",
+    "stitchesUntilNext": "{count} puntadas hasta el siguiente nivel",
+    "maxLevel": "¡Nivel máximo alcanzado!",
+    "names": {
+      "Beginner": "Principiante",
+      "Hobbyist": "Aficionado",
+      "Enthusiast": "Entusiasta",
+      "Expert": "Experto",
+      "Master": "Maestro",
+      "Legend": "Leyenda"
     }
   }
 }

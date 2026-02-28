@@ -4,11 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Progress } from "@/components/ui/progress";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { format } from "date-fns";
 import { User, Calendar } from "lucide-react";
-import { ACHIEVEMENTS } from "@/lib/constants";
+import { ACHIEVEMENTS, RARITY_CONFIG, type AchievementRarity } from "@/lib/constants";
+import type { Level } from "@/lib/levels";
+import { UserTitle } from "@/components/profile/user-title";
+import { TitleSelector } from "@/components/profile/title-selector";
 
 interface UserProfile {
   id: string;
@@ -16,6 +20,7 @@ interface UserProfile {
   email: string;
   avatar: string | null;
   bio: string | null;
+  selectedTitle: string | null;
   createdAt: string;
 }
 
@@ -26,9 +31,20 @@ interface Achievement {
   emoji: string;
   category: string;
   requirement: number;
+  rarity: AchievementRarity;
   isUnlocked: boolean;
   progress: number;
   unlockedAt: string | null;
+}
+
+interface Stats {
+  level: {
+    current: Level;
+    next: Level | null;
+    progress: number;
+    stitchesUntilNext: number;
+    stitchesInCurrentLevel: number;
+  };
 }
 
 interface CompactProfileProps {
@@ -39,6 +55,7 @@ interface CompactProfileProps {
 export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
   const t = useTranslations();
   const tAch = useTranslations("achievements");
+  const tLevels = useTranslations("levels");
 
   // Determine which endpoint to use based on userId and isOwn
   const profileEndpoint = userId && !isOwn ? `/api/users/${userId}` : '/api/profile';
@@ -65,6 +82,17 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
     },
   });
 
+  // Fetch level info (only for own profile)
+  const { data: stats } = useQuery<Stats>({
+    queryKey: ["stats-overall", userId],
+    queryFn: async () => {
+      const res = await fetch('/api/stats/overall');
+      if (!res.ok) throw new Error("Failed to fetch");
+      return res.json();
+    },
+    enabled: isOwn, // Only fetch for own profile
+  });
+
   const unlocked = achievements?.filter((a) => a.unlockedAt) || [];
   const locked = achievements?.filter((a) => !a.unlockedAt) || [];
   const total = Object.values(ACHIEVEMENTS).length;
@@ -83,10 +111,15 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                 {user.name?.[0]?.toUpperCase() || user.email[0]?.toUpperCase() || "?"}
               </AvatarFallback>
             </Avatar>
-            <div className="min-w-0">
-              <p className="text-sm font-semibold truncate group-hover:text-primary transition-colors">
-                {user.name || "Anonymous"}
-              </p>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <p className="text-sm font-semibold group-hover:text-primary transition-colors">
+                  {user.name || "Anonymous"}
+                </p>
+                {user.selectedTitle && (
+                  <UserTitle achievementId={user.selectedTitle} size="sm" />
+                )}
+              </div>
               {isOwn && (
                 <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
               )}
@@ -103,36 +136,85 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
           {/* Вертикальный разделитель */}
           <div className="h-12 w-px bg-border shrink-0" />
 
-          {/* Достижения справа */}
+          {/* Уровень (только для собственного профиля) */}
+          {isOwn && stats?.level && (
+            <>
+              <div className="min-w-[140px]">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <span className="text-xl">{stats.level.current.emoji}</span>
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium truncate">
+                      {tLevels(`names.${stats.level.current.name}`)}
+                    </p>
+                    <p className="text-[9px] text-muted-foreground">
+                      {tLevels("title")} {stats.level.current.level}
+                    </p>
+                  </div>
+                </div>
+                {stats.level.next ? (
+                  <div className="space-y-0.5">
+                    <div className="flex items-center justify-between text-[9px]">
+                      <span className="text-muted-foreground">{stats.level.progress}%</span>
+                      <span className="text-muted-foreground">
+                        {stats.level.stitchesUntilNext.toLocaleString()}
+                      </span>
+                    </div>
+                    <Progress value={stats.level.progress} className="h-1" />
+                  </div>
+                ) : (
+                  <p className="text-[9px] text-muted-foreground">{tLevels("maxLevel")}</p>
+                )}
+              </div>
+
+              {/* Вертикальный разделитель */}
+              <div className="h-12 w-px bg-border shrink-0" />
+            </>
+          )}
+
+          {/* Достижения и титулы справа */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-medium">{tAch("title")}</span>
-              <span className="text-[10px] text-muted-foreground">
-                {unlocked.length}/{total}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-medium">{tAch("title")}</span>
+                <span className="text-[10px] text-muted-foreground">
+                  {unlocked.length}/{total}
+                </span>
+              </div>
+              {isOwn && unlocked.length > 0 && (
+                <TitleSelector currentTitle={user.selectedTitle} />
+              )}
             </div>
             <TooltipProvider>
               <div className="flex gap-1.5 overflow-x-auto pb-0.5">
                 {/* Выполненные достижения */}
-                {unlocked.map((achievement) => (
-                  <Tooltip key={achievement.id}>
-                    <TooltipTrigger>
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center">
-                        <span className="text-lg">{achievement.emoji}</span>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <div className="space-y-0.5">
-                        <p className="text-xs font-semibold text-green-600 dark:text-green-400">
-                          ✓ {tAch(`list.${achievement.id}.name`)}
-                        </p>
-                        <p className="text-[10px] text-muted-foreground">
-                          {tAch(`list.${achievement.id}.description`)}
-                        </p>
-                      </div>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
+                {unlocked.map((achievement) => {
+                  const rarityConfig = RARITY_CONFIG[achievement.rarity];
+                  return (
+                    <Tooltip key={achievement.id}>
+                      <TooltipTrigger>
+                        <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ${rarityConfig.bgColor} ring-1 ring-inset ring-black/5 dark:ring-white/10`}>
+                          <span className="text-lg">{achievement.emoji}</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <div className="space-y-0.5">
+                          <div className="flex items-center gap-1.5">
+                            <p className="text-xs font-semibold text-green-600 dark:text-green-400">
+                              ✓ {tAch(`list.${achievement.id}.name`)}
+                            </p>
+                            <span className="text-[10px]">{rarityConfig.emoji}</span>
+                          </div>
+                          <p className="text-[10px] text-muted-foreground">
+                            {tAch(`list.${achievement.id}.description`)}
+                          </p>
+                          <p className={`text-[9px] font-medium ${rarityConfig.color}`}>
+                            {rarityConfig.name}
+                          </p>
+                        </div>
+                      </TooltipContent>
+                    </Tooltip>
+                  );
+                })}
 
                 {/* Разделитель */}
                 {unlocked.length > 0 && locked.length > 0 && (
@@ -142,29 +224,44 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                 )}
 
                 {/* Невыполненные достижения */}
-                {locked.map((achievement) => (
-                  <Tooltip key={achievement.id}>
-                    <TooltipTrigger>
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center opacity-30 grayscale">
-                        <span className="text-lg">{achievement.emoji}</span>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <div className="space-y-0.5">
-                        <p className="text-xs font-semibold">
-                          {tAch(`list.${achievement.id}.name`)}
-                        </p>
-                        <p className="text-[10px] text-muted-foreground">
-                          {tAch(`list.${achievement.id}.description`)}
-                        </p>
-                        <p className="text-[10px] text-muted-foreground mt-1">
-                          {tAch("progress")}: {achievement.progress.toLocaleString()} /{" "}
-                          {achievement.requirement.toLocaleString()}
-                        </p>
-                      </div>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
+                {locked.map((achievement) => {
+                  const rarityConfig = RARITY_CONFIG[achievement.rarity];
+                  const progressPercent = Math.min(100, (achievement.progress / achievement.requirement) * 100);
+                  return (
+                    <Tooltip key={achievement.id}>
+                      <TooltipTrigger>
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted/30 ring-1 ring-inset ring-border/50 opacity-50 grayscale">
+                          <span className="text-lg">{achievement.emoji}</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-1.5">
+                            <p className="text-xs font-semibold">
+                              {tAch(`list.${achievement.id}.name`)}
+                            </p>
+                            <span className="text-[10px] opacity-50">{rarityConfig.emoji}</span>
+                          </div>
+                          <p className="text-[10px] text-muted-foreground">
+                            {tAch(`list.${achievement.id}.description`)}
+                          </p>
+                          <p className={`text-[9px] font-medium ${rarityConfig.color} opacity-70`}>
+                            {rarityConfig.name}
+                          </p>
+                          <div className="space-y-0.5 pt-1">
+                            <div className="flex items-center justify-between text-[9px]">
+                              <span className="text-muted-foreground">{tAch("progress")}</span>
+                              <span className="text-muted-foreground">
+                                {achievement.progress.toLocaleString()} / {achievement.requirement.toLocaleString()}
+                              </span>
+                            </div>
+                            <Progress value={progressPercent} className="h-1" />
+                          </div>
+                        </div>
+                      </TooltipContent>
+                    </Tooltip>
+                  );
+                })}
               </div>
             </TooltipProvider>
           </div>

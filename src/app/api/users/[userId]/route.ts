@@ -26,6 +26,7 @@ export async function GET(
         name: true,
         avatar: true,
         bio: true,
+        selectedTitle: true,
         createdAt: true,
         projects: {
           // If viewing own profile, show all projects; otherwise only public
@@ -110,6 +111,7 @@ export async function GET(
       name: user.name,
       avatar: user.avatar,
       bio: user.bio,
+      selectedTitle: user.selectedTitle,
       createdAt: user.createdAt,
       isOwnProfile,
       stats: {
