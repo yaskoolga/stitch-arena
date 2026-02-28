@@ -89,7 +89,7 @@ export function FollowProjectButton({
 
   return (
     <Button
-      variant={isFollowing ? "default" : variant}
+      variant={isFollowing ? "outline" : variant}
       size={size}
       onClick={handleClick}
       disabled={toggleFollow.isPending}

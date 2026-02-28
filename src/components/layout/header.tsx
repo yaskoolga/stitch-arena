@@ -31,36 +31,22 @@ export function Header() {
           <ThemeToggle />
           {session && <NotificationsDropdown />}
           {session ? (
-            <>
-              <Link href="/dashboard">
-                <Button variant="ghost">{t('dashboard')}</Button>
-              </Link>
-              <Link href="/community">
-                <Button variant="ghost">{t('community')}</Button>
-              </Link>
-              <Link href="/gallery">
-                <Button variant="ghost">{t('gallery')}</Button>
-              </Link>
-              <Link href="/challenges">
-                <Button variant="ghost">{t('challenges')}</Button>
-              </Link>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">{session.user?.name || session.user?.email}</Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem asChild>
-                    <Link href="/dashboard">{t('profile')}</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/settings">{t('settings')}</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
-                    {t('logout')}
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">{session.user?.name || session.user?.email}</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard">{t('profile')}</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/settings">{t('settings')}</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
+                  {t('logout')}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <>
               <Link href="/login">
