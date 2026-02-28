@@ -43,7 +43,7 @@ export const ACHIEVEMENT_BADGES: Record<string, AchievementBadge> = {
   "speed_demon": {
     id: "speed_demon",
     name: "Speed Demon",
-    description: "Reach 300+ stitches/day average (Rocket tier)",
+    description: "Reach 500+ stitches/day average (Rocket tier)",
     icon: "🚀",
     color: "from-blue-400 to-blue-600",
     tier: "gold",

@@ -35,6 +35,9 @@ interface Log {
   notes?: string | null;
   photoUrl?: string | null;
   imageUrl?: string | null; // Old format (for backwards compatibility)
+  aiDetected?: number | null;
+  aiConfidence?: number | null;
+  userCorrected?: boolean;
 }
 
 interface Project {
@@ -532,18 +535,24 @@ export default function ProjectDetailPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedLogs
-                    .filter(log => (log.dailyStitches ?? 0) > 0)
-                    .map((log) => {
+                  {sortedLogs.map((log) => {
                     const stitchCount = log.totalStitches ?? log.stitches ?? 0;
                     const dailyCount = log.dailyStitches ?? 0;
                     const isToday = log.date.split('T')[0] === todayStr;
                     const isEditing = editingLogId === log.id;
+                    const isInitial = dailyCount === 0 && stitchCount > 0;
 
                     return (
-                      <tr key={log.id} className="group border-b hover:bg-muted/50 transition-colors">
+                      <tr key={log.id} className={`group border-b hover:bg-muted/50 transition-colors ${isInitial ? 'bg-primary/5' : ''}`}>
                         <td className="py-2 px-3 font-medium">
-                          {format(new Date(log.date), "dd.MM.yyyy")}
+                          <div className="flex items-center gap-2">
+                            {format(new Date(log.date), "dd.MM.yyyy")}
+                            {isInitial && (
+                              <Badge variant="secondary" className="text-xs">
+                                {t("logs.initial")}
+                              </Badge>
+                            )}
+                          </div>
                           {log.notes && (
                             <p className="text-xs text-muted-foreground line-clamp-1 max-w-xs">{log.notes}</p>
                           )}
@@ -558,6 +567,10 @@ export default function ProjectDetailPage() {
                               className="h-8 w-24 text-right"
                               autoFocus
                             />
+                          ) : isInitial ? (
+                            <span className="text-muted-foreground italic text-xs">
+                              {t("logs.initialStitches")}
+                            </span>
                           ) : dailyCount > 0 ? (
                             <span className="text-green-600 dark:text-green-400 font-medium">
                               +{dailyCount.toLocaleString()}

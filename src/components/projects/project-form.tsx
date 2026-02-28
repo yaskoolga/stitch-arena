@@ -10,6 +10,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ThemeTagsSelector } from "./theme-tags-selector";
 import { useTranslations } from "next-intl";
+import { Badge } from "@/components/ui/badge";
+import { Loader2, Upload } from "lucide-react";
+import { useCVDetection } from "@/hooks/useCVDetection";
 
 interface ProjectFormProps {
   defaultValues?: {
@@ -54,8 +57,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [coverImage, setCoverImage] = useState(defaultValues?.coverImage || "");
-  const [schemaImage, setSchemaImage] = useState(defaultValues?.schemaImage || "");
-  const [uploading, setUploading] = useState<"cover" | "schema" | null>(null);
+  const [uploading, setUploading] = useState(false);
   const [useAutoCalc, setUseAutoCalc] = useState(false);
   const [manufacturer, setManufacturer] = useState(defaultValues?.manufacturer || "");
   const [showCustomManufacturer, setShowCustomManufacturer] = useState(
@@ -66,22 +68,91 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
   );
   const isEdit = !!projectId;
 
-  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>, type: "cover" | "schema") {
+  // AI Detection for initial stitches
+  const { detectProgress, isLoading: isDetecting } = useCVDetection();
+  const [initialPhotoUrl, setInitialPhotoUrl] = useState<string>("");
+  const [uploadingInitialPhoto, setUploadingInitialPhoto] = useState(false);
+  const [initialStitches, setInitialStitches] = useState<string>(
+    defaultValues?.initialStitches?.toString() || "0"
+  );
+  const [aiDetectedInitial, setAiDetectedInitial] = useState<number | null>(null);
+  const [aiConfidenceInitial, setAiConfidenceInitial] = useState<number | null>(null);
+  const [userCorrectedInitial, setUserCorrectedInitial] = useState(false);
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploading(type);
+    setUploading(true);
     const formData = new FormData();
     formData.append("file", file);
     const res = await fetch("/api/upload", { method: "POST", body: formData });
     if (res.ok) {
       const { url } = await res.json();
-      if (type === "cover") {
-        setCoverImage(url);
-      } else {
-        setSchemaImage(url);
-      }
+      setCoverImage(url);
     }
-    setUploading(null);
+    setUploading(false);
+  }
+
+  async function handleInitialPhotoUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingInitialPhoto(true);
+
+    try {
+      // Upload photo
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to upload photo");
+      }
+
+      const { url } = await res.json();
+      setInitialPhotoUrl(url);
+      toast.success(t("common.uploading"));
+
+      // Trigger CV detection (no previous photo for initial state)
+      const result = await detectProgress(file, null);
+
+      if (result && result.success && result.confidence >= 0.5) {
+        // Auto-apply AI result if confidence is high enough
+        setInitialStitches(result.total_stitches.toString());
+        setAiDetectedInitial(result.total_stitches);
+        setAiConfidenceInitial(result.confidence);
+        toast.success(
+          `${t("projects.ai.detecting")} ${t("projects.ai.confidence", { percent: Math.round(result.confidence * 100) })}`
+        );
+      } else if (result && result.success) {
+        // Low confidence - show warning but still set values
+        setInitialStitches(result.total_stitches.toString());
+        setAiDetectedInitial(result.total_stitches);
+        setAiConfidenceInitial(result.confidence);
+        toast.warning(t("projects.ai.lowConfidence"));
+      } else {
+        // Detection failed - allow manual entry
+        toast.error(t("projects.ai.serviceError") + " - " + t("projects.ai.fallbackManual"));
+      }
+    } catch (error) {
+      toast.error("Failed to upload photo");
+    } finally {
+      setUploadingInitialPhoto(false);
+    }
+  }
+
+  function handleInitialStitchesChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    setInitialStitches(value);
+
+    // If user modifies AI-detected value, set userCorrected flag
+    if (aiDetectedInitial !== null && Number(value) !== aiDetectedInitial) {
+      setUserCorrectedInitial(true);
+    }
   }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -104,14 +175,17 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
       description: form.get("description"),
       manufacturer: manufacturer || null,
       totalStitches,
-      initialStitches: form.get("initialStitches") ? Number(form.get("initialStitches")) : 0,
+      initialStitches: initialStitches ? Number(initialStitches) : 0,
+      initialPhotoUrl: initialPhotoUrl || null,
+      aiDetectedInitial: aiDetectedInitial,
+      aiConfidenceInitial: aiConfidenceInitial,
+      userCorrectedInitial: userCorrectedInitial,
       width,
       height,
       canvasType: form.get("canvasType"),
       isPublic: form.get("isPublic") === "on",
       status: form.get("status") || undefined,
       coverImage: coverImage || null,
-      schemaImage: schemaImage || null,
       themes,
     };
 
@@ -141,16 +215,16 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
       <div>
         <Label htmlFor="coverImage">{t("projects.fields.coverImage")} 📸</Label>
         <p className="text-xs text-muted-foreground mb-2">
-          {t("projects.fields.coverImage")}
+          {t("projects.fields.coverImageHint")}
         </p>
         <Input
           id="coverImage"
           type="file"
           accept="image/*"
-          onChange={(e) => handleImageUpload(e, "cover")}
+          onChange={handleImageUpload}
           className="mt-1"
         />
-        {uploading === "cover" && <p className="text-sm text-muted-foreground mt-1">{t("common.loading")}</p>}
+        {uploading && <p className="text-sm text-muted-foreground mt-1">{t("common.loading")}</p>}
         {coverImage && (
           <div className="mt-2 relative aspect-video w-full max-w-xs overflow-hidden rounded-md border">
             <Image src={coverImage} alt="Cover photo" fill className="object-cover" />
@@ -158,30 +232,11 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
         )}
       </div>
 
-      {/* Schema Image - Technical reference */}
-      <div>
-        <Label htmlFor="schemaImage">{t("projects.fields.schemaImage")}</Label>
-        <p className="text-xs text-muted-foreground mb-2">
-          {t("projects.fields.schemaImage")}
-        </p>
-        <Input
-          id="schemaImage"
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleImageUpload(e, "schema")}
-          className="mt-1"
-        />
-        {uploading === "schema" && <p className="text-sm text-muted-foreground mt-1">{t("common.loading")}</p>}
-        {schemaImage && (
-          <div className="mt-2 relative aspect-video w-full max-w-xs overflow-hidden rounded-md border">
-            <Image src={schemaImage} alt="Pattern reference" fill className="object-cover" />
-          </div>
-        )}
-      </div>
       <div>
         <Label htmlFor="title">{t("projects.fields.title")}</Label>
         <Input id="title" name="title" required defaultValue={defaultValues?.title} />
       </div>
+
       <div>
         <Label htmlFor="description">{t("projects.fields.description")}</Label>
         <Textarea id="description" name="description" defaultValue={defaultValues?.description} />
@@ -205,7 +260,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
                 }
               }}
             >
-              <option value="">{t("projects.fields.manufacturer")}</option>
+              <option value="">{t("projects.fields.manufacturerPlaceholder")}</option>
               {MANUFACTURERS.map((m) => (
                 <option key={m} value={m === "Other" ? "" : m}>
                   {m}
@@ -217,7 +272,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
           <div className="space-y-2">
             <Input
               id="customManufacturer"
-              placeholder={t("projects.fields.manufacturer")}
+              placeholder={t("projects.fields.manufacturerPlaceholder")}
               value={manufacturer}
               onChange={(e) => setManufacturer(e.target.value)}
             />
@@ -230,10 +285,19 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
                 setManufacturer("");
               }}
             >
-              {t("common.filter")}
+              {t("common.back")}
             </Button>
           </div>
         )}
+      </div>
+
+      {/* Theme Tags */}
+      <div>
+        <Label>{t("projects.fields.themes")}</Label>
+        <p className="text-xs text-muted-foreground mb-2">
+          {t("projects.fields.themesHint")}
+        </p>
+        <ThemeTagsSelector value={themes} onChange={setThemes} />
       </div>
 
       {/* Total Stitches Section */}
@@ -246,7 +310,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
             onChange={(e) => setUseAutoCalc(e.target.checked)}
           />
           <Label htmlFor="useAutoCalc" className="cursor-pointer">
-            Calculate from dimensions (width × height)
+            {t("projects.fields.calculateFromDimensions")}
           </Label>
         </div>
 
@@ -269,34 +333,125 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
         )}
       </div>
 
-      {/* Initial Stitches - Already stitched before tracking */}
-      <div>
-        <Label htmlFor="initialStitches">{t("projects.fields.initialStitches")}</Label>
-        <p className="text-xs text-muted-foreground mb-2">
-          {t("projects.fields.initialStitchesHint")}
-        </p>
-        <Input
-          id="initialStitches"
-          name="initialStitches"
-          type="number"
-          min={0}
-          defaultValue={defaultValues?.initialStitches || 0}
-          placeholder="0"
-        />
-      </div>
-
+      {/* Canvas Type */}
       <div>
         <Label htmlFor="canvasType">{t("projects.fields.canvasType")}</Label>
-        <Input id="canvasType" name="canvasType" placeholder={t("projects.fields.canvasType")} defaultValue={defaultValues?.canvasType} />
+        <Input id="canvasType" name="canvasType" placeholder={t("projects.fields.canvasTypePlaceholder")} defaultValue={defaultValues?.canvasType} />
       </div>
 
-      {/* Theme Tags */}
-      <div>
-        <Label>{t("projects.fields.themes")}</Label>
-        <p className="text-xs text-muted-foreground mb-2">
-          {t("projects.fields.themes")}
-        </p>
-        <ThemeTagsSelector value={themes} onChange={setThemes} />
+      {/* Initial Stitches - Already stitched before tracking with AI detection */}
+      <div className="space-y-3 p-4 border rounded-md bg-primary/5">
+        <div>
+          <Label htmlFor="initialStitches">{t("projects.fields.initialStitches")} 🤖</Label>
+          <div className="text-xs text-muted-foreground mb-2 space-y-1">
+            <p>{t("projects.fields.initialStitchesHint")}</p>
+            <p className="font-medium text-primary">ℹ️ {t("projects.fields.initialStitchesExplanation")}</p>
+          </div>
+        </div>
+
+        {/* AI Photo Upload */}
+        <div>
+          <Label htmlFor="initialPhoto">{t("projects.ai.uploadPhoto")} ({t("common.optional")})</Label>
+          <p className="text-xs text-muted-foreground mb-2">
+            {t("projects.ai.uploadPhotoHintInitial")}
+          </p>
+          <div className="flex items-center gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              disabled={uploadingInitialPhoto || isDetecting}
+              onClick={() => document.getElementById('initialPhoto')?.click()}
+              className="gap-2"
+            >
+              <Upload className="h-4 w-4" />
+              {uploadingInitialPhoto || isDetecting
+                ? t("projects.ai.processing")
+                : initialPhotoUrl
+                ? t("projects.ai.changePhoto")
+                : t("projects.ai.choosePhoto")}
+            </Button>
+            {initialPhotoUrl && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setInitialPhotoUrl("");
+                  setAiDetectedInitial(null);
+                  setAiConfidenceInitial(null);
+                  setUserCorrectedInitial(false);
+                }}
+              >
+                {t("common.remove")}
+              </Button>
+            )}
+          </div>
+          <input
+            id="initialPhoto"
+            type="file"
+            accept="image/*"
+            onChange={handleInitialPhotoUpload}
+            disabled={uploadingInitialPhoto || isDetecting}
+            className="hidden"
+          />
+          {(uploadingInitialPhoto || isDetecting) && (
+            <p className="text-sm text-muted-foreground mt-2 flex items-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              {uploadingInitialPhoto ? t("common.uploading") : t("projects.ai.detecting")}
+            </p>
+          )}
+          {initialPhotoUrl && (
+            <div className="mt-3 relative aspect-video w-full max-w-sm overflow-hidden rounded-md border">
+              <Image
+                src={initialPhotoUrl}
+                alt="Initial progress photo"
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Initial Stitches Input with AI badges */}
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <Label htmlFor="initialStitches">{t("projects.fields.initialStitches")}</Label>
+            {isDetecting && (
+              <Badge variant="secondary" className="gap-1">
+                <Loader2 className="h-3 w-3 animate-spin" />
+                {t("projects.ai.detecting")}
+              </Badge>
+            )}
+            {aiConfidenceInitial !== null && !isDetecting && (
+              <Badge
+                variant={
+                  aiConfidenceInitial >= 0.8
+                    ? "default"
+                    : aiConfidenceInitial >= 0.5
+                    ? "secondary"
+                    : "destructive"
+                }
+                className="gap-1"
+              >
+                🤖 {t("projects.ai.confidence", { percent: Math.round(aiConfidenceInitial * 100) })}
+              </Badge>
+            )}
+            {userCorrectedInitial && (
+              <Badge variant="outline" className="gap-1">
+                ✏️ {t("projects.ai.corrected")}
+              </Badge>
+            )}
+          </div>
+          <Input
+            id="initialStitches"
+            name="initialStitches"
+            type="number"
+            min={0}
+            placeholder="0"
+            value={initialStitches}
+            onChange={handleInitialStitchesChange}
+          />
+        </div>
       </div>
       {isEdit && (
         <div>

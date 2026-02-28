@@ -19,9 +19,6 @@ export function Sidebar() {
     { href: "/dashboard", label: t('dashboard') },
     { href: "/gallery", label: t('gallery') },
     { href: "/challenges", label: t('challenges') },
-    { href: "/community", label: t('community') },
-    { href: "/favorites", label: t('favorites') },
-    { href: "/following", label: t('following') },
     { href: "/calculator", label: t('calculator') },
   ];
 

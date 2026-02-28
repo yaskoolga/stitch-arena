@@ -13,13 +13,16 @@ export const projectCreateSchema = z.object({
   manufacturer: z.string().max(100).optional().nullable(),
   totalStitches: z.coerce.number().int().positive("Must be a positive number"),
   initialStitches: z.coerce.number().int().min(0, "Must be non-negative").optional().default(0),
+  initialPhotoUrl: z.string().optional().nullable(),  // Photo used for AI detection of initial stitches
+  aiDetectedInitial: z.coerce.number().int().min(0).optional().nullable(),
+  aiConfidenceInitial: z.coerce.number().min(0).max(1).optional().nullable(),
+  userCorrectedInitial: z.boolean().optional().default(false),
   width: z.coerce.number().int().positive().optional().nullable(),
   height: z.coerce.number().int().positive().optional().nullable(),
   canvasType: z.string().max(100).optional().nullable(),
   calibrationData: z.string().optional().nullable(), // JSON string
   isPublic: z.boolean().optional().default(false),
   coverImage: z.string().optional().nullable(),     // Cover photo from package (for cards)
-  schemaImage: z.string().optional().nullable(),    // Technical pattern reference
   themes: z.array(z.enum(PROJECT_THEMES as unknown as [string, ...string[]]))
     .max(MAX_THEMES_PER_PROJECT, `Maximum ${MAX_THEMES_PER_PROJECT} themes allowed`)
     .optional()

@@ -53,13 +53,16 @@ export async function POST(req: Request) {
     manufacturer,
     totalStitches,
     initialStitches,
+    initialPhotoUrl,
+    aiDetectedInitial,
+    aiConfidenceInitial,
+    userCorrectedInitial,
     width,
     height,
     canvasType,
     calibrationData,
     isPublic,
     coverImage,
-    schemaImage,
     themes
   } = parsed.data;
 
@@ -83,10 +86,27 @@ export async function POST(req: Request) {
       calibrationData,
       isPublic,
       coverImage,
-      schemaImage,
+      schemaImage: null, // Removed schemaImage feature
       themes: JSON.stringify(themes || []),
     },
   });
+
+  // If initial stitches were provided with a photo, create the first daily log
+  if (initialPhotoUrl && initialStitches && initialStitches > 0) {
+    await prisma.dailyLog.create({
+      data: {
+        projectId: project.id,
+        date: new Date(), // Date when project was created
+        dailyStitches: 0, // No new stitches, this is the initial state
+        totalStitches: initialStitches,
+        photoUrl: initialPhotoUrl,
+        notes: "Initial stitches before tracking started",
+        aiDetected: aiDetectedInitial || null,
+        aiConfidence: aiConfidenceInitial || null,
+        userCorrected: userCorrectedInitial || false,
+      },
+    });
+  }
 
   return NextResponse.json(project, { status: 201 });
 }
