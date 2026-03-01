@@ -121,11 +121,11 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                 )}
               </div>
               {isOwn && (
-                <p className="text-xs sm:text-[10px] text-muted-foreground truncate">{user.email}</p>
+                <p className="text-xs sm:text-[11px] text-muted-foreground truncate">{user.email}</p>
               )}
               <div className="flex items-center gap-1 mt-0.5">
                 <Calendar className="h-2.5 w-2.5 text-muted-foreground" />
-                <span className="text-[10px] sm:text-[9px] text-muted-foreground">
+                <span className="text-[11px] sm:text-[11px] text-muted-foreground">
                   {t("common.memberSince")} {format(new Date(user.createdAt), "MMM yyyy")}
                 </span>
               </div>
@@ -146,23 +146,23 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                     <p className="text-xs font-medium truncate">
                       {tLevels(`names.${stats.level.current.name}`)}
                     </p>
-                    <p className="text-[10px] sm:text-[9px] text-muted-foreground">
+                    <p className="text-[11px] sm:text-[11px] text-muted-foreground">
                       {tLevels("title")} {stats.level.current.level}
                     </p>
                   </div>
                 </div>
                 {stats.level.next ? (
                   <div className="space-y-0.5">
-                    <div className="flex items-center justify-between text-[10px] sm:text-[9px]">
+                    <div className="flex items-center justify-between text-[11px] sm:text-[11px]">
                       <span className="text-muted-foreground">{stats.level.progress}%</span>
                       <span className="text-muted-foreground">
                         {stats.level.stitchesUntilNext.toLocaleString()}
                       </span>
                     </div>
-                    <Progress value={stats.level.progress} className="h-1 rounded-full" />
+                    <Progress value={stats.level.progress} className="h-1 rounded-full" aria-label={`Level progress: ${stats.level.progress}%`} />
                   </div>
                 ) : (
-                  <p className="text-[10px] sm:text-[9px] text-muted-foreground">{tLevels("maxLevel")}</p>
+                  <p className="text-[11px] sm:text-[11px] text-muted-foreground">{tLevels("maxLevel")}</p>
                 )}
               </div>
 
@@ -176,7 +176,7 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
             <div className="flex items-center justify-between mb-1.5">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-medium">{tAch("title")}</span>
-                <span className="text-[10px] text-muted-foreground">
+                <span className="text-[11px] text-muted-foreground">
                   {unlocked.length}/{total}
                 </span>
               </div>
@@ -202,12 +202,12 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                             <p className="text-xs font-semibold text-green-600 dark:text-green-400">
                               ✓ {tAch(`list.${achievement.id}.name`)}
                             </p>
-                            <span className="text-[10px]">{rarityConfig.emoji}</span>
+                            <span className="text-[11px]">{rarityConfig.emoji}</span>
                           </div>
-                          <p className="text-[10px] text-muted-foreground">
+                          <p className="text-[11px] text-muted-foreground">
                             {tAch(`list.${achievement.id}.description`)}
                           </p>
-                          <p className={`text-[9px] font-medium ${rarityConfig.color}`}>
+                          <p className={`text-[11px] font-medium ${rarityConfig.color}`}>
                             {rarityConfig.name}
                           </p>
                         </div>
@@ -240,22 +240,22 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                             <p className="text-xs font-semibold">
                               {tAch(`list.${achievement.id}.name`)}
                             </p>
-                            <span className="text-[10px] opacity-50">{rarityConfig.emoji}</span>
+                            <span className="text-[11px] opacity-50">{rarityConfig.emoji}</span>
                           </div>
-                          <p className="text-[10px] text-muted-foreground">
+                          <p className="text-[11px] text-muted-foreground">
                             {tAch(`list.${achievement.id}.description`)}
                           </p>
-                          <p className={`text-[9px] font-medium ${rarityConfig.color} opacity-70`}>
+                          <p className={`text-[11px] font-medium ${rarityConfig.color} opacity-70`}>
                             {rarityConfig.name}
                           </p>
                           <div className="space-y-0.5 pt-1">
-                            <div className="flex items-center justify-between text-[9px]">
+                            <div className="flex items-center justify-between text-[11px]">
                               <span className="text-muted-foreground">{tAch("progress")}</span>
                               <span className="text-muted-foreground">
                                 {achievement.progress.toLocaleString()} / {achievement.requirement.toLocaleString()}
                               </span>
                             </div>
-                            <Progress value={progressPercent} className="h-1 rounded-full" />
+                            <Progress value={progressPercent} className="h-1 rounded-full" aria-label={`Achievement progress: ${progressPercent.toFixed(1)}%`} />
                           </div>
                         </div>
                       </TooltipContent>

@@ -181,7 +181,7 @@ export function ProjectCard({
               </CardTitle>
               <Badge
                 variant={project.status === "completed" ? "default" : "secondary"}
-                className={`text-[10px] px-2 py-0.5 ${project.status === "completed" ? "bg-green-600" : ""}`}
+                className={`text-[11px] px-2 py-0.5 ${project.status === "completed" ? "bg-green-600" : ""}`}
               >
                 {project.status === "in_progress"
                   ? t("projects.status.inProgress")
@@ -204,12 +204,12 @@ export function ProjectCard({
             {project.themes && project.themes.length > 0 && (
               <div className="flex flex-wrap gap-1 mt-1.5">
                 {project.themes.slice(0, 3).map((theme) => (
-                  <Badge key={theme} variant="outline" className="text-[10px]">
+                  <Badge key={theme} variant="outline" className="text-[11px]">
                     {t(`themes.${theme}` as any)}
                   </Badge>
                 ))}
                 {project.themes.length > 3 && (
-                  <Badge variant="outline" className="text-[10px]">
+                  <Badge variant="outline" className="text-[11px]">
                     +{project.themes.length - 3}
                   </Badge>
                 )}
@@ -223,7 +223,7 @@ export function ProjectCard({
               </p>
             )}
             {project.canvasType && (
-              <p className="mb-1.5 text-[10px] text-muted-foreground">
+              <p className="mb-1.5 text-[11px] text-muted-foreground">
                 {project.canvasType}
               </p>
             )}
@@ -235,7 +235,7 @@ export function ProjectCard({
                 </span>
                 <span className="font-medium">{pct}%</span>
               </div>
-              <Progress value={pct} className="h-1.5 rounded-full" />
+              <Progress value={pct} className="h-1.5 rounded-full" aria-label={`Project progress: ${pct}%`} />
             </div>
           </CardContent>
         </Link>

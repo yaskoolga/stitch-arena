@@ -32,6 +32,9 @@ export function Sidebar() {
         size="sm"
         className="fixed left-4 top-20 z-40 md:hidden rounded-full shadow-sm"
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-controls="sidebar-navigation"
+        aria-label={open ? tCommon('close') + " menu" : "Open menu"}
       >
         {open ? tCommon('close') : "Menu"}
       </Button>
@@ -41,17 +44,22 @@ export function Sidebar() {
         <div
           className="fixed inset-0 z-30 bg-black/50 md:hidden"
           onClick={() => setOpen(false)}
+          aria-hidden="true"
         />
       )}
 
       {/* Sidebar */}
       <aside
+        id="sidebar-navigation"
         className={cn(
           "fixed left-0 top-16 z-30 h-[calc(100vh-4rem)] w-56 border-r bg-sidebar p-4 transition-transform md:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
+        aria-modal={open ? "true" : undefined}
+        role={open ? "dialog" : undefined}
+        aria-label="Main navigation"
       >
-        <nav className="space-y-1.5">
+        <nav className="space-y-1.5" aria-label="Main navigation menu">
           {navItems.map((item) => (
             <Link
               key={item.href}

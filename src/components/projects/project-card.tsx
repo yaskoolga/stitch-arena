@@ -73,10 +73,20 @@ export function ProjectCard({
               e.stopPropagation();
               setShowPhotoDialog(true);
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                e.stopPropagation();
+                setShowPhotoDialog(true);
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label={`View ${title} image`}
           >
             <Image src={imageSrc} alt={title} fill className="object-contain" />
             {/* Zoom icon on hover */}
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity flex items-center justify-center" aria-hidden="true">
               <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 transform group-hover/image:scale-110 transition-transform">
                 <ZoomIn className="h-6 w-6 text-gray-800" />
               </div>
@@ -93,7 +103,7 @@ export function ProjectCard({
               )}
               <Badge
                 variant={status === "completed" ? "default" : "secondary"}
-                className="text-[10px] px-2.5 py-0.5 rounded-full"
+                className="text-[11px] px-2.5 py-0.5 rounded-full"
               >
                 {status === "in_progress" ? t("projects.status.inProgress") : status === "completed" ? t("projects.status.completed") : t("projects.status.paused")}
               </Badge>
@@ -104,12 +114,12 @@ export function ProjectCard({
           {themes && themes.length > 0 && (
             <div className="flex flex-wrap gap-1 mt-1.5">
               {themes.slice(0, 3).map((theme) => (
-                <Badge key={theme} variant="outline" className="text-[10px] rounded-full">
+                <Badge key={theme} variant="outline" className="text-[11px] rounded-full">
                   {theme}
                 </Badge>
               ))}
               {themes.length > 3 && (
-                <Badge variant="outline" className="text-[10px] rounded-full">
+                <Badge variant="outline" className="text-[11px] rounded-full">
                   +{themes.length - 3}
                 </Badge>
               )}
@@ -124,12 +134,12 @@ export function ProjectCard({
               <span className="text-muted-foreground">{safeCompletedStitches.toLocaleString()} / {safeTotalStitches.toLocaleString()}</span>
               <span className="font-medium text-primary">{pct}%</span>
             </div>
-            <Progress value={pct} className="h-2 rounded-full" />
+            <Progress value={pct} className="h-2 rounded-full" aria-label={`Project progress: ${pct}%`} />
           </div>
 
           {/* Forecast completion date */}
           {forecastDate && (
-            <div className="flex items-center gap-1.5 mt-2 px-2 py-1 bg-primary/5 rounded-full text-[10px] text-primary">
+            <div className="flex items-center gap-1.5 mt-2 px-2 py-1 bg-primary/5 rounded-full text-[11px] text-primary">
               <Calendar className="h-3 w-3" />
               <span>{t("projects.progress.estDaysLeft")}: {format(forecastDate, "MMM d, yyyy")}</span>
             </div>
@@ -146,8 +156,10 @@ export function ProjectCard({
             e.stopPropagation();
             onDelete(id);
           }}
+          tabIndex={0}
+          aria-label={`Delete project ${title}`}
         >
-          <Trash2 className="h-3.5 w-3.5" />
+          <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
         </Button>
       )}
       </Card>

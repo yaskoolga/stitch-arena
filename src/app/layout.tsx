@@ -39,10 +39,17 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Providers>
+            {/* Skip to main content link for keyboard navigation */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:shadow-lg"
+            >
+              {(messages as any).common?.skipToMain || "Skip to main content"}
+            </a>
             <Header />
             <div className="flex">
               <Sidebar />
-              <main className="flex-1 md:ml-56 px-4 pt-16 pb-8 md:py-8 container mx-auto">{children}</main>
+              <main id="main-content" className="flex-1 md:ml-56 px-4 pt-16 pb-8 md:py-8 container mx-auto">{children}</main>
             </div>
             <Toaster richColors />
           </Providers>

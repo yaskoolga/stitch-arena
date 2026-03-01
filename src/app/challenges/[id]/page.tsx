@@ -314,7 +314,7 @@ export default function ChallengeDetailPage() {
                   {userParticipation.currentProgress.toLocaleString()} / {challenge.targetValue.toLocaleString()}
                 </span>
               </div>
-              <Progress value={progressPercent} className="h-3 rounded-full" />
+              <Progress value={progressPercent} className="h-3 rounded-full" aria-label={`Challenge progress: ${progressPercent.toFixed(1)}%`} />
               <div className="flex justify-between text-sm text-muted-foreground">
                 <span>{progressPercent.toFixed(1)}% {t("common.complete")}</span>
                 {userLeaderboardEntry && (

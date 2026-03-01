@@ -103,7 +103,7 @@ export function GamificationOverview() {
                 <p className="text-sm font-semibold truncate">
                   {tLevels(`names.${stats.level.current.name}`)}
                 </p>
-                <p className="text-xs sm:text-[10px] text-muted-foreground">
+                <p className="text-xs sm:text-[11px] text-muted-foreground">
                   {tLevels("title")} {stats.level.current.level}
                 </p>
               </div>
@@ -114,9 +114,9 @@ export function GamificationOverview() {
               )}
             </div>
             {stats.level.next ? (
-              <Progress value={stats.level.progress} className="h-1.5 rounded-full" />
+              <Progress value={stats.level.progress} className="h-1.5 rounded-full" aria-label={`Level progress: ${stats.level.progress}%`} />
             ) : (
-              <p className="text-xs sm:text-[10px] text-muted-foreground">{tLevels("maxLevel")}</p>
+              <p className="text-xs sm:text-[11px] text-muted-foreground">{tLevels("maxLevel")}</p>
             )}
           </div>
 
@@ -147,8 +147,8 @@ export function GamificationOverview() {
                     {tAch(`list.${nextAchievementDef.id}.name`)}
                   </p>
                   <div className="flex items-center gap-1.5 mt-0.5">
-                    <Progress value={nextAchievement.progressPercent} className="h-1.5 flex-1 rounded-full" />
-                    <span className="text-[10px] sm:text-[9px] text-muted-foreground whitespace-nowrap">
+                    <Progress value={nextAchievement.progressPercent} className="h-1.5 flex-1 rounded-full" aria-label={`Achievement progress: ${Math.round(nextAchievement.progressPercent)}%`} />
+                    <span className="text-[11px] text-muted-foreground whitespace-nowrap">
                       {Math.round(nextAchievement.progressPercent)}%
                     </span>
                   </div>

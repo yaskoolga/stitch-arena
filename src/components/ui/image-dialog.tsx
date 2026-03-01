@@ -40,8 +40,9 @@ export function ImageDialog({ src, alt, className, thumbnailClassName }: ImageDi
             size="icon"
             className="absolute top-2 right-2 z-10 bg-black/50 hover:bg-black/70 text-white"
             onClick={() => setOpen(false)}
+            aria-label="Close image"
           >
-            <X className="h-4 w-4" />
+            <X className="h-4 w-4" aria-hidden="true" />
           </Button>
           <div className="relative w-full h-full flex items-center justify-center bg-black">
             <Image

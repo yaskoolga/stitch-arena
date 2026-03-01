@@ -183,9 +183,9 @@ export default function SettingsPage() {
                     size="icon"
                     className="absolute -top-2 -right-2 h-6 w-6 rounded-full"
                     onClick={() => setAvatar("")}
-                    title="Remove avatar"
+                    aria-label="Remove avatar"
                   >
-                    <X className="h-3 w-3" />
+                    <X className="h-3 w-3" aria-hidden="true" />
                   </Button>
                 )}
               </div>
@@ -204,8 +204,8 @@ export default function SettingsPage() {
                       className="flex-1"
                     />
                     {isUploading && (
-                      <Button type="button" disabled size="icon" variant="outline" className="rounded-full">
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                      <Button type="button" disabled size="icon" variant="outline" className="rounded-full" aria-label="Uploading avatar">
+                        <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
                       </Button>
                     )}
                   </div>
