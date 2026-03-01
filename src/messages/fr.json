@@ -695,5 +695,24 @@
     "leveledUp": "Vous avez atteint le Niveau {level} : {name} !",
     "keepStitching": "Continuez à broder pour débloquer encore plus de succès !",
     "continue": "Continuer"
+  },
+  "report": {
+    "button": "Signaler",
+    "title": "Signaler un contenu",
+    "description": "Aidez-nous à garder la communauté sûre en signalant les contenus inappropriés",
+    "reason": "Raison",
+    "selectReason": "Sélectionnez une raison",
+    "pleaseSelectReason": "Veuillez sélectionner une raison",
+    "details": "Détails supplémentaires",
+    "detailsPlaceholder": "Fournissez plus de contexte sur ce signalement...",
+    "submit": "Envoyer le signalement",
+    "submitted": "Signalement envoyé avec succès. Merci !",
+    "failed": "Échec de l'envoi du signalement. Veuillez réessayer.",
+    "reasons": {
+      "spam": "Spam ou publicité",
+      "inappropriate": "Contenu inapproprié",
+      "harassment": "Harcèlement ou intimidation",
+      "other": "Autre violation"
+    }
   }
 }

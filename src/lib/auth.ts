@@ -55,6 +55,7 @@ export const authOptions: NextAuthOptions = {
       if (account?.provider === "google" && user.email) {
         const existing = await prisma.user.findUnique({
           where: { email: user.email },
+          select: { id: true, isBanned: true },
         });
         if (!existing) {
           await prisma.user.create({
@@ -64,6 +65,17 @@ export const authOptions: NextAuthOptions = {
               avatar: user.image,
             },
           });
+        } else if (existing.isBanned) {
+          return false; // Block banned users from signing in
+        }
+      } else if (user.email) {
+        // Check ban status for credentials provider
+        const dbUser = await prisma.user.findUnique({
+          where: { email: user.email },
+          select: { isBanned: true },
+        });
+        if (dbUser?.isBanned) {
+          return false; // Block banned users
         }
       }
       return true;
@@ -72,20 +84,32 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
+          select: { id: true, role: true, isBanned: true },
         });
-        if (dbUser) token.id = dbUser.id;
+        if (dbUser) {
+          token.id = dbUser.id;
+          token.role = dbUser.role;
+          token.isBanned = dbUser.isBanned;
+        }
       }
       if (account?.provider === "google" && user?.email) {
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email },
+          select: { id: true, role: true, isBanned: true },
         });
-        if (dbUser) token.id = dbUser.id;
+        if (dbUser) {
+          token.id = dbUser.id;
+          token.role = dbUser.role;
+          token.isBanned = dbUser.isBanned;
+        }
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         (session.user as { id: string }).id = token.id as string;
+        (session.user as { role?: string }).role = token.role as string;
+        (session.user as { isBanned?: boolean }).isBanned = token.isBanned as boolean;
       }
       return session;
     },

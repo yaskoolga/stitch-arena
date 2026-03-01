@@ -16,7 +16,9 @@ import {
 } from "@/components/ui/dialog";
 import { LikeButton } from "@/components/projects/like-button";
 import { FollowProjectButton } from "@/components/projects/follow-project-button";
+import { ReportButton } from "@/components/report-button";
 import { ZoomIn, ExternalLink } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 interface ProjectCardProps {
   project: {
@@ -45,6 +47,7 @@ export function ProjectCard({
   showFollowButton = true
 }: ProjectCardProps) {
   const t = useTranslations();
+  const { data: session } = useSession();
   const [showPhotoDialog, setShowPhotoDialog] = useState(false);
   const [showMobileOverlay, setShowMobileOverlay] = useState(false);
 
@@ -251,6 +254,15 @@ export function ProjectCard({
             showCount={false}
             className={showFollowButton ? "" : "hidden"}
           />
+          {session && session.user.id !== project.user.id && (
+            <ReportButton
+              type="project"
+              resourceId={project.id}
+              reportedUserId={project.user.id}
+              variant="ghost"
+              size="sm"
+            />
+          )}
         </CardContent>
       </Card>
 

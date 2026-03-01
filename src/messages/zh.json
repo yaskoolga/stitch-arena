@@ -695,5 +695,24 @@
     "leveledUp": "您已达到 {level} 级：{name}！",
     "keepStitching": "继续刺绣以解锁更多成就！",
     "continue": "继续"
+  },
+  "report": {
+    "button": "举报",
+    "title": "举报内容",
+    "description": "通过举报不当内容帮助我们保持社区安全",
+    "reason": "原因",
+    "selectReason": "选择原因",
+    "pleaseSelectReason": "请选择原因",
+    "details": "其他详情",
+    "detailsPlaceholder": "提供关于此举报的更多信息...",
+    "submit": "提交举报",
+    "submitted": "举报提交成功。谢谢！",
+    "failed": "提交举报失败。请重试。",
+    "reasons": {
+      "spam": "垃圾信息或广告",
+      "inappropriate": "不当内容",
+      "harassment": "骚扰或欺凌",
+      "other": "其他违规"
+    }
   }
 }

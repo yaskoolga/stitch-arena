@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
 import { format } from "date-fns";
+import { ReportButton } from "@/components/report-button";
 
 interface Comment {
   id: string;
@@ -170,17 +171,28 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
                         {format(new Date(comment.createdAt), "MMM d, yyyy 'at' h:mm a")}
                       </span>
                     </div>
-                    {canDeleteComment(comment) && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-8 w-8 p-0 rounded-full text-destructive hover:text-destructive"
-                        onClick={() => deleteComment.mutate(comment.id)}
-                        disabled={deleteComment.isPending}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    )}
+                    <div className="flex items-center gap-1">
+                      {session && session.user.id !== comment.user.id && (
+                        <ReportButton
+                          type="comment"
+                          resourceId={comment.id}
+                          reportedUserId={comment.user.id}
+                          variant="ghost"
+                          size="icon"
+                        />
+                      )}
+                      {canDeleteComment(comment) && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 w-8 p-0 rounded-full text-destructive hover:text-destructive"
+                          onClick={() => deleteComment.mutate(comment.id)}
+                          disabled={deleteComment.isPending}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
                   </div>
                   <p className="text-sm whitespace-pre-wrap break-words">
                     {comment.text}

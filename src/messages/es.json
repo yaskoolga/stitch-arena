@@ -695,5 +695,24 @@
     "leveledUp": "¡Has alcanzado el Nivel {level}: {name}!",
     "keepStitching": "¡Sigue bordando para desbloquear aún más logros!",
     "continue": "Continuar"
+  },
+  "report": {
+    "button": "Reportar",
+    "title": "Reportar contenido",
+    "description": "Ayúdanos a mantener la comunidad segura reportando contenido inapropiado",
+    "reason": "Razón",
+    "selectReason": "Seleccione una razón",
+    "pleaseSelectReason": "Por favor seleccione una razón",
+    "details": "Detalles adicionales",
+    "detailsPlaceholder": "Proporcione más contexto sobre este reporte...",
+    "submit": "Enviar reporte",
+    "submitted": "Reporte enviado exitosamente. ¡Gracias!",
+    "failed": "Error al enviar el reporte. Por favor intente de nuevo.",
+    "reasons": {
+      "spam": "Spam o publicidad",
+      "inappropriate": "Contenido inapropiado",
+      "harassment": "Acoso o intimidación",
+      "other": "Otra violación"
+    }
   }
 }

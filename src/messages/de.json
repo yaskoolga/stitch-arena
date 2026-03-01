@@ -695,5 +695,24 @@
     "leveledUp": "Sie haben Stufe {level} erreicht: {name}!",
     "keepStitching": "Sticken Sie weiter, um noch mehr Erfolge freizuschalten!",
     "continue": "Weiter"
+  },
+  "report": {
+    "button": "Melden",
+    "title": "Inhalt melden",
+    "description": "Helfen Sie uns, die Community sicher zu halten, indem Sie unangemessene Inhalte melden",
+    "reason": "Grund",
+    "selectReason": "Wählen Sie einen Grund",
+    "pleaseSelectReason": "Bitte wählen Sie einen Grund",
+    "details": "Zusätzliche Details",
+    "detailsPlaceholder": "Geben Sie weitere Informationen zu dieser Meldung an...",
+    "submit": "Meldung senden",
+    "submitted": "Meldung erfolgreich gesendet. Vielen Dank!",
+    "failed": "Meldung konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+    "reasons": {
+      "spam": "Spam oder Werbung",
+      "inappropriate": "Unangemessener Inhalt",
+      "harassment": "Belästigung oder Mobbing",
+      "other": "Anderer Verstoß"
+    }
   }
 }
