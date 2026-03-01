@@ -284,6 +284,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
                 setShowCustomManufacturer(false);
                 setManufacturer("");
               }}
+              className="rounded-full"
             >
               {t("common.back")}
             </Button>
@@ -361,7 +362,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
               variant="outline"
               disabled={uploadingInitialPhoto || isDetecting}
               onClick={() => document.getElementById('initialPhoto')?.click()}
-              className="gap-2"
+              className="gap-2 rounded-full"
             >
               <Upload className="h-4 w-4" />
               {uploadingInitialPhoto || isDetecting
@@ -381,6 +382,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
                   setAiConfidenceInitial(null);
                   setUserCorrectedInitial(false);
                 }}
+                className="rounded-full"
               >
                 {t("common.remove")}
               </Button>
@@ -417,7 +419,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
           <div className="flex items-center gap-2 mb-1">
             <Label htmlFor="initialStitches">{t("projects.fields.initialStitches")}</Label>
             {isDetecting && (
-              <Badge variant="secondary" className="gap-1">
+              <Badge variant="secondary" className="gap-1 rounded-full">
                 <Loader2 className="h-3 w-3 animate-spin" />
                 {t("projects.ai.detecting")}
               </Badge>
@@ -431,13 +433,13 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
                     ? "secondary"
                     : "destructive"
                 }
-                className="gap-1"
+                className="gap-1 rounded-full"
               >
                 🤖 {t("projects.ai.confidence", { percent: Math.round(aiConfidenceInitial * 100) })}
               </Badge>
             )}
             {userCorrectedInitial && (
-              <Badge variant="outline" className="gap-1">
+              <Badge variant="outline" className="gap-1 rounded-full">
                 ✏️ {t("projects.ai.corrected")}
               </Badge>
             )}
@@ -467,7 +469,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
         <input type="checkbox" id="isPublic" name="isPublic" defaultChecked={defaultValues?.isPublic} />
         <Label htmlFor="isPublic">{t("projects.fields.isPublic")}</Label>
       </div>
-      <Button type="submit" disabled={loading || !!uploading}>
+      <Button type="submit" disabled={loading || !!uploading} className="rounded-full">
         {loading ? t("common.loading") : isEdit ? t("projects.editProject") : t("projects.createProject")}
       </Button>
     </form>

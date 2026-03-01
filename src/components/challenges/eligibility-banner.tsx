@@ -24,35 +24,35 @@ export function EligibilityBanner({
   const streakProgress = Math.min((currentStreak / streakRequired) * 100, 100);
 
   return (
-    <Alert>
-      <Info className="h-4 w-4" />
+    <Alert className="rounded-2xl bg-warning/5 border-warning/10">
+      <Info className="h-4 w-4 text-warning" />
       <AlertTitle>{t("title")}</AlertTitle>
-      <AlertDescription>
+      <AlertDescription className="text-foreground">
         <p className="mb-4">{t("description")}</p>
 
         <div className="space-y-4">
           <div>
-            <div className="flex justify-between text-sm mb-2">
-              <span>{t("tenure")}</span>
+            <div className="flex justify-between gap-4 text-sm mb-2">
+              <span>{t("tenure")}:</span>
               <span className="font-medium">
                 {tenure} / {tenureRequired} {t("days")}
               </span>
             </div>
-            <Progress value={tenureProgress} />
+            <Progress value={tenureProgress} className="rounded-full" />
           </div>
 
           <div>
-            <div className="flex justify-between text-sm mb-2">
-              <span>{t("streak")}</span>
+            <div className="flex justify-between gap-4 text-sm mb-2">
+              <span>{t("streak")}:</span>
               <span className="font-medium">
                 {currentStreak} / {streakRequired} {t("days")}
               </span>
             </div>
-            <Progress value={streakProgress} />
+            <Progress value={streakProgress} className="rounded-full" />
           </div>
         </div>
 
-        <p className="mt-4 text-sm text-muted-foreground">{t("encouragement")}</p>
+        <p className="mt-4 text-sm">{t("encouragement")}</p>
       </AlertDescription>
     </Alert>
   );

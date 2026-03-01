@@ -57,7 +57,7 @@ export function GamificationOverview() {
 
   if (statsLoading || achLoading) {
     return (
-      <Card>
+      <Card className="rounded-2xl">
         <CardHeader>
           <Skeleton className="h-6 w-32" />
         </CardHeader>
@@ -86,7 +86,7 @@ export function GamificationOverview() {
     : null;
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardContent className="p-3">
         <div className="flex items-start gap-4">
           {/* Level Progress - Left Side */}
@@ -114,7 +114,7 @@ export function GamificationOverview() {
               )}
             </div>
             {stats.level.next ? (
-              <Progress value={stats.level.progress} className="h-1.5" />
+              <Progress value={stats.level.progress} className="h-1.5 rounded-full" />
             ) : (
               <p className="text-[10px] text-muted-foreground">{tLevels("maxLevel")}</p>
             )}
@@ -147,7 +147,7 @@ export function GamificationOverview() {
                     {tAch(`list.${nextAchievementDef.id}.name`)}
                   </p>
                   <div className="flex items-center gap-1.5 mt-0.5">
-                    <Progress value={nextAchievement.progressPercent} className="h-1.5 flex-1" />
+                    <Progress value={nextAchievement.progressPercent} className="h-1.5 flex-1 rounded-full" />
                     <span className="text-[9px] text-muted-foreground whitespace-nowrap">
                       {Math.round(nextAchievement.progressPercent)}%
                     </span>

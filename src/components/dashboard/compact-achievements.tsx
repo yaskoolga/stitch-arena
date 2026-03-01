@@ -38,7 +38,7 @@ export function CompactAchievements() {
   const total = Object.values(ACHIEVEMENTS).length;
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader className="pb-2 px-3 pt-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base">{t("title")}</CardTitle>
@@ -119,7 +119,7 @@ export function CompactAchievements() {
                             {achievement.progress.toLocaleString()} / {achievement.requirement.toLocaleString()}
                           </span>
                         </div>
-                        <Progress value={progressPercent} className="h-1" />
+                        <Progress value={progressPercent} className="h-1 rounded-full" />
                       </div>
                     </div>
                   </TooltipContent>

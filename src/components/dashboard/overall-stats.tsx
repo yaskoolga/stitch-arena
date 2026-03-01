@@ -54,7 +54,7 @@ export function OverallStats() {
 
   if (error) {
     return (
-      <Card>
+      <Card className="rounded-2xl">
         <CardContent className="pt-6">
           <p className="text-destructive">{t('failedToLoad')}</p>
         </CardContent>
@@ -67,7 +67,7 @@ export function OverallStats() {
       <div className="space-y-6">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
           {[...Array(5)].map((_, i) => (
-            <Card key={i}>
+            <Card key={i} className="rounded-2xl">
               <CardHeader className="pb-2">
                 <Skeleton className="h-4 w-24" />
               </CardHeader>
@@ -231,7 +231,7 @@ export function OverallStats() {
                         {project.completedStitches.toLocaleString()} /{" "}
                         {project.totalStitches.toLocaleString()} {t('stitches')}
                       </div>
-                      <Progress value={project.progress} className="h-1 mt-1" />
+                      <Progress value={project.progress} className="h-1 mt-1 rounded-full" />
                     </div>
                     <div className="text-sm font-medium">
                       {project.progress.toFixed(1)}%

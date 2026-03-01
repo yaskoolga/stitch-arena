@@ -102,16 +102,60 @@ export default function ChallengesPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center justify-between gap-4 mb-2">
-          <div className="flex items-center gap-3">
-            <Trophy className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold">{t("challenges.title")}</h1>
+        <div className="flex items-center justify-between gap-4 mb-4">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-2xl bg-warning/10 shadow-sm">
+              <Trophy className="h-10 w-10 text-warning" />
+            </div>
+            <div>
+              <h1 className="text-4xl font-bold text-foreground">
+                {t("challenges.title")}
+              </h1>
+              <p className="text-muted-foreground mt-1">{t("challenges.subtitle")}</p>
+            </div>
           </div>
           {session?.user && eligibility?.canCreate && (
             <CreateChallengeDialog onSuccess={refetchChallenges} />
           )}
         </div>
-        <p className="text-muted-foreground">{t("challenges.subtitle")}</p>
+
+        {/* Quick Stats */}
+        {challenges && challenges.length > 0 && (
+          <div className="grid grid-cols-3 gap-3">
+            <div className="rounded-2xl bg-success/5 border-success/10 border p-4 shadow-sm">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="h-2 w-2 rounded-full bg-success animate-pulse" />
+                <span className="text-xs font-medium text-success">Active</span>
+              </div>
+              <p className="text-2xl font-bold text-success">
+                {challenges.filter(c => {
+                  const now = new Date();
+                  const start = new Date(c.startDate);
+                  const end = new Date(c.endDate);
+                  return now >= start && now <= end;
+                }).length}
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-info/5 border-info/10 border p-4 shadow-sm">
+              <div className="flex items-center gap-2 mb-1">
+                <Trophy className="h-3 w-3 text-info" />
+                <span className="text-xs font-medium text-info">Total</span>
+              </div>
+              <p className="text-2xl font-bold text-info">{challenges.length}</p>
+            </div>
+
+            <div className="rounded-2xl bg-warning/5 border-warning/10 border p-4 shadow-sm">
+              <div className="flex items-center gap-2 mb-1">
+                <Trophy className="h-3 w-3 text-warning" />
+                <span className="text-xs font-medium text-warning">Joined</span>
+              </div>
+              <p className="text-2xl font-bold text-warning">
+                {participations?.length || 0}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Eligibility Banner */}
@@ -127,10 +171,13 @@ export default function ChallengesPage() {
       )}
 
       {/* Filters */}
-      <div className="mb-6 space-y-4">
+      <div className="mb-6 grid gap-4 sm:grid-cols-2">
         {/* Status Filter */}
-        <div>
-          <h3 className="mb-2 text-sm font-medium">{t("common.status")}</h3>
+        <div className="rounded-2xl bg-primary/5 border-primary/10 border p-5 shadow-sm">
+          <h3 className="mb-3 text-sm font-semibold text-primary flex items-center gap-2">
+            <Trophy className="h-4 w-4" />
+            {t("common.status")}
+          </h3>
           <div className="flex flex-wrap gap-2">
             {(["all", "active", "upcoming", "past"] as StatusFilter[]).map((status) => (
               <Button
@@ -138,6 +185,7 @@ export default function ChallengesPage() {
                 variant={statusFilter === status ? "default" : "outline"}
                 size="sm"
                 onClick={() => setStatusFilter(status)}
+                className="rounded-full"
               >
                 {status === "all"
                   ? t("common.all")
@@ -148,13 +196,17 @@ export default function ChallengesPage() {
         </div>
 
         {/* Type Filter */}
-        <div>
-          <h3 className="mb-2 text-sm font-medium">{t("common.type")}</h3>
+        <div className="rounded-2xl bg-success/5 border-success/10 border p-5 shadow-sm">
+          <h3 className="mb-3 text-sm font-semibold text-success flex items-center gap-2">
+            <Trophy className="h-4 w-4" />
+            {t("common.type")}
+          </h3>
           <div className="flex flex-wrap gap-2">
             <Button
               variant={typeFilter === "all" ? "default" : "outline"}
               size="sm"
               onClick={() => setTypeFilter("all")}
+              className="rounded-full"
             >
               {t("common.all")}
             </Button>
@@ -164,7 +216,11 @@ export default function ChallengesPage() {
                 variant={typeFilter === type ? "default" : "outline"}
                 size="sm"
                 onClick={() => setTypeFilter(type)}
+                className="rounded-full"
               >
+                {type === "speed" && "⚡ "}
+                {type === "streak" && "🔥 "}
+                {type === "completion" && "✨ "}
                 {t(`challenges.types.${type}`)}
               </Button>
             ))}
@@ -191,14 +247,19 @@ export default function ChallengesPage() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
-          <Trophy className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-lg font-semibold mb-2">
+        <div className="rounded-2xl bg-muted/30 border border-border p-16 text-center">
+          <div className="inline-flex p-6 rounded-full bg-warning/10 mb-6 shadow-sm">
+            <Trophy className="h-16 w-16 text-warning" />
+          </div>
+          <h3 className="text-2xl font-bold mb-3">
             {t("challenges.noChallenges")}
           </h3>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground max-w-md mx-auto mb-6">
             {t("challenges.noChallengesDescription")}
           </p>
+          {session?.user && eligibility?.canCreate && (
+            <CreateChallengeDialog onSuccess={refetchChallenges} />
+          )}
         </div>
       )}
     </div>

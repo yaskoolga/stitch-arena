@@ -100,7 +100,7 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
   if (!user) return null;
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardContent className="px-3 py-3">
         <div className="flex items-center gap-4">
           {/* Профиль слева */}
@@ -159,7 +159,7 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                         {stats.level.stitchesUntilNext.toLocaleString()}
                       </span>
                     </div>
-                    <Progress value={stats.level.progress} className="h-1" />
+                    <Progress value={stats.level.progress} className="h-1 rounded-full" />
                   </div>
                 ) : (
                   <p className="text-[9px] text-muted-foreground">{tLevels("maxLevel")}</p>
@@ -192,7 +192,7 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                   return (
                     <Tooltip key={achievement.id}>
                       <TooltipTrigger>
-                        <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md ${rarityConfig.bgColor} ring-1 ring-inset ring-black/5 dark:ring-white/10`}>
+                        <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${rarityConfig.bgColor} ring-1 ring-inset ring-black/5 dark:ring-white/10`}>
                           <span className="text-lg">{achievement.emoji}</span>
                         </div>
                       </TooltipTrigger>
@@ -230,7 +230,7 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                   return (
                     <Tooltip key={achievement.id}>
                       <TooltipTrigger>
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted/30 ring-1 ring-inset ring-border/50 opacity-50 grayscale">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted/30 ring-1 ring-inset ring-border/50 opacity-50 grayscale">
                           <span className="text-lg">{achievement.emoji}</span>
                         </div>
                       </TooltipTrigger>
@@ -255,7 +255,7 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                                 {achievement.progress.toLocaleString()} / {achievement.requirement.toLocaleString()}
                               </span>
                             </div>
-                            <Progress value={progressPercent} className="h-1" />
+                            <Progress value={progressPercent} className="h-1 rounded-full" />
                           </div>
                         </div>
                       </TooltipContent>

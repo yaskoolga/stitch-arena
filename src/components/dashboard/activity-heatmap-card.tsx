@@ -22,7 +22,7 @@ export function ActivityHeatmapCard({ userId }: ActivityHeatmapCardProps) {
   });
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader className="pb-3 px-3 pt-3">
         <CardTitle className="text-lg">{t("activityOverview")}</CardTitle>
       </CardHeader>

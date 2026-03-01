@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export function SkeletonCard() {
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden rounded-2xl">
       <div className="h-40 bg-muted animate-pulse" />
       <CardHeader className="pb-2">
         <div className="flex justify-between">
@@ -34,7 +34,7 @@ export function SkeletonProjectDetail() {
       <div className="h-4 w-full rounded bg-muted animate-pulse" />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[...Array(4)].map((_, i) => (
-          <Card key={i}>
+          <Card key={i} className="rounded-2xl">
             <CardHeader className="pb-2">
               <div className="h-4 w-20 rounded bg-muted animate-pulse" />
             </CardHeader>
@@ -44,7 +44,7 @@ export function SkeletonProjectDetail() {
           </Card>
         ))}
       </div>
-      <Card>
+      <Card className="rounded-2xl">
         <CardHeader><div className="h-5 w-32 rounded bg-muted animate-pulse" /></CardHeader>
         <CardContent><div className="h-[300px] rounded bg-muted animate-pulse" /></CardContent>
       </Card>

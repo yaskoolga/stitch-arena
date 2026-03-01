@@ -169,7 +169,7 @@ export function DailyLogForm({
     <>
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* AI Detection Info Banner */}
-      <Card className="border-primary/50 bg-primary/5">
+      <Card className="border-primary/50 bg-primary/5 rounded-2xl">
         <CardContent className="pt-4 pb-4">
           <div className="flex gap-3">
             <div className="flex-shrink-0 mt-0.5">
@@ -189,7 +189,7 @@ export function DailyLogForm({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="rounded-2xl">
         <CardHeader>
           <CardTitle>{t("logs.addDailyLog")}</CardTitle>
           <CardDescription>
@@ -221,7 +221,7 @@ export function DailyLogForm({
                 variant="outline"
                 disabled={uploading || isDetecting}
                 onClick={() => document.getElementById('photo')?.click()}
-                className="gap-2"
+                className="gap-2 rounded-full"
               >
                 <Upload className="h-4 w-4" />
                 {uploading || isDetecting
@@ -236,6 +236,7 @@ export function DailyLogForm({
                   variant="ghost"
                   size="sm"
                   onClick={() => setPhotoUrl("")}
+                  className="rounded-full"
                 >
                   {t("common.remove")}
                 </Button>
@@ -272,7 +273,7 @@ export function DailyLogForm({
             <div className="flex items-center gap-2 mb-1">
               <Label htmlFor="dailyStitches">{t("logs.fields.stitchesCompleted")}</Label>
               {isDetecting && (
-                <Badge variant="secondary" className="gap-1">
+                <Badge variant="secondary" className="gap-1 rounded-full">
                   <Loader2 className="h-3 w-3 animate-spin" />
                   {t("projects.ai.detecting")}
                 </Badge>
@@ -286,13 +287,13 @@ export function DailyLogForm({
                       ? "secondary"
                       : "destructive"
                   }
-                  className="gap-1"
+                  className="gap-1 rounded-full"
                 >
                   🤖 {t("projects.ai.confidence", { percent: Math.round(aiConfidenceValue * 100) })}
                 </Badge>
               )}
               {userCorrectedFlag && (
-                <Badge variant="outline" className="gap-1">
+                <Badge variant="outline" className="gap-1 rounded-full">
                   ✏️ {t("projects.ai.corrected")}
                 </Badge>
               )}
@@ -333,7 +334,7 @@ export function DailyLogForm({
         <Button
           type="submit"
           disabled={saving || uploading || isDetecting}
-          className="flex-1"
+          className="flex-1 rounded-full"
         >
           {saving ? (
             <>
@@ -349,6 +350,7 @@ export function DailyLogForm({
           variant="outline"
           onClick={() => router.back()}
           disabled={saving || isDetecting}
+          className="rounded-full"
         >
           {t("common.cancel")}
         </Button>

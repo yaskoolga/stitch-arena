@@ -2,10 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { StatsCard } from "@/components/design";
+import { Card, CardContent } from "@/components/ui/card";
 import { SpeedBadge } from "@/components/achievements/speed-badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
+import { FolderOpen, Activity, Zap, TrendingUp, Flame } from "lucide-react";
 
 interface OverallStatsData {
   projectCounts: {
@@ -57,7 +58,7 @@ export function CompactStats({ userId }: CompactStatsProps) {
 
   if (error) {
     return (
-      <Card>
+      <Card className="rounded-2xl">
         <CardContent className="pt-6">
           <p className="text-destructive">{t("failedToLoad")}</p>
         </CardContent>
@@ -67,115 +68,69 @@ export function CompactStats({ userId }: CompactStatsProps) {
 
   if (isLoading || !data) {
     return (
-      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+      <>
         {[...Array(5)].map((_, i) => (
-          <Card key={i}>
-            <CardHeader className="pb-2 px-3 pt-3">
-              <Skeleton className="h-3 w-20" />
-            </CardHeader>
-            <CardContent className="px-3 pb-3">
-              <Skeleton className="h-6 w-14" />
+          <Card key={i} className="rounded-2xl animate-pulse">
+            <CardContent className="p-3">
+              <div className="h-16"></div>
             </CardContent>
           </Card>
         ))}
-      </div>
+      </>
     );
   }
 
+  const activePercentage = data.projectCounts.total > 0
+    ? Math.round((data.projectCounts.active / data.projectCounts.total) * 100)
+    : 0;
+
   return (
-    <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-      <Card className="gap-1 py-2">
-        <CardHeader className="px-3 pb-0">
-          <CardTitle className="text-xs font-medium text-muted-foreground">
-            {t("totalProjects")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="px-3 pb-0">
-          <div className="text-xl font-bold">{data.projectCounts.total}</div>
-          <div className="text-[10px] text-muted-foreground mt-0.5">
-            {data.projectCounts.active} {t("active")} · {data.projectCounts.completed}{" "}
-            {t("completed")}
-            {data.projectCounts.paused > 0 &&
-              ` · ${data.projectCounts.paused} ${t("paused")}`}
-          </div>
-        </CardContent>
-      </Card>
+    <>
+      <StatsCard
+        title={t("totalProjects")}
+        value={data.projectCounts.total}
+        description={`${data.projectCounts.active} ${t("active")} · ${data.projectCounts.completed} ${t("completed")}`}
+        icon={FolderOpen}
+        color="primary"
+      />
 
-      <Card className="gap-1 py-2">
-        <CardHeader className="px-3 pb-0">
-          <CardTitle className="text-xs font-medium text-muted-foreground">
-            {t("totalStitches")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="px-3 pb-0">
-          <div className="text-xl font-bold">
-            {data.totalStitches.toLocaleString()}
-          </div>
-          <div className="text-[10px] text-muted-foreground mt-0.5">
-            {t("acrossAll")}
-          </div>
-        </CardContent>
-      </Card>
+      <StatsCard
+        title={t("totalStitches")}
+        value={data.totalStitches}
+        description={t("acrossAll")}
+        icon={Activity}
+        color="success"
+      />
 
-      <Card className="gap-1 py-2">
-        <CardHeader className="px-3 pb-0">
-          <CardTitle className="text-xs font-medium text-muted-foreground">
-            {t("averageSpeed")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="px-3 pb-0">
-          <div className="flex items-center gap-2">
-            <div className="text-xl font-bold">{data.avgSpeed}</div>
-            <SpeedBadge avgStitchesPerDay={data.avgSpeed} size="sm" />
-          </div>
-          <div className="text-[10px] text-muted-foreground mt-0.5">
-            {t("stitchesPerDaySixMonths")}
-          </div>
-        </CardContent>
-      </Card>
+      <StatsCard
+        title={t("averageSpeed")}
+        value={data.avgSpeed}
+        description={t("stitchesPerDaySixMonths")}
+        icon={Zap}
+        color="info"
+      />
 
-      <Card className="gap-1 py-2">
-        <CardHeader className="px-3 pb-0">
-          <CardTitle className="text-xs font-medium text-muted-foreground">
-            {t("mostProductive")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="px-3 pb-0">
-          {data.mostProductiveDay ? (
-            <>
-              <div className="text-xl font-bold">
-                {data.mostProductiveDay.count.toLocaleString()}
-              </div>
-              <div className="text-[10px] text-muted-foreground mt-0.5">
-                {format(new Date(data.mostProductiveDay.date), "MMM d, yyyy")}
-              </div>
-            </>
-          ) : (
-            <div className="text-xs text-muted-foreground">{t("noDataYet")}</div>
-          )}
-        </CardContent>
-      </Card>
+      <StatsCard
+        title={t("mostProductive")}
+        value={data.mostProductiveDay ? data.mostProductiveDay.count : 0}
+        description={data.mostProductiveDay
+          ? format(new Date(data.mostProductiveDay.date), "MMM d, yyyy")
+          : t("noDataYet")
+        }
+        icon={TrendingUp}
+        color="warning"
+      />
 
-      <Card className="gap-1 py-2">
-        <CardHeader className="px-3 pb-0">
-          <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-2">
-            🔥 {t("currentStreak")}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="px-3 pb-0">
-          <div className="text-xl font-bold text-orange-600 dark:text-orange-400">
-            {data.currentStreak}
-          </div>
-          <div className="text-[10px] text-muted-foreground mt-0.5">
-            {data.currentStreak === 1 ? t("dayInARow") : t("daysInARow")}
-          </div>
-          {data.bestStreak > data.currentStreak && (
-            <div className="text-[10px] text-muted-foreground mt-0.5">
-              {t("best")}: {data.bestStreak} {data.bestStreak === 1 ? t("day") : t("days")}
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+      <StatsCard
+        title={t("currentStreak")}
+        value={`${data.currentStreak} ${data.currentStreak === 1 ? t("day") : t("days")}`}
+        description={data.bestStreak > data.currentStreak
+          ? `${t("best")}: ${data.bestStreak} ${data.bestStreak === 1 ? t("day") : t("days")}`
+          : t("daysInARow")
+        }
+        icon={Flame}
+        color="destructive"
+      />
+    </>
   );
 }

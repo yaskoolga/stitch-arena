@@ -88,7 +88,7 @@ export function AchievementBadge({
 
         {showProgress && !isUnlocked && requirement > 0 && (
           <div className="w-full space-y-0.5 mt-1">
-            <Progress value={progressPercent} className="h-1.5" />
+            <Progress value={progressPercent} className="h-1.5 rounded-full" />
             <div className="text-[10px] text-muted-foreground">
               {progress.toLocaleString()} / {requirement.toLocaleString()}
             </div>

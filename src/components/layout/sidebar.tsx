@@ -30,7 +30,7 @@ export function Sidebar() {
       <Button
         variant="outline"
         size="sm"
-        className="fixed left-4 top-20 z-40 md:hidden"
+        className="fixed left-4 top-20 z-40 md:hidden rounded-full shadow-sm"
         onClick={() => setOpen(!open)}
       >
         {open ? tCommon('close') : "Menu"}
@@ -51,17 +51,17 @@ export function Sidebar() {
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <nav className="space-y-1">
+        <nav className="space-y-1.5">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-sidebar-accent",
+                "block rounded-2xl px-4 py-2.5 text-sm font-medium transition-all",
                 pathname === item.href
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                  : "text-sidebar-foreground"
+                  ? "bg-primary/10 text-primary shadow-sm"
+                  : "text-sidebar-foreground hover:bg-sidebar-accent/50"
               )}
             >
               {item.label}

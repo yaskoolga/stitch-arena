@@ -73,7 +73,7 @@ export default function AddDailyLogPage() {
 
   if (!project) {
     return (
-      <Card>
+      <Card className="rounded-2xl">
         <CardContent className="pt-6">
           <p className="text-center text-muted-foreground">{t('projectNotFound')}</p>
           <div className="flex justify-center mt-4">
@@ -115,7 +115,7 @@ export default function AddDailyLogPage() {
       />
 
       {/* Tips */}
-      <Card className="bg-muted/50">
+      <Card className="bg-muted/50 rounded-2xl">
         <CardContent className="pt-6">
           <div className="space-y-2 text-sm">
             <p className="font-medium">{t('tipsTitle')}</p>

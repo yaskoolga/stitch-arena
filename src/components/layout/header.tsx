@@ -20,20 +20,20 @@ export function Header() {
   const t = useTranslations('nav');
 
   return (
-    <header className="border-b bg-background">
+    <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href={session ? "/dashboard" : "/"} className="flex items-center transition-opacity hover:opacity-80">
           <Logo size={40} showText={true} />
         </Link>
 
-        <nav className="flex items-center gap-2">
+        <nav className="flex items-center gap-3">
           <LanguageSwitcher />
           <ThemeToggle />
           {session && <NotificationsDropdown />}
           {session ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline">{session.user?.name || session.user?.email}</Button>
+                <Button variant="outline" className="rounded-full">{session.user?.name || session.user?.email}</Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
@@ -50,10 +50,10 @@ export function Header() {
           ) : (
             <>
               <Link href="/login">
-                <Button variant="ghost">{t('login')}</Button>
+                <Button variant="ghost" className="rounded-full">{t('login')}</Button>
               </Link>
               <Link href="/register">
-                <Button>{t('register')}</Button>
+                <Button className="rounded-full">{t('register')}</Button>
               </Link>
             </>
           )}

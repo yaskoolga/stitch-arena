@@ -266,14 +266,14 @@ export default function ProjectDetailPage() {
       />
 
       {/* Enhanced Project Header */}
-      <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-primary/5 via-background to-background p-6 shadow-sm">
+      <div className="relative overflow-hidden rounded-2xl border bg-background p-6 shadow-sm">
         <div className="relative z-10">
           <div className="flex items-start gap-6 mb-5">
             {(project.coverImage || project.schemaImage || project.imageUrl) && (
               <ImageDialog
                 src={project.coverImage || project.schemaImage || project.imageUrl || ''}
                 alt={project.title}
-                thumbnailClassName="h-48 w-48 flex-shrink-0 overflow-hidden rounded-lg border-2 border-primary/20 shadow-lg"
+                thumbnailClassName="h-48 w-48 flex-shrink-0 overflow-hidden rounded-2xl border-2 border-primary/20 shadow-lg"
               />
             )}
             <div className="flex-1 min-w-0">
@@ -289,7 +289,7 @@ export default function ProjectDetailPage() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8 text-muted-foreground hover:text-primary"
+                            className="h-8 w-8 rounded-full text-muted-foreground hover:text-primary"
                             title={t("projects.editProject")}
                           >
                             <Edit className="h-4 w-4" />
@@ -315,7 +315,7 @@ export default function ProjectDetailPage() {
                       <div className="flex items-start gap-2">
                         <div className="flex flex-wrap gap-1">
                           {JSON.parse(project.themes).slice(0, 5).map((theme: string) => (
-                            <Badge key={theme} variant="outline" className="text-xs">
+                            <Badge key={theme} variant="outline" className="text-xs rounded-full">
                               {theme}
                             </Badge>
                           ))}
@@ -353,13 +353,13 @@ export default function ProjectDetailPage() {
           <div className="flex gap-2 flex-wrap mb-5">
             {project.isPublic && session?.user?.id !== project.userId && (
               <>
-                <LikeButton projectId={id} variant="outline" />
-                <FollowProjectButton projectId={id} projectOwnerId={project.userId} variant="outline" showCount />
+                <LikeButton projectId={id} variant="outline" className="rounded-full" />
+                <FollowProjectButton projectId={id} projectOwnerId={project.userId} variant="outline" showCount className="rounded-full" />
               </>
             )}
             {session?.user?.id === project.userId && (
               <Link href={`/projects/${id}/logs/new`}>
-                <Button className="gap-2">
+                <Button className="gap-2 rounded-full">
                   <Plus className="h-4 w-4" />
                   {t("logs.addLog")}
                 </Button>
@@ -370,7 +370,7 @@ export default function ProjectDetailPage() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setDeleteProjectOpen(true)}
-                className="ml-auto text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                className="ml-auto text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-full"
                 title={t("projects.deleteProject")}
               >
                 <Trash2 className="h-4 w-4" />
@@ -384,7 +384,7 @@ export default function ProjectDetailPage() {
               <span className="font-medium">{completedStitches.toLocaleString()} / {totalStitches.toLocaleString()} {t("logs.fields.stitches")}</span>
               <span className="font-bold text-primary">{pct}%</span>
             </div>
-            <Progress value={pct} className="h-2" />
+            <Progress value={pct} className="h-2 rounded-full" />
             {project.initialStitches > 0 && (
               <p className="text-xs text-muted-foreground mt-2">
                 {t("projects.progress.initialNote", {
@@ -412,7 +412,7 @@ export default function ProjectDetailPage() {
       />
 
       {/* Progress Photos Gallery */}
-      <Card className="gap-3 py-4">
+      <Card className="gap-3 py-4 rounded-2xl">
         <CardHeader className="px-4 pb-0">
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">{t("logs.fields.photo")}</CardTitle>
@@ -424,7 +424,7 @@ export default function ProjectDetailPage() {
                     size="sm"
                     onClick={() => document.getElementById('quick-photo-upload')?.click()}
                     disabled={uploadingPhoto || isDetecting}
-                    className="gap-2"
+                    className="gap-2 rounded-full"
                   >
                     <Upload className="h-4 w-4" />
                     {uploadingPhoto || isDetecting
@@ -448,6 +448,7 @@ export default function ProjectDetailPage() {
                   variant="outline"
                   size="sm"
                   onClick={() => setShowAllPhotos(!showAllPhotos)}
+                  className="rounded-full"
                 >
                   {showAllPhotos ? `↑ ${t("common.back")}` : t("common.loadMore")}
                 </Button>
@@ -469,7 +470,7 @@ export default function ProjectDetailPage() {
                         <ImageDialog
                           src={photoSrc!}
                           alt={`${t("projects.progressPhotoAlt")} ${format(new Date(log.date), "dd.MM.yyyy")}`}
-                          thumbnailClassName="aspect-square w-full overflow-hidden rounded-lg border-2 border-muted hover:border-primary/50 transition-all"
+                          thumbnailClassName="aspect-square w-full overflow-hidden rounded-2xl border-2 border-muted hover:border-primary/50 transition-all"
                         />
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 rounded-b-lg">
                           <p className="text-xs text-white font-medium">
@@ -501,12 +502,12 @@ export default function ProjectDetailPage() {
       )}
 
       {/* Log History Table */}
-      <Card className="gap-3 py-4">
+      <Card className="gap-3 py-4 rounded-2xl">
         <CardHeader className="px-4 pb-0">
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">{t("logs.title")}</CardTitle>
             {sortedLogs.length > 0 && (
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className="text-xs rounded-full">
                 {sortedLogs.length} {t("projects.progress.logs")}
               </Badge>
             )}
@@ -519,7 +520,7 @@ export default function ProjectDetailPage() {
               <p className="text-sm text-muted-foreground mb-3">{t("logs.noLogs")}</p>
               {session?.user?.id === project.userId && (
                 <Link href={`/projects/${id}/logs/new`}>
-                  <Button size="sm">{t("logs.addLog")}</Button>
+                  <Button size="sm" className="rounded-full">{t("logs.addLog")}</Button>
                 </Link>
               )}
             </div>
@@ -548,7 +549,7 @@ export default function ProjectDetailPage() {
                           <div className="flex items-center gap-2">
                             {format(new Date(log.date), "dd.MM.yyyy")}
                             {isInitial && (
-                              <Badge variant="secondary" className="text-xs">
+                              <Badge variant="secondary" className="text-xs rounded-full">
                                 {t("logs.initial")}
                               </Badge>
                             )}
@@ -590,7 +591,7 @@ export default function ProjectDetailPage() {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-7 w-7 text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-950"
+                                    className="h-7 w-7 rounded-full text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-950"
                                     onClick={() => handleSaveEdit(log.id)}
                                     title={t("common.save")}
                                   >
@@ -599,7 +600,7 @@ export default function ProjectDetailPage() {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-7 w-7 text-muted-foreground hover:text-foreground"
+                                    className="h-7 w-7 rounded-full text-muted-foreground hover:text-foreground"
                                     onClick={handleCancelEdit}
                                     title={t("common.cancel")}
                                   >
@@ -612,7 +613,7 @@ export default function ProjectDetailPage() {
                                     <Button
                                       variant="ghost"
                                       size="icon"
-                                      className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-primary hover:bg-primary/10"
+                                      className="h-7 w-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-primary hover:bg-primary/10"
                                       onClick={() => handleEditLog(log)}
                                       title={t("common.edit")}
                                     >
@@ -622,7 +623,7 @@ export default function ProjectDetailPage() {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                                    className="h-7 w-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
                                     onClick={() => setDeleteLogId(log.id)}
                                     title={t("logs.deleteLog")}
                                   >
@@ -655,7 +656,7 @@ export default function ProjectDetailPage() {
       </Card>
 
       {/* Progress Chart */}
-      <Card className="gap-3 py-4">
+      <Card className="gap-3 py-4 rounded-2xl">
         <CardHeader className="px-4 pb-0">
           <CardTitle className="text-lg">{t("projects.progress.title")}</CardTitle>
         </CardHeader>

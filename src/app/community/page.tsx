@@ -88,7 +88,7 @@ export default function CommunityPage() {
         {isLoading ? (
           <>
             {[...Array(5)].map((_, i) => (
-              <Card key={i} className="gap-2 py-3">
+              <Card key={i} className="gap-2 py-3 rounded-2xl">
                 <CardHeader className="px-3 pb-0">
                   <div className="flex items-center gap-2">
                     <Skeleton className="h-8 w-8 rounded-full" />
@@ -109,7 +109,7 @@ export default function CommunityPage() {
             ))}
           </>
         ) : allItems.length === 0 ? (
-          <Card>
+          <Card className="rounded-2xl">
             <CardContent className="py-12 text-center">
               <Sparkles className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
               <h3 className="text-lg font-medium mb-2">{t("community.empty")}</h3>
@@ -131,7 +131,7 @@ export default function CommunityPage() {
                   disabled={isFetchingNextPage}
                   variant="ghost"
                   size="lg"
-                  className="text-muted-foreground hover:text-primary"
+                  className="rounded-full text-muted-foreground hover:text-primary"
                 >
                   {isFetchingNextPage ? (
                     <>
@@ -170,7 +170,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
   );
 
   return (
-    <Card className="gap-2 py-3 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
+    <Card className="gap-2 py-3 overflow-hidden hover:shadow-md transition-shadow rounded-2xl">
       <CardHeader className="px-3 pb-0">
         <div className="flex items-center gap-2">
           <Link href={`/dashboard/${project.user.id}`}>
@@ -191,7 +191,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
               {t("community.activity.createdProject")} • {format(new Date(createdAt), "dd.MM.yyyy")}
             </p>
           </div>
-          <Badge variant="secondary" className="gap-1 text-[10px] px-2 py-0.5">
+          <Badge variant="secondary" className="gap-1 text-[10px] px-2 py-0.5 rounded-full">
             <Sparkles className="h-2.5 w-2.5" />
             {t("projects.createNew").split(" ")[0]}
           </Badge>
@@ -207,7 +207,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
                   src={project.schemaImage}
                   alt={project.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-contain"
                 />
               </div>
             )}
@@ -232,7 +232,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
                     </Badge>
                   ))}
                   {project.themes.length > 3 && (
-                    <Badge variant="outline" className="text-[10px]">
+                    <Badge variant="outline" className="text-[10px] rounded-full">
                       +{project.themes.length - 3}
                     </Badge>
                   )}
@@ -247,7 +247,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
                   </span>
                   <span className="font-medium">{pct}%</span>
                 </div>
-                <Progress value={pct} className="h-1" />
+                <Progress value={pct} className="h-1 rounded-full" />
               </div>
             </div>
           </div>
@@ -256,7 +256,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
         <div className="flex items-center gap-1 pt-1.5 border-t mt-2">
           <LikeButton projectId={project.id} variant="ghost" size="sm" />
           <Link href={`/projects/${project.id}#comments`}>
-            <Button variant="ghost" size="sm" className="gap-1 h-7">
+            <Button variant="ghost" size="sm" className="gap-1 h-7 rounded-full">
               <MessageCircle className="h-3 w-3" />
               <span className="text-xs">{project.commentCount}</span>
             </Button>
@@ -270,7 +270,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
 function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
   const t = useTranslations();
   return (
-    <Card className="gap-2 py-3 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.01]">
+    <Card className="gap-2 py-3 overflow-hidden hover:shadow-md transition-shadow rounded-2xl">
       <CardHeader className="px-3 pb-0">
         <div className="flex items-center gap-2">
           <Link href={`/dashboard/${log.project.user.id}`}>
@@ -291,7 +291,7 @@ function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
               {t("community.activity.updatedProgress")} • {format(new Date(createdAt), "dd.MM.yyyy")}
             </p>
           </div>
-          <Badge variant="secondary" className="gap-1 text-[10px] px-2 py-0.5">
+          <Badge variant="secondary" className="gap-1 text-[10px] px-2 py-0.5 rounded-full">
             <ImageIcon className="h-2.5 w-2.5" />
             {t("community.tabs.updates")}
           </Badge>
@@ -307,7 +307,7 @@ function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
                   src={log.photoUrl}
                   alt="Progress photo"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-contain"
                 />
               </div>
             )}
@@ -322,7 +322,7 @@ function LogFeedCard({ log, createdAt }: { log: any; createdAt: string }) {
               </p>
 
               <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
-                <Badge variant="outline" className="gap-1 text-[10px] bg-green-50 text-green-700 border-green-200">
+                <Badge variant="outline" className="gap-1 text-[10px] rounded-full bg-green-50 text-green-700 border-green-200">
                   +{log.dailyStitches.toLocaleString()}
                 </Badge>
                 <span className="text-[10px] text-muted-foreground">

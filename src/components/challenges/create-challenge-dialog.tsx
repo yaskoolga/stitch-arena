@@ -117,7 +117,7 @@ export function CreateChallengeDialog({ onSuccess }: CreateChallengeDialogProps)
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>{t("create.button")}</Button>
+        <Button className="rounded-full">{t("create.button")}</Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
@@ -265,10 +265,11 @@ export function CreateChallengeDialog({ onSuccess }: CreateChallengeDialogProps)
                 variant="outline"
                 onClick={() => setOpen(false)}
                 disabled={isSubmitting}
+                className="rounded-full"
               >
                 {t("form.cancel")}
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
+              <Button type="submit" disabled={isSubmitting} className="rounded-full">
                 {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {t("form.submit")}
               </Button>

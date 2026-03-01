@@ -37,7 +37,7 @@ export function ConfirmDialog({
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={loading}>
+          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={loading} className="rounded-full">
             Cancel
           </Button>
           <Button
@@ -47,6 +47,7 @@ export function ConfirmDialog({
               onOpenChange(false);
             }}
             disabled={loading}
+            className="rounded-full"
           >
             {loading ? "Deleting..." : "Delete"}
           </Button>

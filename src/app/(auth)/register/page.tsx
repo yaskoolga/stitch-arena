@@ -115,17 +115,17 @@ export default function RegisterPage() {
 
   return (
     <div className="flex justify-center py-12">
-      <Card className="w-full max-w-2xl">
-        <CardHeader>
-          <CardTitle>{t("auth.registerTitle")}</CardTitle>
+      <Card className="w-full max-w-2xl rounded-2xl shadow-lg">
+        <CardHeader className="bg-success/5 rounded-t-2xl border-b border-success/10">
+          <CardTitle className="text-2xl">{t("auth.registerTitle")}</CardTitle>
           <CardDescription>
             {step === 1 ? "Step 1 of 2: Basic Information" : "Step 2 of 2: Quick Cross-Stitch Quiz"}
           </CardDescription>
-          <Progress value={step === 1 ? 50 : 100} className="mt-2" />
+          <Progress value={step === 1 ? 50 : 100} className="mt-3 rounded-full" />
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           {error && (
-            <div className="mb-4 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+            <div className="mb-4 rounded-xl bg-destructive/10 border border-destructive/20 p-3 text-sm text-destructive">
               {error}
             </div>
           )}
@@ -140,6 +140,7 @@ export default function RegisterPage() {
                   name="name"
                   defaultValue={formData.name}
                   placeholder={t("auth.name")}
+                  className="rounded-full"
                 />
               </div>
               <div>
@@ -151,6 +152,7 @@ export default function RegisterPage() {
                   required
                   defaultValue={formData.email}
                   placeholder={t("auth.email")}
+                  className="rounded-full"
                 />
               </div>
               <div>
@@ -163,16 +165,17 @@ export default function RegisterPage() {
                   minLength={6}
                   defaultValue={formData.password}
                   placeholder={t("auth.password")}
+                  className="rounded-full"
                 />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full rounded-full">
                 Next: Cross-Stitch Quiz →
               </Button>
             </form>
           ) : (
             // Step 2: Cross-Stitch Quiz
             <form onSubmit={handleFinalSubmit} className="space-y-6">
-              <div className="rounded-md bg-muted/50 p-4 text-sm">
+              <div className="rounded-2xl bg-primary/5 border border-primary/10 p-4 text-sm">
                 <p className="font-medium">🧵 Quick Quiz: Are you a cross-stitcher?</p>
                 <p className="mt-1 text-muted-foreground">
                   Answer at least 2 out of 3 questions correctly. This helps us keep the community genuine!
@@ -203,17 +206,17 @@ export default function RegisterPage() {
                 </div>
               ))}
 
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setStep(1)}
-                  className="w-full"
+                  className="w-full rounded-full"
                 >
                   <ChevronLeft className="mr-2 h-4 w-4" />
                   {t("common.cancel")}
                 </Button>
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full rounded-full" disabled={loading}>
                   {loading ? t("common.loading") : t("auth.signUp")}
                 </Button>
               </div>
@@ -222,7 +225,7 @@ export default function RegisterPage() {
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             {t("auth.hasAccount")}{" "}
-            <Link href="/login" className="underline">{t("auth.signIn")}</Link>
+            <Link href="/login" className="text-primary hover:underline font-medium">{t("auth.signIn")}</Link>
           </p>
         </CardContent>
       </Card>

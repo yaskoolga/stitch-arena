@@ -32,7 +32,7 @@ function AvatarImage({
   return (
     <AvatarPrimitive.Image
       data-slot="avatar-image"
-      className={cn("aspect-square size-full", className)}
+      className={cn("aspect-square size-full transition-transform duration-200 group-hover/avatar:scale-105", className)}
       {...props}
     />
   )

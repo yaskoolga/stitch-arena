@@ -135,7 +135,7 @@ export default function SettingsPage() {
   if (isLoading || status === "loading") {
     return (
       <div className="max-w-2xl mx-auto">
-        <Card>
+        <Card className="rounded-2xl">
           <CardContent className="py-12 text-center">
             <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
             <p className="text-muted-foreground">Loading settings...</p>
@@ -155,7 +155,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Profile Settings */}
-      <Card>
+      <Card className="rounded-2xl">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <User className="h-5 w-5" />
@@ -204,7 +204,7 @@ export default function SettingsPage() {
                       className="flex-1"
                     />
                     {isUploading && (
-                      <Button type="button" disabled size="icon" variant="outline">
+                      <Button type="button" disabled size="icon" variant="outline" className="rounded-full">
                         <Loader2 className="h-4 w-4 animate-spin" />
                       </Button>
                     )}
@@ -287,7 +287,7 @@ export default function SettingsPage() {
               <Button
                 type="submit"
                 disabled={updateProfile.isPending}
-                className="gap-2"
+                className="gap-2 rounded-full"
               >
                 {updateProfile.isPending ? (
                   <>
@@ -309,6 +309,7 @@ export default function SettingsPage() {
                   setBio(profile?.bio || "");
                   setAvatar(profile?.avatar || "");
                 }}
+                className="rounded-full"
               >
                 Reset
               </Button>

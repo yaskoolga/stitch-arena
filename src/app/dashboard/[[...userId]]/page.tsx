@@ -28,6 +28,7 @@ interface ProjectItem {
   totalStitches: number;
   completedStitches: number;
   status: string;
+  manufacturer?: string | null;
   canvasType?: string;
   schemaImage?: string | null;
   imageUrl?: string | null; // Old format (for backwards compatibility)
@@ -132,21 +133,12 @@ export default function DashboardPage({ params }: DashboardPageProps) {
         <CompactProfile userId={targetUserId} isOwn={isOwnDashboard} />
       </div>
 
-      {/* Gamification Overview (only for own dashboard) */}
-      {isOwnDashboard && (
-        <div className="mb-3">
-          <GamificationOverview />
-        </div>
-      )}
-
-      {/* Компактная статистика */}
+      {/* Компактная статистика (includes challenges for own dashboard) */}
       <div className="mb-3">
-        <CompactStats userId={isOwnDashboard ? undefined : targetUserId} />
-      </div>
-
-      {/* Active Challenges Widget */}
-      <div className="mb-4">
-        <ActiveChallengesWidget userId={isOwnDashboard ? undefined : targetUserId} />
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <CompactStats userId={isOwnDashboard ? undefined : targetUserId} />
+          {isOwnDashboard && <ActiveChallengesWidget userId={undefined} />}
+        </div>
       </div>
 
       <ConfirmDialog
@@ -163,13 +155,13 @@ export default function DashboardPage({ params }: DashboardPageProps) {
       />
 
       {/* Проекты */}
-      <div className="mb-2 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">
+      <div className="mb-4 mt-6">
+        <h1 className="text-2xl font-bold mb-3">
           {isOwnDashboard ? t("myProjects") : tDash("publicProjects")}
         </h1>
         {isOwnDashboard && (
           <Link href="/projects/new">
-            <Button size="sm">
+            <Button size="sm" className="rounded-full shadow-sm">
               <Plus className="mr-1 h-3.5 w-3.5" />
               {t("createNew")}
             </Button>
@@ -184,6 +176,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             variant={filter === "all" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("all")}
+            className="rounded-full"
           >
             {tDash("filters.all")}
           </Button>
@@ -191,6 +184,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             variant={filter === "in_progress" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("in_progress")}
+            className="rounded-full"
           >
             {tDash("filters.inProgress")}
           </Button>
@@ -198,6 +192,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             variant={filter === "completed" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("completed")}
+            className="rounded-full"
           >
             {tDash("filters.completed")}
           </Button>
@@ -205,6 +200,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             variant={filter === "paused" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("paused")}
+            className="rounded-full"
           >
             {tDash("filters.paused")}
           </Button>
@@ -232,7 +228,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <Card className="mb-4">
+        <Card className="mb-4 rounded-2xl">
           <CardContent className="flex flex-col items-center justify-center py-8">
             <BookOpen className="mb-3 h-10 w-10 text-muted-foreground" />
             <p className="mb-4 text-center text-sm text-muted-foreground">
@@ -244,7 +240,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             </p>
             {filter === "all" && isOwnDashboard && (
               <Link href="/projects/new">
-                <Button>
+                <Button className="rounded-full">
                   <Plus className="mr-1 h-4 w-4" />
                   {t("startFirst")}
                 </Button>
@@ -262,6 +258,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
               <ProjectCard
                 key={p.id}
                 {...p}
+                manufacturer={p.manufacturer}
                 themes={themes}
                 avgSpeed={avgSpeed}
                 onDelete={isOwnDashboard ? setDeleteProjectId : undefined}

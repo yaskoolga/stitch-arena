@@ -245,7 +245,7 @@ export default function GalleryPage() {
                       showCount={false}
                     />
                     <Link href={`/projects/${selectedPhoto.project.id}`}>
-                      <Button variant="default" size="default">
+                      <Button variant="default" size="default" className="rounded-full">
                         {t("gallery.openProject")}
                       </Button>
                     </Link>
@@ -358,6 +358,7 @@ function AllProjectsTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
                 variant={selectedThemes.includes(theme) ? "default" : "outline"}
                 size="sm"
                 onClick={() => toggleTheme(theme)}
+                className="rounded-full"
               >
                 {t(`themes.${theme}` as any)}
                 {selectedThemes.includes(theme) && (
@@ -386,7 +387,7 @@ function AllProjectsTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
             return (
               <Card
                 key={p.id}
-                className="overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02]"
+                className="overflow-hidden transition-shadow hover:shadow-md rounded-2xl"
               >
                 <div className="group relative cursor-pointer">
                   {imageSrc ? (
@@ -429,7 +430,7 @@ function AllProjectsTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
                       </CardTitle>
                       <Badge
                         variant={p.status === "completed" ? "default" : "secondary"}
-                        className={`text-[10px] px-2 py-0.5 ${p.status === "completed" ? "bg-green-600" : ""}`}
+                        className={`text-[10px] px-2 py-0.5 rounded-full ${p.status === "completed" ? "bg-green-600" : ""}`}
                       >
                         {p.status === "in_progress"
                           ? t("projects.status.inProgress")
@@ -452,12 +453,12 @@ function AllProjectsTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
                     {p.themes && p.themes.length > 0 && (
                       <div className="flex flex-wrap gap-1 mt-1.5">
                         {p.themes.slice(0, 3).map((theme) => (
-                          <Badge key={theme} variant="outline" className="text-[10px]">
+                          <Badge key={theme} variant="outline" className="text-[10px] rounded-full">
                             {t(`themes.${theme}` as any)}
                           </Badge>
                         ))}
                         {p.themes.length > 3 && (
-                          <Badge variant="outline" className="text-[10px]">
+                          <Badge variant="outline" className="text-[10px] rounded-full">
                             +{p.themes.length - 3}
                           </Badge>
                         )}
@@ -476,7 +477,7 @@ function AllProjectsTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
                         <span>{p.completedStitches.toLocaleString()} / {p.totalStitches.toLocaleString()}</span>
                         <span className="font-medium">{pct}%</span>
                       </div>
-                      <Progress value={pct} className="h-1.5" />
+                      <Progress value={pct} className="h-1.5 rounded-full" />
                     </div>
                   </CardContent>
                 </Link>
@@ -544,7 +545,7 @@ function FeedTab() {
         {isLoading ? (
           <>
             {[...Array(5)].map((_, i) => (
-              <Card key={i} className="gap-2 py-3">
+              <Card key={i} className="gap-2 py-3 rounded-2xl">
                 <CardHeader className="px-3 pb-0">
                   <div className="flex items-center gap-2">
                     <Skeleton className="h-8 w-8 rounded-full" />
@@ -587,7 +588,7 @@ function FeedTab() {
                   disabled={isFetchingNextPage}
                   variant="ghost"
                   size="lg"
-                  className="text-muted-foreground hover:text-primary"
+                  className="rounded-full text-muted-foreground hover:text-primary"
                 >
                   {isFetchingNextPage ? (
                     <>
@@ -627,7 +628,7 @@ function FavoritesTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
 
   if (!session) {
     return (
-      <Card>
+      <Card className="rounded-2xl">
         <CardContent className="py-12 text-center">
           <Heart className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
           <h3 className="text-base font-medium mb-2">{t("auth.loginRequired")}</h3>
@@ -635,7 +636,7 @@ function FavoritesTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
             {t("auth.loginToViewFavorites")}
           </p>
           <Link href="/login">
-            <Button>{t("nav.login")}</Button>
+            <Button className="rounded-full">{t("nav.login")}</Button>
           </Link>
         </CardContent>
       </Card>
@@ -647,7 +648,7 @@ function FavoritesTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
       {isLoading ? (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {[...Array(6)].map((_, i) => (
-            <Card key={i} className="overflow-hidden">
+            <Card key={i} className="overflow-hidden rounded-2xl">
               <Skeleton className="h-40 w-full" />
               <CardHeader className="px-3 pt-3">
                 <Skeleton className="h-5 w-3/4" />
@@ -677,7 +678,7 @@ function FavoritesTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
             const imageSrc = project.finalPhoto || project.coverImage || project.schemaImage;
 
             return (
-              <Card key={project.id} className="group overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02]">
+              <Card key={project.id} className="group overflow-hidden transition-shadow hover:shadow-md rounded-2xl">
                 <div className="group relative cursor-pointer">
                   {imageSrc ? (
                     <>
@@ -736,7 +737,7 @@ function FavoritesTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
                         <span>{project.completedStitches.toLocaleString()} / {project.totalStitches.toLocaleString()}</span>
                         <span className="font-medium">{pct}%</span>
                       </div>
-                      <Progress value={pct} className="h-1.5" />
+                      <Progress value={pct} className="h-1.5 rounded-full" />
                     </div>
                   </CardContent>
                 </Link>
@@ -769,7 +770,7 @@ function FollowingTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
 
   if (!session) {
     return (
-      <Card>
+      <Card className="rounded-2xl">
         <CardContent className="py-12 text-center">
           <Bell className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
           <h3 className="text-base font-medium mb-2">{t("auth.loginRequired")}</h3>
@@ -777,7 +778,7 @@ function FollowingTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
             {t("auth.loginToViewFollowing")}
           </p>
           <Link href="/login">
-            <Button>{t("nav.login")}</Button>
+            <Button className="rounded-full">{t("nav.login")}</Button>
           </Link>
         </CardContent>
       </Card>
@@ -789,7 +790,7 @@ function FollowingTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
       {isLoading ? (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {[...Array(6)].map((_, i) => (
-            <Card key={i} className="overflow-hidden">
+            <Card key={i} className="overflow-hidden rounded-2xl">
               <Skeleton className="h-40 w-full" />
               <CardHeader className="px-3 pt-3">
                 <Skeleton className="h-5 w-3/4" />
@@ -819,7 +820,7 @@ function FollowingTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
             const imageSrc = project.finalPhoto || project.coverImage || project.schemaImage;
 
             return (
-              <Card key={project.id} className="group overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02]">
+              <Card key={project.id} className="group overflow-hidden transition-shadow hover:shadow-md rounded-2xl">
                 <div className="group relative cursor-pointer">
                   {imageSrc ? (
                     <>
@@ -878,7 +879,7 @@ function FollowingTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
                         <span>{project.completedStitches.toLocaleString()} / {project.totalStitches.toLocaleString()}</span>
                         <span className="font-medium">{pct}%</span>
                       </div>
-                      <Progress value={pct} className="h-1.5" />
+                      <Progress value={pct} className="h-1.5 rounded-full" />
                     </div>
                   </CardContent>
                 </Link>
@@ -987,7 +988,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
                   </span>
                   <span className="font-medium">{pct}%</span>
                 </div>
-                <Progress value={pct} className="h-1" />
+                <Progress value={pct} className="h-1 rounded-full" />
               </div>
             </div>
           </div>

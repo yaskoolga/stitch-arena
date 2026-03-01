@@ -96,7 +96,7 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
   };
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span>Comments</span>
@@ -123,6 +123,7 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
               <Button
                 type="submit"
                 disabled={!newComment.trim() || createComment.isPending}
+                className="rounded-full"
               >
                 {createComment.isPending ? "Posting..." : "Post Comment"}
               </Button>
@@ -173,7 +174,7 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="h-8 w-8 p-0 text-destructive hover:text-destructive"
+                        className="h-8 w-8 p-0 rounded-full text-destructive hover:text-destructive"
                         onClick={() => deleteComment.mutate(comment.id)}
                         disabled={deleteComment.isPending}
                       >

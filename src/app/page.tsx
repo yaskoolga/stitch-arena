@@ -10,11 +10,18 @@ export default function Home() {
   const t = useTranslations('landing');
 
   const features = [
-    { icon: BookOpen, key: "track" as const },
-    { icon: Sparkles, key: "ai" as const },
-    { icon: BarChart2, key: "stats" as const },
-    { icon: Users, key: "community" as const },
+    { icon: BookOpen, key: "track" as const, color: "primary" as const },
+    { icon: Sparkles, key: "ai" as const, color: "success" as const },
+    { icon: BarChart2, key: "stats" as const, color: "info" as const },
+    { icon: Users, key: "community" as const, color: "warning" as const },
   ];
+
+  const colorClasses = {
+    primary: "bg-primary/5 border-primary/10 text-primary",
+    success: "bg-success/5 border-success/10 text-success",
+    info: "bg-info/5 border-info/10 text-info",
+    warning: "bg-warning/5 border-warning/10 text-warning",
+  };
 
   return (
     <div className="flex flex-col items-center py-20 text-center">
@@ -24,19 +31,21 @@ export default function Home() {
       </p>
       <div className="mt-8 flex gap-4">
         <Link href="/register">
-          <Button size="lg">{t('getStarted')}</Button>
+          <Button size="lg" className="rounded-full">{t('getStarted')}</Button>
         </Link>
         <Link href="/login">
-          <Button size="lg" variant="outline">{t('signIn')}</Button>
+          <Button size="lg" variant="outline" className="rounded-full">{t('signIn')}</Button>
         </Link>
       </div>
 
       <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full max-w-5xl">
-        {features.map(({ icon: Icon, key }) => (
-          <Card key={key} className="text-left">
+        {features.map(({ icon: Icon, key, color }) => (
+          <Card key={key} className={`text-left rounded-2xl shadow-sm transition-all hover:shadow-md ${colorClasses[color]}`}>
             <CardContent className="pt-6">
-              <Icon className="h-8 w-8 text-primary mb-3" />
-              <h3 className="font-semibold text-base">{t(`features.${key}.title`)}</h3>
+              <div className={`inline-flex h-12 w-12 items-center justify-center rounded-full mb-3 ${colorClasses[color]}`}>
+                <Icon className="h-6 w-6" />
+              </div>
+              <h3 className="font-semibold text-base text-foreground">{t(`features.${key}.title`)}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{t(`features.${key}.description`)}</p>
             </CardContent>
           </Card>

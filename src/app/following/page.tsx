@@ -62,7 +62,7 @@ export default function FollowingPage() {
       {isLoading ? (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {[...Array(6)].map((_, i) => (
-            <Card key={i} className="overflow-hidden">
+            <Card key={i} className="overflow-hidden rounded-2xl">
               <Skeleton className="h-40 w-full" />
               <CardHeader className="px-3 pt-3">
                 <Skeleton className="h-5 w-3/4" />
@@ -76,7 +76,7 @@ export default function FollowingPage() {
           ))}
         </div>
       ) : !following?.length ? (
-        <Card>
+        <Card className="rounded-2xl">
           <CardContent className="py-12 text-center">
             <Bell className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-base font-medium mb-2">{t("following.empty")}</h3>
@@ -101,7 +101,7 @@ export default function FollowingPage() {
             return (
               <Card
                 key={project.id}
-                className="overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02]"
+                className="overflow-hidden transition-all hover:shadow-lg hover:scale-[1.02] rounded-2xl"
               >
                 <Link href={`/projects/${project.id}`}>
                   {project.schemaImage && (
@@ -129,7 +129,7 @@ export default function FollowingPage() {
                           variant={
                             project.status === "completed" ? "default" : "secondary"
                           }
-                          className="text-[10px] px-2 py-0.5"
+                          className="text-[10px] px-2 py-0.5 rounded-full"
                         >
                           {project.status === "in_progress"
                             ? "In Progress"
@@ -145,12 +145,12 @@ export default function FollowingPage() {
                     {project.themes && project.themes.length > 0 && (
                       <div className="flex flex-wrap gap-1 mt-1.5">
                         {project.themes.slice(0, 3).map((theme) => (
-                          <Badge key={theme} variant="outline" className="text-[10px]">
+                          <Badge key={theme} variant="outline" className="text-[10px] rounded-full">
                             {theme}
                           </Badge>
                         ))}
                         {project.themes.length > 3 && (
-                          <Badge variant="outline" className="text-[10px]">
+                          <Badge variant="outline" className="text-[10px] rounded-full">
                             +{project.themes.length - 3}
                           </Badge>
                         )}
@@ -176,7 +176,7 @@ export default function FollowingPage() {
                         </span>
                         <span className="font-medium">{pct}%</span>
                       </div>
-                      <Progress value={pct} className="h-1.5" />
+                      <Progress value={pct} className="h-1.5 rounded-full" />
                     </div>
                   </CardContent>
                 </Link>

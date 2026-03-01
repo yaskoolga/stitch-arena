@@ -44,16 +44,16 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="flex justify-center py-12">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>{t("auth.resetPassword")}</CardTitle>
+      <Card className="w-full max-w-md rounded-2xl shadow-lg">
+        <CardHeader className="bg-info/5 rounded-t-2xl border-b border-info/10">
+          <CardTitle className="text-2xl">{t("auth.resetPassword")}</CardTitle>
           <CardDescription>
             {sent
               ? t("auth.resetEmailSent")
               : "Enter your email and we'll send you a link to reset your password"}
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           {!sent ? (
             <form onSubmit={onSubmit} className="space-y-4">
               <div>
@@ -64,19 +64,22 @@ export default function ForgotPasswordPage() {
                   type="email"
                   required
                   placeholder="your@email.com"
+                  className="rounded-full"
                 />
               </div>
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" className="w-full rounded-full" disabled={loading}>
                 {loading ? t("common.loading") : t("auth.sendResetLink")}
               </Button>
             </form>
           ) : (
-            <p className="text-sm text-muted-foreground">
-              Check your email for a password reset link. It may take a few minutes to arrive.
-            </p>
+            <div className="rounded-xl bg-success/10 border border-success/20 p-4">
+              <p className="text-sm text-success-foreground">
+                ✓ Check your email for a password reset link. It may take a few minutes to arrive.
+              </p>
+            </div>
           )}
-          <p className="mt-4 text-center text-sm text-muted-foreground">
-            <Link href="/login" className="underline">
+          <p className="mt-6 text-center text-sm text-muted-foreground">
+            <Link href="/login" className="text-primary hover:underline font-medium">
               {t("auth.backToLogin")}
             </Link>
           </p>

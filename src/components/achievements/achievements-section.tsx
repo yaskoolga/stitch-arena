@@ -40,7 +40,7 @@ export function AchievementsSection() {
 
   if (isLoading || !data) {
     return (
-      <Card>
+      <Card className="rounded-2xl">
         <CardHeader>
           <Skeleton className="h-6 w-32" />
         </CardHeader>
@@ -66,7 +66,7 @@ export function AchievementsSection() {
   ];
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>{t('title')}</CardTitle>

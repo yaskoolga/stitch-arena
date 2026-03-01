@@ -57,21 +57,21 @@ export default function LoginPage() {
 
   return (
     <div className="flex justify-center py-12">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>{t("auth.signIn")}</CardTitle>
+      <Card className="w-full max-w-md rounded-2xl shadow-lg">
+        <CardHeader className="bg-primary/5 rounded-t-2xl border-b border-primary/10">
+          <CardTitle className="text-2xl">{t("auth.signIn")}</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           {hasGoogle && (
             <>
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full rounded-full"
                 onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
               >
                 {t("auth.signInWith", { provider: "Google" })}
               </Button>
-              <div className="my-4 flex items-center gap-3">
+              <div className="my-6 flex items-center gap-3">
                 <Separator className="flex-1" />
                 <span className="text-sm text-muted-foreground">{t("auth.orContinueWith")}</span>
                 <Separator className="flex-1" />
@@ -79,10 +79,14 @@ export default function LoginPage() {
             </>
           )}
           <form onSubmit={onSubmit} className="space-y-4">
-            {error && <p className="text-sm text-destructive">{error}</p>}
+            {error && (
+              <div className="rounded-xl bg-destructive/10 border border-destructive/20 p-3">
+                <p className="text-sm text-destructive">{error}</p>
+              </div>
+            )}
             <div>
               <Label htmlFor="email">{t("auth.email")}</Label>
-              <Input id="email" name="email" type="email" required />
+              <Input id="email" name="email" type="email" required className="rounded-full" />
             </div>
             <div>
               <div className="flex items-center justify-between mb-1">
@@ -94,15 +98,15 @@ export default function LoginPage() {
                   {t("auth.forgotPassword")}
                 </Link>
               </div>
-              <Input id="password" name="password" type="password" required />
+              <Input id="password" name="password" type="password" required className="rounded-full" />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full rounded-full" disabled={loading}>
               {loading ? t("common.loading") : t("auth.signIn")}
             </Button>
           </form>
-          <p className="mt-4 text-center text-sm text-muted-foreground">
+          <p className="mt-6 text-center text-sm text-muted-foreground">
             {t("auth.noAccount")}{" "}
-            <Link href="/register" className="underline">{t("auth.signUp")}</Link>
+            <Link href="/register" className="text-primary hover:underline font-medium">{t("auth.signUp")}</Link>
           </p>
         </CardContent>
       </Card>
