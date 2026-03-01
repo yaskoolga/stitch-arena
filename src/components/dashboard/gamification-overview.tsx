@@ -88,7 +88,7 @@ export function GamificationOverview() {
   return (
     <Card className="rounded-2xl">
       <CardContent className="p-3">
-        <div className="flex items-start gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start gap-4">
           {/* Level Progress - Left Side */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-2">
@@ -103,7 +103,7 @@ export function GamificationOverview() {
                 <p className="text-sm font-semibold truncate">
                   {tLevels(`names.${stats.level.current.name}`)}
                 </p>
-                <p className="text-[10px] text-muted-foreground">
+                <p className="text-xs sm:text-[10px] text-muted-foreground">
                   {tLevels("title")} {stats.level.current.level}
                 </p>
               </div>
@@ -116,13 +116,13 @@ export function GamificationOverview() {
             {stats.level.next ? (
               <Progress value={stats.level.progress} className="h-1.5 rounded-full" />
             ) : (
-              <p className="text-[10px] text-muted-foreground">{tLevels("maxLevel")}</p>
+              <p className="text-xs sm:text-[10px] text-muted-foreground">{tLevels("maxLevel")}</p>
             )}
           </div>
 
           {/* Vertical Divider */}
           {nextAchievement && nextAchievementDef && (
-            <div className="h-auto w-px bg-border shrink-0" />
+            <div className="hidden sm:block h-auto w-px bg-border shrink-0" />
           )}
 
           {/* Next Achievement - Right Side */}
@@ -148,7 +148,7 @@ export function GamificationOverview() {
                   </p>
                   <div className="flex items-center gap-1.5 mt-0.5">
                     <Progress value={nextAchievement.progressPercent} className="h-1.5 flex-1 rounded-full" />
-                    <span className="text-[9px] text-muted-foreground whitespace-nowrap">
+                    <span className="text-[10px] sm:text-[9px] text-muted-foreground whitespace-nowrap">
                       {Math.round(nextAchievement.progressPercent)}%
                     </span>
                   </div>

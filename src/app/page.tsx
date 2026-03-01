@@ -24,21 +24,21 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center py-20 text-center">
-      <h1 className="text-5xl font-bold tracking-tight">{t('title')}</h1>
-      <p className="mt-4 max-w-lg text-lg text-muted-foreground">
+    <div className="flex flex-col items-center py-10 sm:py-20 text-center px-4">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">{t('title')}</h1>
+      <p className="mt-4 max-w-lg text-base sm:text-lg text-muted-foreground">
         {t('subtitle')}
       </p>
-      <div className="mt-8 flex gap-4">
-        <Link href="/register">
-          <Button size="lg" className="rounded-full">{t('getStarted')}</Button>
+      <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+        <Link href="/register" className="w-full sm:w-auto">
+          <Button size="lg" className="rounded-full w-full sm:w-auto">{t('getStarted')}</Button>
         </Link>
-        <Link href="/login">
-          <Button size="lg" variant="outline" className="rounded-full">{t('signIn')}</Button>
+        <Link href="/login" className="w-full sm:w-auto">
+          <Button size="lg" variant="outline" className="rounded-full w-full sm:w-auto">{t('signIn')}</Button>
         </Link>
       </div>
 
-      <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full max-w-5xl">
+      <div className="mt-12 sm:mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full max-w-5xl">
         {features.map(({ icon: Icon, key, color }) => (
           <Card key={key} className={`text-left rounded-2xl shadow-sm transition-all hover:shadow-md ${colorClasses[color]}`}>
             <CardContent className="pt-6">

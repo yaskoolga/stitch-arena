@@ -171,12 +171,12 @@ export default function DashboardPage({ params }: DashboardPageProps) {
 
       {/* Фильтры */}
       <div className="mb-2 flex flex-wrap items-center gap-2">
-        <div className="flex gap-1">
+        <div className="flex flex-wrap gap-1.5 sm:gap-1">
           <Button
             variant={filter === "all" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("all")}
-            className="rounded-full"
+            className="rounded-full min-h-[44px] px-4"
           >
             {tDash("filters.all")}
           </Button>
@@ -184,7 +184,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             variant={filter === "in_progress" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("in_progress")}
-            className="rounded-full"
+            className="rounded-full min-h-[44px] px-4"
           >
             {tDash("filters.inProgress")}
           </Button>
@@ -192,7 +192,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             variant={filter === "completed" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("completed")}
-            className="rounded-full"
+            className="rounded-full min-h-[44px] px-4"
           >
             {tDash("filters.completed")}
           </Button>
@@ -200,12 +200,12 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             variant={filter === "paused" ? "default" : "outline"}
             size="sm"
             onClick={() => setFilter("paused")}
-            className="rounded-full"
+            className="rounded-full min-h-[44px] px-4"
           >
             {tDash("filters.paused")}
           </Button>
         </div>
-        <div className="ml-auto">
+        <div className="ml-auto w-full sm:w-auto mt-2 sm:mt-0">
           <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortBy)}>
             <SelectTrigger size="sm">
               <SelectValue />

@@ -42,7 +42,7 @@ export default async function RootLayout({
             <Header />
             <div className="flex">
               <Sidebar />
-              <main className="flex-1 md:ml-56 px-4 py-8 container mx-auto">{children}</main>
+              <main className="flex-1 md:ml-56 px-4 pt-16 pb-8 md:py-8 container mx-auto">{children}</main>
             </div>
             <Toaster richColors />
           </Providers>

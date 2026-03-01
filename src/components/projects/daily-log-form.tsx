@@ -20,6 +20,8 @@ import { Loader2, Upload } from "lucide-react";
 import { useCVDetection } from "@/hooks/useCVDetection";
 import { useAchievementCheck } from "@/hooks/useAchievementCheck";
 import { AchievementCelebration } from "@/components/achievements/achievement-celebration";
+import { LevelUpCelebration } from "@/components/level-up-celebration";
+import type { Level } from "@/lib/levels";
 
 interface DailyLogFormProps {
   projectId: string;
@@ -50,6 +52,9 @@ export function DailyLogForm({
 
   // Achievement check hook
   const { checkAchievements, newAchievements, clearNewAchievements } = useAchievementCheck();
+
+  // Level up state
+  const [newLevel, setNewLevel] = useState<Level | null>(null);
 
   // Get default date (today)
   const today = new Date().toISOString().split('T')[0];
@@ -151,13 +156,25 @@ export function DailyLogForm({
         throw new Error(error.error || "Failed to save log");
       }
 
+      const data = await res.json();
+
       toast.success("Daily log saved!");
+
+      // Check for level up
+      if (data.levelUp) {
+        setNewLevel(data.levelUp);
+        // Don't navigate - wait for user to close the celebration modal
+        return;
+      }
 
       // Check for newly unlocked achievements
       await checkAchievements();
 
-      router.push(`/projects/${projectId}`);
-      router.refresh();
+      // Only navigate if no celebrations to show
+      if (newAchievements.length === 0) {
+        router.push(`/projects/${projectId}`);
+        router.refresh();
+      }
     } catch (error: any) {
       toast.error(error.message || "Failed to save log");
     } finally {
@@ -356,6 +373,18 @@ export function DailyLogForm({
         </Button>
       </div>
     </form>
+
+      {/* Level Up Celebration */}
+      {newLevel && (
+        <LevelUpCelebration
+          newLevel={newLevel}
+          onClose={() => {
+            setNewLevel(null);
+            router.push(`/projects/${projectId}`);
+            router.refresh();
+          }}
+        />
+      )}
 
       {/* Achievement Celebration Modal */}
       {newAchievements.length > 0 && (

@@ -688,5 +688,11 @@
       "Master": "大师",
       "Legend": "传奇"
     }
+  },
+  "levelUp": {
+    "congratulations": "恭喜！",
+    "leveledUp": "您已达到 {level} 级：{name}！",
+    "keepStitching": "继续刺绣以解锁更多成就！",
+    "continue": "继续"
   }
 }

@@ -688,5 +688,11 @@
       "Master": "Maestro",
       "Legend": "Leyenda"
     }
+  },
+  "levelUp": {
+    "congratulations": "¡Felicitaciones!",
+    "leveledUp": "¡Has alcanzado el Nivel {level}: {name}!",
+    "keepStitching": "¡Sigue bordando para desbloquear aún más logros!",
+    "continue": "Continuar"
   }
 }

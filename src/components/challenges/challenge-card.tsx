@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -69,7 +70,7 @@ export function ChallengeCard({
 
   // Get type badge and icon
   const getTypeBadge = () => {
-    const typeConfig: Record<string, { color: string; icon: JSX.Element; emoji: string }> = {
+    const typeConfig: Record<string, { color: string; icon: React.ReactElement; emoji: string }> = {
       speed: {
         color: "bg-info/10 text-info border-info/20",
         icon: <Zap className="h-3 w-3" />,

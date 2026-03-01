@@ -702,5 +702,11 @@
       "Master": "Master",
       "Legend": "Legend"
     }
+  },
+  "levelUp": {
+    "congratulations": "Congratulations!",
+    "leveledUp": "You've reached Level {level}: {name}!",
+    "keepStitching": "Keep stitching to unlock even more achievements!",
+    "continue": "Continue"
   }
 }

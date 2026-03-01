@@ -102,20 +102,22 @@ export default function ChallengesPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center justify-between gap-4 mb-4">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-2xl bg-warning/10 shadow-sm">
-              <Trophy className="h-10 w-10 text-warning" />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="p-2 sm:p-3 rounded-2xl bg-warning/10 shadow-sm shrink-0">
+              <Trophy className="h-8 w-8 sm:h-10 sm:w-10 text-warning" />
             </div>
-            <div>
-              <h1 className="text-4xl font-bold text-foreground">
+            <div className="min-w-0">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
                 {t("challenges.title")}
               </h1>
-              <p className="text-muted-foreground mt-1">{t("challenges.subtitle")}</p>
+              <p className="text-sm sm:text-base text-muted-foreground mt-1">{t("challenges.subtitle")}</p>
             </div>
           </div>
           {session?.user && eligibility?.canCreate && (
-            <CreateChallengeDialog onSuccess={refetchChallenges} />
+            <div className="sm:shrink-0">
+              <CreateChallengeDialog onSuccess={refetchChallenges} />
+            </div>
           )}
         </div>
 

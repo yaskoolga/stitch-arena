@@ -24,6 +24,8 @@ import { CommentsSection } from "@/components/comments/comments-section";
 import { LikeButton } from "@/components/projects/like-button";
 import { FollowProjectButton } from "@/components/projects/follow-project-button";
 import { useCVDetection } from "@/hooks/useCVDetection";
+import { LevelUpCelebration } from "@/components/level-up-celebration";
+import type { Level } from "@/lib/levels";
 import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus, Upload } from "lucide-react";
 
 interface Log {
@@ -73,6 +75,7 @@ export default function ProjectDetailPage() {
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [editingLogId, setEditingLogId] = useState<string | null>(null);
   const [editDailyStitches, setEditDailyStitches] = useState<string>("");
+  const [newLevel, setNewLevel] = useState<Level | null>(null);
 
   // CV Detection hook
   const { detectProgress, isLoading: isDetecting } = useCVDetection();
@@ -184,6 +187,13 @@ export default function ProjectDetailPage() {
       });
       if (!logRes.ok) throw new Error("Failed to create log");
 
+      const logResData = await logRes.json();
+
+      // Check for level up
+      if (logResData.levelUp) {
+        setNewLevel(logResData.levelUp);
+      }
+
       toast.success(successMessage);
       queryClient.invalidateQueries({ queryKey: ["project", id] });
 
@@ -268,19 +278,19 @@ export default function ProjectDetailPage() {
       {/* Enhanced Project Header */}
       <div className="relative overflow-hidden rounded-2xl border bg-background p-6 shadow-sm">
         <div className="relative z-10">
-          <div className="flex items-start gap-6 mb-5">
+          <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6 mb-5">
             {(project.coverImage || project.schemaImage || project.imageUrl) && (
               <ImageDialog
                 src={project.coverImage || project.schemaImage || project.imageUrl || ''}
                 alt={project.title}
-                thumbnailClassName="h-48 w-48 flex-shrink-0 overflow-hidden rounded-2xl border-2 border-primary/20 shadow-lg"
+                thumbnailClassName="w-full sm:w-48 sm:h-48 h-auto max-h-64 sm:flex-shrink-0 overflow-hidden rounded-2xl border-2 border-primary/20 shadow-lg"
               />
             )}
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-4 mb-3">
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-3">
-                    <h1 className="text-3xl font-bold text-foreground">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
                       {project.title}
                     </h1>
                     {session?.user?.id === project.userId && (
@@ -459,20 +469,20 @@ export default function ProjectDetailPage() {
         <CardContent className="px-4 pb-0">
           {sortedLogs.some(log => log.photoUrl || log.imageUrl) ? (
             <>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {sortedLogs
                   .filter(log => log.photoUrl || log.imageUrl)
                   .slice(0, showAllPhotos ? undefined : 5)
                   .map((log) => {
                     const photoSrc = log.photoUrl || log.imageUrl;
                     return (
-                      <div key={log.id} className="group relative">
+                      <div key={log.id} className="group relative flex flex-col">
                         <ImageDialog
                           src={photoSrc!}
                           alt={`${t("projects.progressPhotoAlt")} ${format(new Date(log.date), "dd.MM.yyyy")}`}
-                          thumbnailClassName="aspect-square w-full overflow-hidden rounded-2xl border-2 border-muted hover:border-primary/50 transition-all"
+                          thumbnailClassName="w-full h-auto min-h-[300px] overflow-hidden rounded-2xl border-2 border-muted hover:border-primary/50 transition-all"
                         />
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 rounded-b-lg">
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2 rounded-b-2xl">
                           <p className="text-xs text-white font-medium">
                             {format(new Date(log.date), "dd.MM")}
                           </p>
@@ -505,11 +515,21 @@ export default function ProjectDetailPage() {
       <Card className="gap-3 py-4 rounded-2xl">
         <CardHeader className="px-4 pb-0">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">{t("logs.title")}</CardTitle>
-            {sortedLogs.length > 0 && (
-              <Badge variant="secondary" className="text-xs rounded-full">
-                {sortedLogs.length} {t("projects.progress.logs")}
-              </Badge>
+            <div className="flex items-center gap-2">
+              <CardTitle className="text-lg">{t("logs.title")}</CardTitle>
+              {sortedLogs.length > 0 && (
+                <Badge variant="secondary" className="text-xs rounded-full">
+                  {sortedLogs.length} {t("projects.progress.logs")}
+                </Badge>
+              )}
+            </div>
+            {session?.user?.id === project.userId && sortedLogs.length > 0 && (
+              <Link href={`/projects/${id}/logs/new`}>
+                <Button size="sm" variant="outline" className="gap-2 rounded-full">
+                  <Plus className="h-4 w-4" />
+                  {t("logs.addLog")}
+                </Button>
+              </Link>
             )}
           </div>
         </CardHeader>
@@ -613,7 +633,7 @@ export default function ProjectDetailPage() {
                                     <Button
                                       variant="ghost"
                                       size="icon"
-                                      className="h-7 w-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-primary hover:bg-primary/10"
+                                      className="h-7 w-7 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-primary hover:bg-primary/10"
                                       onClick={() => handleEditLog(log)}
                                       title={t("common.edit")}
                                     >
@@ -623,7 +643,7 @@ export default function ProjectDetailPage() {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-7 w-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                                    className="h-7 w-7 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive hover:bg-destructive/10"
                                     onClick={() => setDeleteLogId(log.id)}
                                     title={t("logs.deleteLog")}
                                   >
@@ -664,6 +684,14 @@ export default function ProjectDetailPage() {
           <ProgressChart logs={project.logs || []} />
         </CardContent>
       </Card>
+
+      {/* Level Up Celebration */}
+      {newLevel && (
+        <LevelUpCelebration
+          newLevel={newLevel}
+          onClose={() => setNewLevel(null)}
+        />
+      )}
     </div>
   );
 }

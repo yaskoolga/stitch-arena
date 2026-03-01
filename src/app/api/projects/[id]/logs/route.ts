@@ -55,6 +55,15 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     notes
   } = parsed.data;
 
+  // Get user's total stitches before adding new log
+  let levelUpInfo = null;
+  if (session?.user?.id) {
+    const { getUserTotalStitches, checkLevelUp } = await import("@/lib/level-check");
+    const previousTotal = await getUserTotalStitches(session.user.id);
+    const newTotal = previousTotal + dailyStitches;
+    levelUpInfo = await checkLevelUp(session.user.id, previousTotal, newTotal);
+  }
+
   const log = await prisma.dailyLog.create({
     data: {
       projectId: id,
@@ -82,5 +91,5 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     await unlockAchievements(session.user.id);
   }
 
-  return NextResponse.json(log, { status: 201 });
+  return NextResponse.json({ log, levelUp: levelUpInfo }, { status: 201 });
 }

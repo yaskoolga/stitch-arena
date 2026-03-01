@@ -26,14 +26,16 @@ export function Header() {
           <Logo size={40} showText={true} />
         </Link>
 
-        <nav className="flex items-center gap-3">
-          <LanguageSwitcher />
+        <nav className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden sm:flex">
+            <LanguageSwitcher />
+          </div>
           <ThemeToggle />
           {session && <NotificationsDropdown />}
           {session ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="rounded-full">{session.user?.name || session.user?.email}</Button>
+                <Button variant="outline" className="rounded-full truncate max-w-[120px] sm:max-w-none">{session.user?.name || session.user?.email}</Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>

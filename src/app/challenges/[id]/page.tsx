@@ -195,9 +195,9 @@ export default function ChallengeDetailPage() {
       {/* Header */}
       <div>
         <div className="flex items-start justify-between gap-4 mb-2">
-          <div className="flex items-center gap-3">
-            <Trophy className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold">{challenge.title}</h1>
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <Trophy className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold truncate">{challenge.title}</h1>
           </div>
           {isCreator && (
             <ChallengeActions

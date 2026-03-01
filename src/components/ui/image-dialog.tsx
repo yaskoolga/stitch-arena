@@ -24,7 +24,7 @@ export function ImageDialog({ src, alt, className, thumbnailClassName }: ImageDi
             src={src}
             alt={alt}
             fill
-            className="object-cover transition-opacity group-hover:opacity-80"
+            className="object-contain transition-opacity group-hover:opacity-80"
           />
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10">
             <div className="text-white text-xs bg-black/50 px-2 py-1 rounded">

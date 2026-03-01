@@ -140,7 +140,7 @@ export function ProjectCard({
         <Button
           variant="ghost"
           size="sm"
-          className="absolute top-2 right-2 h-7 w-7 p-0 rounded-full text-muted-foreground/40 hover:text-destructive hover:bg-destructive/10 transition-colors opacity-0 group-hover:opacity-100 shadow-sm"
+          className="absolute top-2 right-2 h-7 w-7 p-0 rounded-full text-muted-foreground/40 hover:text-destructive hover:bg-destructive/10 transition-colors opacity-100 sm:opacity-0 sm:group-hover:opacity-100 shadow-sm"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();

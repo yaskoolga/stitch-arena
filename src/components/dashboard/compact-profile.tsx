@@ -102,7 +102,7 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
   return (
     <Card className="rounded-2xl">
       <CardContent className="px-3 py-3">
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
           {/* Профиль слева */}
           <Link href="/dashboard" className="flex items-center gap-3 group shrink-0">
             <Avatar className="h-12 w-12 ring-2 ring-primary/10 group-hover:ring-primary/30 transition-all">
@@ -121,11 +121,11 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                 )}
               </div>
               {isOwn && (
-                <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
+                <p className="text-xs sm:text-[10px] text-muted-foreground truncate">{user.email}</p>
               )}
               <div className="flex items-center gap-1 mt-0.5">
                 <Calendar className="h-2.5 w-2.5 text-muted-foreground" />
-                <span className="text-[9px] text-muted-foreground">
+                <span className="text-[10px] sm:text-[9px] text-muted-foreground">
                   {t("common.memberSince")} {format(new Date(user.createdAt), "MMM yyyy")}
                 </span>
               </div>
@@ -134,26 +134,26 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
           </Link>
 
           {/* Вертикальный разделитель */}
-          <div className="h-12 w-px bg-border shrink-0" />
+          <div className="hidden sm:block h-12 w-px bg-border shrink-0" />
 
           {/* Уровень (только для собственного профиля) */}
           {isOwn && stats?.level && (
             <>
-              <div className="min-w-[140px]">
+              <div className="w-full sm:min-w-[140px] sm:w-auto">
                 <div className="flex items-center gap-1.5 mb-1">
                   <span className="text-xl">{stats.level.current.emoji}</span>
                   <div className="min-w-0">
                     <p className="text-xs font-medium truncate">
                       {tLevels(`names.${stats.level.current.name}`)}
                     </p>
-                    <p className="text-[9px] text-muted-foreground">
+                    <p className="text-[10px] sm:text-[9px] text-muted-foreground">
                       {tLevels("title")} {stats.level.current.level}
                     </p>
                   </div>
                 </div>
                 {stats.level.next ? (
                   <div className="space-y-0.5">
-                    <div className="flex items-center justify-between text-[9px]">
+                    <div className="flex items-center justify-between text-[10px] sm:text-[9px]">
                       <span className="text-muted-foreground">{stats.level.progress}%</span>
                       <span className="text-muted-foreground">
                         {stats.level.stitchesUntilNext.toLocaleString()}
@@ -162,12 +162,12 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
                     <Progress value={stats.level.progress} className="h-1 rounded-full" />
                   </div>
                 ) : (
-                  <p className="text-[9px] text-muted-foreground">{tLevels("maxLevel")}</p>
+                  <p className="text-[10px] sm:text-[9px] text-muted-foreground">{tLevels("maxLevel")}</p>
                 )}
               </div>
 
               {/* Вертикальный разделитель */}
-              <div className="h-12 w-px bg-border shrink-0" />
+              <div className="hidden sm:block h-12 w-px bg-border shrink-0" />
             </>
           )}
 

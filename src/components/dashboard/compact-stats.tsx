@@ -129,7 +129,7 @@ export function CompactStats({ userId }: CompactStatsProps) {
           : t("daysInARow")
         }
         icon={Flame}
-        color="destructive"
+        color="success"
       />
     </>
   );

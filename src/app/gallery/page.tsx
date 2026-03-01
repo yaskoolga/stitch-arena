@@ -153,11 +153,11 @@ export default function GalleryPage() {
       <p className="mb-4 text-sm text-muted-foreground">{t("gallery.subtitle")}</p>
 
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="w-full">
-        <TabsList className="grid w-full grid-cols-4 mb-4">
-          <TabsTrigger value="all">{t("gallery.tabs.all")}</TabsTrigger>
-          <TabsTrigger value="feed">{t("gallery.tabs.feed")}</TabsTrigger>
-          <TabsTrigger value="favorites">{t("gallery.tabs.favorites")}</TabsTrigger>
-          <TabsTrigger value="following">{t("gallery.tabs.following")}</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-4 h-auto">
+          <TabsTrigger value="all" className="min-h-[44px]">{t("gallery.tabs.all")}</TabsTrigger>
+          <TabsTrigger value="feed" className="min-h-[44px]">{t("gallery.tabs.feed")}</TabsTrigger>
+          <TabsTrigger value="favorites" className="min-h-[44px]">{t("gallery.tabs.favorites")}</TabsTrigger>
+          <TabsTrigger value="following" className="min-h-[44px]">{t("gallery.tabs.following")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="all">
