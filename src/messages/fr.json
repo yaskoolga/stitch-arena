@@ -8,6 +8,7 @@
     "edit": "Modifier",
     "create": "Créer",
     "close": "Fermer",
+    "noImage": "Pas d'image",
     "confirm": "Confirmer",
     "search": "Rechercher",
     "filter": "Filtrer",
@@ -76,6 +77,63 @@
         "title": "Rejoignez la communauté",
         "description": "Partagez vos créations et explorez les projets d'autres brodeurs"
       }
+    },
+    "howItWorks": {
+      "title": "Comment ça marche",
+      "subtitle": "Commencez à suivre vos projets de point de croix en quatre étapes simples",
+      "step1": {
+        "title": "Créer un projet",
+        "description": "Ajoutez votre motif de point de croix avec des détails comme la taille, les couleurs et la progression initiale"
+      },
+      "step2": {
+        "title": "Prenez des photos",
+        "description": "Photographiez votre progression pendant que vous brodez — quotidiennement, hebdomadairement ou quand vous travaillez"
+      },
+      "step3": {
+        "title": "L'IA compte pour vous",
+        "description": "Notre IA intelligente détecte et compte automatiquement vos points à partir des photos"
+      },
+      "step4": {
+        "title": "Suivez et célébrez",
+        "description": "Consultez les statistiques, gagnez des succès et regardez vos projets prendre vie"
+      }
+    },
+    "showcase": {
+      "title": "Beaux projets de notre communauté",
+      "subtitle": "Inspirez-vous de magnifiques créations de point de croix suivies avec StitchArena",
+      "project1": {
+        "title": "Jardin de printemps",
+        "description": "Motif floral vibrant avec plus de 50 couleurs"
+      },
+      "project2": {
+        "title": "Paysage de montagne",
+        "description": "Vue sereine sur les montagnes au coucher du soleil"
+      },
+      "project3": {
+        "title": "Vagues de l'océan",
+        "description": "Paysage marin dynamique avec des détails complexes"
+      },
+      "progress": "Progression",
+      "completed": "Terminé",
+      "inProgress": "En cours",
+      "viewMore": "Explorer la galerie"
+    },
+    "stats": {
+      "title": "Rejoignez des milliers de brodeurs",
+      "subtitle": "Notre communauté grandit chaque jour avec des passionnés de point de croix",
+      "projects": "Projets suivis",
+      "stitches": "Points comptés",
+      "users": "Brodeurs actifs",
+      "accuracy": "Précision IA"
+    },
+    "cta": {
+      "title": "Commencez votre parcours de broderie aujourd'hui",
+      "subtitle": "Rejoignez notre communauté et ne perdez plus jamais la trace de vos progrès. Le suivi par IA rend cela sans effort.",
+      "getStarted": "Commencer gratuitement",
+      "browseGallery": "Parcourir la galerie",
+      "feature1": "Gratuit pour toujours",
+      "feature2": "Communauté active",
+      "feature3": "Sans carte bancaire"
     }
   },
   "calculator": {
@@ -103,6 +161,10 @@
     "name": "Nom",
     "confirmPassword": "Confirmer le mot de passe",
     "forgotPassword": "Mot de passe oublié ?",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "sendResetLink": "Envoyer le lien de réinitialisation",
+    "backToLogin": "Retour à la connexion",
+    "resetEmailSent": "Lien de réinitialisation du mot de passe envoyé à votre e-mail",
     "noAccount": "Pas encore de compte ?",
     "hasAccount": "Vous avez déjà un compte ?",
     "signIn": "Se connecter",
@@ -111,7 +173,14 @@
     "orContinueWith": "Ou continuer avec",
     "loginRequired": "Connectez-vous pour suivre des projets",
     "loginToViewFavorites": "Connectez-vous pour voir vos projets favoris",
-    "loginToViewFollowing": "Connectez-vous pour voir les projets que vous suivez"
+    "loginToViewFollowing": "Connectez-vous pour voir les projets que vous suivez",
+    "errors": {
+      "invalidCredentials": "E-mail ou mot de passe invalide",
+      "userNotFound": "Aucun utilisateur trouvé avec cet e-mail",
+      "invalidPassword": "Mot de passe invalide",
+      "useGoogle": "Ce compte utilise la connexion Google",
+      "generic": "Échec de la connexion. Veuillez réessayer."
+    }
   },
   "dashboard": {
     "title": "Tableau de bord",
@@ -192,6 +261,9 @@
       "description": "Description",
       "manufacturer": "Fabricant",
       "manufacturerPlaceholder": "Sélectionner le fabricant",
+      "articleNumber": "Numéro d'article",
+      "articleNumberPlaceholder": "par ex. 70-35250, 3866",
+      "articleNumberHint": "SKU ou numéro d'article du paquet de motif",
       "totalStitches": "Points totaux",
       "initialStitches": "Points initiaux",
       "initialStitchesHint": "Points déjà complétés avant de commencer à suivre ce projet",

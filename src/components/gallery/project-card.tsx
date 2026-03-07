@@ -26,6 +26,7 @@ interface ProjectCardProps {
     title: string;
     description?: string | null;
     manufacturer?: string | null;
+    articleNumber?: string | null;
     finalPhoto?: string | null;
     coverImage?: string | null;
     schemaImage?: string | null;
@@ -223,6 +224,16 @@ export function ProjectCard({
             {project.description && (
               <p className="mb-1.5 text-xs text-muted-foreground line-clamp-2">
                 {project.description}
+              </p>
+            )}
+            {project.manufacturer && (
+              <p className="mb-1.5 text-[11px] text-muted-foreground">
+                {project.manufacturer}
+              </p>
+            )}
+            {project.articleNumber && (
+              <p className="mb-1.5 text-[11px] text-muted-foreground">
+                № {project.articleNumber}
               </p>
             )}
             {project.canvasType && (

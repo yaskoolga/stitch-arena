@@ -65,7 +65,7 @@ export async function GET() {
     // Calculate streaks
     const streaks = calculateStreak(allLogs);
 
-    // Top 5 projects by stitches
+    // Top 5 projects by stitches + calculate speed for each project
     const projectsWithStitches = projects.map(p => {
       const completed = p.logs.length > 0
         ? Math.max(...p.logs.map(l => l.totalStitches))
@@ -76,6 +76,9 @@ export async function GET() {
       const remainingStitches = p.totalStitches - p.initialStitches;
       const progress = remainingStitches > 0 ? (actualStitched / remainingStitches) * 100 : 0;
 
+      // Calculate project-specific average speed (last 6 months)
+      const projectAvgSpeed = calculate6MonthAverage(p.logs);
+
       return {
         id: p.id,
         title: p.title,
@@ -84,11 +87,37 @@ export async function GET() {
         completedStitches: completed,
         actualStitched, // Stitches done while tracking
         progress,
+        avgSpeed: Math.round(projectAvgSpeed * 10) / 10,
+        status: p.status,
       };
     }).sort((a, b) => b.actualStitched - a.actualStitched).slice(0, 5);
 
     // Heatmap data for last 12 months
     const heatmapData = groupLogsByDate(allLogs, HEATMAP_MONTHS);
+
+    // Progress chart data (last 90 days)
+    const progressData = groupLogsByDate(allLogs, 3); // 3 months
+
+    // All projects with speed data (for comparison chart)
+    const allProjectsWithSpeed = projects.map(p => {
+      const completed = p.logs.length > 0
+        ? Math.max(...p.logs.map(l => l.totalStitches))
+        : p.initialStitches;
+      const actualStitched = Math.max(0, completed - p.initialStitches);
+      const remainingStitches = p.totalStitches - p.initialStitches;
+      const progress = remainingStitches > 0 ? (actualStitched / remainingStitches) * 100 : 0;
+      const projectAvgSpeed = calculate6MonthAverage(p.logs);
+
+      return {
+        id: p.id,
+        title: p.title,
+        totalStitches: p.totalStitches,
+        completedStitches: completed,
+        progress: Math.round(progress),
+        avgSpeed: Math.round(projectAvgSpeed * 10) / 10,
+        status: p.status,
+      };
+    });
 
     // Calculate user level based on total stitches
     const levelInfo = getLevelProgress(totalStitches);
@@ -108,6 +137,8 @@ export async function GET() {
       bestStreak: streaks.bestStreak,
       topProjects: projectsWithStitches,
       heatmapData,
+      progressData, // For progress chart
+      projectsWithSpeed: allProjectsWithSpeed, // For speed comparison
       level: {
         current: levelInfo.current,
         next: levelInfo.next,

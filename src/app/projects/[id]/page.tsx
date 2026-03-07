@@ -26,7 +26,7 @@ import { FollowProjectButton } from "@/components/projects/follow-project-button
 import { useCVDetection } from "@/hooks/useCVDetection";
 import { LevelUpCelebration } from "@/components/level-up-celebration";
 import type { Level } from "@/lib/levels";
-import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus, Upload } from "lucide-react";
+import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus, Upload, Hash } from "lucide-react";
 
 interface Log {
   id: string;
@@ -48,6 +48,7 @@ interface Project {
   title: string;
   description?: string | null;
   manufacturer?: string | null;
+  articleNumber?: string | null;
   coverImage?: string | null;    // Cover photo from package
   schemaImage?: string | null;   // Technical pattern reference
   imageUrl?: string | null;      // Old format (for backwards compatibility)
@@ -319,6 +320,12 @@ export default function ProjectDetailPage() {
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <Palette className="h-4 w-4 text-primary" />
                         <span className="font-medium">{project.manufacturer}</span>
+                      </div>
+                    )}
+                    {project.articleNumber && (
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <Hash className="h-4 w-4 text-primary" />
+                        <span>{project.articleNumber}</span>
                       </div>
                     )}
                     {project.themes && JSON.parse(project.themes).length > 0 && (

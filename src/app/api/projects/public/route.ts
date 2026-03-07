@@ -16,9 +16,11 @@ export async function GET(req: Request) {
       // Show all public projects, not just completed
       ...(manufacturerParam && { manufacturer: manufacturerParam }),
       ...(searchParam && {
-        title: {
-          contains: searchParam,
-        },
+        OR: [
+          { title: { contains: searchParam } },
+          { description: { contains: searchParam } },
+          { articleNumber: { contains: searchParam } },
+        ],
       }),
     },
     include: {
@@ -53,6 +55,7 @@ export async function GET(req: Request) {
       title: p.title,
       description: p.description,
       manufacturer: p.manufacturer,
+      articleNumber: p.articleNumber,
       finalPhoto: finalPhoto, // Final photo from last log (completed work)
       coverImage: p.coverImage, // Cover photo from package (fallback)
       schemaImage: p.schemaImage, // Technical pattern reference (fallback)

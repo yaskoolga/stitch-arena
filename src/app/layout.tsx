@@ -24,6 +24,18 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.svg',
   },
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'StitchArena',
+  },
+  themeColor: '#8b5cf6',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 export default async function RootLayout({

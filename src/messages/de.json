@@ -8,6 +8,7 @@
     "edit": "Bearbeiten",
     "create": "Erstellen",
     "close": "Schließen",
+    "noImage": "Kein Bild",
     "confirm": "Bestätigen",
     "search": "Suchen",
     "filter": "Filter",
@@ -76,6 +77,63 @@
         "title": "Community beitreten",
         "description": "Eigene Arbeiten teilen und Projekte anderer Sticker entdecken"
       }
+    },
+    "howItWorks": {
+      "title": "Wie es funktioniert",
+      "subtitle": "Beginnen Sie in vier einfachen Schritten mit der Verfolgung Ihrer Kreuzstichprojekte",
+      "step1": {
+        "title": "Projekt erstellen",
+        "description": "Fügen Sie Ihr Kreuzstichmuster mit Details wie Größe, Farben und Anfangsfortschritt hinzu"
+      },
+      "step2": {
+        "title": "Fotos machen",
+        "description": "Fotografieren Sie Ihren Fortschritt beim Sticken — täglich, wöchentlich oder wann immer Sie arbeiten"
+      },
+      "step3": {
+        "title": "KI zählt für Sie",
+        "description": "Unsere intelligente KI erkennt und zählt automatisch Ihre Stiche aus den Fotos"
+      },
+      "step4": {
+        "title": "Verfolgen & Feiern",
+        "description": "Statistiken ansehen, Erfolge erzielen und Ihre Projekte zum Leben erwecken"
+      }
+    },
+    "showcase": {
+      "title": "Schöne Projekte aus unserer Community",
+      "subtitle": "Lassen Sie sich von atemberaubenden Kreuzsticharbeiten inspirieren, die mit StitchArena verfolgt werden",
+      "project1": {
+        "title": "Frühlingsgarten",
+        "description": "Lebendiges Blumenmuster mit 50+ Farben"
+      },
+      "project2": {
+        "title": "Berglandschaft",
+        "description": "Ruhiger Bergblick bei Sonnenuntergang"
+      },
+      "project3": {
+        "title": "Ozeanwellen",
+        "description": "Dynamische Meereslandschaft mit aufwendigen Details"
+      },
+      "progress": "Fortschritt",
+      "completed": "Abgeschlossen",
+      "inProgress": "In Bearbeitung",
+      "viewMore": "Galerie erkunden"
+    },
+    "stats": {
+      "title": "Schließen Sie sich Tausenden von Stickern an",
+      "subtitle": "Unsere Community wächst jeden Tag mit leidenschaftlichen Kreuzstich-Enthusiasten",
+      "projects": "Verfolgte Projekte",
+      "stitches": "Gezählte Stiche",
+      "users": "Aktive Sticker",
+      "accuracy": "KI-Genauigkeit"
+    },
+    "cta": {
+      "title": "Beginnen Sie heute Ihre Stickerei-Reise",
+      "subtitle": "Treten Sie unserer Community bei und verlieren Sie nie wieder den Überblick über Ihren Fortschritt. KI-gestützte Verfolgung macht es mühelos.",
+      "getStarted": "Kostenlos starten",
+      "browseGallery": "Galerie durchsuchen",
+      "feature1": "Für immer kostenlos",
+      "feature2": "Aktive Community",
+      "feature3": "Keine Kreditkarte"
     }
   },
   "calculator": {
@@ -103,6 +161,10 @@
     "name": "Name",
     "confirmPassword": "Passwort bestätigen",
     "forgotPassword": "Passwort vergessen?",
+    "resetPassword": "Passwort zurücksetzen",
+    "sendResetLink": "Reset-Link senden",
+    "backToLogin": "Zurück zur Anmeldung",
+    "resetEmailSent": "Link zum Zurücksetzen des Passworts wurde an Ihre E-Mail gesendet",
     "noAccount": "Noch kein Konto?",
     "hasAccount": "Bereits ein Konto?",
     "signIn": "Anmelden",
@@ -111,7 +173,14 @@
     "orContinueWith": "Oder fortfahren mit",
     "loginRequired": "Melde dich an, um Projekten zu folgen",
     "loginToViewFavorites": "Melde dich an, um deine Lieblingsprojekte anzuzeigen",
-    "loginToViewFollowing": "Melde dich an, um Projekte anzuzeigen, denen du folgst"
+    "loginToViewFollowing": "Melde dich an, um Projekte anzuzeigen, denen du folgst",
+    "errors": {
+      "invalidCredentials": "Ungültige E-Mail oder Passwort",
+      "userNotFound": "Kein Benutzer mit dieser E-Mail gefunden",
+      "invalidPassword": "Ungültiges Passwort",
+      "useGoogle": "Dieses Konto verwendet Google-Anmeldung",
+      "generic": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut."
+    }
   },
   "dashboard": {
     "title": "Dashboard",
@@ -188,6 +257,9 @@
       "description": "Beschreibung",
       "manufacturer": "Hersteller",
       "manufacturerPlaceholder": "Hersteller auswählen",
+      "articleNumber": "Artikelnummer",
+      "articleNumberPlaceholder": "z.B. 70-35250, 3866",
+      "articleNumberHint": "SKU oder Artikelnummer von der Musterpackung",
       "totalStitches": "Stiche gesamt",
       "initialStitches": "Anfangsstiche",
       "initialStitchesHint": "Stiche, die bereits vor Beginn der Verfolgung dieses Projekts fertiggestellt wurden",

@@ -8,6 +8,7 @@
     "edit": "Editar",
     "create": "Crear",
     "close": "Cerrar",
+    "noImage": "Sin imagen",
     "confirm": "Confirmar",
     "search": "Buscar",
     "filter": "Filtrar",
@@ -76,6 +77,63 @@
         "title": "Únete a la comunidad",
         "description": "Comparte tu trabajo y explora proyectos de otros bordadores"
       }
+    },
+    "howItWorks": {
+      "title": "Cómo funciona",
+      "subtitle": "Comienza a rastrear tus proyectos de punto de cruz en cuatro pasos simples",
+      "step1": {
+        "title": "Crear un proyecto",
+        "description": "Añade tu patrón de punto de cruz con detalles como tamaño, colores y progreso inicial"
+      },
+      "step2": {
+        "title": "Toma fotos",
+        "description": "Fotografía tu progreso mientras bordas — diariamente, semanalmente o cuando trabajes"
+      },
+      "step3": {
+        "title": "La IA cuenta por ti",
+        "description": "Nuestra IA inteligente detecta y cuenta automáticamente tus puntadas desde las fotos"
+      },
+      "step4": {
+        "title": "Sigue y celebra",
+        "description": "Consulta estadísticas, gana logros y observa cómo tus proyectos cobran vida"
+      }
+    },
+    "showcase": {
+      "title": "Hermosos proyectos de nuestra comunidad",
+      "subtitle": "Inspírate con impresionantes creaciones de punto de cruz rastreadas con StitchArena",
+      "project1": {
+        "title": "Jardín de primavera",
+        "description": "Patrón floral vibrante con más de 50 colores"
+      },
+      "project2": {
+        "title": "Paisaje montañoso",
+        "description": "Vista serena de las montañas al atardecer"
+      },
+      "project3": {
+        "title": "Olas del océano",
+        "description": "Paisaje marino dinámico con detalles intrincados"
+      },
+      "progress": "Progreso",
+      "completed": "Completado",
+      "inProgress": "En progreso",
+      "viewMore": "Explorar galería"
+    },
+    "stats": {
+      "title": "Únete a miles de bordadores",
+      "subtitle": "Nuestra comunidad crece cada día con entusiastas apasionados del punto de cruz",
+      "projects": "Proyectos rastreados",
+      "stitches": "Puntadas contadas",
+      "users": "Bordadores activos",
+      "accuracy": "Precisión IA"
+    },
+    "cta": {
+      "title": "Comienza tu viaje de bordado hoy",
+      "subtitle": "Únete a nuestra comunidad y nunca pierdas el rastro de tu progreso. El seguimiento con IA lo hace sin esfuerzo.",
+      "getStarted": "Comenzar gratis",
+      "browseGallery": "Explorar galería",
+      "feature1": "Gratis para siempre",
+      "feature2": "Comunidad activa",
+      "feature3": "Sin tarjeta de crédito"
     }
   },
   "calculator": {
@@ -103,6 +161,10 @@
     "name": "Nombre",
     "confirmPassword": "Confirmar contraseña",
     "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetPassword": "Restablecer contraseña",
+    "sendResetLink": "Enviar enlace de restablecimiento",
+    "backToLogin": "Volver al inicio de sesión",
+    "resetEmailSent": "Enlace de restablecimiento de contraseña enviado a tu correo electrónico",
     "noAccount": "¿No tienes una cuenta?",
     "hasAccount": "¿Ya tienes una cuenta?",
     "signIn": "Iniciar sesión",
@@ -111,7 +173,14 @@
     "orContinueWith": "O continuar con",
     "loginRequired": "Inicia sesión para seguir proyectos",
     "loginToViewFavorites": "Inicia sesión para ver tus proyectos favoritos",
-    "loginToViewFollowing": "Inicia sesión para ver los proyectos que sigues"
+    "loginToViewFollowing": "Inicia sesión para ver los proyectos que sigues",
+    "errors": {
+      "invalidCredentials": "Correo electrónico o contraseña inválidos",
+      "userNotFound": "No se encontró ningún usuario con este correo electrónico",
+      "invalidPassword": "Contraseña inválida",
+      "useGoogle": "Esta cuenta usa inicio de sesión con Google",
+      "generic": "Error al iniciar sesión. Por favor, inténtalo de nuevo."
+    }
   },
   "dashboard": {
     "title": "Panel",
@@ -188,6 +257,9 @@
       "description": "Descripción",
       "manufacturer": "Fabricante",
       "manufacturerPlaceholder": "Seleccionar fabricante",
+      "articleNumber": "Número de artículo",
+      "articleNumberPlaceholder": "ej. 70-35250, 3866",
+      "articleNumberHint": "SKU o número de artículo del paquete de patrón",
       "totalStitches": "Puntadas totales",
       "initialStitches": "Puntadas iniciales",
       "initialStitchesHint": "Puntadas ya completadas antes de comenzar a rastrear este proyecto",

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
-import { User, Save, Loader2, Upload, X } from "lucide-react";
+import { User, Save, Loader2, Upload, X, Sun, Moon, Monitor } from "lucide-react";
 
 interface UserProfile {
   id: string;
@@ -29,11 +30,15 @@ export default function SettingsPage() {
   const router = useRouter();
   const t = useTranslations();
   const queryClient = useQueryClient();
+  const { theme, setTheme } = useTheme();
 
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState("");
   const [isUploading, setIsUploading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   // Redirect to login if not authenticated
   if (status === "unauthenticated") {
@@ -318,8 +323,56 @@ export default function SettingsPage() {
         </CardContent>
       </Card>
 
-      {/* Language & Theme Settings would go here */}
-      {/* You can add these later */}
+      {/* Theme Settings */}
+      <Card className="rounded-2xl">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            {mounted && theme === "dark" ? (
+              <Moon className="h-5 w-5" />
+            ) : (
+              <Sun className="h-5 w-5" />
+            )}
+            Appearance
+          </CardTitle>
+          <CardDescription>
+            Choose how StitchArena looks to you
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            <Label>Theme</Label>
+            <div className="grid grid-cols-3 gap-3">
+              <Button
+                variant={mounted && theme === "light" ? "default" : "outline"}
+                className="gap-2 rounded-full"
+                onClick={() => setTheme("light")}
+              >
+                <Sun className="h-4 w-4" />
+                Light
+              </Button>
+              <Button
+                variant={mounted && theme === "dark" ? "default" : "outline"}
+                className="gap-2 rounded-full"
+                onClick={() => setTheme("dark")}
+              >
+                <Moon className="h-4 w-4" />
+                Dark
+              </Button>
+              <Button
+                variant={mounted && theme === "system" ? "default" : "outline"}
+                className="gap-2 rounded-full"
+                onClick={() => setTheme("system")}
+              >
+                <Monitor className="h-4 w-4" />
+                System
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Select your preferred color scheme. System will match your device settings.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

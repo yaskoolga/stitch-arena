@@ -52,6 +52,7 @@ model Project {
   title           String
   description     String?
   manufacturer    String?    // Pattern manufacturer (DMC, Dimensions, etc.)
+  articleNumber   String?    // Article/SKU number of the pattern
   coverImage      String?    // Cover photo (from package) - shown in project cards
   schemaImage     String?    // Optional reference photo of pattern (technical)
   totalStitches   Int        // Total stitches in project (manual input or width × height)

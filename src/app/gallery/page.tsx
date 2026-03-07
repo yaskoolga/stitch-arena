@@ -153,12 +153,14 @@ export default function GalleryPage() {
       <p className="mb-4 text-sm text-muted-foreground">{t("gallery.subtitle")}</p>
 
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-4 h-auto">
-          <TabsTrigger value="all" className="min-h-[44px]">{t("gallery.tabs.all")}</TabsTrigger>
-          <TabsTrigger value="feed" className="min-h-[44px]">{t("gallery.tabs.feed")}</TabsTrigger>
-          <TabsTrigger value="favorites" className="min-h-[44px]">{t("gallery.tabs.favorites")}</TabsTrigger>
-          <TabsTrigger value="following" className="min-h-[44px]">{t("gallery.tabs.following")}</TabsTrigger>
-        </TabsList>
+        <div className="mb-4 flex justify-center sm:justify-start">
+          <TabsList className="grid grid-cols-2 sm:grid-cols-4 w-full sm:w-auto !h-auto p-1">
+            <TabsTrigger value="all" className="h-11">{t("gallery.tabs.all")}</TabsTrigger>
+            <TabsTrigger value="feed" className="h-11">{t("gallery.tabs.feed")}</TabsTrigger>
+            <TabsTrigger value="favorites" className="h-11">{t("gallery.tabs.favorites")}</TabsTrigger>
+            <TabsTrigger value="following" className="h-11">{t("gallery.tabs.following")}</TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="all">
           <AllProjectsTab setPhotoDialogOpen={setPhotoDialogOpen} setSelectedPhoto={setSelectedPhoto} />

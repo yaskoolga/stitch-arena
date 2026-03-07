@@ -19,6 +19,7 @@ interface ProjectFormProps {
     title?: string;
     description?: string;
     manufacturer?: string;
+    articleNumber?: string;
     totalStitches?: number;
     initialStitches?: number;
     width?: number;
@@ -174,6 +175,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
       title: form.get("title"),
       description: form.get("description"),
       manufacturer: manufacturer || null,
+      articleNumber: form.get("articleNumber") || null,
       totalStitches,
       initialStitches: initialStitches ? Number(initialStitches) : 0,
       initialPhotoUrl: initialPhotoUrl || null,
@@ -290,6 +292,20 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
             </Button>
           </div>
         )}
+      </div>
+
+      {/* Article Number */}
+      <div>
+        <Label htmlFor="articleNumber">{t("projects.fields.articleNumber")}</Label>
+        <Input
+          id="articleNumber"
+          name="articleNumber"
+          placeholder={t("projects.fields.articleNumberPlaceholder")}
+          defaultValue={defaultValues?.articleNumber}
+        />
+        <p className="text-xs text-muted-foreground mt-1">
+          {t("projects.fields.articleNumberHint")}
+        </p>
       </div>
 
       {/* Theme Tags */}

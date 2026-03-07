@@ -24,6 +24,7 @@ interface ProjectCardProps {
   completedStitches?: number;
   status: string;
   manufacturer?: string | null;
+  articleNumber?: string | null;
   canvasType?: string | null;
   coverImage?: string | null;    // Cover photo from package (main display)
   schemaImage?: string | null;   // Technical pattern reference
@@ -40,6 +41,7 @@ export function ProjectCard({
   completedStitches = 0,
   status,
   manufacturer,
+  articleNumber,
   canvasType,
   coverImage,
   schemaImage,
@@ -84,7 +86,14 @@ export function ProjectCard({
             tabIndex={0}
             aria-label={`View ${title} image`}
           >
-            <Image src={imageSrc} alt={title} fill className="object-contain" />
+            <Image
+              src={imageSrc}
+              alt={title}
+              fill
+              className="object-contain"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
             {/* Zoom icon on hover */}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity flex items-center justify-center" aria-hidden="true">
               <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 transform group-hover/image:scale-110 transition-transform">
@@ -128,6 +137,7 @@ export function ProjectCard({
         </CardHeader>
         <CardContent className="px-3 pb-3">
           {manufacturer && <p className="mb-1.5 text-xs text-muted-foreground">{manufacturer}</p>}
+          {articleNumber && <p className="mb-1.5 text-xs text-muted-foreground">№ {articleNumber}</p>}
           {canvasType && <p className="mb-1.5 text-xs text-muted-foreground">{canvasType}</p>}
           <div className="space-y-1">
             <div className="flex justify-between text-xs">
@@ -184,6 +194,7 @@ export function ProjectCard({
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-base truncate">{title}</h3>
                   {manufacturer && <p className="text-xs text-muted-foreground">{manufacturer}</p>}
+                  {articleNumber && <p className="text-xs text-muted-foreground">№ {articleNumber}</p>}
                 </div>
                 <div className="flex items-center gap-2">
                   <LikeButton projectId={id} variant="outline" size="default" />

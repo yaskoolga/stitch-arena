@@ -11,6 +11,7 @@ export const projectCreateSchema = z.object({
   title: z.string().min(1, "Title is required").max(200),
   description: z.string().max(2000).optional().nullable(),
   manufacturer: z.string().max(100).optional().nullable(),
+  articleNumber: z.string().max(100).optional().nullable(),
   totalStitches: z.coerce.number().int().positive("Must be a positive number"),
   initialStitches: z.coerce.number().int().min(0, "Must be non-negative").optional().default(0),
   initialPhotoUrl: z.string().optional().nullable(),  // Photo used for AI detection of initial stitches
@@ -51,6 +52,7 @@ export const projectUpdateSchema = z.object({
   title: z.string().min(1).max(200).optional(),
   description: z.string().max(2000).optional().nullable(),
   manufacturer: z.string().max(100).optional().nullable(),
+  articleNumber: z.string().max(100).optional().nullable(),
   totalStitches: z.coerce.number().int().positive().optional(),
   initialStitches: z.coerce.number().int().min(0).optional(),
   width: z.coerce.number().int().positive().optional().nullable(),

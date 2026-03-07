@@ -8,7 +8,7 @@ import { SpeedBadge } from "@/components/achievements/speed-badge";
 import { format } from "date-fns";
 import { FolderOpen, Activity, Zap, TrendingUp, Flame } from "lucide-react";
 
-interface OverallStatsData {
+export interface OverallStatsData {
   projectCounts: {
     total: number;
     active: number;
@@ -32,8 +32,20 @@ interface OverallStatsData {
     totalStitches: number;
     completedStitches: number;
     progress: number;
+    avgSpeed: number;
+    status: string;
   }>;
   heatmapData: Array<{ date: string; count: number }>;
+  progressData: Array<{ date: string; count: number }>;
+  projectsWithSpeed: Array<{
+    id: string;
+    title: string;
+    totalStitches: number;
+    completedStitches: number;
+    progress: number;
+    avgSpeed: number;
+    status: string;
+  }>;
 }
 
 interface CompactStatsProps {

@@ -2,7 +2,7 @@ import { getRequestConfig } from 'next-intl/server';
 import { cookies, headers } from 'next/headers';
 
 // Can be imported from a shared config
-export const locales = ['en', 'ru', 'de', 'fr', 'es', 'zh'] as const;
+export const locales = ['en', 'ru', 'de', 'fr', 'es'] as const;
 export type Locale = (typeof locales)[number];
 
 export default getRequestConfig(async () => {
@@ -40,9 +40,6 @@ export default getRequestConfig(async () => {
       break;
     case 'es':
       messages = (await import('../messages/es.json')).default;
-      break;
-    case 'zh':
-      messages = (await import('../messages/zh.json')).default;
       break;
     default:
       messages = (await import('../messages/en.json')).default;

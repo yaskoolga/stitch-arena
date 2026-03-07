@@ -7,8 +7,10 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,9 +21,18 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, Upload } from "lucide-react";
 import { useCVDetection } from "@/hooks/useCVDetection";
 import { useAchievementCheck } from "@/hooks/useAchievementCheck";
-import { AchievementCelebration } from "@/components/achievements/achievement-celebration";
-import { LevelUpCelebration } from "@/components/level-up-celebration";
 import type { Level } from "@/lib/levels";
+
+// Dynamic imports for celebration components (only load when needed)
+const AchievementCelebration = dynamic(
+  () => import("@/components/achievements/achievement-celebration").then(mod => ({ default: mod.AchievementCelebration })),
+  { ssr: false }
+);
+
+const LevelUpCelebration = dynamic(
+  () => import("@/components/level-up-celebration").then(mod => ({ default: mod.LevelUpCelebration })),
+  { ssr: false }
+);
 
 interface DailyLogFormProps {
   projectId: string;
@@ -37,6 +48,7 @@ export function DailyLogForm({
   previousLog,
 }: DailyLogFormProps) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const t = useTranslations();
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -166,6 +178,11 @@ export function DailyLogForm({
         // Don't navigate - wait for user to close the celebration modal
         return;
       }
+
+      // Invalidate all relevant queries to refresh stats
+      queryClient.invalidateQueries({ queryKey: ["overall-stats"] });
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      queryClient.invalidateQueries({ queryKey: ["project", projectId] });
 
       // Check for newly unlocked achievements
       await checkAchievements();
@@ -380,6 +397,8 @@ export function DailyLogForm({
           newLevel={newLevel}
           onClose={() => {
             setNewLevel(null);
+            queryClient.invalidateQueries({ queryKey: ["overall-stats"] });
+            queryClient.invalidateQueries({ queryKey: ["projects"] });
             router.push(`/projects/${projectId}`);
             router.refresh();
           }}

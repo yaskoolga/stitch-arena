@@ -17,6 +17,7 @@ import { CompactStats } from "@/components/dashboard/compact-stats";
 import { GamificationOverview } from "@/components/dashboard/gamification-overview";
 import { ActivityHeatmapCard } from "@/components/dashboard/activity-heatmap-card";
 import { ActiveChallengesWidget } from "@/components/dashboard/active-challenges-widget";
+import { StatsCharts } from "@/components/dashboard/stats-charts";
 import { calculate6MonthAverage } from "@/lib/stats";
 import { Plus, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -270,6 +271,9 @@ export default function DashboardPage({ params }: DashboardPageProps) {
 
       {/* Activity Heatmap - only for own dashboard */}
       {isOwnDashboard && <ActivityHeatmapCard />}
+
+      {/* New Statistics Charts */}
+      <StatsCharts userId={isOwnDashboard ? undefined : targetUserId} />
     </div>
   );
 }

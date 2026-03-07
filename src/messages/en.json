@@ -65,6 +65,63 @@
       "ai": { "title": "No Manual Counting", "description": "AI automatically detects stitches from your photos — just upload and relax" },
       "stats": { "title": "See Your Stats", "description": "Activity heatmap, speed badges, streaks, and completion forecasts" },
       "community": { "title": "Join the Community", "description": "Share your work and explore projects from other stitchers" }
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "subtitle": "Start tracking your cross-stitch projects in four simple steps",
+      "step1": {
+        "title": "Create a Project",
+        "description": "Add your cross-stitch pattern with details like size, colors, and initial progress"
+      },
+      "step2": {
+        "title": "Take Photos",
+        "description": "Snap photos of your progress as you stitch — daily, weekly, or whenever you work"
+      },
+      "step3": {
+        "title": "AI Counts for You",
+        "description": "Our smart AI automatically detects and counts your stitches from the photos"
+      },
+      "step4": {
+        "title": "Track & Celebrate",
+        "description": "View stats, earn achievements, and watch your projects come to life"
+      }
+    },
+    "showcase": {
+      "title": "Beautiful Projects from Our Community",
+      "subtitle": "Get inspired by stunning cross-stitch creations tracked with StitchArena",
+      "project1": {
+        "title": "Spring Garden",
+        "description": "Vibrant floral pattern with 50+ colors"
+      },
+      "project2": {
+        "title": "Mountain Landscape",
+        "description": "Serene mountain view at sunset"
+      },
+      "project3": {
+        "title": "Ocean Waves",
+        "description": "Dynamic seascape with intricate details"
+      },
+      "progress": "Progress",
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "viewMore": "Explore Gallery"
+    },
+    "stats": {
+      "title": "Join Thousands of Stitchers",
+      "subtitle": "Our community is growing every day with passionate cross-stitch enthusiasts",
+      "projects": "Projects Tracked",
+      "stitches": "Stitches Counted",
+      "users": "Active Stitchers",
+      "accuracy": "AI Accuracy"
+    },
+    "cta": {
+      "title": "Start Your Stitching Journey Today",
+      "subtitle": "Join our community and never lose track of your progress again. AI-powered tracking makes it effortless.",
+      "getStarted": "Get Started Free",
+      "browseGallery": "Browse Gallery",
+      "feature1": "Free Forever",
+      "feature2": "Active Community",
+      "feature3": "No Credit Card"
     }
   },
   "calculator": {
@@ -192,6 +249,9 @@
       "description": "Description",
       "manufacturer": "Manufacturer",
       "manufacturerPlaceholder": "Select manufacturer",
+      "articleNumber": "Article Number",
+      "articleNumberPlaceholder": "e.g., 70-35250, 3866",
+      "articleNumberHint": "SKU or article number from the pattern package",
       "totalStitches": "Total Stitches",
       "initialStitches": "Initial Stitches",
       "initialStitchesHint": "Stitches already completed before you started tracking this project",
