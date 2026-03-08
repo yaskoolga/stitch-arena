@@ -18,7 +18,7 @@ pillow==11.1.0
 python-dotenv==1.0.1
 pydantic==2.10.6
 pydantic-settings==2.7.1
-httpx==0.29.1
+httpx==0.28.1
 
 # Image processing
 scikit-image==0.25.0
