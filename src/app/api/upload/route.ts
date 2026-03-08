@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
 import { rateLimit } from "@/lib/rate-limit";
+import { uploadToCloudinary } from "@/lib/cloudinary";
 import sharp from "sharp";
 
 export async function POST(req: Request) {
@@ -32,46 +31,34 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "File must be under 10MB" }, { status: 400 });
   }
 
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
+  try {
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
 
-  // Create filename without extension (we'll use WebP for all)
-  const baseFilename = `${session.user.id}-${Date.now()}`;
-  const uploadDir = path.join(process.cwd(), "public", "uploads");
-  await mkdir(uploadDir, { recursive: true });
+    // Get image metadata
+    const image = sharp(buffer);
+    const metadata = await image.metadata();
 
-  // Process image with sharp
-  const image = sharp(buffer);
-  const metadata = await image.metadata();
+    // Upload to Cloudinary (handles optimization and thumbnails automatically)
+    const publicId = `${session.user.id}-${Date.now()}`;
+    const result = await uploadToCloudinary(
+      buffer,
+      'stitch-arena/projects',
+      publicId
+    );
 
-  // Create optimized version (max 1920px width, quality 85%)
-  const optimizedFilename = `${baseFilename}.webp`;
-  await image
-    .resize(1920, 1920, {
-      fit: "inside",
-      withoutEnlargement: true
-    })
-    .webp({ quality: 85 })
-    .toFile(path.join(uploadDir, optimizedFilename));
-
-  // Create thumbnail for cards (max 800px width, quality 80%)
-  const thumbnailFilename = `${baseFilename}-thumb.webp`;
-  await sharp(buffer)
-    .resize(800, 800, {
-      fit: "inside",
-      withoutEnlargement: true
-    })
-    .webp({ quality: 80 })
-    .toFile(path.join(uploadDir, thumbnailFilename));
-
-  const url = `/uploads/${optimizedFilename}`;
-  const thumbnailUrl = `/uploads/${thumbnailFilename}`;
-
-  return NextResponse.json({
-    url,
-    thumbnailUrl,
-    originalSize: file.size,
-    width: metadata.width,
-    height: metadata.height
-  });
+    return NextResponse.json({
+      url: result.url,
+      thumbnailUrl: result.thumbnailUrl,
+      originalSize: file.size,
+      width: metadata.width || result.width,
+      height: metadata.height || result.height,
+    });
+  } catch (error) {
+    console.error('Upload error:', error);
+    return NextResponse.json(
+      { error: "Failed to upload image" },
+      { status: 500 }
+    );
+  }
 }

@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import { existsSync } from "fs";
-import path from "path";
+import { uploadToCloudinary } from "@/lib/cloudinary";
 import sharp from "sharp";
 import { randomBytes } from "crypto";
 
@@ -53,17 +51,6 @@ export async function POST(req: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Generate unique filename
-    const fileExt = "webp"; // Always convert to WebP
-    const fileName = `${session.user.id}-${randomBytes(8).toString("hex")}.${fileExt}`;
-    const uploadDir = path.join(process.cwd(), "public", "uploads", "avatars");
-    const filePath = path.join(uploadDir, fileName);
-
-    // Ensure upload directory exists
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true });
-    }
-
     // Process image with Sharp
     // - Resize to 256x256
     // - Convert to WebP
@@ -76,14 +63,16 @@ export async function POST(req: Request) {
       .webp({ quality: 85 })
       .toBuffer();
 
-    // Save file
-    await writeFile(filePath, optimizedBuffer);
-
-    // Return public URL
-    const publicUrl = `/uploads/avatars/${fileName}`;
+    // Upload to Cloudinary
+    const publicId = `avatar-${session.user.id}-${randomBytes(4).toString("hex")}`;
+    const result = await uploadToCloudinary(
+      optimizedBuffer,
+      'stitch-arena/avatars',
+      publicId
+    );
 
     return NextResponse.json({
-      url: publicUrl,
+      url: result.url,
       message: "Avatar uploaded successfully",
     });
   } catch (error) {
