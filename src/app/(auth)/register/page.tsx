@@ -185,7 +185,7 @@ export default function RegisterPage() {
                   >
                     {q.options.map((optKey) => {
                       // Find the value for this option
-                      const value = Object.keys(q.answerMap).find(k => q.answerMap[k] === optKey) || optKey;
+                      const value = Object.keys(q.answerMap).find(k => q.answerMap[k as keyof typeof q.answerMap] === optKey) || optKey;
                       return (
                         <div key={value} className="flex items-center space-x-2">
                           <RadioGroupItem value={value} id={`q${idx}-${value}`} />
