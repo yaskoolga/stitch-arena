@@ -9,10 +9,6 @@
       "schedule": "0 1 * * *"
     },
     {
-      "path": "/api/cron/challenges/update-leaderboards",
-      "schedule": "*/5 * * * *"
-    },
-    {
       "path": "/api/cron/daily-update",
       "schedule": "0 3 * * *"
     }
