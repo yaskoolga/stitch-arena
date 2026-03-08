@@ -168,6 +168,35 @@
       "invalidPassword": "Invalid password",
       "useGoogle": "This account uses Google sign-in",
       "generic": "Failed to login. Please try again."
+    },
+    "quiz": {
+      "step1": "Step 1 of 2: Basic Information",
+      "step2": "Step 2 of 2: Quick Cross-Stitch Quiz",
+      "nextQuiz": "Next: Cross-Stitch Quiz →",
+      "quizTitle": "🧵 Quick Quiz: Are you a cross-stitcher?",
+      "quizDescription": "Answer at least 2 out of 3 questions correctly. This helps us keep the community genuine!",
+      "quizError": "Please answer the cross-stitch questions correctly. This helps us ensure you're a real stitcher! 🧵",
+      "q1": {
+        "question": "What fabric is most commonly used for cross-stitch?",
+        "a1": "Aida cloth",
+        "a2": "Regular cotton",
+        "a3": "Silk fabric",
+        "a4": "Denim jeans"
+      },
+      "q2": {
+        "question": "How many strands of embroidery floss are typically used for one cross-stitch?",
+        "a1": "1 strand",
+        "a2": "2 strands",
+        "a3": "6 strands (all)",
+        "a4": "10 strands"
+      },
+      "q3": {
+        "question": "What is the term for the base pattern you follow when stitching?",
+        "a1": "Chart or pattern",
+        "a2": "Treasure map",
+        "a3": "Building blueprint",
+        "a4": "Cooking recipe"
+      }
     }
   },
   "dashboard": {

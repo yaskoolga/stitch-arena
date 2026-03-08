@@ -14,36 +14,25 @@ import { Progress } from "@/components/ui/progress";
 import { ChevronLeft } from "lucide-react";
 
 // Cross-stitch quiz questions for spam protection
-const QUIZ_QUESTIONS = [
+// Correctanswers are hardcoded, but questions/options are translated
+const QUIZ_CONFIG = [
   {
-    question: "What fabric is most commonly used for cross-stitch?",
-    options: [
-      { value: "aida", label: "Aida cloth" },
-      { value: "cotton", label: "Regular cotton" },
-      { value: "silk", label: "Silk fabric" },
-      { value: "denim", label: "Denim jeans" },
-    ],
+    questionKey: "auth.quiz.q1.question",
+    options: ["a1", "a2", "a3", "a4"],
     correctAnswer: "aida",
+    answerMap: { aida: "a1", cotton: "a2", silk: "a3", denim: "a4" }
   },
   {
-    question: "How many strands of embroidery floss are typically used for one cross-stitch?",
-    options: [
-      { value: "1", label: "1 strand" },
-      { value: "2", label: "2 strands" },
-      { value: "6", label: "6 strands (all)" },
-      { value: "10", label: "10 strands" },
-    ],
+    questionKey: "auth.quiz.q2.question",
+    options: ["a1", "a2", "a3", "a4"],
     correctAnswer: "2",
+    answerMap: { "1": "a1", "2": "a2", "6": "a3", "10": "a4" }
   },
   {
-    question: "What is the term for the base pattern you follow when stitching?",
-    options: [
-      { value: "chart", label: "Chart or pattern" },
-      { value: "map", label: "Treasure map" },
-      { value: "blueprint", label: "Building blueprint" },
-      { value: "recipe", label: "Cooking recipe" },
-    ],
+    questionKey: "auth.quiz.q3.question",
+    options: ["a1", "a2", "a3", "a4"],
     correctAnswer: "chart",
+    answerMap: { chart: "a1", map: "a2", blueprint: "a3", recipe: "a4" }
   },
 ];
 
@@ -80,12 +69,12 @@ export default function RegisterPage() {
     setError("");
 
     // Validate quiz answers (at least 2 out of 3 correct)
-    const correctCount = QUIZ_QUESTIONS.filter(
+    const correctCount = QUIZ_CONFIG.filter(
       (q, idx) => quizAnswers[idx] === q.correctAnswer
     ).length;
 
     if (correctCount < 2) {
-      setError("Please answer the cross-stitch questions correctly. This helps us ensure you're a real stitcher! 🧵");
+      setError(t("auth.quiz.quizError"));
       setLoading(false);
       return;
     }
@@ -119,7 +108,7 @@ export default function RegisterPage() {
         <CardHeader className="bg-success/5 rounded-t-2xl border-b border-success/10">
           <CardTitle className="text-2xl">{t("auth.registerTitle")}</CardTitle>
           <CardDescription>
-            {step === 1 ? "Step 1 of 2: Basic Information" : "Step 2 of 2: Quick Cross-Stitch Quiz"}
+            {step === 1 ? t("auth.quiz.step1") : t("auth.quiz.step2")}
           </CardDescription>
           <Progress value={step === 1 ? 50 : 100} className="mt-3 rounded-full" />
         </CardHeader>
@@ -169,23 +158,23 @@ export default function RegisterPage() {
                 />
               </div>
               <Button type="submit" className="w-full rounded-full">
-                Next: Cross-Stitch Quiz →
+                {t("auth.quiz.nextQuiz")}
               </Button>
             </form>
           ) : (
             // Step 2: Cross-Stitch Quiz
             <form onSubmit={handleFinalSubmit} className="space-y-6">
               <div className="rounded-2xl bg-primary/5 border border-primary/10 p-4 text-sm">
-                <p className="font-medium">🧵 Quick Quiz: Are you a cross-stitcher?</p>
+                <p className="font-medium">{t("auth.quiz.quizTitle")}</p>
                 <p className="mt-1 text-muted-foreground">
-                  Answer at least 2 out of 3 questions correctly. This helps us keep the community genuine!
+                  {t("auth.quiz.quizDescription")}
                 </p>
               </div>
 
-              {QUIZ_QUESTIONS.map((q, idx) => (
+              {QUIZ_CONFIG.map((q, idx) => (
                 <div key={idx} className="space-y-3">
                   <Label className="text-base font-medium">
-                    {idx + 1}. {q.question}
+                    {idx + 1}. {t(q.questionKey)}
                   </Label>
                   <RadioGroup
                     value={quizAnswers[idx] || ""}
@@ -194,30 +183,34 @@ export default function RegisterPage() {
                     }
                     required
                   >
-                    {q.options.map((option) => (
-                      <div key={option.value} className="flex items-center space-x-2">
-                        <RadioGroupItem value={option.value} id={`q${idx}-${option.value}`} />
-                        <Label htmlFor={`q${idx}-${option.value}`} className="font-normal cursor-pointer">
-                          {option.label}
-                        </Label>
-                      </div>
-                    ))}
+                    {q.options.map((optKey) => {
+                      // Find the value for this option
+                      const value = Object.keys(q.answerMap).find(k => q.answerMap[k] === optKey) || optKey;
+                      return (
+                        <div key={value} className="flex items-center space-x-2">
+                          <RadioGroupItem value={value} id={`q${idx}-${value}`} />
+                          <Label htmlFor={`q${idx}-${value}`} className="font-normal cursor-pointer">
+                            {t(`auth.quiz.q${idx + 1}.${optKey}`)}
+                          </Label>
+                        </div>
+                      );
+                    })}
                   </RadioGroup>
                 </div>
               ))}
 
-              <div className="flex gap-3">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setStep(1)}
-                  className="w-full rounded-full"
-                >
-                  <ChevronLeft className="mr-2 h-4 w-4" />
-                  {t("common.cancel")}
-                </Button>
+              <div className="space-y-3">
                 <Button type="submit" className="w-full rounded-full" disabled={loading}>
                   {loading ? t("common.loading") : t("auth.signUp")}
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => setStep(1)}
+                  className="w-full"
+                >
+                  <ChevronLeft className="mr-2 h-4 w-4" />
+                  {t("common.back")}
                 </Button>
               </div>
             </form>
