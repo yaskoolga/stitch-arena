@@ -179,7 +179,8 @@
       "userNotFound": "No se encontró ningún usuario con este correo electrónico",
       "invalidPassword": "Contraseña inválida",
       "useGoogle": "Esta cuenta usa inicio de sesión con Google",
-      "generic": "Error al iniciar sesión. Por favor, inténtalo de nuevo."
+      "generic": "Error al iniciar sesión. Por favor, inténtalo de nuevo.",
+      "emailExists": "Este correo electrónico ya está registrado. Por favor, inicia sesión."
     }
   },
   "dashboard": {
@@ -198,6 +199,7 @@
     "bestStreak": "Mejor racha",
     "filters": {
       "all": "Todos",
+      "stash": "Reserva",
       "inProgress": "En progreso",
       "completed": "Completados",
       "paused": "Pausados"
@@ -277,6 +279,7 @@
       "calculateFromDimensions": "Calcular desde dimensiones (ancho × alto)"
     },
     "status": {
+      "stash": "En reserva",
       "inProgress": "En progreso",
       "completed": "Completado",
       "paused": "Pausado"

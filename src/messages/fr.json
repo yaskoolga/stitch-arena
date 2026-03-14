@@ -179,7 +179,8 @@
       "userNotFound": "Aucun utilisateur trouvé avec cet e-mail",
       "invalidPassword": "Mot de passe invalide",
       "useGoogle": "Ce compte utilise la connexion Google",
-      "generic": "Échec de la connexion. Veuillez réessayer."
+      "generic": "Échec de la connexion. Veuillez réessayer.",
+      "emailExists": "Cet e-mail est déjà enregistré. Veuillez vous connecter."
     }
   },
   "dashboard": {
@@ -198,6 +199,7 @@
     "bestStreak": "Meilleure série",
     "filters": {
       "all": "Tous",
+      "stash": "Stock",
       "inProgress": "En cours",
       "completed": "Terminés",
       "paused": "En pause"
@@ -281,6 +283,7 @@
       "calculateFromDimensions": "Calculer à partir des dimensions (largeur × hauteur)"
     },
     "status": {
+      "stash": "En stock",
       "inProgress": "En cours",
       "completed": "Terminé",
       "paused": "En pause"

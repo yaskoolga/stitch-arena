@@ -471,16 +471,16 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
           />
         </div>
       </div>
-      {isEdit && (
-        <div>
-          <Label htmlFor="status">{t("projects.fields.status")}</Label>
-          <select id="status" name="status" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" defaultValue={defaultValues?.status}>
-            <option value="in_progress">{t("projects.status.inProgress")}</option>
-            <option value="completed">{t("projects.status.completed")}</option>
-            <option value="paused">{t("projects.status.paused")}</option>
-          </select>
-        </div>
-      )}
+      <div>
+        <Label htmlFor="status">{t("projects.fields.status")}</Label>
+        <select id="status" name="status" className="flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm" defaultValue={defaultValues?.status || "stash"}>
+          <option value="stash">{t("projects.status.stash")}</option>
+          <option value="in_progress">{t("projects.status.inProgress")}</option>
+          <option value="completed">{t("projects.status.completed")}</option>
+          <option value="paused">{t("projects.status.paused")}</option>
+        </select>
+        <p className="text-xs text-muted-foreground mt-1">{t("projects.fields.statusHint")}</p>
+      </div>
       <div className="flex items-center gap-2">
         <input type="checkbox" id="isPublic" name="isPublic" defaultChecked={defaultValues?.isPublic} />
         <Label htmlFor="isPublic">{t("projects.fields.isPublic")}</Label>

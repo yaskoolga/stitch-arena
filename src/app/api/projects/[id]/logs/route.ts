@@ -79,6 +79,17 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     },
   });
 
+  // If project is in stash and user logged stitches > 0, move to in_progress and set startedAt
+  if (project.status === "stash" && dailyStitches > 0) {
+    await prisma.project.update({
+      where: { id },
+      data: {
+        status: "in_progress",
+        startedAt: new Date(date),
+      },
+    });
+  }
+
   // Update challenge progress for user
   if (session?.user?.id) {
     const { updateChallengeProgressForUser } = await import("@/lib/challenges");

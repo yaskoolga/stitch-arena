@@ -41,7 +41,7 @@ interface ProjectItem {
   }>;
 }
 
-type FilterStatus = "all" | "in_progress" | "completed" | "paused";
+type FilterStatus = "all" | "stash" | "in_progress" | "completed" | "paused";
 type SortBy = "newest" | "oldest" | "progress" | "name";
 
 interface DashboardPageProps {
@@ -180,6 +180,14 @@ export default function DashboardPage({ params }: DashboardPageProps) {
             className="rounded-full min-h-[44px] px-4"
           >
             {tDash("filters.all")}
+          </Button>
+          <Button
+            variant={filter === "stash" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setFilter("stash")}
+            className="rounded-full min-h-[44px] px-4"
+          >
+            {tDash("filters.stash")}
           </Button>
           <Button
             variant={filter === "in_progress" ? "default" : "outline"}

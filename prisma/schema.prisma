@@ -61,7 +61,8 @@ model Project {
   height          Int?       // Pattern height (for auto-calculation)
   canvasType      String?    // Aida 14, 16, 18, etc.
   calibrationData String?    // JSON string with calibration settings
-  status          String     @default("in_progress") // in_progress, completed, abandoned
+  status          String     @default("stash") // stash, in_progress, completed, abandoned
+  startedAt       DateTime?  // Date when first stitches were logged (not initial stitches)
   isPublic        Boolean    @default(false)
   themes          String?    @default("[]") // JSON array of project themes/categories
   createdAt       DateTime   @default(now())

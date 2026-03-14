@@ -179,7 +179,8 @@
       "userNotFound": "Kein Benutzer mit dieser E-Mail gefunden",
       "invalidPassword": "Ungültiges Passwort",
       "useGoogle": "Dieses Konto verwendet Google-Anmeldung",
-      "generic": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut."
+      "generic": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "emailExists": "Diese E-Mail ist bereits registriert. Bitte melden Sie sich an."
     }
   },
   "dashboard": {
@@ -198,6 +199,7 @@
     "bestStreak": "Beste Serie",
     "filters": {
       "all": "Alle",
+      "stash": "Vorrat",
       "inProgress": "In Bearbeitung",
       "completed": "Abgeschlossen",
       "paused": "Pausiert"
@@ -277,6 +279,7 @@
       "calculateFromDimensions": "Aus Abmessungen berechnen (Breite × Höhe)"
     },
     "status": {
+      "stash": "Vorrat",
       "inProgress": "In Bearbeitung",
       "completed": "Abgeschlossen",
       "paused": "Pausiert"
