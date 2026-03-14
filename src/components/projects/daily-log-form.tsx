@@ -20,6 +20,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Upload } from "lucide-react";
 import { useCVDetection } from "@/hooks/useCVDetection";
+import { compressImage } from "@/lib/image-compression";
 import { useAchievementCheck } from "@/hooks/useAchievementCheck";
 import type { Level } from "@/lib/levels";
 
@@ -79,9 +80,12 @@ export function DailyLogForm({
     setPhotoFile(file);
 
     try {
+      // Compress image before upload
+      const compressedFile = await compressImage(file);
+
       // Upload photo
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", compressedFile);
 
       const res = await fetch("/api/upload", {
         method: "POST",

@@ -24,6 +24,7 @@ import { CommentsSection } from "@/components/comments/comments-section";
 import { LikeButton } from "@/components/projects/like-button";
 import { FollowProjectButton } from "@/components/projects/follow-project-button";
 import { useCVDetection } from "@/hooks/useCVDetection";
+import { compressImage } from "@/lib/image-compression";
 import { LevelUpCelebration } from "@/components/level-up-celebration";
 import type { Level } from "@/lib/levels";
 import { Palette, Calendar, TrendingUp, Edit, Trash2, Plus, Upload, Hash } from "lucide-react";
@@ -127,9 +128,12 @@ export default function ProjectDetailPage() {
 
     setUploadingPhoto(true);
     try {
+      // Compress image before upload
+      const compressedFile = await compressImage(file);
+
       // Upload photo
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", compressedFile);
       const uploadRes = await fetch("/api/upload", {
         method: "POST",
         body: formData,

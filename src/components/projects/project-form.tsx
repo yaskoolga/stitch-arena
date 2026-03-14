@@ -13,6 +13,7 @@ import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Upload } from "lucide-react";
 import { useCVDetection } from "@/hooks/useCVDetection";
+import { compressImage } from "@/lib/image-compression";
 
 interface ProjectFormProps {
   defaultValues?: {
@@ -84,8 +85,12 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
+
+    // Compress image before upload
+    const compressedFile = await compressImage(file);
+
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", compressedFile);
     const res = await fetch("/api/upload", { method: "POST", body: formData });
     if (res.ok) {
       const { url } = await res.json();
@@ -101,9 +106,12 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
     setUploadingInitialPhoto(true);
 
     try {
+      // Compress image before upload
+      const compressedFile = await compressImage(file);
+
       // Upload photo
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", compressedFile);
 
       const res = await fetch("/api/upload", {
         method: "POST",
