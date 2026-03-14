@@ -315,7 +315,6 @@ export const ACHIEVEMENTS = {
     requirement: 1,
     rarity: 'platinum' as AchievementRarity,
   },
-} as const;
 
   // Stash (Запасы / Хомячья норка)
   FIRST_STASH: {
