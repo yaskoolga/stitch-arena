@@ -19,11 +19,16 @@ export function calculate6MonthAverage(logs: DailyLog[]): number {
 
   const totalStitches = recentLogs.reduce((sum, log) => sum + log.dailyStitches, 0);
 
-  // Calculate number of days in the period
-  const oldestLog = recentLogs.reduce((oldest, log) =>
+  // Exclude logs with 0 stitches (e.g., initial state logs) from period calculation
+  const activeLogs = recentLogs.filter(log => log.dailyStitches > 0);
+
+  if (!activeLogs.length) return 0;
+
+  // Calculate number of days in the period based on active logs only
+  const oldestLog = activeLogs.reduce((oldest, log) =>
     new Date(log.date) < new Date(oldest.date) ? log : oldest
   );
-  const newestLog = recentLogs.reduce((newest, log) =>
+  const newestLog = activeLogs.reduce((newest, log) =>
     new Date(log.date) > new Date(newest.date) ? log : newest
   );
 
