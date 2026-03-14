@@ -645,21 +645,6 @@
       }
     }
   },
-  "themes": {
-    "Nature": "Nature",
-    "Animals": "Animals",
-    "Abstract": "Abstract",
-    "Seasonal": "Seasonal",
-    "Fantasy": "Fantasy",
-    "Portrait": "Portrait",
-    "Landscape": "Landscape",
-    "StillLife": "Still Life",
-    "Holiday": "Holiday",
-    "Floral": "Floral",
-    "Modern": "Modern",
-    "Traditional": "Traditional",
-    "Other": "Other"
-  },
   "speedTiers": {
     "TURTLE": {
       "name": "Turtle",

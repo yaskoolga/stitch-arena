@@ -646,20 +646,6 @@
       }
     }
   },
-  "themes": {
-    "Nature": "Природа",
-    "Animals": "Животные",
-    "Abstract": "Абстракция",
-    "Seasonal": "Сезонные",
-    "Fantasy": "Фэнтези",
-    "Portrait": "Портрет",
-    "Geometric": "Геометрия",
-    "Holiday": "Праздники",
-    "Floral": "Цветы",
-    "Modern": "Современное",
-    "Traditional": "Традиционное",
-    "Other": "Другое"
-  },
   "speedTiers": {
     "TURTLE": {
       "name": "Черепаха",
