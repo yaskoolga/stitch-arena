@@ -111,7 +111,8 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to upload photo");
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Failed to upload photo");
       }
 
       const { url } = await res.json();
@@ -140,7 +141,9 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
         toast.error(t("projects.ai.serviceError") + " - " + t("projects.ai.fallbackManual"));
       }
     } catch (error) {
-      toast.error("Failed to upload photo");
+      const errorMessage = error instanceof Error ? error.message : "Failed to upload photo";
+      toast.error(errorMessage);
+      console.error('Photo upload error:', error);
     } finally {
       setUploadingInitialPhoto(false);
     }

@@ -134,7 +134,10 @@ export default function ProjectDetailPage() {
         method: "POST",
         body: formData,
       });
-      if (!uploadRes.ok) throw new Error("Failed to upload photo");
+      if (!uploadRes.ok) {
+        const errorData = await uploadRes.json();
+        throw new Error(errorData.error || "Failed to upload photo");
+      }
       const { url } = await uploadRes.json();
 
       // Trigger CV detection
@@ -201,7 +204,9 @@ export default function ProjectDetailPage() {
       // Reset file input
       e.target.value = '';
     } catch (error) {
-      toast.error(t("toast.error.generic"));
+      const errorMessage = error instanceof Error ? error.message : t("toast.error.generic");
+      toast.error(errorMessage);
+      console.error('Quick photo upload error:', error);
     } finally {
       setUploadingPhoto(false);
     }
