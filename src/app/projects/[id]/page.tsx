@@ -333,7 +333,7 @@ export default function ProjectDetailPage() {
                         <div className="flex flex-wrap gap-1">
                           {JSON.parse(project.themes).slice(0, 5).map((theme: string) => (
                             <Badge key={theme} variant="outline" className="text-xs rounded-full">
-                              {theme}
+                              {t(`themes.${theme}` as any)}
                             </Badge>
                           ))}
                           {JSON.parse(project.themes).length > 5 && (

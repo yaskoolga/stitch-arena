@@ -124,7 +124,7 @@ export function ProjectCard({
             <div className="flex flex-wrap gap-1 mt-1.5">
               {themes.slice(0, 3).map((theme) => (
                 <Badge key={theme} variant="outline" className="text-[11px] rounded-full">
-                  {theme}
+                  {t(`themes.${theme}` as any)}
                 </Badge>
               ))}
               {themes.length > 3 && (

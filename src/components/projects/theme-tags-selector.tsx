@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { PROJECT_THEMES, MAX_THEMES_PER_PROJECT } from "@/lib/constants";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ export function ThemeTagsSelector({
   maxTags = MAX_THEMES_PER_PROJECT,
   className,
 }: ThemeTagsSelectorProps) {
+  const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
 
   const availableThemes = PROJECT_THEMES.filter((theme) => !value.includes(theme));
@@ -42,7 +44,7 @@ export function ThemeTagsSelector({
         <div className="flex flex-wrap gap-2">
           {value.map((theme) => (
             <Badge key={theme} variant="secondary" className="pl-2 pr-1">
-              {theme}
+              {t(`themes.${theme}` as any)}
               <Button
                 type="button"
                 variant="ghost"
@@ -93,7 +95,7 @@ export function ThemeTagsSelector({
                         setIsOpen(false);
                       }}
                     >
-                      {theme}
+                      {t(`themes.${theme}` as any)}
                     </Button>
                   ))}
                 </div>
