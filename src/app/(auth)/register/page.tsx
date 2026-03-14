@@ -48,10 +48,46 @@ export default function RegisterPage() {
     password: "",
   });
   const [quizAnswers, setQuizAnswers] = useState<Record<number, string>>({});
+  const [emailError, setEmailError] = useState("");
+  const [checkingEmail, setCheckingEmail] = useState(false);
+
+  async function checkEmailExists(email: string) {
+    if (!email || !email.includes("@")) {
+      setEmailError("");
+      return;
+    }
+
+    setCheckingEmail(true);
+    setEmailError("");
+
+    try {
+      const res = await fetch("/api/auth/check-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (data.exists) {
+        setEmailError(t("auth.errors.emailExists"));
+      }
+    } catch (error) {
+      console.error("Email check error:", error);
+    } finally {
+      setCheckingEmail(false);
+    }
+  }
 
   function handleNextStep(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
+
+    // Prevent progression if email already exists
+    if (emailError) {
+      setError(emailError);
+      return;
+    }
 
     const form = new FormData(e.currentTarget);
     setFormData({
@@ -142,7 +178,19 @@ export default function RegisterPage() {
                   defaultValue={formData.email}
                   placeholder={t("auth.email")}
                   className="rounded-full"
+                  onBlur={(e) => checkEmailExists(e.target.value)}
+                  onChange={() => setEmailError("")}
                 />
+                {checkingEmail && (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {t("common.loading")}
+                  </p>
+                )}
+                {emailError && (
+                  <p className="mt-1 text-xs text-destructive">
+                    {emailError}
+                  </p>
+                )}
               </div>
               <div>
                 <Label htmlFor="password">{t("auth.password")}</Label>

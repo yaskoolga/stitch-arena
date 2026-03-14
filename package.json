@@ -10,7 +10,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "analyze": "ANALYZE=true next build",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "migrate:prod": "bash scripts/migrate.sh",
+    "deploy": "bash scripts/deploy.sh",
+    "db:pull": "vercel env pull .env.production --yes --token=$VERCEL_TOKEN && npx prisma db pull",
+    "db:push": "vercel env pull .env.production --yes --token=$VERCEL_TOKEN && npx prisma db push"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
