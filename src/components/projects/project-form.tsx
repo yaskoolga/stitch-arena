@@ -111,8 +111,16 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
       });
 
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Failed to upload photo");
+        let errorMessage = "Failed to upload photo";
+        try {
+          const errorData = await res.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          // Response is not JSON, try to read as text
+          const text = await res.text();
+          errorMessage = text || `Upload failed (${res.status})`;
+        }
+        throw new Error(errorMessage);
       }
 
       const { url } = await res.json();

@@ -135,8 +135,16 @@ export default function ProjectDetailPage() {
         body: formData,
       });
       if (!uploadRes.ok) {
-        const errorData = await uploadRes.json();
-        throw new Error(errorData.error || "Failed to upload photo");
+        let errorMessage = "Failed to upload photo";
+        try {
+          const errorData = await uploadRes.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          // Response is not JSON, try to read as text
+          const text = await uploadRes.text();
+          errorMessage = text || `Upload failed (${uploadRes.status})`;
+        }
+        throw new Error(errorMessage);
       }
       const { url } = await uploadRes.json();
 
