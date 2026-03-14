@@ -45,7 +45,8 @@
     "projects": "Proyectos",
     "community": "Comunidad",
     "gallery": "Galería",
-    "challenges": "Desafíos",
+    "challenges": "Challenges",
+      "stash": "Stash",
     "profile": "Perfil",
     "favorites": "Favoritos",
     "following": "Siguiendo",
@@ -495,7 +496,8 @@
       "logs": "Registros",
       "speed": "Velocidad",
       "social": "Social",
-      "challenges": "Desafíos"
+      "challenges": "Challenges",
+      "stash": "Stash"
     },
     "list": {
       "first_project": {

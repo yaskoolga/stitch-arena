@@ -514,7 +514,8 @@
       "logs": "Записи",
       "speed": "Скорость",
       "social": "Социальные",
-      "challenges": "Челленджи"
+      "challenges": "Челленджи",
+      "stash": "Запасы"
     },
     "list": {
       "first_project": {
@@ -588,6 +589,58 @@
       "challenge_winner": {
         "name": "Чемпион",
         "description": "Победите в челлендже (1 место)"
+      },
+      "first_stash": {
+        "name": "Первый запас",
+        "description": "Каждый хомяк с чего-то начинает!"
+      },
+      "collector_beginner": {
+        "name": "Начинающий коллекционер",
+        "description": "Норка начинает заполняться"
+      },
+      "hamster_prepared": {
+        "name": "Запасливый хомяк",
+        "description": "У меня есть план на всё это вышить... когда-нибудь"
+      },
+      "serious_collector": {
+        "name": "Серьёзный коллекционер",
+        "description": "Норка превращается в склад"
+      },
+      "hamster_millionaire": {
+        "name": "Хомяк-миллионер",
+        "description": "Больше схем, чем времени на жизнь"
+      },
+      "dragon_hoard": {
+        "name": "Дракон на сокровищах",
+        "description": "Я не покупаю схемы, я их коллекционирую"
+      },
+      "lets_start": {
+        "name": "Приступим!",
+        "description": "Начало положено!"
+      },
+      "stash_conqueror": {
+        "name": "Покоритель запасов",
+        "description": "Лучше поздно, чем никогда!"
+      },
+      "destasher": {
+        "name": "Расхомячиватель",
+        "description": "Запасы тают на глазах!"
+      },
+      "patience_champion": {
+        "name": "Чемпион выдержки",
+        "description": "Терпение - это добродетель"
+      },
+      "shopping_spree": {
+        "name": "Распродажа!",
+        "description": "Магазин был виноват!"
+      },
+      "ascetic": {
+        "name": "Аскет",
+        "description": "Всё вышито или раздарено"
+      },
+      "stitcher_syndrome": {
+        "name": "Вышивальный синдром",
+        "description": "Покупать проще, чем вышивать"
       }
     }
   },

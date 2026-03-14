@@ -28,6 +28,44 @@ export async function checkAchievements(userId: string): Promise<AchievementChec
   const totalStitches = allLogs.reduce((sum, log) => sum + log.dailyStitches, 0);
   const completedProjects = projects.filter(p => p.status === "completed").length;
   const publicProjects = projects.filter(p => p.isPublic).length;
+  const stashProjects = projects.filter(p => p.status === "stash");
+  const stashCount = stashProjects.length;
+
+  // Count projects moved from stash to in_progress
+  const movedFromStash = projects.filter(p =>
+    p.status !== "stash" && p.startedAt !== null
+  ).length;
+
+  // Count completed projects that were in stash > 6 months
+  const now = new Date();
+  const completedFromOldStash = projects.filter(p => {
+    if (p.status !== "completed" || !p.startedAt || !p.createdAt) return false;
+    const monthsInStash = (p.startedAt.getTime() - p.createdAt.getTime()) / (1000 * 60 * 60 * 24 * 30);
+    return monthsInStash >= 6;
+  }).length;
+
+  // Count completed projects that were ever in stash
+  const completedFromStash = projects.filter(p =>
+    p.status === "completed" && p.startedAt !== null
+  ).length;
+
+  // Check if started a project that was in stash > 1 year
+  const startedOldProject = projects.some(p => {
+    if (!p.startedAt || !p.createdAt) return false;
+    const yearsInStash = (p.startedAt.getTime() - p.createdAt.getTime()) / (1000 * 60 * 60 * 24 * 365);
+    return yearsInStash >= 1;
+  });
+
+  // Check if added 5+ projects to stash in one day
+  const projectsByDay = new Map<string, number>();
+  for (const project of projects) {
+    const day = project.createdAt.toISOString().split('T')[0];
+    projectsByDay.set(day, (projectsByDay.get(day) || 0) + 1);
+  }
+  const hasShoppingSpree = Array.from(projectsByDay.values()).some(count => count >= 5);
+
+  // Check Stitcher's Syndrome (more in stash than completed)
+  const hasStitcherSyndrome = stashCount > completedProjects && stashCount > 0;
 
   // Get user's challenge participations
   const challengeParticipations = await prisma.challengeParticipant.findMany({
@@ -201,6 +239,98 @@ export async function checkAchievements(userId: string): Promise<AchievementChec
     isUnlocked: unlockedIds.has(ACHIEVEMENTS.CHALLENGE_WINNER.id) || hasWonChallenge,
     progress: hasWonChallenge ? 1 : 0,
     requirement: ACHIEVEMENTS.CHALLENGE_WINNER.requirement,
+  });
+
+  // Stash achievements
+  checks.push({
+    achievementId: ACHIEVEMENTS.FIRST_STASH.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.FIRST_STASH.id) || stashCount >= 1,
+    progress: stashCount,
+    requirement: ACHIEVEMENTS.FIRST_STASH.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.COLLECTOR_BEGINNER.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.COLLECTOR_BEGINNER.id) || stashCount >= 3,
+    progress: stashCount,
+    requirement: ACHIEVEMENTS.COLLECTOR_BEGINNER.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.HAMSTER_PREPARED.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.HAMSTER_PREPARED.id) || stashCount >= 5,
+    progress: stashCount,
+    requirement: ACHIEVEMENTS.HAMSTER_PREPARED.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.SERIOUS_COLLECTOR.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.SERIOUS_COLLECTOR.id) || stashCount >= 10,
+    progress: stashCount,
+    requirement: ACHIEVEMENTS.SERIOUS_COLLECTOR.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.HAMSTER_MILLIONAIRE.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.HAMSTER_MILLIONAIRE.id) || stashCount >= 20,
+    progress: stashCount,
+    requirement: ACHIEVEMENTS.HAMSTER_MILLIONAIRE.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.DRAGON_HOARD.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.DRAGON_HOARD.id) || stashCount >= 50,
+    progress: stashCount,
+    requirement: ACHIEVEMENTS.DRAGON_HOARD.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.LETS_START.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.LETS_START.id) || movedFromStash >= 1,
+    progress: movedFromStash,
+    requirement: ACHIEVEMENTS.LETS_START.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.STASH_CONQUEROR.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.STASH_CONQUEROR.id) || completedFromOldStash >= 1,
+    progress: completedFromOldStash,
+    requirement: ACHIEVEMENTS.STASH_CONQUEROR.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.DESTASHER.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.DESTASHER.id) || completedFromStash >= 5,
+    progress: completedFromStash,
+    requirement: ACHIEVEMENTS.DESTASHER.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.PATIENCE_CHAMPION.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.PATIENCE_CHAMPION.id) || startedOldProject,
+    progress: startedOldProject ? 1 : 0,
+    requirement: ACHIEVEMENTS.PATIENCE_CHAMPION.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.SHOPPING_SPREE.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.SHOPPING_SPREE.id) || hasShoppingSpree,
+    progress: hasShoppingSpree ? 5 : Math.max(...Array.from(projectsByDay.values()), 0),
+    requirement: ACHIEVEMENTS.SHOPPING_SPREE.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.ASCETIC.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.ASCETIC.id) || (stashCount === 0 && projects.length > 0),
+    progress: stashCount === 0 && projects.length > 0 ? 1 : 0,
+    requirement: ACHIEVEMENTS.ASCETIC.requirement,
+  });
+
+  checks.push({
+    achievementId: ACHIEVEMENTS.STITCHER_SYNDROME.id,
+    isUnlocked: unlockedIds.has(ACHIEVEMENTS.STITCHER_SYNDROME.id) || hasStitcherSyndrome,
+    progress: hasStitcherSyndrome ? 1 : 0,
+    requirement: ACHIEVEMENTS.STITCHER_SYNDROME.requirement,
   });
 
   return checks;

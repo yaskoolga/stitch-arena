@@ -50,3 +50,4 @@ next-env.d.ts
 **/public/worker-*.js.map
 
 .vercel
+.env.local

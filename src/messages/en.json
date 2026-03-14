@@ -513,7 +513,8 @@
       "logs": "Logs",
       "speed": "Speed",
       "social": "Social",
-      "challenges": "Challenges"
+      "challenges": "Challenges",
+      "stash": "Stash"
     },
     "list": {
       "first_project": {
@@ -587,6 +588,58 @@
       "challenge_winner": {
         "name": "Champion",
         "description": "Win a challenge (1st place)"
+      },
+      "first_stash": {
+        "name": "First Stash",
+        "description": "Every hamster starts somewhere!"
+      },
+      "collector_beginner": {
+        "name": "Beginner Collector",
+        "description": "The burrow is starting to fill up"
+      },
+      "hamster_prepared": {
+        "name": "Prepared Hamster",
+        "description": "I have a plan to stitch all of this... someday"
+      },
+      "serious_collector": {
+        "name": "Serious Collector",
+        "description": "The burrow is turning into a warehouse"
+      },
+      "hamster_millionaire": {
+        "name": "Hamster Millionaire",
+        "description": "More patterns than time in life"
+      },
+      "dragon_hoard": {
+        "name": "Dragon's Hoard",
+        "description": "I don't buy patterns, I collect them"
+      },
+      "lets_start": {
+        "name": "Let's Start!",
+        "description": "The beginning is made!"
+      },
+      "stash_conqueror": {
+        "name": "Stash Conqueror",
+        "description": "Better late than never!"
+      },
+      "destasher": {
+        "name": "Destasher",
+        "description": "Stash is melting away!"
+      },
+      "patience_champion": {
+        "name": "Patience Champion",
+        "description": "Patience is a virtue"
+      },
+      "shopping_spree": {
+        "name": "Shopping Spree",
+        "description": "The shop was to blame!"
+      },
+      "ascetic": {
+        "name": "Ascetic",
+        "description": "Everything stitched or given away"
+      },
+      "stitcher_syndrome": {
+        "name": "Stitcher's Syndrome",
+        "description": "Buying is easier than stitching"
       }
     }
   },
