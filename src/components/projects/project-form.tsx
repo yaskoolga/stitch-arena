@@ -206,7 +206,9 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
       router.push(`/projects/${project.id || projectId}`);
       router.refresh();
     } else {
-      toast.error(t("toast.error.generic"));
+      const errorData = await res.json();
+      const errorMessage = errorData.error || t("toast.error.generic");
+      toast.error(errorMessage);
     }
     setLoading(false);
   }

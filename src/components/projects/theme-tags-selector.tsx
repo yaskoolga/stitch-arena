@@ -69,7 +69,7 @@ export function ThemeTagsSelector({
             onClick={() => setIsOpen(!isOpen)}
             disabled={availableThemes.length === 0}
           >
-            Add Theme ({value.length}/{maxTags})
+            {t("projects.fields.addTheme")} ({value.length}/{maxTags})
           </Button>
 
           {isOpen && availableThemes.length > 0 && (

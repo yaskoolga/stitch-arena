@@ -276,6 +276,7 @@
       "status": "Estado",
       "themes": "Temas",
       "themesHint": "Seleccione hasta 5 temas para este proyecto",
+      "addTheme": "Agregar tema",
       "isPublic": "Hacer público",
       "calculateFromDimensions": "Calcular desde dimensiones (ancho × alto)"
     },
@@ -443,7 +444,8 @@
     "Seasonal": "Estacional",
     "Fantasy": "Fantasía",
     "Portrait": "Retrato",
-    "Geometric": "Geométrico",
+    "Landscape": "Paisaje",
+    "StillLife": "Bodegón",
     "Holiday": "Festividad",
     "Floral": "Floral",
     "Modern": "Moderno",
