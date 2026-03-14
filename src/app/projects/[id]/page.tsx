@@ -137,12 +137,18 @@ export default function ProjectDetailPage() {
       if (!uploadRes.ok) {
         let errorMessage = "Failed to upload photo";
         try {
-          const errorData = await uploadRes.json();
-          errorMessage = errorData.error || errorMessage;
-        } catch {
-          // Response is not JSON, try to read as text
+          // Read response as text first
           const text = await uploadRes.text();
-          errorMessage = text || `Upload failed (${uploadRes.status})`;
+          // Try to parse as JSON
+          try {
+            const errorData = JSON.parse(text);
+            errorMessage = errorData.error || errorMessage;
+          } catch {
+            // Not JSON, use the text itself
+            errorMessage = text || `Upload failed (${uploadRes.status})`;
+          }
+        } catch {
+          errorMessage = `Upload failed (${uploadRes.status})`;
         }
         throw new Error(errorMessage);
       }

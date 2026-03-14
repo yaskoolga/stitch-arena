@@ -91,12 +91,18 @@ export function DailyLogForm({
       if (!res.ok) {
         let errorMessage = "Failed to upload photo";
         try {
-          const errorData = await res.json();
-          errorMessage = errorData.error || errorMessage;
-        } catch {
-          // Response is not JSON, try to read as text
+          // Read response as text first
           const text = await res.text();
-          errorMessage = text || `Upload failed (${res.status})`;
+          // Try to parse as JSON
+          try {
+            const errorData = JSON.parse(text);
+            errorMessage = errorData.error || errorMessage;
+          } catch {
+            // Not JSON, use the text itself
+            errorMessage = text || `Upload failed (${res.status})`;
+          }
+        } catch {
+          errorMessage = `Upload failed (${res.status})`;
         }
         throw new Error(errorMessage);
       }
