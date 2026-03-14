@@ -19,12 +19,21 @@ export async function POST(req: Request) {
   const file = formData.get("file") as File | null;
 
   if (!file) {
+    console.error('No file in formData');
     return NextResponse.json({ error: "No file provided" }, { status: 400 });
   }
 
-  const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+  console.log('Upload attempt:', {
+    fileName: file.name,
+    fileType: file.type,
+    fileSize: file.size,
+    userId: session.user.id,
+  });
+
+  const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/heic", "image/heif"];
   if (!allowedTypes.includes(file.type)) {
-    return NextResponse.json({ error: "Only JPEG, PNG, WebP and GIF are allowed" }, { status: 400 });
+    console.error(`Unsupported file type: ${file.type}`);
+    return NextResponse.json({ error: `Unsupported file type: ${file.type}. Only JPEG, PNG, WebP, GIF, and HEIC are allowed` }, { status: 400 });
   }
 
   if (file.size > 10 * 1024 * 1024) {
@@ -56,8 +65,15 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     console.error('Upload error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error details:', {
+      fileName: file.name,
+      fileType: file.type,
+      fileSize: file.size,
+      errorMessage,
+    });
     return NextResponse.json(
-      { error: "Failed to upload image" },
+      { error: `Failed to upload image: ${errorMessage}` },
       { status: 500 }
     );
   }
