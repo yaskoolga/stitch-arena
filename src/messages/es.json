@@ -351,6 +351,7 @@
     "currentProgress": "Progreso actual",
     "currentProgressDesc": "Tu progreso en este proyecto",
     "totalStitches": "Puntadas totales",
+    "dailyStitches": "Puntadas diarias",
     "completed": "Completado",
     "progressPercent": "Progreso",
     "lastLogged": "Último registro:",
@@ -607,9 +608,15 @@
     "addComment": "Añadir comentario",
     "writeComment": "Escribe un comentario...",
     "post": "Publicar",
+    "postComment": "Publicar comentario",
+    "posting": "Publicando...",
+    "posted": "Comentario publicado",
     "delete": "Eliminar",
+    "deleted": "Comentario eliminado",
+    "deleteFailed": "No se pudo eliminar el comentario",
     "noComments": "Aún no hay comentarios",
     "beFirst": "¡Sé el primero en comentar!",
+    "signInToComment": "Inicia sesión para dejar un comentario",
     "commentCount": "{count} comentarios"
   },
   "favorites": {

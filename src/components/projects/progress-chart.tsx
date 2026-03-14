@@ -2,6 +2,7 @@
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { format } from "date-fns";
+import { useTranslations } from "next-intl";
 
 interface Log {
   id: string;
@@ -13,6 +14,7 @@ interface Log {
 }
 
 export function ProgressChart({ logs }: { logs: Log[] }) {
+  const t = useTranslations();
   const sorted = [...logs].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   let cumulative = 0;
@@ -35,7 +37,7 @@ export function ProgressChart({ logs }: { logs: Log[] }) {
   });
 
   if (data.length === 0) {
-    return <p className="text-muted-foreground text-sm">No logs yet. Add your first stitching session!</p>;
+    return <p className="text-muted-foreground text-sm">{t("logs.noLogs")}</p>;
   }
 
   return (
@@ -45,8 +47,8 @@ export function ProgressChart({ logs }: { logs: Log[] }) {
         <XAxis dataKey="date" fontSize={12} />
         <YAxis fontSize={12} />
         <Tooltip />
-        <Line type="monotone" dataKey="total" stroke="hsl(var(--chart-1))" strokeWidth={2} name="Total stitches" />
-        <Line type="monotone" dataKey="daily" stroke="hsl(var(--chart-2))" strokeWidth={2} name="Daily stitches" />
+        <Line type="monotone" dataKey="total" stroke="hsl(var(--chart-1))" strokeWidth={2} name={t("logs.totalStitches")} />
+        <Line type="monotone" dataKey="daily" stroke="hsl(var(--chart-2))" strokeWidth={2} name={t("logs.dailyStitches")} />
       </LineChart>
     </ResponsiveContainer>
   );

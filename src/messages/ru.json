@@ -369,6 +369,7 @@
     "currentProgress": "Текущий прогресс",
     "currentProgressDesc": "Ваш прогресс по этому проекту",
     "totalStitches": "Всего крестиков",
+    "dailyStitches": "Крестиков за день",
     "completed": "Завершено",
     "progressPercent": "Прогресс",
     "lastLogged": "Последняя запись:",
@@ -677,9 +678,15 @@
     "addComment": "Добавить комментарий",
     "writeComment": "Напишите комментарий...",
     "post": "Отправить",
+    "postComment": "Опубликовать",
+    "posting": "Публикация...",
+    "posted": "Комментарий опубликован",
     "delete": "Удалить",
+    "deleted": "Комментарий удален",
+    "deleteFailed": "Не удалось удалить комментарий",
     "noComments": "Пока нет комментариев",
     "beFirst": "Будьте первым, кто оставит комментарий!",
+    "signInToComment": "Войдите, чтобы оставить комментарий",
     "commentCount": "{count} комментариев"
   },
   "favorites": {

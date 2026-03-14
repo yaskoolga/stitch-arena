@@ -366,6 +366,7 @@
     "currentProgress": "Current Progress",
     "currentProgressDesc": "Your progress on this project",
     "totalStitches": "Total Stitches",
+    "dailyStitches": "Daily Stitches",
     "completed": "Completed",
     "progressPercent": "Progress",
     "lastLogged": "Last logged:",
@@ -676,9 +677,15 @@
     "addComment": "Add a comment",
     "writeComment": "Write a comment...",
     "post": "Post",
+    "postComment": "Post Comment",
+    "posting": "Posting...",
+    "posted": "Comment posted",
     "delete": "Delete",
+    "deleted": "Comment deleted",
+    "deleteFailed": "Failed to delete comment",
     "noComments": "No comments yet",
     "beFirst": "Be the first to comment!",
+    "signInToComment": "Sign in to leave a comment",
     "commentCount": "{count} comments"
   },
   "favorites": {

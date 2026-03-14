@@ -93,8 +93,8 @@ export async function POST(req: Request) {
     },
   });
 
-  // If initial stitches were provided with a photo, create the first daily log
-  if (initialPhotoUrl && initialStitches && initialStitches > 0) {
+  // If initial photo was provided, create the first daily log to show initial state
+  if (initialPhotoUrl && typeof initialStitches === 'number' && initialStitches >= 0) {
     await prisma.dailyLog.create({
       data: {
         projectId: project.id,

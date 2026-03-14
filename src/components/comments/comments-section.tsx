@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
 import { format } from "date-fns";
+import { useTranslations } from "next-intl";
 import { ReportButton } from "@/components/report-button";
 
 interface Comment {
@@ -32,6 +33,7 @@ interface CommentsSectionProps {
 export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionProps) {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
+  const t = useTranslations();
   const [newComment, setNewComment] = useState("");
 
   const { data: comments, isLoading } = useQuery<Comment[]>({
@@ -59,7 +61,7 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comments", projectId] });
       setNewComment("");
-      toast.success("Comment posted");
+      toast.success(t("comments.posted"));
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -76,10 +78,10 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comments", projectId] });
-      toast.success("Comment deleted");
+      toast.success(t("comments.deleted"));
     },
     onError: () => {
-      toast.error("Failed to delete comment");
+      toast.error(t("comments.deleteFailed"));
     },
   });
 
@@ -100,7 +102,7 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
     <Card className="rounded-2xl">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
-          <span>Comments</span>
+          <span>{t("comments.title")}</span>
           <span className="text-sm font-normal text-muted-foreground">
             {comments?.length || 0}
           </span>
@@ -111,7 +113,7 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
         {session && (
           <form onSubmit={handleSubmit} className="space-y-2">
             <Textarea
-              placeholder="Write a comment..."
+              placeholder={t("comments.writeComment")}
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               maxLength={1000}
@@ -126,7 +128,7 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
                 disabled={!newComment.trim() || createComment.isPending}
                 className="rounded-full"
               >
-                {createComment.isPending ? "Posting..." : "Post Comment"}
+                {createComment.isPending ? t("comments.posting") : t("comments.postComment")}
               </Button>
             </div>
           </form>
@@ -134,7 +136,7 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
 
         {!session && (
           <p className="text-sm text-muted-foreground text-center py-4">
-            Sign in to leave a comment
+            {t("comments.signInToComment")}
           </p>
         )}
 
@@ -202,7 +204,7 @@ export function CommentsSection({ projectId, projectOwnerId }: CommentsSectionPr
             ))
           ) : (
             <p className="text-sm text-muted-foreground text-center py-8">
-              No comments yet. Be the first to comment!
+              {t("comments.beFirst")}
             </p>
           )}
         </div>
