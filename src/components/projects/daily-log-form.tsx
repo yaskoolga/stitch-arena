@@ -120,7 +120,7 @@ export function DailyLogForm({
         ? await fetch(previousLog.photoUrl).then(r => r.blob()).then(blob => new File([blob], "previous.jpg", { type: blob.type }))
         : null;
 
-      const result = await detectProgress(file, previousPhotoFile);
+      const result = await detectProgress(compressedFile, previousPhotoFile);
 
       if (result && result.success && result.confidence >= 0.5) {
         // Auto-apply AI result if confidence is high enough

@@ -164,7 +164,7 @@ export default function ProjectDetailPage() {
         ? await fetch(previousPhotoUrl).then(r => r.blob()).then(blob => new File([blob], "previous.jpg", { type: blob.type }))
         : null;
 
-      const cvResult = await detectProgress(file, previousPhotoFile);
+      const cvResult = await detectProgress(compressedFile, previousPhotoFile);
 
       let dailyStitches = 0;
       let aiDetected = null;

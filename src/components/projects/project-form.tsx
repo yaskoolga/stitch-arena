@@ -142,7 +142,7 @@ export function ProjectForm({ defaultValues, projectId }: ProjectFormProps) {
       toast.success(t("common.uploading"));
 
       // Trigger CV detection (no previous photo for initial state)
-      const result = await detectProgress(file, null);
+      const result = await detectProgress(compressedFile, null);
 
       if (result && result.success && result.confidence >= 0.5) {
         // Auto-apply AI result if confidence is high enough
