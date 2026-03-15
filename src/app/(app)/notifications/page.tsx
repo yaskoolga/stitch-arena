@@ -38,8 +38,7 @@ export default function NotificationsPage() {
   const { data: session } = useSession();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const t = useTranslations("notifications");
-  const tCommon = useTranslations("common");
+  const t = useTranslations();
   const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
 
   // Fetch notifications
@@ -136,10 +135,10 @@ export default function NotificationsPage() {
 
   const groupByDate = (notifications: Notification[]) => {
     const groups: Record<string, Notification[]> = {
-      [t("today")]: [],
-      [t("yesterday")]: [],
-      [t("thisWeek")]: [],
-      [t("older")]: [],
+      [t("notifications.today")]: [],
+      [t("notifications.yesterday")]: [],
+      [t("notifications.thisWeek")]: [],
+      [t("notifications.older")]: [],
     };
 
     const now = new Date();
@@ -152,13 +151,13 @@ export default function NotificationsPage() {
     notifications.forEach((notif) => {
       const date = new Date(notif.createdAt);
       if (date >= today) {
-        groups[t("today")].push(notif);
+        groups[t("notifications.today")].push(notif);
       } else if (date >= yesterday) {
-        groups[t("yesterday")].push(notif);
+        groups[t("notifications.yesterday")].push(notif);
       } else if (date >= thisWeek) {
-        groups[t("thisWeek")].push(notif);
+        groups[t("notifications.thisWeek")].push(notif);
       } else {
-        groups[t("older")].push(notif);
+        groups[t("notifications.older")].push(notif);
       }
     });
 
@@ -170,9 +169,9 @@ export default function NotificationsPage() {
       <div className="container max-w-4xl mx-auto py-8 px-4">
         <Card className="p-8 text-center">
           <Bell className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-          <h2 className="text-2xl font-bold mb-2">{t("title")}</h2>
+          <h2 className="text-2xl font-bold mb-2">{t("notifications.title")}</h2>
           <p className="text-muted-foreground">
-            {t("empty")}
+            {t("notifications.empty")}
           </p>
         </Card>
       </div>
@@ -191,10 +190,10 @@ export default function NotificationsPage() {
     <div className="container max-w-4xl mx-auto py-8 px-4">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold">{t("title")}</h1>
+          <h1 className="text-3xl font-bold">{t("notifications.title")}</h1>
           {unreadCount > 0 && (
             <p className="text-sm text-muted-foreground mt-1">
-              {unreadCount} {t("unread").toLowerCase()}
+              {unreadCount} {t("notifications.unread").toLowerCase()}
             </p>
           )}
         </div>
@@ -210,7 +209,7 @@ export default function NotificationsPage() {
             ) : (
               <Check className="h-4 w-4 mr-2" />
             )}
-            {t("markAllRead")}
+            {t("notifications.markAllRead")}
           </Button>
         )}
       </div>
@@ -219,9 +218,9 @@ export default function NotificationsPage() {
         <TabsList className="grid w-full grid-cols-3 rounded-full">
           <TabsTrigger value="all" className="rounded-full">{tCommon("all")}</TabsTrigger>
           <TabsTrigger value="unread" className="rounded-full">
-            {t("unread")} {unreadCount > 0 && `(${unreadCount})`}
+            {t("notifications.unread")} {unreadCount > 0 && `(${unreadCount})`}
           </TabsTrigger>
-          <TabsTrigger value="read" className="rounded-full">{t("read")}</TabsTrigger>
+          <TabsTrigger value="read" className="rounded-full">{t("notifications.read")}</TabsTrigger>
         </TabsList>
       </Tabs>
 
@@ -233,13 +232,13 @@ export default function NotificationsPage() {
       ) : filteredNotifications.length === 0 ? (
         <Card className="p-8 text-center rounded-2xl">
           <Bell className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
-          <h2 className="text-xl font-semibold mb-2">{t("empty")}</h2>
+          <h2 className="text-xl font-semibold mb-2">{t("notifications.empty")}</h2>
           <p className="text-muted-foreground">
             {filter === "unread"
-              ? t("allCaughtUp")
+              ? t("notifications.allCaughtUp")
               : filter === "read"
-              ? t("noRead")
-              : t("noUnread")}
+              ? t("notifications.noRead")
+              : t("notifications.noUnread")}
           </p>
         </Card>
       ) : (
@@ -272,7 +271,7 @@ export default function NotificationsPage() {
                         </div>
                         {!notification.isRead && (
                           <Badge variant="default" className="flex-shrink-0 rounded-full">
-                            {t("unread")}
+                            {t("notifications.unread")}
                           </Badge>
                         )}
                       </div>
