@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +14,20 @@ import { BarChart2, Users, BookOpen, Sparkles, Plus, Camera, Wand2, TrendingUp, 
 
 export default function Home() {
   const t = useTranslations('landing');
+  const router = useRouter();
+  const { data: session, status } = useSession();
+
+  // Redirect authenticated users to dashboard
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/dashboard");
+    }
+  }, [status, router]);
+
+  // Show loading state while checking auth
+  if (status === "loading" || status === "authenticated") {
+    return null;
+  }
 
   const features = [
     { icon: BookOpen, key: "track" as const, color: "primary" as const },

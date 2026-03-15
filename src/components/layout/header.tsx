@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useTranslations } from 'next-intl';
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,7 +36,14 @@ export function Header() {
           {session ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="rounded-full truncate max-w-[120px] sm:max-w-none">{session.user?.name || session.user?.email}</Button>
+                <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 p-0">
+                  <Avatar className="h-9 w-9">
+                    <AvatarImage src={session.user?.image || undefined} alt={session.user?.name || "User"} />
+                    <AvatarFallback className="text-xs bg-primary/10">
+                      {(session.user?.name?.[0] || session.user?.email?.[0] || "?").toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
