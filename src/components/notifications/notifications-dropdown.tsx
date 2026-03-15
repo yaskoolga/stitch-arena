@@ -25,7 +25,18 @@ interface Notification {
   isRead: boolean;
   createdAt: string;
   resourceId?: string;
+  metadata?: any;
 }
+
+const getNotificationContent = (notification: Notification, t: any) => {
+  // If metadata exists, use it for translated content
+  if (notification.metadata) {
+    const template = t(`notifications.types.${notification.type}`);
+    return template.replace(/{(\w+)}/g, (_: string, key: string) => notification.metadata[key] || "");
+  }
+  // Fallback to stored content for old notifications
+  return notification.content;
+};
 
 export function NotificationsDropdown() {
   const { data: session } = useSession();
@@ -177,7 +188,7 @@ export function NotificationsDropdown() {
                 >
                   <div className="mt-0.5">{getIcon(notification.type)}</div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm line-clamp-2">{notification.content}</p>
+                    <p className="text-sm line-clamp-2">{getNotificationContent(notification, t)}</p>
                     <p className="text-xs text-muted-foreground mt-1">
                       {formatDistanceToNow(new Date(notification.createdAt), {
                         addSuffix: true,

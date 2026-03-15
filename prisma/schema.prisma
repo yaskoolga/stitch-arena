@@ -201,7 +201,8 @@ model Notification {
   type       String   // "like", "comment", "follow", "achievement", "projectfollow"
   actorId    String?  // User who performed the action (nullable for system notifications)
   resourceId String?  // ID of related resource (projectId, commentId, etc.)
-  content    String   // Notification message
+  content    String   // Notification message (fallback for old notifications)
+  metadata   Json?    // Parameters for client-side translation
   isRead     Boolean  @default(false)
   createdAt  DateTime @default(now())
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)

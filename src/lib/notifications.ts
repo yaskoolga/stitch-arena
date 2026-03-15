@@ -9,12 +9,14 @@ async function createNotification({
   actorId,
   resourceId,
   content,
+  metadata,
 }: {
   userId: string;
   type: string;
   actorId?: string;
   resourceId?: string;
   content: string;
+  metadata?: any;
 }) {
   // Don't notify yourself
   if (actorId && userId === actorId) {
@@ -39,6 +41,7 @@ async function createNotification({
         actorId,
         resourceId,
         content,
+        metadata,
       },
     });
   } catch (error) {
@@ -73,6 +76,7 @@ export async function notifyLike({
     actorId: likedByUserId,
     resourceId: projectId,
     content: `${likedByUserName} liked your project "${project.title}"`,
+    metadata: { user: likedByUserName, project: project.title },
   });
 }
 
@@ -102,6 +106,7 @@ export async function notifyComment({
     actorId: commentedByUserId,
     resourceId: projectId,
     content: `${commentedByUserName} commented on your project "${project.title}"`,
+    metadata: { user: commentedByUserName, project: project.title },
   });
 }
 
@@ -123,6 +128,7 @@ export async function notifyFollow({
     actorId: followerUserId,
     resourceId: followerUserId,
     content: `${followerUserName} started following you`,
+    metadata: { user: followerUserName },
   });
 }
 
@@ -143,6 +149,7 @@ export async function notifyAchievement({
     type: "achievement",
     resourceId: achievementId,
     content: `You unlocked: ${achievementName}`,
+    metadata: { achievement: achievementName },
   });
 }
 
@@ -168,6 +175,7 @@ export async function notifyProjectFollow({
     actorId: followedByUserId,
     resourceId: projectId,
     content: `${followedByUserName} started following your project "${projectTitle}"`,
+    metadata: { user: followedByUserName, project: projectTitle },
   });
 }
 
@@ -202,6 +210,7 @@ export async function notifyNewLog({
       actorId: projectOwnerId,
       resourceId: projectId,
       content: `New progress in "${projectTitle}": +${dailyStitches} stitches`,
+      metadata: { project: projectTitle, stitches: dailyStitches },
     })
   );
 
@@ -236,6 +245,7 @@ export async function notifyNewProject({
       actorId: userId,
       resourceId: projectId,
       content: `${userName} started a new project: "${projectTitle}"`,
+      metadata: { user: userName, project: projectTitle },
     })
   );
 
@@ -264,6 +274,7 @@ export async function notifyProjectCompletion({
     type: "completion",
     resourceId: projectId,
     content: `Your project "${projectTitle}" is ${percentage}% complete! Almost there! 🎉`,
+    metadata: { project: projectTitle, percentage },
   });
 }
 
@@ -286,5 +297,6 @@ export async function notifyStreakDanger({
     userId,
     type: "streak",
     content: `Your ${currentStreak}-day streak is in danger! Log progress in the next ${hoursRemaining} hours to keep it alive 🔥`,
+    metadata: { days: currentStreak, hours: hoursRemaining },
   });
 }

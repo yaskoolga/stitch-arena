@@ -32,7 +32,18 @@ interface Notification {
   isRead: boolean;
   createdAt: string;
   resourceId?: string;
+  metadata?: any;
 }
+
+const getNotificationContent = (notification: Notification, t: any) => {
+  // If metadata exists, use it for translated content
+  if (notification.metadata) {
+    const template = t(`notifications.types.${notification.type}`);
+    return template.replace(/{(\w+)}/g, (_: string, key: string) => notification.metadata[key] || "");
+  }
+  // Fallback to stored content for old notifications
+  return notification.content;
+};
 
 export default function NotificationsPage() {
   const { data: session } = useSession();
@@ -263,7 +274,7 @@ export default function NotificationsPage() {
                       <div className="flex items-start gap-4">
                         <div className="mt-1 flex-shrink-0">{getIcon(notification.type)}</div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm leading-relaxed">{notification.content}</p>
+                          <p className="text-sm leading-relaxed">{getNotificationContent(notification, t)}</p>
                           <p className="text-xs text-muted-foreground mt-2">
                             {formatDistanceToNow(new Date(notification.createdAt), {
                               addSuffix: true,
