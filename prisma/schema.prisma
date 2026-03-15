@@ -10,6 +10,7 @@ datasource db {
 model User {
   id                    String                 @id @default(cuid())
   email                 String                 @unique
+  username              String?                @unique // SEO-friendly username for URLs (/@username)
   name                  String?
   password              String?
   avatar                String?
@@ -50,6 +51,7 @@ model User {
 model Project {
   id              String     @id @default(cuid())
   userId          String
+  slug            String?    // SEO-friendly URL slug (unique per user)
   title           String
   description     String?
   manufacturer    String?    // Pattern manufacturer (DMC, Dimensions, etc.)
@@ -68,6 +70,8 @@ model Project {
   themes          String?    @default("[]") // JSON array of project themes/categories
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
+
+  @@unique([userId, slug]) // Slug unique per user
   user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   logs            DailyLog[]
   comments        Comment[]
@@ -133,6 +137,7 @@ model Like {
 
 model Challenge {
   id                String                 @id @default(cuid())
+  slug              String?                @unique // SEO-friendly URL slug
   type              String                 // "speed", "streak", "completion"
   title             String
   description       String?
