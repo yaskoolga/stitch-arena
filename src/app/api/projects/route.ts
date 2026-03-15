@@ -18,6 +18,9 @@ export async function GET() {
         select: { totalStitches: true, dailyStitches: true, date: true },
         orderBy: { date: "desc" },
       },
+      user: {
+        select: { username: true },
+      },
     },
     orderBy: { createdAt: "desc" },
   });
@@ -29,6 +32,7 @@ export async function GET() {
       ...p,
       completedStitches,
       actualStitched,
+      username: p.user.username || 'user',
     };
   });
 

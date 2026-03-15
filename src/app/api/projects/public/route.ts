@@ -24,7 +24,7 @@ export async function GET(req: Request) {
       }),
     },
     include: {
-      user: { select: { id: true, name: true, avatar: true } },
+      user: { select: { id: true, name: true, avatar: true, username: true } },
       logs: {
         select: { totalStitches: true, photoUrl: true },
         orderBy: { date: "desc" },
@@ -53,6 +53,7 @@ export async function GET(req: Request) {
     return {
       id: p.id,
       title: p.title,
+      slug: p.slug || 'project',
       description: p.description,
       manufacturer: p.manufacturer,
       articleNumber: p.articleNumber,

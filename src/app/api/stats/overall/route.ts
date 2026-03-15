@@ -24,6 +24,13 @@ export async function GET() {
   }
 
   try {
+    // Get user's username
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { username: true },
+    });
+    const username = user?.username || 'user';
+
     // Get all projects for the user
     const projects = await prisma.project.findMany({
       where: { userId: session.user.id },
@@ -82,6 +89,8 @@ export async function GET() {
       return {
         id: p.id,
         title: p.title,
+        slug: p.slug || 'project',
+        username,
         schemaImage: p.schemaImage,
         totalStitches: p.totalStitches,
         completedStitches: completed,
@@ -111,6 +120,8 @@ export async function GET() {
       return {
         id: p.id,
         title: p.title,
+        slug: p.slug || 'project',
+        username,
         totalStitches: p.totalStitches,
         completedStitches: completed,
         progress: Math.round(progress),

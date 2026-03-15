@@ -36,6 +36,7 @@ import { format } from "date-fns";
 interface PublicProject {
   id: string;
   title: string;
+  slug: string;
   description?: string | null;
   manufacturer?: string | null;
   finalPhoto?: string | null;
@@ -46,12 +47,13 @@ interface PublicProject {
   canvasType?: string | null;
   status: string;
   themes?: string[];
-  user: { id: string; name?: string | null; avatar?: string | null };
+  user: { id: string; name?: string | null; avatar?: string | null; username: string };
 }
 
 interface FavoriteProject {
   id: string;
   title: string;
+  slug: string;
   description: string | null;
   schemaImage: string | null;
   coverImage: string | null;
@@ -66,12 +68,14 @@ interface FavoriteProject {
     id: string;
     name: string | null;
     avatar: string | null;
+    username: string;
   };
 }
 
 interface FollowingProject {
   id: string;
   title: string;
+  slug: string;
   description: string | null;
   schemaImage: string | null;
   coverImage: string | null;
@@ -87,6 +91,7 @@ interface FollowingProject {
     id: string;
     name: string | null;
     avatar: string | null;
+    username: string;
   };
 }
 
@@ -247,7 +252,7 @@ export default function GalleryPage() {
                       size="default"
                       showCount={false}
                     />
-                    <Link href={`/projects/${selectedPhoto.project.id}`}>
+                    <Link href={`/@${selectedPhoto.project.user.username}/${selectedPhoto.project.slug}`}>
                       <Button variant="default" size="default" className="rounded-full">
                         {t("gallery.openProject")}
                       </Button>
@@ -425,7 +430,7 @@ function AllProjectsTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
                   )}
                 </div>
 
-                <Link href={`/projects/${p.id}`}>
+                <Link href={`/@${p.user.username}/${p.slug}`}>
                   <CardHeader className="pb-1.5 px-3 pt-3">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-base group-hover:text-primary transition-colors">
@@ -700,7 +705,7 @@ function FavoritesTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
                     </div>
                   )}
                 </div>
-                <Link href={`/projects/${project.id}`}>
+                <Link href={`/@${project.user.username}/${project.slug}`}>
                   <CardHeader className="pb-1.5 px-3 pt-3">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-base group-hover:text-primary transition-colors">{project.title}</CardTitle>
@@ -828,7 +833,7 @@ function FollowingTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
                     </div>
                   )}
                 </div>
-                <Link href={`/projects/${project.id}`}>
+                <Link href={`/@${project.user.username}/${project.slug}`}>
                   <CardHeader className="pb-1.5 px-3 pt-3">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-base group-hover:text-primary transition-colors">{project.title}</CardTitle>
@@ -916,7 +921,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
         </div>
       </CardHeader>
       <CardContent className="px-3 pb-0">
-        <Link href={`/projects/${project.id}`} className="block group">
+        <Link href={`/@${project.user.username}/${project.slug}`} className="block group">
           <div className="flex gap-2">
             {(project.schemaImage || project.coverImage) && (
               <div className="relative h-40 w-40 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
@@ -971,7 +976,7 @@ function ProjectFeedCard({ project, createdAt }: { project: any; createdAt: stri
 
         <div className="flex items-center gap-1 pt-1.5 border-t mt-2">
           <LikeButton projectId={project.id} variant="ghost" size="sm" />
-          <Link href={`/projects/${project.id}#comments`}>
+          <Link href={`/@${project.user.username}/${project.slug}#comments`}>
             <Button variant="ghost" size="sm" className="gap-1 h-7">
               <MessageCircle className="h-3 w-3" />
               <span className="text-xs">{project.commentCount}</span>

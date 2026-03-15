@@ -26,6 +26,7 @@ import { DailyLog } from "@prisma/client";
 interface ProjectItem {
   id: string;
   title: string;
+  slug: string;
   totalStitches: number;
   completedStitches: number;
   status: string;
@@ -35,6 +36,7 @@ interface ProjectItem {
   imageUrl?: string | null; // Old format (for backwards compatibility)
   themes?: string;
   createdAt: string;
+  username: string; // User's username for SEO URLs
   logs?: Array<{
     dailyStitches: number;
     date: string;

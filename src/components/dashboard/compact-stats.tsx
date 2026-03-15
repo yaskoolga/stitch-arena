@@ -28,6 +28,8 @@ export interface OverallStatsData {
   topProjects: Array<{
     id: string;
     title: string;
+    slug: string;
+    username: string;
     schemaImage: string | null;
     totalStitches: number;
     completedStitches: number;
@@ -40,6 +42,8 @@ export interface OverallStatsData {
   projectsWithSpeed: Array<{
     id: string;
     title: string;
+    slug: string;
+    username: string;
     totalStitches: number;
     completedStitches: number;
     progress: number;

@@ -23,6 +23,13 @@ export async function GET(
   const { userId } = await params;
 
   try {
+    // Get user's username
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { username: true },
+    });
+    const username = user?.username || 'user';
+
     // Get only PUBLIC projects for the user
     const projects = await prisma.project.findMany({
       where: {
@@ -85,6 +92,8 @@ export async function GET(
         return {
           id: p.id,
           title: p.title,
+          slug: p.slug || 'project',
+          username,
           schemaImage: p.schemaImage,
           totalStitches: p.totalStitches,
           completedStitches: completed,

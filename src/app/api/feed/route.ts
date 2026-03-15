@@ -31,6 +31,7 @@ export async function GET(req: Request) {
               id: true,
               name: true,
               avatar: true,
+              username: true,
             },
           },
           _count: {
@@ -56,6 +57,7 @@ export async function GET(req: Request) {
           createdAt: project.createdAt,
           data: {
             ...project,
+            slug: project.slug || 'project',
             themes: projectThemes,
             completedStitches: project.logs[0]?.totalStitches || 0,
             likeCount: project._count.likes,
@@ -106,6 +108,7 @@ export async function GET(req: Request) {
             notes: log.notes,
             project: {
               ...log.project,
+              slug: log.project.slug || 'project',
               themes: projectThemes,
             },
           },

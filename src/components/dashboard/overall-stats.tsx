@@ -31,6 +31,8 @@ interface OverallStatsData {
   topProjects: Array<{
     id: string;
     title: string;
+    slug: string;
+    username: string;
     schemaImage: string | null;
     totalStitches: number;
     completedStitches: number;
@@ -206,7 +208,7 @@ export function OverallStats() {
               {data.topProjects.map((project, index) => (
                 <Link
                   key={project.id}
-                  href={`/projects/${project.id}`}
+                  href={`/@${project.username}/${project.slug}`}
                   className="block group"
                 >
                   <div className="flex items-center gap-4">

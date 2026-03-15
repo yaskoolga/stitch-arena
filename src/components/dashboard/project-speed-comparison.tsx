@@ -11,6 +11,8 @@ import { Zap, TrendingUp, TrendingDown } from "lucide-react";
 interface ProjectSpeedData {
   id: string;
   title: string;
+  slug: string;
+  username: string;
   avgSpeed: number;
   totalStitches: number;
   completedStitches: number;
@@ -77,7 +79,7 @@ export function ProjectSpeedComparison({ projects }: ProjectSpeedComparisonProps
           return (
             <Link
               key={project.id}
-              href={`/projects/${project.id}`}
+              href={`/@${project.username}/${project.slug}`}
               className="block group"
             >
               <div className="space-y-2 p-3 rounded-xl hover:bg-accent/50 transition-colors">
