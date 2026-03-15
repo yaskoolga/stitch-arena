@@ -14,7 +14,10 @@ export async function GET(req: NextRequest) {
     const username = searchParams.get("username");
     const slug = searchParams.get("slug");
 
+    console.log('[by-slug] Request:', { username, slug, hasSession: !!session });
+
     if (!username || !slug) {
+      console.log('[by-slug] Missing params');
       return NextResponse.json(
         { error: "Username and slug are required" },
         { status: 400 }
@@ -27,7 +30,10 @@ export async function GET(req: NextRequest) {
       select: { id: true },
     });
 
+    console.log('[by-slug] User found:', !!user);
+
     if (!user) {
+      console.log('[by-slug] User not found');
       return NextResponse.json(
         { error: "User not found" },
         { status: 404 }
@@ -55,7 +61,10 @@ export async function GET(req: NextRequest) {
       },
     });
 
+    console.log('[by-slug] Project found:', !!project);
+
     if (!project) {
+      console.log('[by-slug] Project not found for userId:', user.id, 'slug:', slug);
       return NextResponse.json(
         { error: "Project not found" },
         { status: 404 }
@@ -121,9 +130,10 @@ export async function GET(req: NextRequest) {
       isFollowing: !!isFollowing,
     });
   } catch (error) {
-    console.error("Error fetching project by slug:", error);
+    console.error("[by-slug] Error fetching project:", error);
+    console.error("[by-slug] Error details:", error instanceof Error ? error.message : String(error));
     return NextResponse.json(
-      { error: "Failed to fetch project" },
+      { error: "Failed to fetch project", details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }
