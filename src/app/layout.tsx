@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   description: "Track your cross-stitch projects and daily stitching progress",
   icons: {
     icon: '/favicon.svg',
+    apple: '/apple-touch-icon.png',
   },
   manifest: '/manifest.json',
   appleWebApp: {
