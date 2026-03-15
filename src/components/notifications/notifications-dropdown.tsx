@@ -3,6 +3,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -30,6 +31,7 @@ export function NotificationsDropdown() {
   const { data: session } = useSession();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const t = useTranslations("notifications");
 
   // Fetch notifications
   const { data, refetch } = useQuery<{ notifications: Notification[]; unreadCount: number }>({
@@ -143,7 +145,7 @@ export function NotificationsDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-80 max-w-[calc(100vw-2rem)]">
         <div className="flex items-center justify-between px-2 py-2">
-          <h3 className="font-semibold">Notifications</h3>
+          <h3 className="font-semibold">{t("title")}</h3>
           {unreadCount > 0 && (
             <Button
               variant="ghost"
@@ -152,7 +154,7 @@ export function NotificationsDropdown() {
               onClick={() => markAllAsRead.mutate()}
             >
               <Check className="h-3 w-3 mr-1" />
-              Mark all read
+              {t("markAllRead")}
             </Button>
           )}
         </div>
@@ -161,7 +163,7 @@ export function NotificationsDropdown() {
         {notifications.length === 0 ? (
           <div className="px-4 py-8 text-center text-sm text-muted-foreground">
             <Bell className="h-8 w-8 mx-auto mb-2 opacity-50" />
-            <p>No notifications yet</p>
+            <p>{t("empty")}</p>
           </div>
         ) : (
           <>
@@ -196,7 +198,7 @@ export function NotificationsDropdown() {
                 className="w-full justify-center rounded-full"
                 onClick={() => router.push("/notifications")}
               >
-                View all notifications
+                {t("viewAll")}
               </Button>
             </div>
           </>

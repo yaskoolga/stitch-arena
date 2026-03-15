@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -37,6 +38,7 @@ export default function NotificationsPage() {
   const { data: session } = useSession();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const t = useTranslations("notifications");
   const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
 
   // Fetch notifications
@@ -133,10 +135,10 @@ export default function NotificationsPage() {
 
   const groupByDate = (notifications: Notification[]) => {
     const groups: Record<string, Notification[]> = {
-      Today: [],
-      Yesterday: [],
-      "This Week": [],
-      Older: [],
+      [t("today")]: [],
+      [t("yesterday")]: [],
+      [t("thisWeek")]: [],
+      [t("older")]: [],
     };
 
     const now = new Date();
@@ -149,13 +151,13 @@ export default function NotificationsPage() {
     notifications.forEach((notif) => {
       const date = new Date(notif.createdAt);
       if (date >= today) {
-        groups.Today.push(notif);
+        groups[t("today")].push(notif);
       } else if (date >= yesterday) {
-        groups.Yesterday.push(notif);
+        groups[t("yesterday")].push(notif);
       } else if (date >= thisWeek) {
-        groups["This Week"].push(notif);
+        groups[t("thisWeek")].push(notif);
       } else {
-        groups.Older.push(notif);
+        groups[t("older")].push(notif);
       }
     });
 
@@ -167,9 +169,9 @@ export default function NotificationsPage() {
       <div className="container max-w-4xl mx-auto py-8 px-4">
         <Card className="p-8 text-center">
           <Bell className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-          <h2 className="text-2xl font-bold mb-2">Sign in to view notifications</h2>
+          <h2 className="text-2xl font-bold mb-2">{t("title")}</h2>
           <p className="text-muted-foreground">
-            You need to be signed in to see your notifications.
+            {t("empty")}
           </p>
         </Card>
       </div>
@@ -188,10 +190,10 @@ export default function NotificationsPage() {
     <div className="container max-w-4xl mx-auto py-8 px-4">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold">Notifications</h1>
+          <h1 className="text-3xl font-bold">{t("title")}</h1>
           {unreadCount > 0 && (
             <p className="text-sm text-muted-foreground mt-1">
-              {unreadCount} unread notification{unreadCount !== 1 ? "s" : ""}
+              {unreadCount} {t("unread").toLowerCase()}
             </p>
           )}
         </div>
@@ -207,36 +209,36 @@ export default function NotificationsPage() {
             ) : (
               <Check className="h-4 w-4 mr-2" />
             )}
-            Mark all read
+            {t("markAllRead")}
           </Button>
         )}
       </div>
 
       <Tabs value={filter} onValueChange={(v) => setFilter(v as typeof filter)} className="mb-6">
         <TabsList className="grid w-full grid-cols-3 rounded-full">
-          <TabsTrigger value="all" className="rounded-full">All</TabsTrigger>
+          <TabsTrigger value="all" className="rounded-full">{useTranslations("common")("all")}</TabsTrigger>
           <TabsTrigger value="unread" className="rounded-full">
-            Unread {unreadCount > 0 && `(${unreadCount})`}
+            {t("unread")} {unreadCount > 0 && `(${unreadCount})`}
           </TabsTrigger>
-          <TabsTrigger value="read" className="rounded-full">Read</TabsTrigger>
+          <TabsTrigger value="read" className="rounded-full">{t("read")}</TabsTrigger>
         </TabsList>
       </Tabs>
 
       {isLoading ? (
         <Card className="p-8 text-center">
           <Loader2 className="h-8 w-8 mx-auto mb-4 animate-spin text-muted-foreground" />
-          <p className="text-muted-foreground">Loading notifications...</p>
+          <p className="text-muted-foreground">{useTranslations("common")("loading")}</p>
         </Card>
       ) : filteredNotifications.length === 0 ? (
         <Card className="p-8 text-center rounded-2xl">
           <Bell className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
-          <h2 className="text-xl font-semibold mb-2">No notifications</h2>
+          <h2 className="text-xl font-semibold mb-2">{t("empty")}</h2>
           <p className="text-muted-foreground">
             {filter === "unread"
-              ? "You're all caught up!"
+              ? t("allCaughtUp")
               : filter === "read"
-              ? "No read notifications yet"
-              : "You don't have any notifications yet"}
+              ? t("noRead")
+              : t("noUnread")}
           </p>
         </Card>
       ) : (
@@ -269,7 +271,7 @@ export default function NotificationsPage() {
                         </div>
                         {!notification.isRead && (
                           <Badge variant="default" className="flex-shrink-0 rounded-full">
-                            New
+                            {t("unread")}
                           </Badge>
                         )}
                       </div>

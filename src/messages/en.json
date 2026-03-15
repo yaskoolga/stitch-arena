@@ -720,6 +720,12 @@
       "streak": "Your {days}-day streak is in danger! Log progress in the next {hours} hours to keep it alive 🔥"
     }
   },
+  "settings": {
+    "title": "Settings",
+    "notificationsDescription": "Manage your notification preferences",
+    "enableNotifications": "Enable Notifications",
+    "notificationsHint": "Receive notifications about likes, comments, follows, and achievements"
+  },
   "toast": {
     "success": {
       "projectCreated": "Project created successfully",

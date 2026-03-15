@@ -651,6 +651,12 @@
       "streak": "Ihre {days}-tägige Serie ist in Gefahr! Loggen Sie Fortschritt in den nächsten {hours} Stunden, um sie zu halten 🔥"
     }
   },
+  "settings": {
+    "title": "Einstellungen",
+    "notificationsDescription": "Verwalten Sie Ihre Benachrichtigungseinstellungen",
+    "enableNotifications": "Benachrichtigungen aktivieren",
+    "notificationsHint": "Erhalten Sie Benachrichtigungen über Likes, Kommentare, Follows und Erfolge"
+  },
   "toast": {
     "success": {
       "projectCreated": "Projekt erfolgreich erstellt",

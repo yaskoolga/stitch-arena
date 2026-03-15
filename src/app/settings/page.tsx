@@ -333,20 +333,20 @@ export default function SettingsPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Bell className="h-5 w-5" />
-            Notifications
+            {t("notifications.title")}
           </CardTitle>
           <CardDescription>
-            Manage your notification preferences
+            {t("settings.notificationsDescription")}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label htmlFor="notifications-toggle" className="text-base">
-                Enable Notifications
+                {t("settings.enableNotifications")}
               </Label>
               <p className="text-sm text-muted-foreground">
-                Receive notifications about likes, comments, follows, and achievements
+                {t("settings.notificationsHint")}
               </p>
             </div>
             <Switch

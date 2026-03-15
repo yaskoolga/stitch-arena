@@ -651,6 +651,12 @@
       "streak": "¡Tu racha de {days} días está en peligro! Registra progreso en las próximas {hours} horas para mantenerla 🔥"
     }
   },
+  "settings": {
+    "title": "Configuración",
+    "notificationsDescription": "Administra tus preferencias de notificaciones",
+    "enableNotifications": "Habilitar notificaciones",
+    "notificationsHint": "Recibe notificaciones sobre me gusta, comentarios, seguidores y logros"
+  },
   "toast": {
     "success": {
       "projectCreated": "Proyecto creado exitosamente",
