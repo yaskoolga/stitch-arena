@@ -15,6 +15,7 @@ model User {
   avatar                String?
   bio                   String?
   selectedTitle         String?                // ID of unlocked achievement used as title
+  notificationsEnabled  Boolean                @default(true) // Toggle notifications on/off
   resetToken            String?
   resetTokenExpiry      DateTime?
   role                  String                 @default("user") // "user" | "admin"

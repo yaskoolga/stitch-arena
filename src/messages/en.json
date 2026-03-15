@@ -698,11 +698,26 @@
     "title": "Notifications",
     "markAllRead": "Mark all as read",
     "empty": "No notifications",
+    "unread": "Unread",
+    "read": "Read",
+    "allCaughtUp": "You're all caught up!",
+    "noUnread": "No unread notifications",
+    "noRead": "No read notifications yet",
+    "viewAll": "View all notifications",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "thisWeek": "This Week",
+    "older": "Older",
     "types": {
       "like": "{user} liked your project",
       "comment": "{user} commented on your project",
       "follow": "{user} started following you",
-      "achievement": "You unlocked: {achievement}"
+      "projectfollow": "{user} started following your project",
+      "achievement": "You unlocked: {achievement}",
+      "newlog": "New progress in \"{project}\": +{stitches} stitches",
+      "newproject": "{user} started a new project: \"{project}\"",
+      "completion": "Your project \"{project}\" is {percentage}% complete! Almost there! 🎉",
+      "streak": "Your {days}-day streak is in danger! Log progress in the next {hours} hours to keep it alive 🔥"
     }
   },
   "toast": {

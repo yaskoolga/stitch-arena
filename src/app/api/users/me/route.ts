@@ -8,6 +8,7 @@ const updateProfileSchema = z.object({
   name: z.string().min(1, "Name is required").max(50, "Name too long").optional(),
   bio: z.string().max(500, "Bio too long").optional(),
   avatar: z.string().url("Invalid avatar URL").optional().nullable(),
+  notificationsEnabled: z.boolean().optional(),
 });
 
 /**
@@ -30,6 +31,7 @@ export async function GET() {
         name: true,
         avatar: true,
         bio: true,
+        notificationsEnabled: true,
         createdAt: true,
       },
     });
@@ -76,6 +78,7 @@ export async function PUT(req: Request) {
         ...(parsed.data.name !== undefined && { name: parsed.data.name }),
         ...(parsed.data.bio !== undefined && { bio: parsed.data.bio }),
         ...(parsed.data.avatar !== undefined && { avatar: parsed.data.avatar }),
+        ...(parsed.data.notificationsEnabled !== undefined && { notificationsEnabled: parsed.data.notificationsEnabled }),
       },
       select: {
         id: true,
@@ -83,6 +86,7 @@ export async function PUT(req: Request) {
         name: true,
         avatar: true,
         bio: true,
+        notificationsEnabled: true,
         createdAt: true,
       },
     });

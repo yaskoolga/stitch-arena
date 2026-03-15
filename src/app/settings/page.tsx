@@ -14,7 +14,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
-import { User, Save, Loader2, Upload, X, Sun, Moon, Monitor } from "lucide-react";
+import { User, Save, Loader2, Upload, X, Sun, Moon, Monitor, Bell } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 
 interface UserProfile {
   id: string;
@@ -22,6 +23,7 @@ interface UserProfile {
   name: string | null;
   avatar: string | null;
   bio: string | null;
+  notificationsEnabled: boolean;
   createdAt: string;
 }
 
@@ -35,6 +37,7 @@ export default function SettingsPage() {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -57,6 +60,7 @@ export default function SettingsPage() {
       setName(data.name || "");
       setBio(data.bio || "");
       setAvatar(data.avatar || "");
+      setNotificationsEnabled(data.notificationsEnabled ?? true);
 
       return data;
     },
@@ -64,7 +68,7 @@ export default function SettingsPage() {
   });
 
   const updateProfile = useMutation({
-    mutationFn: async (data: { name?: string; bio?: string; avatar?: string | null }) => {
+    mutationFn: async (data: { name?: string; bio?: string; avatar?: string | null; notificationsEnabled?: boolean }) => {
       const res = await fetch("/api/users/me", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -92,6 +96,7 @@ export default function SettingsPage() {
       name: name.trim() || undefined,
       bio: bio.trim() || undefined,
       avatar: avatar.trim() || null,
+      notificationsEnabled,
     });
   };
 
@@ -320,6 +325,40 @@ export default function SettingsPage() {
               </Button>
             </div>
           </form>
+        </CardContent>
+      </Card>
+
+      {/* Notifications Settings */}
+      <Card className="rounded-2xl">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Bell className="h-5 w-5" />
+            Notifications
+          </CardTitle>
+          <CardDescription>
+            Manage your notification preferences
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label htmlFor="notifications-toggle" className="text-base">
+                Enable Notifications
+              </Label>
+              <p className="text-sm text-muted-foreground">
+                Receive notifications about likes, comments, follows, and achievements
+              </p>
+            </div>
+            <Switch
+              id="notifications-toggle"
+              checked={notificationsEnabled}
+              onCheckedChange={(checked) => {
+                setNotificationsEnabled(checked);
+                // Auto-save notification preference
+                updateProfile.mutate({ notificationsEnabled: checked });
+              }}
+            />
+          </div>
         </CardContent>
       </Card>
 

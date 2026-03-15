@@ -629,11 +629,26 @@
     "title": "Benachrichtigungen",
     "markAllRead": "Alle als gelesen markieren",
     "empty": "Keine Benachrichtigungen",
+    "unread": "Ungelesen",
+    "read": "Gelesen",
+    "allCaughtUp": "Sie haben alles gelesen!",
+    "noUnread": "Keine ungelesenen Benachrichtigungen",
+    "noRead": "Noch keine gelesenen Benachrichtigungen",
+    "viewAll": "Alle Benachrichtigungen anzeigen",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "thisWeek": "Diese Woche",
+    "older": "Ältere",
     "types": {
       "like": "{user} gefällt Ihr Projekt",
       "comment": "{user} hat Ihr Projekt kommentiert",
       "follow": "{user} folgt Ihnen jetzt",
-      "achievement": "Sie haben freigeschaltet: {achievement}"
+      "projectfollow": "{user} folgt Ihrem Projekt",
+      "achievement": "Sie haben freigeschaltet: {achievement}",
+      "newlog": "Neuer Fortschritt in \"{project}\": +{stitches} Stiche",
+      "newproject": "{user} hat ein neues Projekt gestartet: \"{project}\"",
+      "completion": "Ihr Projekt \"{project}\" ist zu {percentage}% fertig! Fast geschafft! 🎉",
+      "streak": "Ihre {days}-tägige Serie ist in Gefahr! Loggen Sie Fortschritt in den nächsten {hours} Stunden, um sie zu halten 🔥"
     }
   },
   "toast": {

@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { Bell, Heart, MessageCircle, UserPlus, Trophy, Check } from "lucide-react";
+import { Bell, Heart, MessageCircle, UserPlus, Trophy, Check, Image, FolderPlus, PartyPopper, Flame } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { toast } from "sonner";
 import { useEffect } from "react";
@@ -80,10 +80,12 @@ export function NotificationsDropdown() {
 
     // Navigate based on type
     if (notification.resourceId) {
-      if (notification.type === "like" || notification.type === "comment") {
+      if (notification.type === "like" || notification.type === "comment" ||
+          notification.type === "projectfollow" || notification.type === "newlog" ||
+          notification.type === "newproject" || notification.type === "completion") {
         router.push(`/projects/${notification.resourceId}`);
       } else if (notification.type === "follow") {
-        router.push(`/profile/${notification.resourceId}`);
+        router.push(`/dashboard/${notification.resourceId}`);
       }
     }
   };
@@ -96,8 +98,18 @@ export function NotificationsDropdown() {
         return <MessageCircle className="h-4 w-4 text-blue-500" />;
       case "follow":
         return <UserPlus className="h-4 w-4 text-green-500" />;
+      case "projectfollow":
+        return <Bell className="h-4 w-4 text-purple-500" />;
       case "achievement":
         return <Trophy className="h-4 w-4 text-amber-500" />;
+      case "newlog":
+        return <Image className="h-4 w-4 text-cyan-500" />;
+      case "newproject":
+        return <FolderPlus className="h-4 w-4 text-indigo-500" />;
+      case "completion":
+        return <PartyPopper className="h-4 w-4 text-pink-500" />;
+      case "streak":
+        return <Flame className="h-4 w-4 text-orange-500" />;
       default:
         return <Bell className="h-4 w-4" />;
     }
@@ -152,30 +164,42 @@ export function NotificationsDropdown() {
             <p>No notifications yet</p>
           </div>
         ) : (
-          <div className="max-h-96 overflow-y-auto">
-            {notifications.map((notification) => (
-              <DropdownMenuItem
-                key={notification.id}
-                className={`flex items-start gap-3 p-3 cursor-pointer ${
-                  !notification.isRead ? "bg-muted/50" : ""
-                }`}
-                onClick={() => handleNotificationClick(notification)}
+          <>
+            <div className="max-h-96 overflow-y-auto">
+              {notifications.map((notification) => (
+                <DropdownMenuItem
+                  key={notification.id}
+                  className={`flex items-start gap-3 p-3 cursor-pointer ${
+                    !notification.isRead ? "bg-muted/50" : ""
+                  }`}
+                  onClick={() => handleNotificationClick(notification)}
+                >
+                  <div className="mt-0.5">{getIcon(notification.type)}</div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm line-clamp-2">{notification.content}</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {formatDistanceToNow(new Date(notification.createdAt), {
+                        addSuffix: true,
+                      })}
+                    </p>
+                  </div>
+                  {!notification.isRead && (
+                    <div className="h-2 w-2 rounded-full bg-primary flex-shrink-0 mt-1.5" />
+                  )}
+                </DropdownMenuItem>
+              ))}
+            </div>
+            <DropdownMenuSeparator />
+            <div className="p-2">
+              <Button
+                variant="ghost"
+                className="w-full justify-center rounded-full"
+                onClick={() => router.push("/notifications")}
               >
-                <div className="mt-0.5">{getIcon(notification.type)}</div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm line-clamp-2">{notification.content}</p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {formatDistanceToNow(new Date(notification.createdAt), {
-                      addSuffix: true,
-                    })}
-                  </p>
-                </div>
-                {!notification.isRead && (
-                  <div className="h-2 w-2 rounded-full bg-primary flex-shrink-0 mt-1.5" />
-                )}
-              </DropdownMenuItem>
-            ))}
-          </div>
+                View all notifications
+              </Button>
+            </div>
+          </>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

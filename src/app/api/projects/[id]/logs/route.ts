@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logCreateSchema } from "@/lib/validations";
+import { notifyNewLog, notifyProjectCompletion } from "@/lib/notifications";
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -100,6 +101,28 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   if (session?.user?.id) {
     const { unlockAchievements } = await import("@/lib/achievements");
     await unlockAchievements(session.user.id);
+  }
+
+  // Send notifications
+  if (dailyStitches > 0) {
+    // Notify project followers about new progress
+    notifyNewLog({
+      projectId: id,
+      projectTitle: project.title,
+      projectOwnerId: project.userId,
+      dailyStitches,
+    }).catch(console.error);
+
+    // Check if project is close to completion (95%+)
+    const percentage = Math.round((totalStitches / project.totalStitches) * 100);
+    if (percentage >= 95 && percentage < 100) {
+      notifyProjectCompletion({
+        userId: project.userId,
+        projectId: id,
+        projectTitle: project.title,
+        percentage,
+      }).catch(console.error);
+    }
   }
 
   return NextResponse.json({ log, levelUp: levelUpInfo }, { status: 201 });

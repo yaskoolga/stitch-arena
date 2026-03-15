@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { projectCreateSchema } from "@/lib/validations";
+import { notifyNewProject } from "@/lib/notifications";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -108,6 +109,16 @@ export async function POST(req: Request) {
         userCorrected: userCorrectedInitial || false,
       },
     });
+  }
+
+  // Notify user followers about new public project
+  if (isPublic) {
+    notifyNewProject({
+      projectId: project.id,
+      projectTitle: project.title,
+      userId: session.user.id,
+      userName: session.user.name || "Someone",
+    }).catch(console.error);
   }
 
   return NextResponse.json(project, { status: 201 });
