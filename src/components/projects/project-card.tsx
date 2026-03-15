@@ -106,7 +106,7 @@ export function ProjectCard({
             </div>
           </div>
         )}
-        <Link href={`/@${username}/${slug}`}>
+        <Link href={`/${username}/${slug}`}>
         <CardHeader className="pb-1.5 px-3 pt-3">
           <div className="flex items-center justify-between">
             <CardTitle className="text-base">{title}</CardTitle>
@@ -211,7 +211,7 @@ export function ProjectCard({
                       showCount={false}
                     />
                   )}
-                  <Link href={`/@${username}/${slug}`}>
+                  <Link href={`/${username}/${slug}`}>
                     <Button variant="default" size="sm" className="rounded-full">
                       <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
                       {t("gallery.openProject")}

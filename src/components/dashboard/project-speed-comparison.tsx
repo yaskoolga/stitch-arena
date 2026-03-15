@@ -79,7 +79,7 @@ export function ProjectSpeedComparison({ projects }: ProjectSpeedComparisonProps
           return (
             <Link
               key={project.id}
-              href={`/@${project.username}/${project.slug}`}
+              href={`/${project.username}/${project.slug}`}
               className="block group"
             >
               <div className="space-y-2 p-3 rounded-xl hover:bg-accent/50 transition-colors">

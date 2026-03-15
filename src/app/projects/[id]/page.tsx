@@ -36,7 +36,7 @@ export default function ProjectRedirect() {
         const user = await userRes.json();
 
         // Redirect to new SEO-friendly URL
-        const newUrl = `/@${user.username}/${project.slug}`;
+        const newUrl = `/${user.username}/${project.slug}`;
         router.replace(newUrl);
       } catch (error) {
         console.error('Redirect error:', error);

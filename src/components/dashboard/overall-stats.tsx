@@ -208,7 +208,7 @@ export function OverallStats() {
               {data.topProjects.map((project, index) => (
                 <Link
                   key={project.id}
-                  href={`/@${project.username}/${project.slug}`}
+                  href={`/${project.username}/${project.slug}`}
                   className="block group"
                 >
                   <div className="flex items-center gap-4">

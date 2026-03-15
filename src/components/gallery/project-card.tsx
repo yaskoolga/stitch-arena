@@ -74,7 +74,7 @@ export function ProjectCard({
   const handleGoToProject = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    window.location.href = `/@${project.user.username}/${project.slug}`;
+    window.location.href = `/${project.user.username}/${project.slug}`;
   };
 
   return (
@@ -178,7 +178,7 @@ export function ProjectCard({
         </div>
 
         {/* Project Info */}
-        <Link href={`/@${project.user.username}/${project.slug}`}>
+        <Link href={`/${project.user.username}/${project.slug}`}>
           <CardHeader className="pb-1.5 px-3 pt-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base group-hover:text-primary transition-colors">
@@ -302,7 +302,7 @@ export function ProjectCard({
               className="flex-1"
               onClick={() => {
                 setShowPhotoDialog(false);
-                window.location.href = `/@${project.user.username}/${project.slug}`;
+                window.location.href = `/${project.user.username}/${project.slug}`;
               }}
             >
               <ExternalLink className="mr-2 h-4 w-4" />
