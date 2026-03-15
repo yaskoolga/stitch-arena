@@ -39,6 +39,7 @@ export default function NotificationsPage() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const t = useTranslations("notifications");
+  const tCommon = useTranslations("common");
   const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
 
   // Fetch notifications
@@ -216,7 +217,7 @@ export default function NotificationsPage() {
 
       <Tabs value={filter} onValueChange={(v) => setFilter(v as typeof filter)} className="mb-6">
         <TabsList className="grid w-full grid-cols-3 rounded-full">
-          <TabsTrigger value="all" className="rounded-full">{useTranslations("common")("all")}</TabsTrigger>
+          <TabsTrigger value="all" className="rounded-full">{tCommon("all")}</TabsTrigger>
           <TabsTrigger value="unread" className="rounded-full">
             {t("unread")} {unreadCount > 0 && `(${unreadCount})`}
           </TabsTrigger>
@@ -227,7 +228,7 @@ export default function NotificationsPage() {
       {isLoading ? (
         <Card className="p-8 text-center">
           <Loader2 className="h-8 w-8 mx-auto mb-4 animate-spin text-muted-foreground" />
-          <p className="text-muted-foreground">{useTranslations("common")("loading")}</p>
+          <p className="text-muted-foreground">{tCommon("loading")}</p>
         </Card>
       ) : filteredNotifications.length === 0 ? (
         <Card className="p-8 text-center rounded-2xl">
