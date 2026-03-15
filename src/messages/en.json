@@ -508,6 +508,8 @@
     "progress": "Progress",
     "unlockedAt": "Unlocked on {date}",
     "celebration": "Congratulations!",
+    "showMore": "Show {count} more",
+    "showLess": "Show less",
     "categories": {
       "all": "All",
       "projects": "Projects",

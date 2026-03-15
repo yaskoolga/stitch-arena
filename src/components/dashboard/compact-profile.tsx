@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Progress } from "@/components/ui/progress";
 import { useTranslations } from "next-intl";
@@ -56,6 +58,7 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
   const t = useTranslations();
   const tAch = useTranslations("achievements");
   const tLevels = useTranslations("levels");
+  const [showAllAchievements, setShowAllAchievements] = useState(false);
 
   // Determine which endpoint to use based on userId and isOwn
   const profileEndpoint = userId && !isOwn ? `/api/users/${userId}` : '/api/profile';
@@ -96,6 +99,28 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
   const unlocked = achievements?.filter((a) => a.unlockedAt) || [];
   const locked = achievements?.filter((a) => !a.unlockedAt) || [];
   const total = Object.values(ACHIEVEMENTS).length;
+
+  // Filter achievements to show: all unlocked + top 5 nearest to unlock
+  const getFilteredAchievements = () => {
+    if (showAllAchievements) {
+      return { unlocked, locked };
+    }
+
+    // Sort locked achievements by progress (higher progress = closer to unlock)
+    const sortedLocked = [...locked].sort((a, b) => {
+      const progressA = (a.progress / a.requirement) * 100;
+      const progressB = (b.progress / b.requirement) * 100;
+      return progressB - progressA;
+    });
+
+    // Take top 5 closest to unlock
+    const nearestLocked = sortedLocked.slice(0, 5);
+
+    return { unlocked, locked: nearestLocked };
+  };
+
+  const { unlocked: displayedUnlocked, locked: displayedLocked } = getFilteredAchievements();
+  const hiddenCount = locked.length - displayedLocked.length;
 
   if (!user) return null;
 
@@ -185,83 +210,100 @@ export function CompactProfile({ userId, isOwn = true }: CompactProfileProps) {
               )}
             </div>
             <TooltipProvider>
-              <div className="flex gap-1.5 overflow-x-auto pb-0.5">
-                {/* Выполненные достижения */}
-                {unlocked.map((achievement) => {
-                  const rarityConfig = RARITY_CONFIG[achievement.rarity];
-                  return (
-                    <Tooltip key={achievement.id}>
-                      <TooltipTrigger>
-                        <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${rarityConfig.bgColor} ring-1 ring-inset ring-black/5 dark:ring-white/10`}>
-                          <span className="text-lg">{achievement.emoji}</span>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <div className="space-y-0.5">
-                          <div className="flex items-center gap-1.5">
-                            <p className="text-xs font-semibold text-green-600 dark:text-green-400">
-                              ✓ {tAch(`list.${achievement.id}.name`)}
-                            </p>
-                            <span className="text-[11px]">{rarityConfig.emoji}</span>
+              <div>
+                <div className="flex gap-1.5 overflow-x-auto pb-0.5">
+                  {/* Выполненные достижения */}
+                  {displayedUnlocked.map((achievement) => {
+                    const rarityConfig = RARITY_CONFIG[achievement.rarity];
+                    return (
+                      <Tooltip key={achievement.id}>
+                        <TooltipTrigger>
+                          <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${rarityConfig.bgColor} ring-1 ring-inset ring-black/5 dark:ring-white/10`}>
+                            <span className="text-lg">{achievement.emoji}</span>
                           </div>
-                          <p className="text-[11px] text-muted-foreground">
-                            {tAch(`list.${achievement.id}.description`)}
-                          </p>
-                          <p className={`text-[11px] font-medium ${rarityConfig.color}`}>
-                            {rarityConfig.name}
-                          </p>
-                        </div>
-                      </TooltipContent>
-                    </Tooltip>
-                  );
-                })}
-
-                {/* Разделитель */}
-                {unlocked.length > 0 && locked.length > 0 && (
-                  <div className="flex items-center shrink-0">
-                    <div className="w-px h-5 bg-border" />
-                  </div>
-                )}
-
-                {/* Невыполненные достижения */}
-                {locked.map((achievement) => {
-                  const rarityConfig = RARITY_CONFIG[achievement.rarity];
-                  const progressPercent = Math.min(100, (achievement.progress / achievement.requirement) * 100);
-                  return (
-                    <Tooltip key={achievement.id}>
-                      <TooltipTrigger>
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted/30 ring-1 ring-inset ring-border/50 opacity-50 grayscale">
-                          <span className="text-lg">{achievement.emoji}</span>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <div className="space-y-1">
-                          <div className="flex items-center gap-1.5">
-                            <p className="text-xs font-semibold">
-                              {tAch(`list.${achievement.id}.name`)}
-                            </p>
-                            <span className="text-[11px] opacity-50">{rarityConfig.emoji}</span>
-                          </div>
-                          <p className="text-[11px] text-muted-foreground">
-                            {tAch(`list.${achievement.id}.description`)}
-                          </p>
-                          <p className={`text-[11px] font-medium ${rarityConfig.color} opacity-70`}>
-                            {rarityConfig.name}
-                          </p>
-                          <div className="space-y-0.5 pt-1">
-                            <div className="flex items-center justify-between text-[11px]">
-                              <span className="text-muted-foreground">{tAch("progress")}</span>
-                              <span className="text-muted-foreground">
-                                {achievement.progress.toLocaleString()} / {achievement.requirement.toLocaleString()}
-                              </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <div className="space-y-0.5">
+                            <div className="flex items-center gap-1.5">
+                              <p className="text-xs font-semibold text-green-600 dark:text-green-400">
+                                ✓ {tAch(`list.${achievement.id}.name`)}
+                              </p>
+                              <span className="text-[11px]">{rarityConfig.emoji}</span>
                             </div>
-                            <Progress value={progressPercent} className="h-1 rounded-full" aria-label={`Achievement progress: ${progressPercent.toFixed(1)}%`} />
+                            <p className="text-[11px] text-muted-foreground">
+                              {tAch(`list.${achievement.id}.description`)}
+                            </p>
+                            <p className={`text-[11px] font-medium ${rarityConfig.color}`}>
+                              {rarityConfig.name}
+                            </p>
                           </div>
-                        </div>
-                      </TooltipContent>
-                    </Tooltip>
-                  );
-                })}
+                        </TooltipContent>
+                      </Tooltip>
+                    );
+                  })}
+
+                  {/* Разделитель */}
+                  {displayedUnlocked.length > 0 && displayedLocked.length > 0 && (
+                    <div className="flex items-center shrink-0">
+                      <div className="w-px h-5 bg-border" />
+                    </div>
+                  )}
+
+                  {/* Невыполненные достижения */}
+                  {displayedLocked.map((achievement) => {
+                    const rarityConfig = RARITY_CONFIG[achievement.rarity];
+                    const progressPercent = Math.min(100, (achievement.progress / achievement.requirement) * 100);
+                    return (
+                      <Tooltip key={achievement.id}>
+                        <TooltipTrigger>
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted/30 ring-1 ring-inset ring-border/50 opacity-50 grayscale">
+                            <span className="text-lg">{achievement.emoji}</span>
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-1.5">
+                              <p className="text-xs font-semibold">
+                                {tAch(`list.${achievement.id}.name`)}
+                              </p>
+                              <span className="text-[11px] opacity-50">{rarityConfig.emoji}</span>
+                            </div>
+                            <p className="text-[11px] text-muted-foreground">
+                              {tAch(`list.${achievement.id}.description`)}
+                            </p>
+                            <p className={`text-[11px] font-medium ${rarityConfig.color} opacity-70`}>
+                              {rarityConfig.name}
+                            </p>
+                            <div className="space-y-0.5 pt-1">
+                              <div className="flex items-center justify-between text-[11px]">
+                                <span className="text-muted-foreground">{tAch("progress")}</span>
+                                <span className="text-muted-foreground">
+                                  {achievement.progress.toLocaleString()} / {achievement.requirement.toLocaleString()}
+                                </span>
+                              </div>
+                              <Progress value={progressPercent} className="h-1 rounded-full" aria-label={`Achievement progress: ${progressPercent.toFixed(1)}%`} />
+                            </div>
+                          </div>
+                        </TooltipContent>
+                      </Tooltip>
+                    );
+                  })}
+                </div>
+
+                {/* Show more/less button */}
+                {hiddenCount > 0 && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="mt-2 text-xs rounded-full h-7 px-3"
+                    onClick={() => setShowAllAchievements(!showAllAchievements)}
+                  >
+                    {showAllAchievements
+                      ? tAch("showLess")
+                      : tAch("showMore", { count: hiddenCount })
+                    }
+                  </Button>
+                )}
               </div>
             </TooltipProvider>
           </div>

@@ -509,6 +509,8 @@
     "progress": "Прогресс",
     "unlockedAt": "Разблокировано {date}",
     "celebration": "Поздравляем!",
+    "showMore": "Показать еще {count}",
+    "showLess": "Показать меньше",
     "categories": {
       "all": "Все",
       "projects": "Проекты",

@@ -491,6 +491,8 @@
     "progress": "Progreso",
     "celebration": "¡Felicitaciones!",
     "unlockedAt": "Desbloqueado el {date}",
+    "showMore": "Mostrar {count} más",
+    "showLess": "Mostrar menos",
     "categories": {
       "all": "Todos",
       "projects": "Proyectos",
