@@ -39,6 +39,7 @@ export default function NotificationsPage() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const t = useTranslations();
+  const tCommon = useTranslations("common");
   const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
 
   // Fetch notifications
