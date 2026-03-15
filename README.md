@@ -2,6 +2,8 @@
 
 Трекер прогресса для вышивки крестиком. Создавайте проекты, логируйте ежедневный прогресс, отслеживайте статистику и визуализируйте свой прогресс с красивыми графиками.
 
+**🚀 Live Production:** https://stitch-arena.vercel.app
+
 ## ✨ Основные возможности
 
 ### 📊 Tracking & Analytics
@@ -284,15 +286,32 @@ pytest --cov=app tests/   # с покрытием
 
 ## 🚀 Deployment
 
-### Frontend (Vercel)
+### Production URLs
+- **Live App**: https://stitch-arena.vercel.app
+- **GitHub Repository**: https://github.com/yaskoolga/stitch-arena
+- **CV Service**: https://stitch-arena-production.up.railway.app
+
+### Deployment Process
+- **Auto-deploy**: Push to `main` branch → Vercel (frontend) + Railway (CV service)
+- **Database**: Neon PostgreSQL (production)
+- **Images**: Cloudinary
+
+### Manual Deploy
+**Frontend (Vercel):**
 ```bash
-vercel deploy
+vercel deploy --prod
 ```
 
-### CV Service (Docker)
+**CV Service (Docker):**
 ```bash
 docker build -t stitch-arena-cv ./cv-service
 docker run -p 8001:8001 stitch-arena-cv
+```
+
+**Database Migration (Production):**
+```bash
+vercel env pull .env.production
+npx prisma migrate deploy
 ```
 
 ## 🧪 Testing
