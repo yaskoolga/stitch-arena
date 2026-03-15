@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ProjectCard } from "@/components/projects/project-card";
-import { SkeletonCard } from "@/components/skeleton-card";
+import { SkeletonCard, SkeletonCompactProfile, SkeletonStatsGrid } from "@/components/ui/skeletons";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 import { CompactProfile } from "@/components/dashboard/compact-profile";
 import { CompactStats } from "@/components/dashboard/compact-stats";
@@ -124,7 +124,29 @@ export default function DashboardPage({ params }: DashboardPageProps) {
     return list;
   }, [projects, filter, sortBy]);
 
-  if (status === "loading" || !resolvedParams) return <p>{tCommon('loading')}</p>;
+  if (status === "loading" || !resolvedParams) {
+    return (
+      <div>
+        {/* Profile skeleton */}
+        <div className="mb-3">
+          <SkeletonCompactProfile />
+        </div>
+
+        {/* Stats skeleton */}
+        <div className="mb-3">
+          <SkeletonStatsGrid />
+        </div>
+
+        {/* Projects skeleton */}
+        <div className="mt-8 mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (!session) redirect("/login");
 
   return (

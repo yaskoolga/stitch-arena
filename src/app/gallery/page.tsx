@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
+import { SkeletonGallery, SkeletonCard } from "@/components/ui/skeletons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { LikeButton } from "@/components/projects/like-button";
@@ -373,7 +374,7 @@ function AllProjectsTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
       </div>
 
       {isLoading ? (
-        <p>{t("common.loading")}</p>
+        <SkeletonGallery count={9} />
       ) : !sortedProjects?.length ? (
         <p className="text-muted-foreground">
           {selectedThemes.length > 0
@@ -648,21 +649,7 @@ function FavoritesTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
   return (
     <>
       {isLoading ? (
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {[...Array(6)].map((_, i) => (
-            <Card key={i} className="overflow-hidden rounded-2xl">
-              <Skeleton className="h-40 w-full" />
-              <CardHeader className="px-3 pt-3">
-                <Skeleton className="h-5 w-3/4" />
-                <Skeleton className="h-3 w-1/2 mt-1.5" />
-              </CardHeader>
-              <CardContent className="px-3 pb-3">
-                <Skeleton className="h-3 w-full" />
-                <Skeleton className="h-1.5 w-full mt-1.5" />
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <SkeletonGallery count={6} />
       ) : !favorites?.length ? (
         <Card>
           <CardContent className="py-12 text-center">
@@ -790,21 +777,7 @@ function FollowingTab({ setPhotoDialogOpen, setSelectedPhoto }: TabProps) {
   return (
     <>
       {isLoading ? (
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {[...Array(6)].map((_, i) => (
-            <Card key={i} className="overflow-hidden rounded-2xl">
-              <Skeleton className="h-40 w-full" />
-              <CardHeader className="px-3 pt-3">
-                <Skeleton className="h-5 w-3/4" />
-                <Skeleton className="h-3 w-1/2 mt-1.5" />
-              </CardHeader>
-              <CardContent className="px-3 pb-3">
-                <Skeleton className="h-3 w-full" />
-                <Skeleton className="h-1.5 w-full mt-1.5" />
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <SkeletonGallery count={6} />
       ) : !following?.length ? (
         <Card>
           <CardContent className="py-12 text-center">
